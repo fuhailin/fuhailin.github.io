@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fuhailin.github.io/"/>
-  <updated>2018-11-08T13:39:12.356Z</updated>
+  <updated>2018-11-09T17:20:48.332Z</updated>
   <id>http://fuhailin.github.io/</id>
   
   <author>
@@ -17,11 +17,277 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>推荐系统CTR实战——Attentional Factorization Machines(AFM)</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Attentional-Factorization-Machines-AFM/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Attentional-Factorization-Machines-AFM/</id>
+    <published>2018-11-09T17:14:22.000Z</published>
+    <updated>2018-11-09T17:20:48.332Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——Neural Factorization Machines(NFM)</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Neural-Factorization-Machines-NFM/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Neural-Factorization-Machines-NFM/</id>
+    <published>2018-11-09T17:13:42.000Z</published>
+    <updated>2018-11-09T17:23:56.024Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——Product-based Neural Network(PNN)</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Product-based-Neural-Network-PNN/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Product-based-Neural-Network-PNN/</id>
+    <published>2018-11-09T17:12:55.000Z</published>
+    <updated>2018-11-09T17:24:12.157Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——GBDT+LR</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94GBDT-LR/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——GBDT-LR/</id>
+    <published>2018-11-09T17:11:24.000Z</published>
+    <updated>2018-11-09T17:23:37.051Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——xDeepFM</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94xDeepFM/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——xDeepFM/</id>
+    <published>2018-11-09T17:10:31.000Z</published>
+    <updated>2018-11-09T17:24:42.280Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——Wide &amp; Deep</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Wide-Deep/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Wide-Deep/</id>
+    <published>2018-11-09T17:08:33.000Z</published>
+    <updated>2018-11-09T17:24:36.847Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——FFM</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94FFM/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——FFM/</id>
+    <published>2018-11-09T17:06:57.000Z</published>
+    <updated>2018-11-09T17:22:52.115Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——FM</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94FM/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——FM/</id>
+    <published>2018-11-09T17:06:51.000Z</published>
+    <updated>2018-11-09T17:23:18.497Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——DeepFM</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94DeepFM/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——DeepFM/</id>
+    <published>2018-11-09T17:05:33.000Z</published>
+    <updated>2018-11-09T17:22:25.416Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——Deep Interest Network</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Deep-Interest-Network/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Deep-Interest-Network/</id>
+    <published>2018-11-09T17:04:13.000Z</published>
+    <updated>2018-11-09T17:22:34.588Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>推荐系统CTR实战——Deep &amp; Cross</title>
+    <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Deep-Cross/"/>
+    <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Deep-Cross/</id>
+    <published>2018-11-09T17:03:39.000Z</published>
+    <updated>2018-11-09T17:23:45.027Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://fuhailin.github.io/categories/Machine-Learning/"/>
+    
+    
+      <category term="CTR" scheme="http://fuhailin.github.io/tags/CTR/"/>
+    
+      <category term="Recommender system" scheme="http://fuhailin.github.io/tags/Recommender-system/"/>
+    
+      <category term="Deep Learning" scheme="http://fuhailin.github.io/tags/Deep-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【剑指Offer】24. 二叉搜索树的后序遍历</title>
+    <link href="http://fuhailin.github.io/2018/11/09/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%9124-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/"/>
+    <id>http://fuhailin.github.io/2018/11/09/【剑指Offer】24-二叉搜索树的后序遍历/</id>
+    <published>2018-11-09T15:32:06.000Z</published>
+    <updated>2018-11-09T15:33:59.577Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目描述：<br>输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。</p><p>思路：<br>1、序列的的最后一个数字是根节点<br>2、二叉搜索树左子树的节点都比根节点小，右子树的节点都比根节点大。<br><img src="https://img-blog.csdn.net/20181020211958624?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA0MTI4NTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述"></p><p>C++递归与非递归实现代码：</p><a id="more"></a><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line"><span class="comment">//参数为引用，不为值传递是为了防止拷贝构造函数的无限递归，最终导致栈溢出。</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;sequence, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">if</span> (left == right)</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">int</span> mid = left;</span><br><span class="line"><span class="keyword">while</span> (sequence[mid] &lt; sequence[right] &amp;&amp; mid &lt; right)</span><br><span class="line">&#123;</span><br><span class="line">mid++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> tmp = mid;</span><br><span class="line"><span class="keyword">while</span> (sequence[tmp] &gt; sequence[right] &amp;&amp; tmp &lt; right)</span><br><span class="line">&#123;</span><br><span class="line">tmp++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (tmp &lt; right)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (mid == left || mid == right)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> judge(sequence, left, right - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> judge(sequence, left, mid - <span class="number">1</span>) &amp;&amp; judge(sequence, mid, right - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">VerifySquenceOfBST</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sequence)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> size = sequence.size();</span><br><span class="line"><span class="keyword">if</span> (<span class="number">0</span> == size)</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (--size)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">while</span> (sequence[i] &lt; sequence[size])</span><br><span class="line">&#123;</span><br><span class="line">i++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//while (sequence[i++] &lt; sequence[size]);</span></span><br><span class="line"><span class="comment">//while (sequence[i++] &gt; sequence[size]);</span></span><br><span class="line"><span class="keyword">while</span> (sequence[i] &gt; sequence[size])</span><br><span class="line">&#123;</span><br><span class="line">i++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (i &lt; size)</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">i = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">VerifySquenceOfBSTRecursize</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sequence)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> length = sequence.size();</span><br><span class="line"><span class="keyword">if</span> (length == <span class="number">0</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">return</span> judge(sequence, <span class="number">0</span>, length - <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tree1&#123;<span class="number">5</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">10</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tree2&#123;<span class="number">4</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">12</span>, <span class="number">16</span>, <span class="number">14</span>, <span class="number">10</span>&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tree3&#123;<span class="number">2</span>, <span class="number">1</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">3</span>&#125;;</span><br><span class="line">Solution solution = Solution();</span><br><span class="line"><span class="keyword">bool</span> tmp = solution.VerifySquenceOfBST(tree3);</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; boolalpha &lt;&lt; tmp &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目描述：&lt;br&gt;输入一个整数数组，判断该数组是不是某二叉搜索树的后序遍历的结果。如果是则输出Yes,否则输出No。假设输入的数组的任意两个数字都互不相同。&lt;/p&gt;
+&lt;p&gt;思路：&lt;br&gt;1、序列的的最后一个数字是根节点&lt;br&gt;2、二叉搜索树左子树的节点都比根节点小，右子树的节点都比根节点大。&lt;br&gt;&lt;img src=&quot;https://img-blog.csdn.net/20181020211958624?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA0MTI4NTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70&quot; alt=&quot;在这里插入图片描述&quot;&gt;&lt;/p&gt;
+&lt;p&gt;C++递归与非递归实现代码：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://fuhailin.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="C++" scheme="http://fuhailin.github.io/tags/C/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello-Hexo</title>
     <link href="http://fuhailin.github.io/2018/11/08/Hello-Hexo/"/>
     <id>http://fuhailin.github.io/2018/11/08/Hello-Hexo/</id>
     <published>2018-11-08T07:35:15.000Z</published>
-    <updated>2018-11-08T13:39:12.356Z</updated>
+    <updated>2018-11-08T13:39:12.000Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is a guide post to use Hexo. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for<br>more info. If you get any problems when using Hexo, you can find the answer in<br><a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on<br><a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><a id="more"></a><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p><h2 id="How-to-use-Hexo-and-deploy-to-GitHub-Pages"><a href="#How-to-use-Hexo-and-deploy-to-GitHub-Pages" class="headerlink" title="How to use Hexo and deploy to GitHub Pages"></a>How to use Hexo and deploy to GitHub Pages</h2><ul><li><a href="https://github.com/hexojs/hexo" target="_blank" rel="noopener">https://github.com/hexojs/hexo</a></li><li><a href="https://hexo.io/docs/" target="_blank" rel="noopener">https://hexo.io/docs/</a></li></ul><h3 id="1-Install-Hexo"><a href="#1-Install-Hexo" class="headerlink" title="1. Install Hexo"></a>1. Install Hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ sudo npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">$ hexo -v</span><br><span class="line">hexo-cli: 0.1.9</span><br><span class="line">os: Darwin 14.3.0 darwin x64</span><br><span class="line">http_parser: 2.3</span><br><span class="line">node: 0.12.7</span><br><span class="line">v8: 3.28.71.19</span><br><span class="line">uv: 1.6.1</span><br><span class="line">zlib: 1.2.8</span><br><span class="line">modules: 14</span><br><span class="line">openssl: 1.0.1p</span><br></pre></td></tr></table></figure><h3 id="2-Create-a-project-for-your-GitHub-Pages"><a href="#2-Create-a-project-for-your-GitHub-Pages" class="headerlink" title="2. Create a project for your GitHub Pages"></a>2. Create a project for your GitHub Pages</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init fuhailin.github.io</span><br><span class="line">INFO  Copying data to ~/***/fuhailin.github.io</span><br><span class="line">INFO  You are almost done! Don&apos;t forget to run &apos;npm install&apos; before you start blogging with Hexo!</span><br><span class="line"></span><br><span class="line">$ cd fuhailin.github.io</span><br><span class="line"></span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure><h3 id="3-Run-a-test-server-for-your-page-on-Mac"><a href="#3-Run-a-test-server-for-your-page-on-Mac" class="headerlink" title="3. Run a test server for your page on Mac"></a>3. Run a test server for your page on Mac</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure><h3 id="4-Set-information-for-your-new-blog"><a href="#4-Set-information-for-your-new-blog" class="headerlink" title="4. Set information for your new blog"></a>4. Set information for your new blog</h3><p><a href="https://hexo.io/docs/configuration.html" target="_blank" rel="noopener">https://hexo.io/docs/configuration.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ vi _config.yml</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~ _config.yml ~~~~~~~~~~~~~~~~~~</span><br><span class="line"># Site</span><br><span class="line">title: fuhailin&apos;s note</span><br><span class="line">subtitle:</span><br><span class="line">description: fuhailin&apos;s personal blog</span><br><span class="line">author: fuhailin</span><br><span class="line">language:</span><br><span class="line">timezone: Japan</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">## If your site is put in a subdirectory, set url as &apos;http://yoursite.com/child&apos; and root as &apos;/child/&apos;</span><br><span class="line">url: http://fuhailin.github.io/</span><br><span class="line">root: /</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br></pre></td></tr></table></figure></p><h3 id="5-Set-information-to-use-Git"><a href="#5-Set-information-to-use-Git" class="headerlink" title="5. Set information to use Git"></a>5. Set information to use Git</h3><p><a href="https://github.com/hexojs/hexo-deployer-git" target="_blank" rel="noopener">https://github.com/hexojs/hexo-deployer-git</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br><span class="line">$ vi _config.yml</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~ _config.yml ~~~~~~~~~~~~~~~~~~</span><br><span class="line"># Deployment</span><br><span class="line">## Docs: http://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">    repo: git@github.com:fuhailin/fuhailin.github.io.git</span><br><span class="line">      branch: master</span><br></pre></td></tr></table></figure></p><h3 id="6-Set-“watch”-before-starting-your-work"><a href="#6-Set-“watch”-before-starting-your-work" class="headerlink" title="6. Set “watch” before starting your work"></a>6. Set “watch” before starting your work</h3><p>“watch” command can monitor your files.<br><a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">https://hexo.io/docs/generating.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate --watch</span><br></pre></td></tr></table></figure></p><h3 id="7-Create-a-new-post-file"><a href="#7-Create-a-new-post-file" class="headerlink" title="7. Create a new post file"></a>7. Create a new post file</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new first-post</span><br><span class="line">INFO  Created: ~/***/fuhailin.github.io/source/_posts/first-post.md</span><br></pre></td></tr></table></figure><h3 id="8-Edit-the-above-file-with-Markdown-or-Hexo’s-Helper"><a href="#8-Edit-the-above-file-with-Markdown-or-Hexo’s-Helper" class="headerlink" title="8. Edit the above file with Markdown or Hexo’s Helper"></a>8. Edit the above file with Markdown or Hexo’s Helper</h3><p>Hexo’s Helper<br><a href="https://hexo.io/docs/helpers.html" target="_blank" rel="noopener">https://hexo.io/docs/helpers.html</a><br>I use Atom with “shift + control + m” when I use Markdown :-)<br><a href="https://atom.io/" target="_blank" rel="noopener">https://atom.io/</a></p><h3 id="9-Delete-“source-posts-hello-world-md”"><a href="#9-Delete-“source-posts-hello-world-md”" class="headerlink" title="9. Delete “source/_posts/hello-world.md”"></a>9. Delete “source/_posts/hello-world.md”</h3><p>It’s not necessary to deploy.</p><h3 id="10-Deploy-your-new-blog"><a href="#10-Deploy-your-new-blog" class="headerlink" title="10. Deploy your new blog!!"></a>10. Deploy your new blog!!</h3><p><a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p><p>After writting the above command, you can see your new blog on GitHub Pages.<br>http://<strong>**</strong>.github.io/</p><h3 id="11-Change-your-blog-theme"><a href="#11-Change-your-blog-theme" class="headerlink" title="11. Change your blog theme"></a>11. Change your blog theme</h3><p><a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">For instance, How to use the following theme.</span><br><span class="line">https://hexo.io/hexo-theme-light/</span><br><span class="line"></span><br><span class="line">## Install it</span><br><span class="line">$ cd fuhailin.github.io</span><br><span class="line">$ git clone git://github.com/tommy351/hexo-theme-light.git themes/light</span><br><span class="line"></span><br><span class="line">## Update the above files</span><br><span class="line">$ themes/light</span><br><span class="line">$ git pull</span><br><span class="line"></span><br><span class="line">## Set information to use the theme</span><br><span class="line">$ cd fuhailin.github.io</span><br><span class="line">$ vi _config.yml</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~ _config.yml ~~~~~~~~~~~~~~~~~~</span><br><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">## Themes: http://hexo.io/themes/</span><br><span class="line">theme: light</span><br></pre></td></tr></table></figure></p><h3 id="12-Create-a-new-page-file"><a href="#12-Create-a-new-page-file" class="headerlink" title="12. Create a new page file"></a>12. Create a new page file</h3><p><a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">https://hexo.io/docs/writing.html</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page aboutme</span><br><span class="line">INFO  Created: ~/***/fuhailin.github.io/source/aboutme/index.md</span><br><span class="line"></span><br><span class="line">$ cd source/aboutme/</span><br><span class="line"></span><br><span class="line">$ vi index.md</span><br></pre></td></tr></table></figure></p><h3 id="13-Use-“Read-More”"><a href="#13-Use-“Read-More”" class="headerlink" title="13. Use “Read More”"></a>13. Use “Read More”</h3><p>Write <code>&lt;!-- more --&gt;</code> in your articles.  </p><h3 id="14-Use-Plugins"><a href="#14-Use-Plugins" class="headerlink" title="14. Use Plugins"></a>14. Use Plugins</h3><p><a href="https://github.com/hexojs/hexo/wiki/Plugins" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Plugins</a></p><h2 id="为blog添加评论区"><a href="#为blog添加评论区" class="headerlink" title="为blog添加评论区"></a>为blog添加评论区</h2><p>hexo添加gitment评论系统：<br><a href="http://kuring.me/post/gitment/" target="_blank" rel="noopener">http://kuring.me/post/gitment/</a></p><h2 id="给-Github-添加-README"><a href="#给-Github-添加-README" class="headerlink" title="给 Github 添加 README"></a>给 Github 添加 README</h2><p>默认情况下，Github中每一个项目，我们希望有一份 README.md 的文件来作为项目的说明，但是我们在项目根目录下的 blog\source<br>目录下创建一份 README.md 文件，写好说明介绍，部署的时候，这个 README.md 会被 hexo 解析掉，而不会被解析到 Github 中去的。<br>正确的解决方法其实很简单：<br>把 README.md 文件的后缀名改成 “MDOWN” 然后扔到<code>blog/source</code>文件夹下即可，这样 hexo 不会解析，Github 也会将其作为 MD<br>文件解析。<br><a href="https://neveryu.github.io/2016/09/30/hexo-next-two/" target="_blank" rel="noopener">https://neveryu.github.io/2016/09/30/hexo-next-two/</a></p><h2 id="fork-me-on-github"><a href="#fork-me-on-github" class="headerlink" title="fork me on github"></a>fork me on github</h2><p><a href="https://www.jianshu.com/p/2002f4881353" target="_blank" rel="noopener">https://www.jianshu.com/p/2002f4881353</a></p>]]></content>
     
