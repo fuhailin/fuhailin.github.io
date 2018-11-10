@@ -86,7 +86,7 @@
     root: '/',
     scheme: 'Pisces',
     version: '6.5.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="Hailin Fu">
 <meta property="og:description" content="快速、简洁且高效的博客框架Hexo">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-08T13:39:12.000Z">
+<meta property="og:updated_time" content="2018-11-10T03:06:19.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello-Hexo">
 <meta name="twitter:description" content="快速、简洁且高效的博客框架Hexo">
@@ -143,6 +143,15 @@
 
 
 
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-129037882-1');
+</script>
 
 
 
@@ -316,23 +325,6 @@
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
 
   </li>
-        
-        
-        
-          
-          <li class="menu-item menu-item-sitemap">
-
-    
-    
-    
-      
-    
-
-    
-
-    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
-
-  </li>
 
       
       
@@ -428,10 +420,10 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello-Hexo
+          <h2 class="post-title" itemprop="name headline">Hello-Hexo
               
             
-          </h1>
+          </h2>
         
 
         <div class="post-meta">
@@ -453,12 +445,24 @@
                 
               
 
-              <time title="Created: 2018-11-08 15:35:15 / Modified: 21:39:12" itemprop="dateCreated datePublished" datetime="2018-11-08T15:35:15+08:00">2018-11-08</time>
+              <time title="Created: 2018-11-08 15:35:15" itemprop="dateCreated datePublished" datetime="2018-11-08T15:35:15+08:00">2018-11-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-11-10 11:06:19" itemprop="dateModified" datetime="2018-11-10T11:06:19+08:00">2018-11-10</time>
               
             
           </span>
@@ -560,6 +564,8 @@
 <h2 id="为blog添加评论区"><a href="#为blog添加评论区" class="headerlink" title="为blog添加评论区"></a>为blog添加评论区</h2><p>hexo添加gitment评论系统：<br><a href="http://kuring.me/post/gitment/" target="_blank" rel="noopener">http://kuring.me/post/gitment/</a></p>
 <h2 id="给-Github-添加-README"><a href="#给-Github-添加-README" class="headerlink" title="给 Github 添加 README"></a>给 Github 添加 README</h2><p>默认情况下，Github中每一个项目，我们希望有一份 README.md 的文件来作为项目的说明，但是我们在项目根目录下的 blog\source<br>目录下创建一份 README.md 文件，写好说明介绍，部署的时候，这个 README.md 会被 hexo 解析掉，而不会被解析到 Github 中去的。<br>正确的解决方法其实很简单：<br>把 README.md 文件的后缀名改成 “MDOWN” 然后扔到<code>blog/source</code>文件夹下即可，这样 hexo 不会解析，Github 也会将其作为 MD<br>文件解析。<br><a href="https://neveryu.github.io/2016/09/30/hexo-next-two/" target="_blank" rel="noopener">https://neveryu.github.io/2016/09/30/hexo-next-two/</a></p>
 <h2 id="fork-me-on-github"><a href="#fork-me-on-github" class="headerlink" title="fork me on github"></a>fork me on github</h2><p><a href="https://www.jianshu.com/p/2002f4881353" target="_blank" rel="noopener">https://www.jianshu.com/p/2002f4881353</a></p>
+<p>Good References:</p>
+<p>Hexo+NexT 打造一个炫酷博客：<a href="https://juejin.im/post/5bcd2d395188255c3b7dc1db" target="_blank" rel="noopener">https://juejin.im/post/5bcd2d395188255c3b7dc1db</a></p>
 
       
     </div>
@@ -683,7 +689,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -826,6 +832,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -893,11 +906,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -1371,6 +1379,21 @@
   
 
   
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
 
   
 

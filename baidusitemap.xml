@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://fuhailin.github.io/2018/11/10/text/</loc>
-    <lastmod>2018-11-10T02:11:25.091Z</lastmod>
+    <loc>http://fuhailin.github.io/2018/11/08/Hello-Hexo/</loc>
+    <lastmod>2018-11-10T03:06:19.757Z</lastmod>
   </url>  <url>
     <loc>http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Attentional-Factorization-Machines-AFM/</loc>
     <lastmod>2018-11-09T17:48:02.432Z</lastmod>
@@ -39,8 +39,5 @@
   </url>  <url>
     <loc>http://fuhailin.github.io/2018/11/09/%E3%80%90%E5%89%91%E6%8C%87Offer%E3%80%9124-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</loc>
     <lastmod>2018-11-09T15:33:59.577Z</lastmod>
-  </url>  <url>
-    <loc>http://fuhailin.github.io/2018/11/08/Hello-Hexo/</loc>
-    <lastmod>2018-11-08T13:39:12.000Z</lastmod>
   </url>
 </urlset>
