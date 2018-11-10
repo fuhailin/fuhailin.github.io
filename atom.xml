@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>HailinFu</title>
+  <title>Hailin Fu</title>
   
   
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://fuhailin.github.io/"/>
-  <updated>2018-11-09T17:20:48.332Z</updated>
+  <updated>2018-11-10T02:11:25.091Z</updated>
   <id>http://fuhailin.github.io/</id>
   
   <author>
@@ -17,13 +17,34 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>text</title>
+    <link href="http://fuhailin.github.io/2018/11/10/text/"/>
+    <id>http://fuhailin.github.io/2018/11/10/text/</id>
+    <published>2018-11-10T02:11:25.000Z</published>
+    <updated>2018-11-10T02:11:25.091Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>推荐系统CTR实战——Attentional Factorization Machines(AFM)</title>
     <link href="http://fuhailin.github.io/2018/11/10/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9FCTR%E5%AE%9E%E6%88%98%E2%80%94%E2%80%94Attentional-Factorization-Machines-AFM/"/>
     <id>http://fuhailin.github.io/2018/11/10/推荐系统CTR实战——Attentional-Factorization-Machines-AFM/</id>
     <published>2018-11-09T17:14:22.000Z</published>
-    <updated>2018-11-09T17:20:48.332Z</updated>
+    <updated>2018-11-09T17:48:02.432Z</updated>
+    
+    <content type="html"><![CDATA[<p>References:<br><a href="https://zhuanlan.zhihu.com/p/38517948" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/38517948</a></p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;p&gt;References:&lt;br&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/38517948&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://zhuanlan.zhihu.com/p/38517948&lt;/a&gt;&lt;/
+      
     
     </summary>
     
