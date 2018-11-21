@@ -3,7 +3,7 @@ title: Hello-Hexo
 date: 2018-11-08 15:35:15
 updated: 2018-11-11 12:15:27  # 搜狗输入法：sj 快速输入当前时间
 tags: Hexo
-categories: 笔记
+categories: 实用工具笔记
 description: 快速、简洁且高效的博客框架Hexo
 ---
 
@@ -124,7 +124,7 @@ deploy:
       ```
 
 ### 6. Set "watch" before starting your work
-"watch" command can monitor your files.  
+"watch" command can monitor your files.
 https://hexo.io/docs/generating.html
 ```
 $ hexo generate --watch
@@ -137,9 +137,9 @@ INFO  Created: ~/***/fuhailin.github.io/source/_posts/first-post.md
 ```
 
 ### 8. Edit the above file with Markdown or Hexo's Helper
-Hexo's Helper  
-https://hexo.io/docs/helpers.html  
-I use Atom with "shift + control + m" when I use Markdown :-)  
+Hexo's Helper
+https://hexo.io/docs/helpers.html
+I use Atom with "shift + control + m" when I use Markdown :-)
 https://atom.io/
 
 ### 9. Delete "source/_posts/hello-world.md"
@@ -151,7 +151,7 @@ https://hexo.io/docs/deployment.html
 $ hexo clean
 $ hexo deploy
 ```
-After writting the above command, you can see your new blog on GitHub Pages.  
+After writting the above command, you can see your new blog on GitHub Pages.
 http://******.github.io/
 
 ### 11. Change your blog theme
@@ -191,7 +191,7 @@ $ vi index.md
 ```
 
 ### 13. Use "Read More"
-Write `<!-- more -->` in your articles.  
+Write `<!-- more -->` in your articles.
 
 ### 14. Use Plugins
 https://github.com/hexojs/hexo/wiki/Plugins
@@ -240,7 +240,9 @@ post Markdown code             |  效果
 {% asset_img image.jpg This is an image %}
 ```
 
+# How to create and sync your hexo blog in one repo
 
+https://xiaoyuliu.github.io/2018/03/28/how-to-sync-hexo-blog/
 
 **Good References:**
 
