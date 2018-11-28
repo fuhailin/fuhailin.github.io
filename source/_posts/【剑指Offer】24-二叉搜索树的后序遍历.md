@@ -11,11 +11,11 @@ categories: 编程
 思路：
 1、序列的的最后一个数字是根节点
 2、二叉搜索树左子树的节点都比根节点小，右子树的节点都比根节点大。
-![在这里插入图片描述](https://img-blog.csdn.net/20181020211958624?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTA0MTI4NTg=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-
-C++递归与非递归实现代码：
+![在这里插入图片描述](/uploads/20181020211958624.png)
 
 <!--more-->
+
+C++递归与非递归实现代码：
 
 ```cpp
 #include <iostream>

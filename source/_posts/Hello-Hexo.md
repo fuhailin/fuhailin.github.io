@@ -221,13 +221,14 @@ post Markdown code             |  效果
 
 ## 在文章中插入图片
 [Hexo博客搭建之在文章中插入图片](https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/)
-#### 绝对路径本地引用
+
+### 绝对路径本地引用
 当Hexo项目中只用到少量图片时，可以将图片统一放在source/images文件夹中，通过markdown语法访问它们。
 ```
 ![](/images/image.jpg)
 ```
 
-#### 相对路径本地引用
+### 相对路径本地引用
 图片除了可以放在统一的images文件夹中，还可以放在文章自己的目录中。文章的目录可以通过站点配置文件_config.yml来生成。
 `post_asset_folder: true`
 将_config.yml文件中的配置项post_asset_folder设为true后，执行命令$ hexo new post_name，在source/_posts中会生成文章post_name.md和同名文件夹post_name。将图片资源放在post_name中，文章就可以使用相对路径引用图片资源了。
@@ -235,14 +236,18 @@ post Markdown code             |  效果
 ![](image.jpg)
 ```
 
-如果希望图片在文章和首页中同时显示，可以使用标签插件语法。
+这种相对路径的图片显示方法在博文详情页面显示没有问题，但是在首页预览页面图片将显示不出来。如果希望图片在文章和首页中同时显示，可以使用标签插件语法。
 ```
 {% asset_img image.jpg This is an image %}
 ```
+直接将`![](image.jpg)`替换上面的语法即可。
 
-# How to create and sync your hexo blog in one repo
-
+## How to create and sync your hexo blog in one repo
 https://xiaoyuliu.github.io/2018/03/28/how-to-sync-hexo-blog/
+
+## Hexo标签插件的使用
+https://wuchenxu.com/2015/12/08/Static-Blog-hexo-github-6-tag-plugins/
+
 
 **Good References:**
 
