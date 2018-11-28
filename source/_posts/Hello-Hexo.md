@@ -252,3 +252,5 @@ https://wuchenxu.com/2015/12/08/Static-Blog-hexo-github-6-tag-plugins/
 **Good References:**
 
 Hexo+NexT 打造一个炫酷博客：https://juejin.im/post/5bcd2d395188255c3b7dc1db
+Hexo官方中文文档：https://hexo.io/zh-cn/docs/
+hexo进阶: http://stevenshi.me/2017/05/09/hexo-advance/
