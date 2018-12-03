@@ -1,7 +1,7 @@
 ---
 title: Hello-Hexo
 date: 2018-11-08 15:35:15
-updated: 2018-11-11 12:15:27  # 搜狗输入法：sj 快速输入当前时间
+# updated: 2018-11-11 12:15:27  # 搜狗输入法：sj 快速输入当前时间
 tags: Hexo
 categories: 实用工具笔记
 description: 快速、简洁且高效的博客框架Hexo
@@ -240,6 +240,10 @@ post Markdown code             |  效果
 ```
 {% asset_img image.jpg This is an image %}
 ```
+
+```html
+<img src="SpellCheck.png" width="50%" height="50%" title="拼写检查工具Grammarly." alt="拼写检查工具Grammarly."/>
+```
 直接将`![](image.jpg)`替换上面的语法即可。
 
 ## How to create and sync your hexo blog in one repo
@@ -248,9 +252,17 @@ https://xiaoyuliu.github.io/2018/03/28/how-to-sync-hexo-blog/
 ## Hexo标签插件的使用
 https://wuchenxu.com/2015/12/08/Static-Blog-hexo-github-6-tag-plugins/
 
+## 在文章中插入代码
+http://octopress.org/docs/plugins/codeblock/
+
+插入gist代码
+```
+{% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}
+```
 
 **Good References:**
 
 Hexo+NexT 打造一个炫酷博客：https://juejin.im/post/5bcd2d395188255c3b7dc1db
 Hexo官方中文文档：https://hexo.io/zh-cn/docs/
 hexo进阶: http://stevenshi.me/2017/05/09/hexo-advance/
+博客写作模板: https://blog.baoyukun.win/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/a-writing-model/
