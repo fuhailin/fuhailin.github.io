@@ -267,3 +267,6 @@ Hexo官方中文文档：https://hexo.io/zh-cn/docs/
 hexo进阶: http://stevenshi.me/2017/05/09/hexo-advance/
 博客写作模板: https://blog.baoyukun.win/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/a-writing-model/
 搭建 Hexo 博客的填坑经历和必要的优化：https://kris2d.info/posts/b706980b/
+Hexo程序archive页面数量设置：http://www.yuzhewo.com/2015/11/21/Hexo%E7%A8%8B%E5%BA%8Farchive%E9%A1%B5%E9%9D%A2%E6%95%B0%E9%87%8F%E8%AE%BE%E7%BD%AE/
+Hexo博客归档不分页显示设置方法：https://sobaigu.com/hexo-archives-show-all-in-one-page.html
+搭建Hexo博客进阶篇---主题自定义（三）：https://www.jianshu.com/p/4b9ee8fec3a3

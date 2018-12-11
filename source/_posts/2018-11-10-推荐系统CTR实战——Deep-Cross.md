@@ -11,9 +11,16 @@ description: Deep & Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanfo
 ---
 特征工程一直是很多预测模型效果突出的关键，人工设计等影响因素往往决定这这一环节的好坏，深度学习可以自动学习特征，却很难学到一些交叉特征。本文提出了一种交叉的网络结构的深度学习模型DCN，Deep & Cross Network，可以有效的寻找交叉特征，在CTR预估方面可以取得较好的效果。
 
+Deep&Cross的主要特点:
+
+1. **自动提取交叉组合特征，并不需要人为设计复杂的的特征工程**；
+2. **交叉网络（DCN）在LogLoss上与DNN相比少了近一个量级的参数量，所以模型更小**。
+
+****************
+
 整体网络结构如下:
 
-![The Deep & Cross Network](/uploads/DCN.png)
+<img src="/uploads/DCN.png" width="70%" height="70%" title="The Deep & Cross Network." alt="The Deep & Cross Network."/>
 
 ## Embedding and Stacking Layer
 
