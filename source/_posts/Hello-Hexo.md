@@ -266,3 +266,4 @@ Hexo+NexT 打造一个炫酷博客：https://juejin.im/post/5bcd2d395188255c3b7d
 Hexo官方中文文档：https://hexo.io/zh-cn/docs/
 hexo进阶: http://stevenshi.me/2017/05/09/hexo-advance/
 博客写作模板: https://blog.baoyukun.win/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/a-writing-model/
+搭建 Hexo 博客的填坑经历和必要的优化：https://kris2d.info/posts/b706980b/
