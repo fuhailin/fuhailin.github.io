@@ -245,13 +245,13 @@ post Markdown code             |  效果
 <img src="SpellCheck.png" width="50%" height="50%" title="拼写检查工具Grammarly." alt="拼写检查工具Grammarly."/>
 ```
 直接将`![](image.jpg)`替换上面的语法即可。
-
+*********************
 ## How to create and sync your hexo blog in one repo
 https://xiaoyuliu.github.io/2018/03/28/how-to-sync-hexo-blog/
-
+************************
 ## Hexo标签插件的使用
 https://wuchenxu.com/2015/12/08/Static-Blog-hexo-github-6-tag-plugins/
-
+******************
 ## 在文章中插入代码
 http://octopress.org/docs/plugins/codeblock/
 
@@ -259,8 +259,35 @@ http://octopress.org/docs/plugins/codeblock/
 ```
 {% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}
 ```
+***********************
+## 搜索引擎优化SEO
+https://fuhailin.github.io/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%E4%B9%8BSEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/
+****************
+## Hexo博客文章添加置顶属性
+使用插件[hexo-generator-index-pin-top](https://github.com/netcan/hexo-generator-index-pin-top)
+安装：
+> $ npm uninstall hexo-generator-index --save
+> $ npm install hexo-generator-index-pin-top --save
 
-# 搜索引擎优化SEO
+使用：在需要置顶的**Front-matter**中加上`top: 数字`即可，数字越大，置顶越靠前。
+
+********************
+## 自定义Hexo博客的文章模板
+博客模版存放在**scaffolds**文件夹
+scaffolds文件夹：
+```
+├── scaffolds					//保存着默认模板，自定义模板就是修改该目录下的文件
+│   ├── draft.md 				//默认的草稿模板
+│   ├── page.md 				//默认的页面模板
+│   └── post.md 				//默认的文章模板
+```
+在新建文章时，Hexo 会根据 scaffolds 文件夹内相对应的文件来建立文件，例如：
+`hexo new draft "My Gallery"`
+在执行这行指令时，Hexo 会尝试在 scaffolds 文件夹中寻找 draft.md
+
+http://www.mashangxue123.com/Hexo/353523292.html
+
+*********************
 
 **Good References:**
 
