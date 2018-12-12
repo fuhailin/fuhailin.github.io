@@ -101,7 +101,9 @@ search:
   format: html
   limit: 10000
 
-sitemap:
-  path: sitemap.xml
-# baidusitemap:
-#   path: baidusitemap.xml
+# hexo sitemap
+sitemap: # config in /theme/next/_config.yml -> menu
+  path: sitemap.xml
+
+baidusitemap:
+  path: baidusitemap.xml

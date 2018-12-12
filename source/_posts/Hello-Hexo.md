@@ -260,6 +260,8 @@ http://octopress.org/docs/plugins/codeblock/
 {% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}
 ```
 
+# 搜索引擎优化SEO
+
 **Good References:**
 
 Hexo+NexT 打造一个炫酷博客：https://juejin.im/post/5bcd2d395188255c3b7dc1db
