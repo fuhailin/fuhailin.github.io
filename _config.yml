@@ -13,9 +13,10 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://fuhailin.github.io/
+# permalink: :year/:month/:day/:title/
+url: https://fuhailin.github.io/
 root: /
-permalink: :year/:month/:day/:title/
+permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -102,7 +103,7 @@ search:
   limit: 10000
 
 # hexo sitemap
-sitemap: # config in /theme/next/_config.yml -> menu
+sitemap:
   path: sitemap.xml
 
 baidusitemap:
