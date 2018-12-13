@@ -255,6 +255,28 @@ https://wuchenxu.com/2015/12/08/Static-Blog-hexo-github-6-tag-plugins/
 ## 在文章中插入代码
 http://octopress.org/docs/plugins/codeblock/
 
+插入代码文件
+
+把整个文件作为代码插入，这样做的好处是作为可运行的代码后续如果修正了bug，重新hexo g一下文章中的代码就会自动更新；不需要每次从文件中拷贝粘贴代码到文章中。
+
+**配置code存放路径**
+在hexo的配置文件`hexo/_config.yml`中看到`code_dir: downloads/code`,说明所有的code文件都放到`source/downloads/code`文件夹下。
+**语法**
+```
+{% include_code [title] [lang:language] path/to/file %}
+```
+`[title]`:可选，标题名，默认是文件名
+`[lang:language]`:可选设置语言后，根据不同的语言设置语法高亮
+
+**举例**
+代码文件存放在`source/uploads/code/hello_world.c`.
+
+```
+{% include_code lang:c hello world in c lang hello_world.c %}
+```
+{% include_code lang:c hello world in c lang hello_world.c %}
+
+
 插入gist代码
 ```
 {% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}
@@ -288,6 +310,13 @@ scaffolds文件夹：
 http://www.mashangxue123.com/Hexo/353523292.html
 
 *********************
+
+##  博文中嵌入PDF插件
+
+https://github.com/superalsrk/hexo-pdf
+
+********************
+
 
 **Good References:**
 
