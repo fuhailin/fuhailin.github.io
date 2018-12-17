@@ -45,7 +45,7 @@ $$
 
 这一部分在tensorflow中，使用tf.feature_columnAPI可以很容易实现，大致代码结构如下：
 
-```
+```py
 embed0 = tf.feature_column.embedding_column(...)
 ...
 dense0 = tf.feature_column.indicator_column(...)
