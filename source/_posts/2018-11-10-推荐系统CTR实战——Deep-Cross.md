@@ -30,15 +30,15 @@ DCN模型以一个嵌入和堆叠层(embedding and stacking layer)开始，接�
 在大规模推荐系统中，如CTR预测，通常会有大量的类别特征需要处理，如“country=usa”。为了将这些信息变成计算机能处理的特征，通常使用one_hot编码处理成独热向量如“[ 0,1,0 ]”；然而，这些大量的词汇往往导致处理后的特征空间维度过高。
 
 为了减少维数，一种常用的做法是采用嵌入过程将这些离散特征转换成实数值的稠密向量（通常称为嵌入向量）：
-
 $$
 \mathbf { x } _ { \text { embed, } i } = W _ { \text { embed, } , i } \mathbf { x } _ { i }
 $$
+
 其中$x_{embed,i}$是embedding vector，$x_i$是第i个category的二元输入，$W_{embed,i} \in R^{n_e \times n_v}$是对应的embedding matrix，会与网络中的其它参数一起进行优化，$n_e$, $n_v$分别是embedding size和vocabulary size。
 
 然后，我们将嵌入向量与连续特征向量叠加起来形成一个向量：
 $$
-x_0=[x_{\text{embed,1}}^T,\cdots,x_{\text{embed,k}}^T,x_{\text{dense}}^T]
+x_0 = [ x_{embed,1}^T, ..., X_{embed,k}^T, X_{dense}^T]。
 $$
 
 拼接起来的向量$X0$将作为我们Cross Network和Deep Network的输入.
