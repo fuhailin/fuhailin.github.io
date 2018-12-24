@@ -277,10 +277,14 @@ http://octopress.org/docs/plugins/codeblock/
 {% include_code lang:c hello world in c lang hello_world.c %}
 
 
+{% gist 55e8446e255abd3ee2900c3691cca09f trie.py %}
+
 插入gist代码
 ```
 {% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}
 ```
+
+
 ***********************
 ## 搜索引擎优化SEO
 https://fuhailin.github.io/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%E4%B9%8BSEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/
