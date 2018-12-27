@@ -7,6 +7,8 @@ top:
 description: PostgreSQL是一个跨平台、开源的、对象关系型(object-relational)数据库
 ---
 
+PostgreSQL的一些特点：PostgreSQL中可以插入重复数据，也就是说不需要唯一性主键。
+
 # PostgreSQL在Ubuntu下的安装
 
 ```bash
