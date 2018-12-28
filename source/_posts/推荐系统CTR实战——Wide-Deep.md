@@ -5,7 +5,7 @@ tags:
   - CTR
   - Recommender system
   - Deep Learning
-categories: Machine Learning
+categories: 机器学习与算法
 mathjax: true
 description: Wide and deep 模型是 TensorFlow 在 2016 年 6 月左右发布的一类用于分类和回归的模型，并应用到了 Google Play 的应用推荐中。wide and deep 模型的核心思想是结合线性模型的记忆能力（memorization）和 DNN 模型的泛化能力（generalization），在训练过程中同时优化 2 个模型的参数，从而达到整体模型的预测能力最优。
 ---

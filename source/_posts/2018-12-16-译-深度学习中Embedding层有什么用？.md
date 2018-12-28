@@ -2,7 +2,7 @@
 title: '[译]深度学习中Embedding层有什么用？'
 date: 2018-12-16 00:02:56
 tags: [深度学习,Embedding]
-categories: 深度学习
+categories: 机器学习与算法
 top:
 ---
 

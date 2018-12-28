@@ -5,5 +5,5 @@ tags:
   - CTR
   - Recommender system
   - Machine Learning
-categories: Machine Learning
+categories: 机器学习与算法
 ---

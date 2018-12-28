@@ -5,7 +5,7 @@ tags:
   - CTR
   - Recommender system
   - Deep Learning
-categories: Machine Learning
+categories: 机器学习与算法
 mathjax: true
 top: 100
 description: Deep & Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide & Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。

@@ -5,7 +5,7 @@ tags:
   - CTR
   - Recommender system
   - Machine Learning
-categories: Machine Learning
+categories: 机器学习与算法
 mathjax: true
 ---
 FM主要目标是：**`解决数据稀疏的情况下，特征怎样组合的问题`**
