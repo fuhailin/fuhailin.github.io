@@ -1,8 +1,8 @@
 ---
 title: 【剑指Offer】24. 二叉搜索树的后序遍历
 date: 2018-11-09 23:32:06
-tags: C++
-categories: 编程
+tags: [剑指Offer,C++]
+categories: 数据结构与算法
 ---
 
 题目描述：
@@ -105,4 +105,3 @@ int main()
 }
 
 ```
-
