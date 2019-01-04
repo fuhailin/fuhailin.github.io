@@ -238,7 +238,11 @@ post Markdown code             |  效果
 
 这种相对路径的图片显示方法在博文详情页面显示没有问题，但是在首页预览页面图片将显示不出来。如果希望图片在文章和首页中同时显示，可以使用标签插件语法。
 ```
+# 本地图片资源，不显示图片尺寸
 {% asset_img image.jpg This is an image %}
+# 网络图片资源，限制图片显示尺寸
+{% img http://www.viemu.com/vi-vim-cheat-sheet.gif 200 400 vi-vim-cheat-sheet %}
+
 ```
 
 ```html
