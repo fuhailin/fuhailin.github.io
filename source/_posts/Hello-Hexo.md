@@ -220,35 +220,9 @@ post Markdown code             |  效果
 ![](/uploads/hexo_updatetime2.png) | ![](/uploads/hexo_updatetime1.png)
 
 ## 在文章中插入图片
-[Hexo博客搭建之在文章中插入图片](https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/)
 
-### 绝对路径本地引用
-当Hexo项目中只用到少量图片时，可以将图片统一放在source/images文件夹中，通过markdown语法访问它们。
-```
-![](/images/image.jpg)
-```
+https://fuhailin.github.io/%E5%9C%A8Hexo%E5%8D%9A%E5%AE%A2%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87%E7%9A%84%E5%90%84%E7%A7%8D%E6%96%B9%E5%BC%8F/
 
-### 相对路径本地引用
-图片除了可以放在统一的images文件夹中，还可以放在文章自己的目录中。文章的目录可以通过站点配置文件_config.yml来生成。
-`post_asset_folder: true`
-将_config.yml文件中的配置项post_asset_folder设为true后，执行命令$ hexo new post_name，在source/_posts中会生成文章post_name.md和同名文件夹post_name。将图片资源放在post_name中，文章就可以使用相对路径引用图片资源了。
-```
-![](image.jpg)
-```
-
-这种相对路径的图片显示方法在博文详情页面显示没有问题，但是在首页预览页面图片将显示不出来。如果希望图片在文章和首页中同时显示，可以使用标签插件语法。
-```
-# 本地图片资源，不显示图片尺寸
-{% asset_img image.jpg This is an image %}
-# 网络图片资源，限制图片显示尺寸
-{% img http://www.viemu.com/vi-vim-cheat-sheet.gif 200 400 vi-vim-cheat-sheet %}
-
-```
-
-```html
-<img src="SpellCheck.png" width="50%" height="50%" title="拼写检查工具Grammarly." alt="拼写检查工具Grammarly."/>
-```
-直接将`![](image.jpg)`替换上面的语法即可。
 *********************
 ## How to create and sync your hexo blog in one repo
 https://xiaoyuliu.github.io/2018/03/28/how-to-sync-hexo-blog/
