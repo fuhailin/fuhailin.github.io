@@ -8,7 +8,7 @@ subtitle: Program Artist
 description: 敢為天下先
 keywords: 算法工程师
 author: Hailin
-language:
+language: zh-Hans #默认是英文
 timezone:
 
 # URL
