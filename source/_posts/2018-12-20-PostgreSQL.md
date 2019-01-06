@@ -41,3 +41,21 @@ CREATE TABLE table_name
     column4 numeric
 )
 ```
+
+### PostgreSQL 中获取表名、数据库名称
+①表名
+```sql
+SELECT tablename FROM pg_tables WHERE tablename NOT LIKE 'pg%' AND tablename NOT LIKE 'sql_%'
+```
+
+②数据库名
+
+```sql
+SELECT datname FROM pg_database;
+```
+
+③列名
+
+```sql
+select * from information_schema.columns where table_name = 'final_back_pg_lv10'
+```
