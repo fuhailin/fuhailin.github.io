@@ -162,7 +162,7 @@ https://hexo.io/hexo-theme-light/
 
 ## Install it
 $ cd fuhailin.github.io
-$ git clone git://github.com/tommy351/hexo-theme-light.git themes/light
+$ git clone https://github.com/theme-next/hexo-theme-next themes/next
 
 ## Update the above files
 $ themes/light
@@ -302,6 +302,13 @@ http://www.mashangxue123.com/Hexo/353523292.html
 https://github.com/superalsrk/hexo-pdf
 
 ********************
+
+## 在博客中显示LaTeX数学公式
+
+我这里使用的是`MathJax` LaTeX渲染引擎和`hexo-renderer-markdown-it`Markdown解析器
+https://theme-next.org/docs/third-party-services/math-equations/
+
+**********************
 
 
 **Good References:**

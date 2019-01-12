@@ -196,3 +196,5 @@ array([[ 0.96855599],
 ```
 
 本文译自：http://www.orbifold.net/default/2017/01/10/embedding-and-tokenizer-in-keras/
+
+万物皆Embedding，从经典的word2vec到深度学习基本操作item2vec: https://zhuanlan.zhihu.com/p/53194407?utm_source=qq&utm_medium=social&utm_oi=1066622868011413504

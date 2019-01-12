@@ -127,6 +127,7 @@ markdown:
     - markdown-it-sup
     - markdown-it-emoji  ## add emoji
     - markdown-it-checkbox  ## add checkbox
+    - markdown-it-mathjax
   anchors:
     level: 2
     collisionSuffix: 'v'
