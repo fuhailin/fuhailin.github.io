@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 趙大寳
+title: 奔跑的飛魚
 subtitle: Program Artist
-description: 敢為天下先
+description: 趙大寳個人小站
 keywords: 算法工程师
-author: Hailin
-language: 
+author: 趙大寳
+language: en
 timezone:
 
 # URL
@@ -136,3 +136,12 @@ markdown:
     permalinkClass: header-anchor
     # The symbol used to make the permalink
     permalinkSymbol: ¶
+
+# Blog rolls
+links_icon: link
+links_title: 友情链接
+links_layout: block
+#links_layout: inline
+links:
+  甜欣屋: https://tcxx.info/
+  Siwei Lai的博客: http://licstar.net/
