@@ -35,38 +35,8 @@ Note: Each term of the sequence of integers will be represented as a string.
 
 ##
 因为Python对字符串的处理比较方便，这里先实现了Python的递归方法：
-```py
-class Solution:
-    def countAndSay(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
-        result = "1"
-        for i in range(1, n):
-            result = self.getNext(result)
-        return result
+{% ghcode https://github.com/fuhailin/show-me-python-code/blob/master/leetcode/38.count-and-say.py %}
 
-    def getNext(self, last):
-        result = str()
-        count = 1
-        i = 0
-        while i < len(last):
-            # for i in range(len(last), 1):
-            if i == (len(last)-1):
-                result = result+str(count)+last[i]
-                break
-            while last[i] == last[i+1]:
-                count += 1
-                i += 1
-                if(i+1 == len(last)):
-                    break
-            result = result+str(count)+last[i]
-            count = 1
-            i += 1
-        return result
+C++的实现：
 
-
-test = Solution().countAndSay(2)
-print(test)
-```
+{% ghcode https://github.com/fuhailin/show-me-cpp-code/blob/master/LeetCode/38.count-and-say.cpp %}
