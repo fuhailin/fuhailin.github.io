@@ -4,6 +4,7 @@ date: 2019-01-18 13:24:16
 tags: [LeetCode,C++,递归]
 categories: 数据结构与算法
 top:
+description: LeetCode 38.Count and Say
 ---
 
 ## 题目描述
