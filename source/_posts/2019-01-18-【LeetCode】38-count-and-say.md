@@ -41,3 +41,5 @@ Note: Each term of the sequence of integers will be represented as a string.
 C++的实现：
 
 {% ghcode https://github.com/fuhailin/show-me-cpp-code/blob/master/LeetCode/38.count-and-say.cpp %}
+
+不过最终有意思的是，同样的思路，Python花费64ms，C++花费了4ms。
