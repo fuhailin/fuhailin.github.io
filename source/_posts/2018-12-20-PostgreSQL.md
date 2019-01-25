@@ -2,7 +2,7 @@
 title: PostgreSQL
 date: 2018-12-20 16:44:29
 tags: [PostgreSQL,SQL]
-categories: SQL
+categories: 计算机理论与基础
 top:
 description: PostgreSQL是一个跨平台、开源的、对象关系型(object-relational)数据库
 ---
