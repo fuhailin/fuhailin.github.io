@@ -186,7 +186,7 @@ social:
   #StackOverflow: https://stackoverflow.com/yourname || stack-overflow
   #YouTube: https://youtube.com/yourname || youtube
   Instagram: https://instagram.com/hailinfufu || instagram
-  Linkedin: https://www.linkedin.com/in/º£ÁÖ-¸¶-855633ab/ || linkedin
+  Linkedin: https://www.linkedin.com/in/ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½-855633ab/ || linkedin
   #Skype: skype:yourname?call|chat || skype
   CSDN: https://blog.csdn.net/u010412858 || csdn
 
@@ -328,7 +328,7 @@ codeblock:
 # And you can show or hide one article specially through add page variable `reward: true/false`.
 reward:
   enable: true
-  comment: ÄúµÄÖ§³Ö½«¹ÄÀøÎÒ¼ÌĞø´´×÷£¡
+  comment: æ‚¨çš„æ”¯æŒå°†é¼“åŠ±æˆ‘ç»§ç»­åˆ›ä½œï¼
   wechatpay: /images/wechatpay.jpg
   alipay: /images/alipay.jpg
   bitcoin: /images/bitcoinpay.jpg
