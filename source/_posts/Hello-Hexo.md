@@ -211,6 +211,18 @@ https://neveryu.github.io/2016/09/30/hexo-next-two/
 ## 添加Fork Me on github书签
 https://www.jianshu.com/p/2002f4881353
 
+****************************************
+
+## NexT主题下修改文章底部#号tag标签
+在`~hexo/themes/next/layout/_macro`中找到`post.swig`文件，在内搜索`el="tag">#`，将**#**换成**<i class="fa fa-tag"></i>**即可.
+
+想使用其他图标可在[Fontawesome](http://www.fontawesome.com.cn/faicons/)内自行查找。
+
+前：![](https://image-1253170309.cos.ap-guangzhou.myqcloud.com/image/QQ%E6%88%AA%E5%9B%BE20180902194605.jpg)
+后：![](https://image-1253170309.cos.ap-guangzhou.myqcloud.com/image/QQ%E6%88%AA%E5%9B%BE20180902195213.jpg)
+
+******************************
+
 ## 显示每篇文章的更新时间
 
 最新版本的next主题已经加入了配置博文更新时间的代码。在主题配置文件中，`post_meta`中有一个`updated_at`属性，如果enable就是开启这个功能。所以我们在博文开头开头部分加入`updated`定义就行：
