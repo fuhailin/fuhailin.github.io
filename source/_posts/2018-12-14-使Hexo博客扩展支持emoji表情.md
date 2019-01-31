@@ -34,14 +34,16 @@ npm ERR!     C:\Users\Hailin\AppData\Roaming\npm-cache\_logs\2018-12-14T07_45_51
 
 看提示应该是npm编译的binary文件链接问题，错误指向`node_modules\.bin\marked`这个文件，而**node_modules**这个文件夹下面的内容都是可以通过`npm`再download下来的，所以我们可以直接先删除**node_modules**文件夹，然后再：
 
-> npm install
-> npm un hexo-renderer-marked --save
+```bash
+npm install
+npm un hexo-renderer-marked --save
+```
 
 ##### 安装新的渲染器和emoji插件
-
-> npm i hexo-renderer-markdown-it --save
-> npm install markdown-it-emoji --save
-
+```bash
+npm i hexo-renderer-markdown-it --save
+npm install markdown-it-emoji --save
+```
 据说 [hexo-renderer-markdown-it](https://github.com/hexojs/hexo-renderer-markdown-it) 的速度要比 Hexo 原装插件要快，而且功能更多
 
 
