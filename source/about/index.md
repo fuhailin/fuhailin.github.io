@@ -12,4 +12,4 @@ I am generally interested in **data mining and machine learning**, especially re
 This past summer, I have spent great time as a **Machine Learning Intern at *[CloudBrain](http://www.cloudbrain.ai/)* **, participated in two projects in cooperation with *vivo* and *CCB*.
 <!-- Now I am working on Design2code under the supervision of Prof. Fei Wu at Institute of Artificial Intelligence of Zhejiang University with Alibaba. -->
 
-Check out my CV **[here](/uploads/Hailin_Fu_CV.pdf)**, and please feel free to **[contact me](mailto:hailinfufu@outlook.com)**, thanks!
+Check out my CV **[here](/uploads/Hailin_Fu_CV.pdf)**, and please feel free to **[contact me📧](mailto:hailinfufu@outlook.com)**, thanks!
