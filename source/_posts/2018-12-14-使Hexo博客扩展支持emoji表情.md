@@ -18,9 +18,11 @@ top:
 
 首先进入博客根目录
 
-> npm un hexo-renderer-marked --save
-
+```bash
+npm un hexo-renderer-marked --save
+```
 我这里卸载遇到了如下的错误：
+
 ```
 npm ERR! path C:\Users\Hailin\Documents\Projects\fuhailin.github.io\node_modules\.bin\marked
 npm ERR! code EEXIST
