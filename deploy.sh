@@ -20,9 +20,9 @@ git pull
 cd ../..
 
 # 
-git add .
-git commit -m "Theme updated: $current_date_time"
-git push 
+# git add .
+# git commit -m "Theme updated: $current_date_time"
+# git push 
 cd ../..
 
 # Generate blog
