@@ -32,3 +32,5 @@ $$
 \sum_{i=1}^{n}\sum_{j=i+1}^n<V_i,V_j> x_ix_j
 =\frac{1}{2}\sum_{f=1}^{k}((\sum_{i=1}^nv_{if}x_i)(\sum_{j=1}^nv_{jf}x_j) - \sum_{i=1}^nv_{if}^2x_i^2)
 $$
+
+[^7]: [FM算法解析及Python实现](https://www.cnblogs.com/wkang/p/9588360.html)
