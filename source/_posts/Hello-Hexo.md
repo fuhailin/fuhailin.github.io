@@ -84,6 +84,8 @@ $ npm install
 ```
 $ hexo server
 INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
+
+hexo s --draft  # 预览Draft
 ```
 
 ### 4. Set information for your new blog
