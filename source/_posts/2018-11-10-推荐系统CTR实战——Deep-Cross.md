@@ -34,7 +34,7 @@ $$
 \mathbf { x } _ { \text { embed, } i } = W _ { \text { embed, } , i } \mathbf { x } _ { i }
 $$
 
-其中$x_{embed,i}$是embedding vector，$x_i$是第i个category的二元输入，$W_{embed,i} \in R^{n_e \times n_v}$是对应的embedding matrix，会与网络中的其它参数一起进行优化，$n_e$, $n_v$分别是embedding size和vocabulary size。
+其中`$x_{embed,i}$`是embedding vector，`$x_i$`是第i个category的二元输入，`$W_{embed,i} \in R^{n_e \times n_v}$`是对应的embedding matrix，会与网络中的其它参数一起进行优化，$n_e$, $n_v$分别是embedding size和vocabulary size。
 
 然后，我们将嵌入向量与连续特征向量叠加起来形成一个向量：
 $$
@@ -70,7 +70,7 @@ x_{l+1} = x_0 x_l^T w_l + b_l + x_l = f(x_l, w_l, b_l) + x_l
 $$
 
 其中:
- - $x_l,x_{l+1}$是列向量（column vectors），分别表示来自第l层和第(l+1)层cross layers的输出；
+ - `$x_l,x_{l+1}$`是列向量（column vectors），分别表示来自第l层和第(l+1)层cross layers的输出；
  - $w_l, b_l \in R^d$是第l层layer的weight和bias参数。
 
 可以看到，交叉网络的特殊结构使交叉特征的程度随着层深度的增加而增大。多项式的最高程度（就输入X0而言）为L层交叉网络L + 1。如果用Lc表示交叉层数，d表示输入维度。然后，参数的数量参与跨网络参数为：d * Lc * 2 (w和b).

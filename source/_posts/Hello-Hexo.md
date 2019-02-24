@@ -320,11 +320,25 @@ https://github.com/superalsrk/hexo-pdf
 
 ## 在博客中显示LaTeX数学公式
 
-我这里使用的是`MathJax` LaTeX渲染引擎和`hexo-renderer-markdown-it`Markdown解析器
+我这里使用的是`MathJax` LaTeX渲染引擎和~~`hexo-renderer-markdown-it`~~ [hexo-renderer-kramed](https://github.com/sun11/hexo-renderer-kramed) Markdown解析器
 https://theme-next.org/docs/third-party-services/math-equations/
 
 **********************
 
+## 扩展支持emoji表情
+https://github.com/crimx/hexo-filter-github-emojis
+```
+npm install hexo-filter-github-emojis --save
+```
+##### emoji使用方法
+
+这里有一份emoji与markdown编码的对照表:
+[Complete list of github markdown emoji markup · GitHub](https://gist.github.com/rxaviers/7360908)
+
+Emoji test：:blush::cupid::star::hankey::+1::pig::cn::underage::mortar_board::heart_eyes:
+
+但是发现在主页上的emoji表情没有显示出来
+****************
 
 **Good References:**
 
@@ -336,3 +350,4 @@ hexo进阶: http://stevenshi.me/2017/05/09/hexo-advance/
 Hexo程序archive页面数量设置：http://www.yuzhewo.com/2015/11/21/Hexo%E7%A8%8B%E5%BA%8Farchive%E9%A1%B5%E9%9D%A2%E6%95%B0%E9%87%8F%E8%AE%BE%E7%BD%AE/
 Hexo博客归档不分页显示设置方法：https://sobaigu.com/hexo-archives-show-all-in-one-page.html
 搭建Hexo博客进阶篇---主题自定义（三）：https://www.jianshu.com/p/4b9ee8fec3a3
+[Git Pages 使用指南](http://saili.science/2017/04/02/github-for-win/#)
