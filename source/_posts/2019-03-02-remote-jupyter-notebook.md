@@ -12,6 +12,7 @@ top:
 pip install ipython
 pip install jupyter
 ```
+如果是在Anaconda虚拟环境中运行Jupyter的话还需要安装`conda install notebook ipykernel`（**Python3适用**）
 # 生成配置文件
 ```bash
 jupyter notebook --generate-config
@@ -42,7 +43,8 @@ Out[2]: 'sha1:43b95b731276:5d330ee6f6054613b3ab4cc59c5048ff7c70f549'
 vi /home/hailin/.jupyter/jupyter_notebook_config.py
 
 c.NotebookApp.ip='*' #设置访问notebook的ip，*表示所有IP，这里设置ip为都可访问  
-c.NotebookApp.password = u'sha1:5df252f58b7f:bf65d53125bb36c085162b3780377f66d73972d1' #填写刚刚生成的密文  
+c.NotebookApp.allow_remote_access = True
+c.NotebookApp.password = 'sha1:5df252f58b7f:bf65d53125bb36c085162b3780377f66d73972d1' #填写刚刚生成的密文  
 c.NotebookApp.open_browser = False # 禁止notebook启动时自动打开浏览器(在linux服务器一般都是ssh命令行访问，没有图形界面的。所以，启动也没啥用)  
 c.NotebookApp.port =8888 #指定访问的端口，默认是8888
 ```
