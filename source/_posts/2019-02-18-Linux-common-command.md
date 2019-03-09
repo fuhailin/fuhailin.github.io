@@ -2,7 +2,7 @@
 title: Linux常用command笔记
 date: 2019-02-18 20:05:47
 tags: Linux
-categories:
+categories: Linux
 top:
 ---
 我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04

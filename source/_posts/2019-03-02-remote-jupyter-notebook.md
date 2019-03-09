@@ -2,7 +2,7 @@
 title: Linux上配置Jupyter Notebook远程访问
 date: 2019-03-02 22:57:49
 tags: [Linux,Jupyter,Python]
-categories:
+categories: Linux
 top:
 ---
 现在运行深度学习的程序基本需要比较高配置的GPU服务器，所以一般会通过自己的电脑远程访问服务器。但是服务器上没有浏览器，我想在服务器上运行Jupyter Notebook该怎么访问呢？

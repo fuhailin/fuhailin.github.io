@@ -2,6 +2,7 @@
 title: Python中super()有什么用
 date: 2018-12-04 21:44:00
 tags: Python
+categories: Python
 description: Python中的super()方法有什么用？如何用它来初始化父类属性
 ---
 

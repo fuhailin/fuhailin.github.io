@@ -4,7 +4,7 @@ title: >-
   'const_ty'
 date: 2019-01-29 18:24:36
 tags: C++
-categories: 数据结构与算法
+categories: C++
 top:
 ---
 今天在Windows平台下面用Visual Studio编写C++程序时遇到了一个这样的错误：
