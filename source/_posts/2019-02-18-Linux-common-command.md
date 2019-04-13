@@ -156,3 +156,21 @@ more 允许你向前查看文本文件。
 `ls | more`：有很多文件的目录，可以组合 `more` 跟 `ls` 命令完整查看这个目录当中的内容
 `grep ‘productivity’ core.md Dict.md lctt2014.md lctt2016.md lctt2018.md README.md | more` ：组合 more 和 grep 命令，实现在多个文件中找到指定的文本 “productivity”
 `ps -u Hailin | more`：列出你用户下(Hailin)正在运行的进程
+
+### 查看Linux系统的发行包（Ubuntu还是CentOS）
+`uname -a`：显示全部的版本信息
+
+radhat或centos 发新版查看：
+```bash
+$ cat /etc/redhat-release    # 或者下面的命令
+$ cat /etc/centos-release
+```
+debian或ubuntu 发行版查看：
+```bash
+$ cat /etc/debian_version    # 或者下面的命令
+$ cat /etc/lsb-release
+```
+Slackware发行版查看：
+```bash
+$ cat /etc/slackware_version
+```
