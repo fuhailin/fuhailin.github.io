@@ -174,3 +174,6 @@ Slackware发行版查看：
 ```bash
 $ cat /etc/slackware_version
 ```
+![BASIC LINUX COMMAND](isnefnt32wn21.jpg)
+[Linux Cheat Sheet David Relyea | PDF](Linux-Cheat-Sheet-David-Relyea.pdf)
+[Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube](https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ)

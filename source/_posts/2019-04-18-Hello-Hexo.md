@@ -1,9 +1,9 @@
 ---
-title: Hello-Hexo
+title: 我的Hexo博客搭建过程与扩展功能记录
 date: 2018-11-08 15:35:15
-# updated: 2018-11-11 12:15:27  # 搜狗输入法：sj 快速输入当前时间
-tags: Hexo
-categories: 实用工具笔记
+tags:
+categories:
+top:
 description: 快速、简洁且高效的博客框架Hexo
 ---
 
@@ -332,7 +332,7 @@ https://github.com/crimx/hexo-filter-github-emojis
 ```
 npm install hexo-filter-github-emojis --save
 ```
-##### emoji使用方法
+**emoji使用方法**
 
 这里有一份emoji与markdown编码的对照表:
 [Complete list of github markdown emoji markup · GitHub](https://gist.github.com/rxaviers/7360908)
@@ -340,6 +340,39 @@ npm install hexo-filter-github-emojis --save
 Emoji test：:blush::cupid::star::hankey::+1::pig::cn::underage::mortar_board::heart_eyes:
 
 但是发现在主页上的emoji表情没有显示出来
+****************
+
+## 文章置顶标签及排序
+{% asset_img TIM20181212171732.png 'Hexo文章置顶及排序问题+置顶标签' %}
+**添加置顶属性**
+使用插件[hexo-generator-index-pin-top](https://github.com/netcan/hexo-generator-index-pin-top)
+安装：
+> $ npm uninstall hexo-generator-index --save
+> $ npm install hexo-generator-index-pin-top --save
+
+使用：在需要置顶的**Front-matter**中加上`top: 数字`即可，数字越大，置顶越靠前。
+
+但是我使用的Next主题这样配置目前还不能实现自动给置顶的博文加上置顶标签，需要手动修改代码解决。
+
+**设置置顶标志**
+
+打开：`/blog/themes/next/layout/_macro/post.swig`文件，定位到`<span class="post-time">`标签下，插入如下代码：
+
+```
+{% if post.top %}
+  <i class="fa fa-thumb-tack"></i>
+  <font color=7D26CD>置顶</font>
+  <span class="post-meta-divider">|</span>
+{% endif %}
+```
+重新编译博客之后就可以显示了
+
+希望有人能把这个功能提一个pull request到官方库里面，我现在能力还有限。
+
+**References**:
+1. [hexo博客优化之文章置顶+置顶标签](https://blog.csdn.net/qwerty200696/article/details/79010629)
+2. https://github.com/netcan/hexo-generator-index-pin-top
+3. [Hexo置顶及排序问题|叶落阁](https://yelog.org/2017/02/24/hexo-top-sort/)
 ****************
 
 **Good References:**
