@@ -9,5 +9,6 @@ hexo generate
 hexo deploy
 # Deploy
 git add .
-git commit -m "Site updated: $current_date_time"
+git commit -m "Site updated: $current_date_time $1"
 git push
+
