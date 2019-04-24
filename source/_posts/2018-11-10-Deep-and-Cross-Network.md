@@ -23,7 +23,7 @@ DCN模型以一个嵌入和堆叠层(embedding and stacking layer)开始，接�
 
 整体网络结构如下:
 
-<img src="/uploads/DCN.png" width="70%" height="70%" title="The Deep & Cross Network." alt="The Deep & Cross Network."/>
+<img src="DCN.png" width="70%" height="70%" title="The Deep & Cross Network." alt="The Deep & Cross Network."/>
 
 ## Embedding and Stacking Layer
 
@@ -61,7 +61,7 @@ x0 = tf.feature_column.input_layer(features, feature_columns)
 在广告场景下，特征交叉的组合与点击率是有显著相关的，例如，“USA”与“Thanksgiving”、“China”与“Chinese New Year”这样的关联特征，对用户的点击有着正向的影响。换句话说，来自“China”的用户很可能会在“Chinese New Year”有大量的浏览、购买行为，而在“Thanksgiving”却不会有特别的消费行为。这种关联特征与label的正向相关性在实际问题中是普遍存在的，如“化妆品”类商品与“女性”，“球类运动配件”的商品与“男性”，“电影票”的商品与“电影”品类偏好等。因此，引入特征的组合是非常有意义的。而这部分正是FM存在的意义。
 
 DCN的特点之一就在于提出了一个创新的结构来计算组合特征：
-![](/uploads/cross_layer.webp)
+![](cross_layer.webp)
 
 交叉网络的核心思想是以有效的方式应用显式特征交叉。交叉网络由交叉层组成，每个层具有以下公式：
 
@@ -111,10 +111,10 @@ $$
 
 https://github.com/RyanDeepLearning/Deep-Cross-Net
 
-
 **References**:
-1. [推荐系统遇上深度学习(五)--Deep&Cross Network模型理论和实践|石晓文的学习日记](https://www.jianshu.com/p/77719fc252fa)
+1. [DEEP & CROSS NETWORK FOR AD CLICK PREDICTIONS](https://arxiv.org/pdf/1708.05123.pdf)
 2. [Deep & Cross 与广告不得不说的秘密](https://zhuanlan.zhihu.com/p/38461541)
 3. http://blog.leanote.com/post/ryan_fan/Deep-Cross-Network
 4. https://www.jiqizhixin.com/articles/2018-07-16-17
 5. [距离玩转企业级DCN(Deep & Cross Network)模型，你只差一步|小毛驴](https://yangxudong.github.io/dcn/)
+6. [推荐系统遇上深度学习(五)--Deep&Cross Network模型理论和实践|石晓文的学习日记](https://www.jianshu.com/p/77719fc252fa)
