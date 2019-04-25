@@ -180,7 +180,19 @@ systemctl status mssql-server
 [Install Compose on Linux systems](https://docs.docker.com/compose/install/#install-compose)
 **********
 ### JAVA
-https://blog.csdn.net/u014273195/article/details/70854522
+```bash
+sudo apt-get update
+sudo apt-get install default-jre default-jdk
+```
+vim ~/.bashrc: `export JAVA_HOME=/usr/lib/jvm/default-java`
+```shell
+source ~/.bashrc    # 使变量设置生效
+echo $JAVA_HOME     # 检验变量值
+java -version
+$JAVA_HOME/bin/java -version  # 与直接执行java -version一样
+```
+至此，就成功安装了Java环境
+[Hadoop安装教程_单机/伪分布式配置_Hadoop2.6.0/Ubuntu14.04:第2种安装JDK方式]http://dblab.xmu.edu.cn/blog/install-hadoop/
 *********
 ### Scala
 http://www.cnblogs.com/wrencai/p/3867460.html

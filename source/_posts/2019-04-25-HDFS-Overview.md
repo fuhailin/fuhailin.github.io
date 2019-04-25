@@ -1,9 +1,13 @@
 ---
-title: HDFS Overview
-tags: [HDFS,Hadoop]
+title: HDFS学习笔记
+tags:
+  - HDFS
+  - Hadoop
 categories: 大数据
+date: 2019-04-25 16:52:13
 top:
 ---
+
 **Hadoop Distributed File System**——HDFS，是世界上最可靠的存储系统。 HDFS是Hadoop的文件系统，是Hadoop不可缺少的一部分，其为2003年Google发表的Google文件系统GFS的克隆版。
 {% asset_img Hadoop-Architecture.jpg HDFS in Hadoop %}
 Hadoop文件系统使用分布式文件系统设计开发，设计原则是存储较少数量的大文件而不是大量的小文件。用于存储在硬件集群上运行的非常大的文件。不像其他的分布式系统，HDFS是高度容错以及使用低成本的硬件设计。
