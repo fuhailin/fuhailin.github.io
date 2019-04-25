@@ -1,5 +1,5 @@
 ---
-title: Ubuntu18.04 下 hadoop 3的安装与配置（伪分布式环境）
+title: Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境）
 date: 2019-04-25 11:33:41
 tags: [Hadoop,HDFS]
 categories: 大数据

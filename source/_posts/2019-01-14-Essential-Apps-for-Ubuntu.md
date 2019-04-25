@@ -194,11 +194,15 @@ $JAVA_HOME/bin/java -version  # 与直接执行java -version一样
 至此，就成功安装了Java环境
 [Hadoop安装教程_单机/伪分布式配置_Hadoop2.6.0/Ubuntu14.04:第2种安装JDK方式]http://dblab.xmu.edu.cn/blog/install-hadoop/
 *********
+### Hadoop
+Hadoop3：https://fuhailin.github.io/Hadoop-Install/
+************
 ### Scala
 http://www.cnblogs.com/wrencai/p/3867460.html
 ************
 ### Spark
-https://blog.csdn.net/u010171031/article/details/51849562
+http://fuhailin.github.io/Spark-Tutorial/#Spark%E7%9A%84%E5%AE%89%E8%A3%85
+
 *********
 ## 安装中文输入法
 
