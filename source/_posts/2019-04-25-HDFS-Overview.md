@@ -43,6 +43,8 @@ HDFS遵循主/从式架构，它具有以下元素。
 往HDFS中写入的任何文件，都会分成称为**块**的小块数据。 HDFS的默认块大小为128 MB，可根据要求增加，即便一个数据块大小为130M，也会被拆分为2个Block，一个大小为128M，一个大小为2M。 这些块以分布式方式存储在集群中的不同节点上。这为MapReduce提供了一种在集群中并行处理数据的机制。默认情况下，每个数据块都会有三个副本，每个副本都会被存放在不同的机器上，而且每一个副本都有自己唯一的编号。这就提供了容错、可靠性和高可用性。如下图：
 ![HDFS副本机制](7e142940a0feb4c119be2d8df7fad13c.png)
 
+[Hadoop HDFS Command Cheatsheet.pdf](http://images.linoxide.com/hadoop-hdfs-commands-cheatsheet.pdf)
+
 **References**:
 1. [HDFS Tutorial – A Complete Hadoop HDFS Overview](https://data-flair.training/blogs/hadoop-hdfs-tutorial/)
 2. [HDFS伪分布式环境搭建](https://blog.51cto.com/zero01/2090716)

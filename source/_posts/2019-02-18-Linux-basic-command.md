@@ -9,7 +9,12 @@ top:
 下面记录一些使用过程中遇到的Linux命令：
 
 <!-- more -->
-
+### ls: list
+ls -l: a long listing format
+ls -lh: human readable long listing format
+ls -lSh: sorted by size and then by the exist time
+### cd: change directory
+### pwd: print name of current/working directory
 ### 删除软件
 
 ```
@@ -70,16 +75,18 @@ https://www.cnblogs.com/wuheng1991/p/5332764.html
 查看nvidia芯片信息：`lspci |grep -i nvidia`，会打印出nvidia系列的硬件信息，如果主机安装了没有视频输出的GPU（如tesla系列），这个命令会很有用
 ![这里写图片描述](20180715131139920)
 
-### DiskUsage du
+### du: DiskUsage
 查看硬盘使用情况
 `df -hl` 查看磁盘剩余空间
-
 `df -h` 查看每个根路径的分区大小;`-h`:human readable
-
 `du -sh` [目录名] ：**D**isk **U**sage返回该目录的大小
-
 `du -sm` [文件夹] 返回该文件夹总M数
 ![这里写图片描述](20180718110351393)
+
+### df: Disk space being used by File ystem
+df -h: human readable
+### man: view the system's reference MANuals
+man pwd: get the manual for PWD command
 
 ### `top`
 查看CPU使用情况

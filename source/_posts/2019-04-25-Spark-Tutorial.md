@@ -161,5 +161,9 @@ numBs = logData.filter(lambda line: 'b' in line).count()
 print('Lines with a: %s, Lines with b: %s' % (numAs, numBs))
 ```
 
+一些学习资料：
+[Spark性能优化指南——基础篇](https://tech.meituan.com/2016/04/29/spark-tuning-basic.html)
+[PySpark_SQL_Cheat_Sheet_Python.pdf](PySpark_SQL_Cheat_Sheet_Python.pdf)
+
 **References**:
 1. [大数据之Spark入门教程(Python版)|厦门大学数据库](http://dblab.xmu.edu.cn/blog/1709-2/)
