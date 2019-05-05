@@ -55,9 +55,13 @@ Spark通过分析各个RDD的依赖关系生成了DAG，再通过分析各个RDD
 2. SparkContext负责计算RDD之间的依赖关系，构建DAG；
 3. DAGScheduler负责把DAG图分解成多个阶段，每个阶段中包含了多个任务，每个任务会被任务调度器分发给各个工作节点（Worker Node）上的Executor去执行。
 
-![](图9-12-RDD在Spark中的运行过程.jpg)
+![RDD在Spark中的运行过程](图9-12-RDD在Spark中的运行过程.jpg)
 
 ### DataFrame与RDD的区别
 ![DataFrame与RDD的区别](DataFrame-RDD.jpg)
  - RDD是分布式的 Java对象的集合。比如，RDD[Person]是以Person为类型参数，但是，Person类的内部结构对于RDD而言却是不可知的。
  - DataFrame是一种以RDD为基础的分布式数据集，也就是分布式的Row对象的集合（每个Row对象代表一行记录），提供了详细的结构信息，也就是常说的模式（schema），Spark SQL可以清楚地知道该数据集中包含哪些列、每列的名称和类型。DataFrame的推出，让Spark具备了处理大规模结构化数据的能力，不仅比原有的RDD转化方式更加简单易用，而且获得了更高的计算性能。和RDD一样，DataFrame的各种变换操作也采用惰性机制，只是记录了各种转换的逻辑转换路线图（是一个DAG图），不会发生真正的计算。DAG图相当于一个逻辑查询计划，最终，会被翻译成物理查询计划，生成RDD DAG，按照RDD DAG的执行方式去完成最终的计算得到结果。
+
+
+[Spark入门：RDD的设计与运行原理(Python版)](http://dblab.xmu.edu.cn/blog/1681-2/)
+[Spark2.1.0+入门：RDD编程(Python版)](http://dblab.xmu.edu.cn/blog/1700-2/)
