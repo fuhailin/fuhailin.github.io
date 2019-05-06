@@ -18,10 +18,8 @@ NUM_doc = df.count()
 df = df.select('*', F.explode('keys').alias('token'))
 df.show()
 # Calculate TF
-tf1 = df.groupBy("doc_id").agg(F.count("token").alias("doc_len"))
-tf2 = df.groupBy("doc_id", "token").agg(F.count("keys").alias("word_count"))
-TF = tf1.join(tf2, ['doc_id'])
-TF = TF.withColumn("tf", F.col("word_count")/F.col("doc_len"))
+TF = df.groupBy("doc_id").agg(F.count("token").alias("doc_len"))
+.join(df.groupBy("doc_id", "token").agg(F.count("keys").alias("word_count")), ['doc_id']).withColumn("tf", F.col("word_count")/F.col("doc_len"))
 TF = TF.drop("doc_len", "word_count")
 # Calculate IDF
 IDF = df.groupBy("token").agg(F.countDistinct("doc_id").alias("df"))

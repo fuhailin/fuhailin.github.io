@@ -1,5 +1,5 @@
 ---
-title: RDD编程(PySpark版)
+title: Spark入门笔记—编程操作对象RDD与DataFrame(PySpark版)
 date: 2019-04-29 14:56:00
 tags: [Spark,Python]
 categories: 大数据
@@ -62,6 +62,13 @@ Spark通过分析各个RDD的依赖关系生成了DAG，再通过分析各个RDD
  - RDD是分布式的 Java对象的集合。比如，RDD[Person]是以Person为类型参数，但是，Person类的内部结构对于RDD而言却是不可知的。
  - DataFrame是一种以RDD为基础的分布式数据集，也就是分布式的Row对象的集合（每个Row对象代表一行记录），提供了详细的结构信息，也就是常说的模式（schema），Spark SQL可以清楚地知道该数据集中包含哪些列、每列的名称和类型。DataFrame的推出，让Spark具备了处理大规模结构化数据的能力，不仅比原有的RDD转化方式更加简单易用，而且获得了更高的计算性能。和RDD一样，DataFrame的各种变换操作也采用惰性机制，只是记录了各种转换的逻辑转换路线图（是一个DAG图），不会发生真正的计算。DAG图相当于一个逻辑查询计划，最终，会被翻译成物理查询计划，生成RDD DAG，按照RDD DAG的执行方式去完成最终的计算得到结果。
 
+### RDD和DataFrame不同版本API执行效率比较
+目前spark的编程接口中，执行效率是Scala DataFrame api > PySpark DataFrame api > Scala RDD api > PySpark RDD api
+总的来说，DataFrame执行效率高于RDD，而Scala执行效率又高于Python
+
+Dataset 上可用的操作可分为 Transformation 和 Action 两大类操作。Transformation操作会产生新的Dataset， 而Action操作将会触发计算并返回结果。Transformation操作主要包含的算子有：`map()、filter()、select()、aggregate()、groupBy()`。Action操作主要包含的算子有`count()、show()、或者写数据到文件系统`。值得注意的是，Datasets是"惰性的"，代码运行到Transformation类算子并不会马上执行，而是先构建DAG数据流图，当代码运行到Action类算子时才会触发真正的计算
+
 
 [Spark入门：RDD的设计与运行原理(Python版)](http://dblab.xmu.edu.cn/blog/1681-2/)
 [Spark2.1.0+入门：RDD编程(Python版)](http://dblab.xmu.edu.cn/blog/1700-2/)
+https://spark.apache.org/docs/2.0.0/api/java/org/apache/spark/sql/Dataset.html

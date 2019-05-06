@@ -248,6 +248,7 @@ https://xiaoyuliu.github.io/2018/03/28/how-to-sync-hexo-blog/
 https://wuchenxu.com/2015/12/08/Static-Blog-hexo-github-6-tag-plugins/
 ******************
 ## 在文章中插入代码
+自定义 Hexo 博客代码块: https://www.w3ctrain.com/2017/12/11/hexo-code-block/
 http://octopress.org/docs/plugins/codeblock/
 
 插入代码文件
