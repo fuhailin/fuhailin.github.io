@@ -31,7 +31,7 @@ DCN模型以一个嵌入和堆叠层(embedding and stacking layer)开始，接�
 
 为了减少维数，一种常用的做法是采用嵌入过程将这些离散特征转换成实数值的稠密向量（通常称为嵌入向量）：
 $$
-\mathbf { x } _ { \text { embed, } i } = W _ { \text { embed, } , i } \mathbf { x } _ { i }
+\mathbf { x } _ { \text { embed, } i } = W _ { \text { embed } , i } \mathbf { x } _ { i }
 $$
 
 其中`$x_{embed,i}$`是embedding vector，`$x_i$`是第i个category的二元输入，`$W_{embed,i} \in R^{n_e \times n_v}$`是对应的embedding matrix，会与网络中的其它参数一起进行优化，$n_e$, $n_v$分别是embedding size和vocabulary size。

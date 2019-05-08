@@ -18,12 +18,16 @@ NUM_doc = df.count()
 df = df.select('*', F.explode('keys').alias('token'))
 df.show()
 # Calculate TF
-TF = df.groupBy("doc_id").agg(F.count("token").alias("doc_len"))
-.join(df.groupBy("doc_id", "token").agg(F.count("keys").alias("word_count")), ['doc_id']).withColumn("tf", F.col("word_count")/F.col("doc_len"))
-TF = TF.drop("doc_len", "word_count")
+TF = df.groupBy("doc_id").agg(F.count("token").alias("doc_len")) \
+    .join(df.groupBy("doc_id", "token")
+          .agg(F.count("keys").alias("word_count")), ['doc_id']) \
+    .withColumn("tf", F.col("word_count") / F.col("doc_len")) \
+    .drop("doc_len", "word_count")
+TF.cache()
 # Calculate IDF
 IDF = df.groupBy("token").agg(F.countDistinct("doc_id").alias("df"))
-IDF = IDF.select('*', (F.log(NUM_doc/(IDF['df']+1))).alias('idf'))
+IDF = IDF.select('*', (F.log(NUM_doc / (IDF['df'] + 1))).alias('idf'))
+IDF.cache()
 # Calculate TF-IDF
 TFIDF = TF.join(IDF, ['token']).withColumn('tf-idf', F.col('tf') * F.col('idf'))
 TFIDF.show()

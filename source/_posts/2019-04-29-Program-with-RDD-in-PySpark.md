@@ -72,3 +72,4 @@ Dataset 上可用的操作可分为 Transformation 和 Action 两大类操作。
 [Spark入门：RDD的设计与运行原理(Python版)](http://dblab.xmu.edu.cn/blog/1681-2/)
 [Spark2.1.0+入门：RDD编程(Python版)](http://dblab.xmu.edu.cn/blog/1700-2/)
 https://spark.apache.org/docs/2.0.0/api/java/org/apache/spark/sql/Dataset.html
+https://spark.apache.org/docs/latest/rdd-programming-guide.html

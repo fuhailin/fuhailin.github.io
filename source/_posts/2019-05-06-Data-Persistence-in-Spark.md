@@ -39,3 +39,4 @@ cache()=persist(StorageLevel.MEMORY_ONLY)   |  persist(StorageLevel.MEMORY_AND_D
 ![](DInZf.png)
 
 [What is the difference between cache and persist?](https://stackoverflow.com/questions/26870537/what-is-the-difference-between-cache-and-persist)
+[spark 数据持久化与释放](https://www.jianshu.com/p/0b2ea4cfdc8a)
