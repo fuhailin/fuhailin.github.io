@@ -1,5 +1,5 @@
 ---
-title: Spark学习笔记之数据持久化
+title: Cache() or not Cache() in Spark, 这是一个价值百万的问题
 date: 2019-05-06 16:34:19
 tags: Spark
 categories: 大数据
@@ -36,7 +36,10 @@ cache()=persist(StorageLevel.MEMORY_ONLY)   |  persist(StorageLevel.MEMORY_AND_D
 
 要记住的是，当Worker节点内存不够用时，Spark将以LRU方式自动从Workers中替换RDD分区，并且这种替换在每个Worker上是独立发生。
 
+
+
 ![](DInZf.png)
 
 [What is the difference between cache and persist?](https://stackoverflow.com/questions/26870537/what-is-the-difference-between-cache-and-persist)
 [spark 数据持久化与释放](https://www.jianshu.com/p/0b2ea4cfdc8a)
+[TO CACHE OR NOT TO CACHE, THAT’S THE MILLION DOLLAR QUESTION](https://unraveldata.com/to-cache-or-not-to-cache/)
