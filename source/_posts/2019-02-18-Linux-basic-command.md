@@ -164,23 +164,10 @@ more 允许你向前查看文本文件。
 `grep ‘productivity’ core.md Dict.md lctt2014.md lctt2016.md lctt2018.md README.md | more` ：组合 more 和 grep 命令，实现在多个文件中找到指定的文本 “productivity”
 `ps -u Hailin | more`：列出你用户下(Hailin)正在运行的进程
 
-### 查看Linux系统的发行包（Ubuntu还是CentOS）
-`uname -a`：显示全部的版本信息
+### 查看Linux系统的发行版（Ubuntu还是CentOS）
+$ `cat /etc/os-release`
+$ `uname -a`：显示全部的版本信息
 
-radhat或centos 发新版查看：
-```bash
-$ cat /etc/redhat-release    # 或者下面的命令
-$ cat /etc/centos-release
-```
-debian或ubuntu 发行版查看：
-```bash
-$ cat /etc/debian_version    # 或者下面的命令
-$ cat /etc/lsb-release
-```
-Slackware发行版查看：
-```bash
-$ cat /etc/slackware_version
-```
 ![BASIC LINUX COMMAND](isnefnt32wn21.jpg)
 [Linux Cheat Sheet David Relyea | PDF](Linux-Cheat-Sheet-David-Relyea.pdf)
 [Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube](https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ)
