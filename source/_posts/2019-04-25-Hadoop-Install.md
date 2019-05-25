@@ -32,7 +32,7 @@ ssh localhost                         #此时已不需密码即可登录localhos
 # 安装Java环境
 此处参考 https://fuhailin.github.io/Essential-Apps-for-Ubuntu/#JAVA
 # 安装 Hadoop 3
-通过Apache Hadoop官方下载页面(https://hadoop.apache.org/releases.html)选择最新的Binary版本进行下载（截止2019年4月25日，Hadoop最新稳定版本为3.1.2）。
+通过Apache Hadoop官方下载页面( https://hadoop.apache.org/releases.html )选择最新的Binary版本进行下载（截止2019年4月25日，Hadoop最新稳定版本为3.1.2）。
 Binary版本是编译好的二进制版本，可以直接解压安装；另一个包含 src 的则是 Hadoop 源代码，需要进行编译才可使用。
 下面进行安装：
 ```bash
