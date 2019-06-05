@@ -168,6 +168,32 @@ more 允许你向前查看文本文件。
 $ `cat /etc/os-release`
 $ `uname -a`：显示全部的版本信息
 
+### `find`
+$ `find ~ -name '*jpg'`：在主目录中找到所有的 JPEG 文件。 -name 参数允许你将结果限制为与给定模式匹配的文件
+$ `find ~ -iname '*jpg'`：-iname 就像 -name，但是不区分大小写。
+$ `find ~ ( -iname 'jpeg' -o -iname 'jpg' )`：用“或”（表示为 -o）来组合。在主目录中找到所有的 JPEG或JPG 文件
+$ `find ~ \( -iname '*jpeg' -o -iname '*jpg' \) -type f`：指定查找类型为file文件
+$ `find ~ \( -iname '*jpeg' -o -iname '*jpg' \) -type d`：指定查找类型为directory目录
+$ `find ~ \( -iname '*jpeg' -o -iname '*jpg' \) -type f -mtime -7`：指定修改日期在7天以内的file
+你可以根据文件状态更改时间 （ctime）、修改时间 （mtime） 或访问时间 （atime） 来执行时间过滤。 这些是在几天内，所以如果你想要更细粒度的控制，你可以表示为在几分钟内（分别是 cmin、mmin 和 amin）。 除非你确切地知道你想要的时间，否则你可能会在 + （大于）或 - （小于）的后面加上数字。
+$ `find /var/log -size +1G`：在 log 目录下找到所有“大于 1GB”的文件
+$ `find /data -owner hailin`：在 /data 中找到 hailin 拥有的所有文件
+$ `find ~ -perm -o=r`：在主目录中找到对所有人可读的文件
+[How to use FIND in Linux](https://opensource.com/article/18/4/how-use-find-linux)
+
+### `awk`
+awk是一种编程语言，用于在linux/unix下对文本和数据进行处理，数据可以来自标准输入、一个或多个文件。其名称得自于它的创始人Alfred Aho、Peter Weinberger 和 Brian Kernighan姓氏的首个字母。
+$ `awk '!seen[$9]++ { print $4,$5,$9 }' part-00000 part*`：输出文件的第4，5，9列，并按第九列内容去重
+[awk命令详解](http://man.linuxde.net/awk)
+
+### `sed`: Stream EDitor
+$`sed -i -e 's/abc/ABC/g' feature_list.csv`: 将文件中的`abc`全局替换为`ABC`
+$`sed -e 's/$/hello/' -i feature_list.csv`: 为每一行末尾append `hello`
+$`sed -i '/#/d' feature_list.csv`: remove包含`#`的每一行
+[Linux sed 命令](https://www.runoob.com/linux/linux-comm-sed.html)
+
+
+
 ![BASIC LINUX COMMAND](isnefnt32wn21.jpg)
 [Linux Cheat Sheet David Relyea | PDF](Linux-Cheat-Sheet-David-Relyea.pdf)
 [Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube](https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ)
