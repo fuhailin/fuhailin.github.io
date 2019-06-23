@@ -1,1 +1,27 @@
 这是一个我的个人博客，my personal blog： [https://fuhailin.github.io/](https://fuhailin.github.io/)
+
+sudo apt-get install nodejs  # Install Node.js on Ubuntu
+node -v
+npm -v
+
+git clone --recursive https://github.com/fuhailin/fuhailin.github.io.git
+
+git remote show origin
+# Add the remote, call it "upstream":
+
+git remote add upstream https://github.com/theme-next/hexo-theme-next.git
+
+# Fetch all the branches of that remote into remote-tracking branches,
+# such as upstream/master:
+
+git fetch upstream
+
+# Make sure that you're on your master branch:
+
+git checkout master
+
+# Rewrite your master branch so that any commits of yours that
+# aren't already in upstream/master are replayed on top of that
+# other branch:
+
+git rebase upstream/master

@@ -14,7 +14,7 @@ mathjax: true
 <!-- more -->
 
 说到$e$，我们会很自然地想起另一个无理常数$\pi$。$\pi$的含义可以通过下图中的内接与外切多边形的边长逼近来很形象的理解。
-![图片来源: betterexplained](https://mmbiz.qpic.cn/mmbiz_png/zBOEoibxMDhyezM3UYwiczH3eUyObH8icwrjCuD5icymAm4d3XHsc8YI7gyIicketCNDOR7xSibqFV0YSJLvfxM1Tp7g/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片来源: betterexplained](641.jfif)
 
 假设一个圆的直径为1，其外切与内接多边形的周长可以构成$\pi$ 的估计值的取值范围上下限，内接与外切多边形的边越多，取值范围就越窄，只要边数足够多，取值范围上下限就可以越来越逼近圆周率$\pi$ 。
 
