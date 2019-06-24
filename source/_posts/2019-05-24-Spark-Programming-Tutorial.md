@@ -6,7 +6,7 @@ categories: 大数据
 top:
 ---
 Spark编程指南、API文档：  https://spark.apache.org/docs/latest/#spark-overview
-
+<!-- more -->
 # 文件读写
 Spark支持的文件读写来源有：文件系统(本地文件系统、HDFS、远程Amazon S3)、数据库(MySQL、HBase、Hive)
 SPark支持支持很多其他常见的文件格式：文本文件、JSON、CSV、SequenceFile，以及protocol buffer
