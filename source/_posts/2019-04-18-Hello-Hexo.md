@@ -220,8 +220,8 @@ https://www.jianshu.com/p/2002f4881353
 ~~在`~hexo/themes/next/layout/_macro`中找到`post.swig`文件，在内搜索`el="tag">#`，将**#**换成**<i class="fa fa-tag"></i>**即可.~~
 
 ******************************
-## 添加分享按钮NeedMoreShare2 for NexT
-[theme-next-needmoreshare2](https://github.com/theme-next/theme-next-needmoreshare2)
+## 添加分享按钮
+[theme-next/hexo-next-share](https://github.com/theme-next/hexo-next-share)
 
 ******************************
 ## 显示每篇文章的更新时间
