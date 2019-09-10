@@ -5,10 +5,29 @@ tags: Linux
 categories: Linux
 top:
 ---
+Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机Android、路由器OpenWRT等，最底层就是运行在linux系统上的。
 我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04
 下面记录一些使用过程中遇到的Linux命令：
 
 <!-- more -->
+# linux的目录结构
+
+![/ 下级目录结构](proxy)
+
+ - bin (binaries)存放二进制可执行文件
+ - sbin (super user binaries)存放二进制可执行文件，只有root才能访问
+ - etc (etcetera)存放系统配置文件
+ - usr (unix shared resources)用于存放共享的系统资源
+ - home 存放用户文件的根目录
+ - root 超级用户目录
+ - dev (devices)用于存放设备文件
+ - lib (library)存放跟文件系统中的程序运行所需要的共享库及内核模块
+ - mnt (mount)系统管理员安装临时文件系统的安装点
+ - boot 存放用于系统引导时使用的各种文件
+ - tmp (temporary)用于存放各种临时文件
+ - var (variable)用于存放运行时需要改变数据的文件
+
+# linux常用命令
 ### ls: list
 ls -l: a long listing format
 ls -lh: human readable long listing format
@@ -197,3 +216,5 @@ $`sed -i '/#/d' feature_list.csv`: remove包含`#`的每一行
 ![BASIC LINUX COMMAND](isnefnt32wn21.jpg)
 [Linux Cheat Sheet David Relyea | PDF](Linux-Cheat-Sheet-David-Relyea.pdf)
 [Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube](https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ)
+[Linux 下的这些高效指令，是你快速入门运维的神器](https://mlog.club/article/28876)
+[Linux最常用命令：简单易学，但能解决95%以上的问题](https://mlog.club/article/31049)
