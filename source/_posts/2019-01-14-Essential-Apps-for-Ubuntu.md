@@ -172,12 +172,28 @@ systemctl status mssql-server
 ```
 ## 开发工具
 ### Docker
-**安装Docker**:
+```bash
+# 如果你过去安装过 docker，先删掉
+sudo apt-get remove docker docker-engine docker.io
+# 安装依赖
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+# 信任 Docker 的 GPG 公钥
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# 对于 amd64 架构的计算机，添加软件仓库:
+sudo add-apt-repository \
+   "deb [arch=amd64] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
+sudo apt-get update
+sudo apt-get install docker-ce
+```
+
 [How To Install and Use Docker on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
 ![这里写图片描述](20180319151255921)
 
-**Docker Compose**:
-[Install Compose on Linux systems](https://docs.docker.com/compose/install/#install-compose)
+[Docker Community Edition 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/)
+
 **********
 ### JAVA
 ```bash

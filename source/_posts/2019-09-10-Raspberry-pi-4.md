@@ -58,9 +58,27 @@ deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
 
 ## 必备软件安装
 
-`sudo apt install vim tmux git python3 python3-pip`
+`sudo apt install vim tmux git python3 python3-pip`：安装VIM、tmux、git、Python3、pip
 
 `curl -sLf https://spacevim.org/install.sh | bash`：配置SpaceVim
+
+**安装Docker**:
+```bash
+# 如果你过去安装过 docker，先删掉
+sudo apt-get remove docker docker-engine docker.io
+# 安装依赖
+sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+# 信任 Docker 的 GPG 公钥
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# 树莓派或其它ARM架构计算机，添加软件仓库:
+echo "deb [arch=armhf] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
+     $(lsb_release -cs) stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list
+
+sudo apt-get update
+sudo apt-get install docker-ce
+```
+[Docker Community Edition 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/)
 
 ## 关机与重启
 
