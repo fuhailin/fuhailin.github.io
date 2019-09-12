@@ -48,3 +48,6 @@ top:
 
 
 **Amazon products dataset** -->
+
+# Learning Fashion Compatibility with Bidirectional LSTMs
+将一个搭配方案视为从上到下然后到饰品的单品序列。
