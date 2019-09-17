@@ -211,6 +211,33 @@ $`sed -e 's/$/hello/' -i feature_list.csv`: 为每一行末尾append `hello`
 $`sed -i '/#/d' feature_list.csv`: remove包含`#`的每一行
 [Linux sed 命令](https://www.runoob.com/linux/linux-comm-sed.html)
 
+### 设置开机自启动程序
+
+ 1. Run this command：`sudo vim /etc/systemd/system/YOUR_SERVICE_NAME.service`
+ 2. 输入以下的配置：
+```
+Description=GIVE_YOUR_SERVICE_A_DESCRIPTION
+
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+ExecStart=YOUR_COMMAND_HERE
+Restart=on-failure
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+```
+ 3. 重启服务：`sudo systemctl daemon-reload`
+ 4. 启用服务：`sudo systemctl enable YOUR_SERVICE_NAME`
+ 5. 开始服务：`sudo systemctl start YOUR_SERVICE_NAME`
+ 6. 检查服务状态：`systemctl status YOUR_SERVICE_NAME`
+ 7. 尝试重启设备检查服务有没有重新开始运行
+
+*************
 
 
 ![BASIC LINUX COMMAND](isnefnt32wn21.jpg)

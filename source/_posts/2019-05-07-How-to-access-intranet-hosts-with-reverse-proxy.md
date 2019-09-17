@@ -15,6 +15,17 @@ top:
 # FRP
 分为Server端配置和Client配置，详见frp readme。
 
+## 配合Supervisor守护FRP
+使用Supervisor来做进程的监控，让服务器重启或者FRP down掉之后还能自动重新连接
+
+安装Supervisor：`sudo apt install supervisor`
+编辑FRP client的配置文件：`vim /etc/supervisord.d/frpc.ini`：
+```
+[program:frps]
+command = ./frp_0.24.1_linux_amd64/frpc -c ./frp_0.24.1_linux_amd64/frpc.ini
+autostart = true
+```
+重启Supervisor后配置生效：`sudo service supervisord restart`
 # SSH
 
 主要使用命令如下：
