@@ -64,19 +64,7 @@ deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
 
 **安装Docker**:
 ```bash
-# 如果你过去安装过 docker，先删掉
-sudo apt-get remove docker docker-engine docker.io
-# 安装依赖
-sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
-# 信任 Docker 的 GPG 公钥
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# 树莓派或其它ARM架构计算机，添加软件仓库:
-echo "deb [arch=armhf] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/ubuntu \
-     $(lsb_release -cs) stable" | \
-    sudo tee /etc/apt/sources.list.d/docker.list
-
-sudo apt-get update
-sudo apt-get install docker-ce
+curl -sL get.docker.com | sed 's/9)/10)/' | sh
 ```
 [Docker Community Edition 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/)
 
@@ -91,3 +79,18 @@ sudo apt-get install docker-ce
 ## 打造树莓派路由器
 
 [billz/**raspap-webgui**](https://github.com/billz/raspap-webgui)
+
+## 打造私人git服务器
+**安装Gitea**
+```bash
+docker pull gitea/gitea:latest
+
+sudo usermod -aG docker $USER 
+
+sudo mkdir -p /var/lib/gitea
+
+docker run -d --name=gitea -p 10022:22 -p 10080:3000 -v /var/lib/gitea:/data gitea/gitea:latest
+```
+https://docs.gitea.io/zh-tw/install-with-docker/
+
+https://docs.gitea.io/zh-cn/install-with-docker/
