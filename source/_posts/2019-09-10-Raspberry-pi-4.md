@@ -80,17 +80,36 @@ curl -sL get.docker.com | sed 's/9)/10)/' | sh
 
 [billz/**raspap-webgui**](https://github.com/billz/raspap-webgui)
 
+```bash
+sudo docker run -d --name=gitea -p 1008x:3000 -v /var/lib/gitea:/data --restart unless-stopped kunde21/gitea-arm:latest
+```
+
 ## 打造私人git服务器
 **安装Gitea**
 ```bash
 docker pull gitea/gitea:latest
 
-sudo usermod -aG docker $USER 
+sudo usermod -aG docker $USER
 
 sudo mkdir -p /var/lib/gitea
 
 docker run -d --name=gitea -p 10022:22 -p 10080:3000 -v /var/lib/gitea:/data gitea/gitea:latest
 ```
+
+## 打造家用云服务器
+**安装NextCloudPi**
+```
+# Start docker with custom storage volume with:
+sudo mkdir /media/ncdata
+# 主机80端口已被raspap-webgui占用
+docker run -d -p 4443:4443 -p 443:443 -p 81:80 -v /media/ncdata:/data --name nextcloudpi ownyourbits/nextcloudpi-armhf $DOMAIN
+# 观察nextcloudpi的安装进度
+docker logs -f nextcloudpi
+```
+https://docs.nextcloudpi.com/en/how-to-get-started-with-ncp-docker/
+
+*************
+
 https://docs.gitea.io/zh-tw/install-with-docker/
 
 https://docs.gitea.io/zh-cn/install-with-docker/

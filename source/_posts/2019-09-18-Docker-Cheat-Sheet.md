@@ -10,13 +10,22 @@ top:
 
 <!-- more -->
 
-## DOcker的安装
+## Docker的安装
 
 Linux：
-```
+```bash
 curl -sSL https://get.docker.com/ | sh
 
 ```
+
+OR
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+![](Screenshot from 2019-09-20 22-12-42.png)
 
 ## Docker Hub
 
@@ -66,19 +75,22 @@ curl -sSL https://get.docker.com/ | sh
 ## Docker net/http: TLS handshake timeout的解决办法
 
 由于国内网络环境问题，Docker pull国外镜像出现无法使用的网络问题，因此更换国内镜像：
-修改`/etc/docker/daemon.json`，添加如下地址：
+修改 `sudo vim /etc/docker/daemon.json`，添加如下地址：
+
 ```json
-# 配置代理,此处为阿里云的镜像,可选其他的.
 {
   "registry-mirrors": [
     "https://khec465u.mirror.aliyuncs.com"
   ]
 }
 ```
+重启Docker服务：`sudo service docker restart`
 
 ##　解决每次使用Docker命令都需要root权限的问题
 
-将你使用的具有root权限的用户加入docker group：`sudo usermod -aG docker $USER`
+将你使用的具有root权限的用户加入docker group： ``sudo usermod -aG docker $USER``
 
 
 https://www.linode.com/docs/applications/containers/docker-commands-quick-reference-cheat-sheet/
+
+[Docker Volumes: Why, When, and Which Ones?](https://spin.atomicobject.com/2019/07/11/docker-volumes-explained/)
