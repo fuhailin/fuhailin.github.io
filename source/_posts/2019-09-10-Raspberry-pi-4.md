@@ -65,6 +65,13 @@ deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
 **安装Docker**:
 ```bash
 curl -sL get.docker.com | sed 's/9)/10)/' | sh
+pip3 config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+sudo pip3 install docker-compose
+```
+更换Docker清华镜像
+`sudo vim /etc/apt/sources.list.d/docker.list`:
+```
+deb [arch=armhf] https://mirrors.tuna.tsinghua.edu.cn/docker-ce/linux/raspbian buster stable
 ```
 [Docker Community Edition 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/)
 

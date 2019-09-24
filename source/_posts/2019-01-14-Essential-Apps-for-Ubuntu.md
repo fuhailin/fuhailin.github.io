@@ -285,3 +285,11 @@ Nextcloud Web界面               |                Nextcloud iOS界面
 [基于 Ubuntu + nextCloud 搭建自己的私人网盘](https://cloud.tencent.com/developer/labs/lab/10287)
 [nextcloud打开链接Apache2 Ubuntu Default Page问题](https://www.jianshu.com/p/9b2332a90337)
 **************
+### navi: An interactive cheatsheet tool for the command-line
+https://github.com/denisidoro/navi
+
+### fzf: A command-line fuzzy finder
+https://github.com/junegunn/fzf
+
+### Linuxbrew: Homebrew on Linux (un)installer
+https://github.com/Linuxbrew/install
