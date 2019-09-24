@@ -383,3 +383,4 @@ Hexo程序archive页面数量设置：http://www.yuzhewo.com/2015/11/21/Hexo%E7%
 Hexo博客归档不分页显示设置方法：https://sobaigu.com/hexo-archives-show-all-in-one-page.html
 搭建Hexo博客进阶篇---主题自定义（三）：https://www.jianshu.com/p/4b9ee8fec3a3
 [Git Pages 使用指南](http://saili.science/2017/04/02/github-for-win/#)
+[NexT官方文档](https://theme-next.org/docs/third-party-services/search-services)
