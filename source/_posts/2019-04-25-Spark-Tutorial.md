@@ -82,7 +82,7 @@ export PATH=$HADOOP_HOME/bin:$SPARK_HOME/bin:$PATH
 ```
 PYTHONPATH环境变量主要是为了在Python3中引入pyspark库，PYSPARK_PYTHON变量主要是设置pyspark运行的python版本。
 .bashrc中必须包含`JAVA_HOME`,`HADOOP_HOME`,`SPARK_HOME`,`PYTHONPATH`,`PYSPARK_PYTHON`,`PATH`这些环境变量。如果已经设置了这些变量则不需要重新添加设置。
-![SPARK_HOME环境变量](2019-04-25-18-02-23.png)
+![SPARK_HOME环境变量](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-04-25-18-02-23.png)
 接着还需要让该环境变量生效，执行`source ~/.bashrc`。
 配置完成后就可以直接使用，不需要像Hadoop运行启动命令。
 通过运行Spark自带的示例，验证Spark是否安装成功。
@@ -95,7 +95,7 @@ bin/run-example SparkPi
 bin/run-example SparkPi 2>&1 | grep "Pi is"
 ```
 过滤后的运行结果如下图示，
-![run-example SparkPi](2019-04-25-18-01-05.png)
+![run-example SparkPi](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-04-25-18-01-05.png)
 
 # Spark的使用(Python版PySpark)
 学习Spark程序开发，建议首先通过pyspark交互式学习，加深Spark程序开发的理解。

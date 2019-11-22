@@ -21,9 +21,9 @@ Spark用Scala语言实现了RDD的API，程序员可以通过调用API实现对R
 3. 最后一个RDD经“行动”操作进行处理，并输出到外部数据源（或者变成Scala集合或标量）。
 
 需要说明的是，RDD采用了惰性调用，即在RDD的执行过程中（如下图所示），真正的计算发生在RDD的“行动”操作，对于“行动”之前的所有“转换”操作，Spark只是记录下“转换”操作应用的一些基础数据集以及RDD生成的轨迹，即相互之间的依赖关系，而不会触发真正的计算。
-![Spark的转换和行动操作](Spark-Action-Transformation.jpg)
+![Spark的转换和行动操作](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Spark-Action-Transformation.jpg)
 例如，在下图中，从输入中逻辑上生成A和C两个RDD，经过一系列“转换”操作，逻辑上生成了F（也是一个RDD），之所以说是逻辑上，是因为这时候计算并没有发生，Spark只是记录了RDD之间的生成和依赖关系。当F要进行输出时，也就是当F进行“行动”操作的时候，Spark才会根据RDD的依赖关系生成DAG，并从起点开始真正的计算。
-![RDD执行过程的一个实例](RDD-execute-intence.jpg)
+![RDD执行过程的一个实例](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/RDD-execute-intence.jpg)
 上述这一系列处理称为一个“血缘关系（Lineage）”，即DAG拓扑排序的结果。采用惰性调用，通过血缘关系连接起来的一系列RDD操作就可以实现管道化（pipeline），避免了多次转换操作之间数据同步的等待，而且不用担心有过多的中间数据，因为这些具有血缘关系的操作都管道化了，一个操作得到的结果不需要保存为中间数据，而是直接管道式地流入到下一个操作进行处理。同时，这种通过血缘关系把一系列操作进行管道化连接的设计方式，也使得管道中每次操作的计算变得相对简单，保证了每个操作在处理逻辑上的单一性；相反，在MapReduce的设计中，为了尽可能地减少MapReduce过程，在单个MapReduce中会写入过多复杂的逻辑。
 
 ## RDD特性
@@ -41,12 +41,12 @@ RDD中不同的操作会使得不同RDD中的分区会产生不同的依赖。RD
 2. 对输入做非协同划分，属于宽依赖，如下图(b)所示。
 
 对于窄依赖的RDD，可以以流水线的方式计算所有父分区，不会造成网络之间的数据混合。对于宽依赖的RDD，则通常伴随着Shuffle操作，即首先需要计算好所有父分区数据，然后在节点之间进行Shuffle。
-![窄依赖与宽依赖的区别](图9-10-窄依赖与宽依赖的区别.jpg)
+![窄依赖与宽依赖的区别](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/9-10-.jpg)
 Spark的这种依赖关系设计，使其具有了天生的容错性，大大加快了Spark的执行速度。因为，RDD数据集通过“血缘关系”记住了它是如何从其它RDD中演变过来的，血缘关系记录的是粗颗粒度的转换操作行为，当这个RDD的部分分区数据丢失时，它可以通过血缘关系获取足够的信息来重新运算和恢复丢失的数据分区，由此带来了性能的提升。相对而言，在两种依赖关系中，窄依赖的失败恢复更为高效，它只需要根据父RDD分区重新计算丢失的分区即可（不需要重新计算所有分区），而且可以并行地在不同节点进行重新计算。而对于宽依赖而言，单个节点失效通常意味着重新计算过程会涉及多个父RDD分区，开销较大。此外，Spark还提供了数据检查点和记录日志，用于持久化中间RDD，从而使得在进行失败恢复时不需要追溯到最开始的阶段。在进行故障恢复时，Spark会对数据检查点开销和重新计算RDD分区的开销进行比较，从而自动选择最优的恢复策略。
 
 ## 阶段的划分
 Spark通过分析各个RDD的依赖关系生成了DAG，再通过分析各个RDD中的分区之间的依赖关系来决定如何划分阶段，具体划分方法是：在DAG中进行反向解析，遇到宽依赖就断开，遇到窄依赖就把当前的RDD加入到当前的阶段中；将窄依赖尽量划分在同一个阶段中，可以实现流水线计算（具体的阶段划分算法请参见AMP实验室发表的论文《Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing》）。例如，如图9-11所示，假设从HDFS中读入数据生成3个不同的RDD（即A、C和E），通过一系列转换操作后再将计算结果保存回HDFS。对DAG进行解析时，在依赖图中进行反向解析，由于从RDD A到RDD B的转换以及从RDD B和F到RDD G的转换，都属于宽依赖，因此，在宽依赖处断开后可以得到三个阶段，即阶段1、阶段2和阶段3。可以看出，在阶段2中，从map到union都是窄依赖，这两步操作可以形成一个流水线操作，比如，分区7通过map操作生成的分区9，可以不用等待分区8到分区9这个转换操作的计算结束，而是继续进行union操作，转换得到分区13，这样流水线执行大大提高了计算的效率。
-![根据RDD分区的依赖关系划分阶段](图9-11-根据RDD分区的依赖关系划分阶段.jpg)
+![根据RDD分区的依赖关系划分阶段](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/9-11-RDD.jpg)
 由上述论述可知，把一个DAG图划分成多个“阶段”以后，每个阶段都代表了一组关联的、相互之间没有Shuffle依赖关系的任务组成的任务集合。每个任务集合会被提交给任务调度器（TaskScheduler）进行处理，由任务调度器将任务分发给Executor运行。
 
 ## RDD运行过程
@@ -55,10 +55,10 @@ Spark通过分析各个RDD的依赖关系生成了DAG，再通过分析各个RDD
 2. SparkContext负责计算RDD之间的依赖关系，构建DAG；
 3. DAGScheduler负责把DAG图分解成多个阶段，每个阶段中包含了多个任务，每个任务会被任务调度器分发给各个工作节点（Worker Node）上的Executor去执行。
 
-![RDD在Spark中的运行过程](图9-12-RDD在Spark中的运行过程.jpg)
+![RDD在Spark中的运行过程](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/9-12-RDD-Spark.jpg)
 
 ### DataFrame与RDD的区别
-![DataFrame与RDD的区别](DataFrame-RDD.jpg)
+![DataFrame与RDD的区别](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/DataFrame-RDD.jpg)
  - RDD是分布式的 Java对象的集合。比如，RDD[Person]是以Person为类型参数，但是，Person类的内部结构对于RDD而言却是不可知的。
  - DataFrame是一种以RDD为基础的分布式数据集，也就是分布式的Row对象的集合（每个Row对象代表一行记录），提供了详细的结构信息，也就是常说的模式（schema），Spark SQL可以清楚地知道该数据集中包含哪些列、每列的名称和类型。DataFrame的推出，让Spark具备了处理大规模结构化数据的能力，不仅比原有的RDD转化方式更加简单易用，而且获得了更高的计算性能。和RDD一样，DataFrame的各种变换操作也采用惰性机制，只是记录了各种转换的逻辑转换路线图（是一个DAG图），不会发生真正的计算。DAG图相当于一个逻辑查询计划，最终，会被翻译成物理查询计划，生成RDD DAG，按照RDD DAG的执行方式去完成最终的计算得到结果。
 

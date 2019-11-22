@@ -33,12 +33,12 @@ _这篇博客翻译自国外的深度学习系列文章的第四篇，想查看�
 
 接下来会创建嵌入矩阵，我们要决定每一个索引需要分配多少个‘潜在因子’，这大体上意味着我们想要多长的向量，通常使用的情况是长度分配为32和50。在这篇博客中，为了保持文章可读性这里为每个索引指定6个潜在因子。嵌入矩阵就会变成这样：
 
-![Embedding Matrix](1_Di85w_0UTc6C3ilk5_LEgg.png)
+![Embedding Matrix](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_Di85w_0UTc6C3ilk5_LEgg.png)
 
 
 这样，我们就可以使用嵌入矩阵来而不是庞大的one-hot编码向量来保持每个向量更小。简而言之，嵌入层embedding在这里做的就是把单词“deep”用向量[.32,&nbsp;.02,&nbsp;.48,&nbsp;.21,&nbsp;.56,&nbsp;.15]来表达。然而并不是每一个单词都会被一个向量来代替，而是被替换为用于查找嵌入矩阵中向量的索引。其次这种方法面对大数据时也可有效计算。由于在深度神经网络的训练过程中嵌入向量也会被更新，我们就可以探索在高维空间中哪些词语之间具有彼此相似性，再通过使用[t-SNE ](https://lvdmaaten.github.io/tsne/)这样的降维技术就可以将这些相似性可视化。
 
-<img src="1_m8Ahpl-lpVgm16CC-INGuw.png" width="50%" height="50%" title="t-SNE visualization of word embeddings" alt="t-SNE visualization of word embeddings"/>
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_m8Ahpl-lpVgm16CC-INGuw.png" width="50%" height="50%" title="t-SNE visualization of word embeddings" alt="t-SNE visualization of word embeddings"/>
 
 * * *
 

@@ -50,7 +50,7 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin
 ```
 执行source ~./bashrc使设置生效，并查看hadoop是否安装成功
-![hadoop version](hadoop-version.png)
+![hadoop version](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop-version.png)
 
 # 伪分布式配置
 Hadoop 可以在单节点上以伪分布式的方式运行，Hadoop 进程以分离的 Java 进程来运行，节点既作为 NameNode 也作为 DataNode，同时，读取的是 HDFS 中的文件。
@@ -97,7 +97,7 @@ Hadoop 的运行方式是由配置文件决定的（运行 Hadoop 时会读取�
 
 配置完成后，执行 NameNode 的格式化:
 `./bin/hdfs namenode -format`
-![./bin/hdfs namenode -format](namenode-format.png)
+![./bin/hdfs namenode -format](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/namenode-format.png)
 启动namenode和datanode进程，并查看启动结果
 `./sbin/start-dfs.sh`
 启动完成后，可以通过命令 `jps` 来判断是否成功启动，若成功启动则会列出如下进程: “NameNode”、”DataNode” 和 “SecondaryNameNode”

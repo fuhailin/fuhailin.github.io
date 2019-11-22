@@ -10,7 +10,7 @@ Spark编程指南、API文档：  https://spark.apache.org/docs/latest/#spark-ov
 # 文件读写
 Spark支持的文件读写来源有：文件系统(本地文件系统、HDFS、远程Amazon S3)、数据库(MySQL、HBase、Hive)
 SPark支持支持很多其他常见的文件格式：文本文件、JSON、CSV、SequenceFile，以及protocol buffer
-![](1136325-20170915111603547-1070150402.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1136325-20170915111603547-1070150402.png)
 
 ## 读取本地文件系统
 要加载本地文件，必须采用`file:///`开头的这种格式;

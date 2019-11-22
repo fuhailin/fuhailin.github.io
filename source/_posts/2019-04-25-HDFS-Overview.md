@@ -9,7 +9,7 @@ top:
 ---
 
 **Hadoop Distributed File System**——HDFS，是世界上最可靠的存储系统。 HDFS是Hadoop的文件系统，是Hadoop不可缺少的一部分，其为2003年Google发表的Google文件系统GFS的克隆版。
-{% asset_img Hadoop-Architecture.jpg HDFS in Hadoop %}
+{% asset_img https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Hadoop-Architecture.jpg HDFS in Hadoop %}
 Hadoop文件系统使用分布式文件系统设计开发，设计原则是存储较少数量的大文件而不是大量的小文件。用于存储在硬件集群上运行的非常大的文件。不像其他的分布式系统，HDFS是高度容错以及使用低成本的硬件设计。
 <!-- more -->
 
@@ -25,7 +25,7 @@ Hadoop文件系统使用分布式文件系统设计开发，设计原则是存�
 
 ## HDFS架构
 下面给出是Hadoop的文件系统的体系结构。
-  ![HDFS架构](HDFS-Architecture.jpg)
+  ![HDFS架构](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/HDFS-Architecture.jpg)
 HDFS遵循主/从式架构，它具有以下元素。
 
 ### 命名节点 - Namenode
@@ -41,7 +41,7 @@ HDFS遵循主/从式架构，它具有以下元素。
 
 ### 数据块
 往HDFS中写入的任何文件，都会分成称为**块**的小块数据。 HDFS的默认块大小为128 MB，可根据要求增加，即便一个数据块大小为130M，也会被拆分为2个Block，一个大小为128M，一个大小为2M。 这些块以分布式方式存储在集群中的不同节点上。这为MapReduce提供了一种在集群中并行处理数据的机制。默认情况下，每个数据块都会有三个副本，每个副本都会被存放在不同的机器上，而且每一个副本都有自己唯一的编号。这就提供了容错、可靠性和高可用性。如下图：
-![HDFS副本机制](7e142940a0feb4c119be2d8df7fad13c.png)
+![HDFS副本机制](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/7e142940a0feb4c119be2d8df7fad13c.png)
 
 [Hadoop HDFS Command Cheatsheet.pdf](http://images.linoxide.com/hadoop-hdfs-commands-cheatsheet.pdf)
 

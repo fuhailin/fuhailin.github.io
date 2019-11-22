@@ -17,7 +17,7 @@ mathjax: true
 **市场（或代表性指数）收益率market rate of return**：国内市场通常使用沪深300指数作为市场代表，美股则常用标普500指数，港股则常用恒生指数
 
 **无风险利率risk-free rate**：这是投资者将资金投资于某一项没有任何风险的投资对象而能得到的利息率，例如以人民币投资的中国国债、美元投资的美国国库券、以欧元交易和投资的德国政府债券等。该数字通常以百分比表示。
-![Investing.com - 中国政府债券](2019-08-12 11 34 20.png)
+![Investing.com - 中国政府债券](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-08-12-11-34-20.png)
 
 # Capital Asset Pricing Model资本资产定价模型
 在金融世界，人们手持多余的资金时候本能欲望都会寻求让资金尽量增长，投资因此诞生。但并不是每项投资都能带来收益，人的本能让人追求收益畏惧风险。
@@ -51,7 +51,7 @@ $$
 - 牛市时选择高Beta证券，将成倍放大市场收益；熊市时选择低Beta证券以抵御市场风险
 
 <!-- ![](v4-728px-Calculate-Beta-Step-3-Version-4.jpg.jfif) -->
-![图中我们可以看出，谷歌股票的回报波动比较大（蓝色），标普500的回报波动比较小（橙色）](download.png)
+![图中我们可以看出，谷歌股票的回报波动比较大（蓝色），标普500的回报波动比较小（橙色）](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/download.png)
 
 # Beta系数计算方法
 
@@ -77,7 +77,7 @@ $$
 将大盘收益率作为Y，将策略历史收益率作为X进行回归，$\varepsilon$是建模误差。通过最小化回归方程预测的 y 值与实际 y 值之间的平方差（垂直距离），能够得到一条最合理的回归直线，直线与Y轴截距是事后的 $\alpha$，即与市场指数回报相比，超额回报的衡量。如果截距是负数，则意味着策略在风险调整的基础上表现落后于大盘，而截距是正数，则意味着其在风险调整基础上有超额收益。回归线的斜率系数 Beta 被计算为 x 和 y 的协方差除以 x 的方差，在数学上与方式一是一致的。
 
 这种方式得出的Beta值相对稳定
-![](download1.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/download1.png)
 
 # Alpha系数
 实际风险回报和平均预期风险回报的差额即 α 系数。

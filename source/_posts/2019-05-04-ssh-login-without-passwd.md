@@ -10,15 +10,15 @@ top:
 # 通过密钥登录
 ## 查看local有没有公钥
 `ls ~/.ssh/`
-![ls ~/.ssh/](20180816111251441)
+![ls ~/.ssh/](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180816111251441)
 
 如果local没有公钥的话需要生成公钥
 `ssh-keygen`：产生公钥与私钥对
-![ssh-keygen](2019-05-04-16-51-01.png)
+![ssh-keygen](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-05-04-16-51-01.png)
 ## 将公钥上传给主机
 `ssh-copy-id` 将本机的公钥复制到目的机器的authorized_keys文件中
 使用方式为：`ssh-copy-id -i .ssh/id_rsa.pub name@193.112.x.xxx`
-![ssh-copy-id](2019-05-04-16-31-52.png)
+![ssh-copy-id](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-05-04-16-31-52.png)
 我这里多出来的-oPort=xxxx参数是因为我配置了反向代理，所以需要指定登录端口号。
 
 ## 登录到远程机器不用输入密码
@@ -26,7 +26,7 @@ top:
 
 # 配置ssh别名登录
 `vi ~/.ssh/config`
-![](20180809175741834)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809175741834)
 登录到远程机器使用简短的别名：
 `ssh GPU`
 `ssh cloud`

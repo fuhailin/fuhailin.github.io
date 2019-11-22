@@ -90,7 +90,7 @@ https://github.com/JinnLynn/GenPAC
 点击：System settings > Network > Network Proxy，选择 Method 为 Automatic，设置 Configuration URL 为 autoproxy.pac 文件的路径，点击 Apply System Wide。
 格式如：file:///home/{user}/Downloads/shadowsocks/autoproxy.pac
 
-![这里写图片描述](screenshot_from_2019-01-14_20-28-26.png)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/screenshot_from_2019-01-14_20-28-26.png)
 
 ### 5、安装Anaconda：
 download the [Anaconda installer for Linux](http://anaconda.com/downloads.html) and install it:
@@ -190,7 +190,7 @@ sudo apt-get install docker-ce
 ```
 
 [How To Install and Use Docker on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
-![这里写图片描述](20180319151255921)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180319151255921)
 
 [Docker Community Edition 镜像使用帮助](https://mirror.tuna.tsinghua.edu.cn/help/docker-ce/)
 
@@ -262,7 +262,7 @@ sudo apt-get install texlive-lang-chinese
 ```
 安装Texlive前               |                安装Texlive后
 :-------------------------:|:-------------------------:
-![](20180718112621899)|![](20180718112717961)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718112621899)|![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718112717961)
 [Ubuntu18.04安装LaTeX并配置中文环境](https://blog.csdn.net/qq_41814939/article/details/82288145)
 [Ubuntu18 + VSCode + TexLive 配置中文Latex环境](http://jun369.me/2018/10/22/latex/)
 [Ubuntu 18.04 LTS 安装 Tex Live](https://vanxnf.top/2018/09/15/Ubuntu-18-04-LTS-%E5%AE%89%E8%A3%85-Tex-Live/)
@@ -280,7 +280,7 @@ sudo snap install nextcloud
 
 Nextcloud Web界面               |                Nextcloud iOS界面
 :-------------------------:|:-------------------------:
-![](netxcloud-web.png)|![](nextcloud-mobile.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/netxcloud-web.png)|![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/nextcloud-mobile.png)
 [Nextcloud](https://nextcloud.com/)
 [基于 Ubuntu + nextCloud 搭建自己的私人网盘](https://cloud.tencent.com/developer/labs/lab/10287)
 [nextcloud打开链接Apache2 Ubuntu Default Page问题](https://www.jianshu.com/p/9b2332a90337)

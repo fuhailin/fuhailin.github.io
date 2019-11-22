@@ -25,7 +25,7 @@ cache()和presist()的区别在于，cache()是persist()的一种简化方式，
 
 cache()=persist(StorageLevel.MEMORY_ONLY)   |  persist(StorageLevel.MEMORY_AND_DISK)
 :------------------------------------------:|:-------------------------:
-![MEMORY_ONLY](ekNcE.png)     |      ![MEMORY_AND_DISK](cjD3K.png)
+![MEMORY_ONLY](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/ekNcE.png)     |      ![MEMORY_AND_DISK](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/cjD3K.png)
 
 
 # 什么时候应该持久化RDD或DataFrame？
@@ -38,7 +38,7 @@ cache()=persist(StorageLevel.MEMORY_ONLY)   |  persist(StorageLevel.MEMORY_AND_D
 
 
 
-![](DInZf.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/DInZf.png)
 
 [What is the difference between cache and persist?](https://stackoverflow.com/questions/26870537/what-is-the-difference-between-cache-and-persist)
 [spark 数据持久化与释放](https://www.jianshu.com/p/0b2ea4cfdc8a)

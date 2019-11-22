@@ -11,7 +11,7 @@ categories: 数据结构与算法
 思路：
 1、序列的的最后一个数字是根节点
 2、二叉搜索树左子树的节点都比根节点小，右子树的节点都比根节点大。
-![在这里插入图片描述](/uploads/20181020211958624.png)
+![在这里插入图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181020211958624.png)
 
 <!--more-->
 

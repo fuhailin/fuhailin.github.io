@@ -31,7 +31,7 @@ top:
 > Average Items/Outfit: 6.5
 > Text Available?: Titles & Descriptions
 
-![](2019-07-25-23-05-54.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-07-25-23-05-54.png)
 
 [polyvore-images.tar.gz](https://drive.google.com/drive/folders/0B4Eo9mft9jwoVDNEWlhEbUNUSE0) 是一个更大的版本（33,375 outfits），polyvore-dataset为其真子集。
 

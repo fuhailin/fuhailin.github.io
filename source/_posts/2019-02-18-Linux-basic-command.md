@@ -89,10 +89,10 @@ https://www.cnblogs.com/wuheng1991/p/5332764.html
 > vi filename     :打开或新建文件，并将光标置于第一行首
 
 查看显卡型号：`lspci |grep VGA` （lspci是linux查看硬件信息的命令），屏幕会打印出主机的集显几独显信息
-![这里写图片描述](2018071513101933)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018071513101933)
 
 查看nvidia芯片信息：`lspci |grep -i nvidia`，会打印出nvidia系列的硬件信息，如果主机安装了没有视频输出的GPU（如tesla系列），这个命令会很有用
-![这里写图片描述](20180715131139920)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180715131139920)
 
 ### du: DiskUsage
 查看硬盘使用情况
@@ -100,7 +100,7 @@ https://www.cnblogs.com/wuheng1991/p/5332764.html
 `df -h` 查看每个根路径的分区大小;`-h`:human readable
 `du -sh` [目录名] ：**D**isk **U**sage返回该目录的大小
 `du -sm` [文件夹] 返回该文件夹总M数
-![这里写图片描述](20180718110351393)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718110351393)
 
 ### df: Disk space being used by File ystem
 df -h: human readable
@@ -110,9 +110,9 @@ man pwd: get the manual for PWD command
 ### `top`
 查看CPU使用情况
 `top`
-![这里写图片描述](20180718150831127)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150831127)
 `top` `1`
-![这里写图片描述](20180718150928345)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150928345)
 
 ### `tail` 命令
 https://www.cnblogs.com/mfryf/p/3336804.html
@@ -129,14 +129,14 @@ http://linux.51yip.com/search/awk
 
 ### `md5sum` : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。
 `md5sum filename`
-![这里写图片描述](20180809174303523)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809174303523)
 
 ### `scp`
 secure copy，远程拷贝文件
 
  1. **将本地文件上传到服务器上**
 `scp -P 2222 /home/lnmp0.4.tar.gz root@www.vpser.net:/root/lnmp0.4.tar.gz`
-![这里写图片描述](20180809180429836)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809180429836)
 
 ### `unzip`
 解压zip文件
@@ -166,9 +166,9 @@ allows to run job in the background after you log out from a shell
 
 ### 查看NVIDIA显卡信息
 由于我已经切换到ＮＶＩＤＩＡ专有驱动：`nvidia-smi`
-![驱动](20171228211613210)
+![驱动](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211613210)
 
-![nvidia-smi](20171228211819829)
+![nvidia-smi](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211819829)
 
 `watch -n 5 nvidia-smi`:每隔5秒更新一下显卡使用情况, `ctrl+c`退出
 

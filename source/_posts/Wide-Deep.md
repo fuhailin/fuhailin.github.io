@@ -11,7 +11,7 @@ description: Wide and deep 模型是 TensorFlow 在 2016 年 6 月左右发布�
 ---
 
 Wide & Deep模型结构如下：
-![Wide & Deep Network](/uploads/wide_and_deep.webp)
+![Wide & Deep Network](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wide_and_deep.webp)
 最左边的线性模型和最右边的深度模型联手结盟打造出中间的wide and deep。
 
 
@@ -44,7 +44,7 @@ $$
 
 ## 使用Wide and Deep模型的App推荐系统架构
 当一个用户访问app商店时，此时会产生一个请求，请求到达推荐系统后，推荐系统为该用户返回推荐的apps列表。
-![](/uploads/wide_and_deep_overview.png)
+![](/https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wide_and_deep_overview.png)
 在实际的推荐系统中，通常将推荐的过程分为两个部分，即上图中的Retrieval和Ranking，Retrieval负责从数据库中检索出与用户相关的一些apps，Ranking负责对这些检索出的apps打分，最终，按照分数的高低返回相应的列表给用户。
 
 模型的训练之前，最重要的工作是训练数据的准备以及特征的选择，在apps推荐中，可以使用到的数据包括用户和曝光数据。
@@ -52,7 +52,7 @@ $$
 
 对于类别特征，通过词典（Vocabularies）将其映射成向量；对于连续的实数特征，将其归一化到区间[0,1]。
 
-![](/uploads/wide_and_deep_structure.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wide_and_deep_structure.png)
 
 ## TensorFlow官方实现代码
 

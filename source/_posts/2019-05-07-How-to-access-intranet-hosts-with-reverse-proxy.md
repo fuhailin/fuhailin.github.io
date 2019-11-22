@@ -36,10 +36,10 @@ autostart = true
 
 测试转发连接是否建立成功：
 **在代理服务器上查看`ss -ant` ：**
-![这里写图片描述](20180729122546729)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180729122546729)
 
 在目标主机上查看 `ps aux | grep ssh` ：
-![这里写图片描述](20180729123244214)
+![这里写图片描述](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180729123244214)
 
 
 ## 在代理服务器上执行如下命令:

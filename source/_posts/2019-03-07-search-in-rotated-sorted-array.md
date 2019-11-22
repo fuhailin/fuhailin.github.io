@@ -109,5 +109,5 @@ class Solution
 ```
 时间复杂度分析：最好的情况下O(1)，最坏的情况下O(n)，平均时间复杂度O(n/2).
 空间复杂度分析：由于存在递归调用，会使用栈空间，空间复杂度O(n/2).
-上述解决方案递交到LeetCode上面AC但是成绩并不高![](2019-03-08-004047.png)
+上述解决方案递交到LeetCode上面AC但是成绩并不高![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-03-08-004047.png)
 而且写法也较为啰嗦，存在很大的优化空间。
