@@ -2,7 +2,7 @@
 title: Elasticsearch
 date: 2019-08-14 16:58:15
 tags: elasticsearch
-categories: 
+categories:
 top:
 ---
 # 简介
@@ -12,7 +12,7 @@ Elasticsearch是一个基于Apache Lucene(TM)的开源搜索引擎。无论在�
 
 <!-- more -->
 解压文件`tar -zxvf elasticsearch-x.x.x.tar.gz`，`./bin/elasticsearch`为启动文件，但如果此时直接启动elasticsearch的话，会报错
-![](Image 3.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Image 3.png)
 原因是elasticsearch默认不支持root用户运行，因为正式环境用root运行可能会有安全风险，不建议用root来跑。我们可以单独为elasticsearch单独创建一个用户
 ```bash
 sudo useradd -m elastic -s /bin/bash          #创建elastic用户，并使用/bin/bash作为shell

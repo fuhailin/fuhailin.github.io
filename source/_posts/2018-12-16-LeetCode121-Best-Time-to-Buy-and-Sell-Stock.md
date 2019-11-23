@@ -1,8 +1,8 @@
 ---
 title: 【LeetCode】121. Best Time to Buy and Sell Stock
 date: 2018-12-16 00:41:46
-tags: [LeetCode,C++]
-categories: 数据结构与算法 
+tags: [LeetCode,CPP]
+categories: 数据结构与算法
 top:
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Difference between the dot(.) and the arrow(->) operator in C++?
 date: 2019-01-24 21:05:54
-tags: C++
+tags: CPP
 categories: C++
 top:
 ---

@@ -1,7 +1,7 @@
 ---
 title: 【LeetCode】38.count-and-say
 date: 2019-01-18 13:24:16
-tags: [LeetCode,C++,递归]
+tags: [LeetCode,CPP,递归]
 categories: 数据结构与算法
 top:
 description: LeetCode 38.Count and Say

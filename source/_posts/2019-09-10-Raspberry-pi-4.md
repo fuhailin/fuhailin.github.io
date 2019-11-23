@@ -3,7 +3,7 @@ title: 树莓派4B 玩转指南
 tags:
   - Raspberry
   - Linux
-categories: Linux
+categories: [操作系统,Raspbian]
 date: 2019-09-10 23:32:11
 top:
 ---

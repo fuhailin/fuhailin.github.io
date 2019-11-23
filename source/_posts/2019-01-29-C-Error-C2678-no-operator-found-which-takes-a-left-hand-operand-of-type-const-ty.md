@@ -3,7 +3,7 @@ title: >-
   C++ Error C2678: no operator found which takes a left-hand operand of type
   'const_ty'
 date: 2019-01-29 18:24:36
-tags: C++
+tags: CPP
 categories: C++
 top:
 ---

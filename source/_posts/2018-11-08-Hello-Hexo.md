@@ -1,8 +1,8 @@
 ---
 title: 我的Hexo博客搭建过程与扩展功能记录
 date: 2018-11-08 15:35:15
-tags:
-categories:
+tags: [Hexo]
+categories: Tools
 top:
 description: 快速、简洁且高效的博客框架Hexo
 ---
@@ -230,7 +230,7 @@ https://www.jianshu.com/p/2002f4881353
 
 post Markdown code             |  效果
 :-------------------------:|:-------------------------:
-![](/uploads/hexo_updatetime2.png) | ![](/uploads/hexo_updatetime1.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime2.png) | ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime1.png)
 
 ## 在文章中插入图片
 
