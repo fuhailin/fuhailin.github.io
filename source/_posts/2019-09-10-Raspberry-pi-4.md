@@ -58,7 +58,18 @@ deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
 
 ## 必备软件安装
 
-`sudo apt install vim tmux git python3 python3-pip`：安装VIM、tmux、git、Python3、pip
+`sudo apt install vim tmux git`：安装VIM、tmux、git
+安装Python3：
+```
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-armv7l.sh
+chmod +x Miniconda3-latest-Linux-armv7l.sh
+./Miniconda3-latest-Linux-armv7l.sh
+
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+conda config --set show_channel_urls yes
+
+```
 
 `curl -sLf https://spacevim.org/install.sh | bash`：配置SpaceVim
 
@@ -113,7 +124,41 @@ docker run -d -p 4443:4443 -p 443:443 -p 81:80 -v /media/ncdata:/data --name nex
 # 观察nextcloudpi的安装进度
 docker logs -f nextcloudpi
 ```
+
+
+Login with user `pi` and password `raspberry`(<- For default).
+**进入系统设置**
+`sudo raspi-config`
+**进入nextcloud app 设置**
+`sudo sudo ncp-config`
 https://docs.nextcloudpi.com/en/how-to-get-started-with-ncp-docker/
+
+## 挂载移动硬盘并设置Samba共享
+**挂载硬盘**
+我的硬盘之前安装过Ubuntu系统，因此为ext4文件系统，树莓派的是Debian系统可以直接读取ext4文件系统，因此挂载后可以直接读取，如果是Windows的NTFS系统需要另外处理
+插上硬盘，查看状态：sudo fdisk -l
+新建一个目录 ，让树莓派将硬盘挂载到创建的目录：
+```sh
+sudo mkdir /mnt/toshiba
+sudo mount /dev/sda2  /mnt/data
+```
+还可以设置开机自动挂载
+
+**Samba**
+sudo apt install samba samba-common-bin
+sudo vim /etc/samba/smb.conf
+```
+[pi]           # Name will show on Internet
+path = /mnt/data
+valid users = pi
+browseable = yes
+public = yes
+writable = yes
+```
+设置`pi`用户的密码：sudo smbpasswd -a pi
+重启Samba服务：sudo systemctl restart smbd.service
+
+打开MacOS的finder，从`Go`选项中点击`Connect to Server…`，输入树莓派Samba地址：`192.168.1.3/pi`输入用户名密码即可完成连接。
 
 *************
 

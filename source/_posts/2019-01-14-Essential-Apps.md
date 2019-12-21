@@ -1,12 +1,12 @@
 ---
-title: Ubuntu必备软件配置记录帖
+title: Ubuntu、macOS必备软件配置记录帖
 date: 2019-01-14 17:36:36
-tags: Linux
+tags: [Linux,macOS]
 categories: [Linux,Tools]
 top:
 description: Ubuntu必备软件配置记录帖
 ---
-
+# For Ubuntu
 ## 安装编辑器&编译器
 
 ### 1、安装Sublime Text 3：
@@ -236,12 +236,13 @@ wget "http://cdn2.ime.sogou.com/dl/index/1524572264/sogoupinyin_2.2.0.0108_amd64
 
 第一步               |                第二步      |               第三步
 :-------------------------:|:-------------------------:|:-------------------------:
-![](http://blog.zedyeung.com/2018/08/05/Ubuntu-18-04-fcitx-chinese-input-setup-google-and-sogou/input2.png)|![](Screenshot_from_2019-01-15_10-55-12.png) | ![](Screenshot_from_2019-01-15_10-55-36.png)
+![](http://blog.zedyeung.com/2018/08/05/Ubuntu-18-04-fcitx-chinese-input-setup-google-and-sogou/input2.png)|![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screenshot_from_2019-01-15_10-55-12.png) | ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screenshot_from_2019-01-15_10-55-36.png) 
 
  <kbd>Ctrl</kbd>+<kbd>Space</kbd>切换中英文输入
 
 [Ubuntu 18.04 fcitx chinese input setup(google and sogou)](http://blog.zedyeung.com/2018/08/05/Ubuntu-18-04-fcitx-chinese-input-setup-google-and-sogou/)
 [ubuntu 18.04 英文环境安装搜狗输入法](https://blog.csdn.net/f_c_g_/article/details/81265589)
+
 *********
 ## 升级16.04到18.04
 https://linuxconfig.org/how-to-upgrade-to-ubuntu-18-04-lts-bionic-beaver
@@ -293,3 +294,67 @@ https://github.com/junegunn/fzf
 
 ### Linuxbrew: Homebrew on Linux (un)installer
 https://github.com/Linuxbrew/install
+
+
+# For macOS
+## Homebrew
+https://brew.sh/
+```sh
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+**Homebrew Cask**
+HomeBrew是通过源码的方式来安装软件，但是有时候我们安装的软件是GUI程序应用宝(.dmg/.pkg)，这个时候我们就不能使用HomeBrew了，所以有了HomeBrew Cask的出现
+
+brew cask 是在brew 的基础上一个增强的工具，用来安装Mac上的Gui程序应用包（.dmg/.pkg）, 比如qq、chrome等。它先下载解压到统一的目录中（/opt/homebrew-cask/Caskroom），省掉了自己去下载、解压、拖拽（安装）等步骤，同样，卸载相当容易与干净。然后再软链到~/Applications/目录下, 非常方便，而且还包含很多在 AppStore 里没有的常用软件。
+
+brew cask的官网是：http://caskroom.io
+
+github地址是：https://github.com/caskroom/homebrew-cask
+
+## Htop
+```sh
+brew install htop
+```
+## iterm2
+https://www.iterm2.com/index.html
+[iterm2 cheatsheet](https://gist.github.com/squarism/ae3613daf5c01a98ba3a )
+
+## Oh My Zsh
+```sh
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+vim ~/.zshrc
+```sh
+source ~/.bash_Profile
+```
+https://ohmyz.sh/
+
+**zsh-syntax-highlighting**: 配置语法高亮
+https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+
+https://tonyxu.io/zh/posts/2018/ultimate-way-to-beautify-mac-terminal-and-recommendations-for-plugins/
+
+## Node.js & NPM
+```sh
+brew install node
+node -v
+npm -v
+```
+
+## Atom
+```sh
+brew cask install atom
+```
+
+## Aria2
+```sh
+# For Ubuntu
+$ sudo apt install aria2
+# For macOS
+$ brew install aria2
+```
+
+## Bazel
+https://docs.bazel.build/versions/master/install-os-x.html#install-on-mac-os-x-homebrew

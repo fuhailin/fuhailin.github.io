@@ -54,7 +54,7 @@ More info: [Deployment](https://hexo.io/docs/deployment.html)
 * https://hexo.io/docs/
 
 ### 1. Install Hexo
-```
+```sh
 $ sudo npm install -g hexo-cli
 
 $ hexo -v
@@ -70,7 +70,7 @@ openssl: 1.0.1p
 ```
 
 ### 2. Create a project for your GitHub Pages
-```
+```sh
 $ hexo init fuhailin.github.io
 INFO  Copying data to ~/***/fuhailin.github.io
 INFO  You are almost done! Don't forget to run 'npm install' before you start blogging with Hexo!
@@ -90,7 +90,7 @@ hexo s --draft  # 预览Draft
 
 ### 4. Set information for your new blog
 https://hexo.io/docs/configuration.html
-```
+```yaml
 $ vi _config.yml
 
 ~~~~~~~~~~~~~~~~~ _config.yml ~~~~~~~~~~~~~~~~~~
@@ -123,7 +123,7 @@ deploy:
   type: git
     repo: git@github.com:fuhailin/fuhailin.github.io.git
       branch: master
-      ```
+```
 
 ### 6. Set "watch" before starting your work
 "watch" command can monitor your files.

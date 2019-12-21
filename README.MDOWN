@@ -1,27 +1,38 @@
 这是一个我的个人博客，my personal blog： [https://fuhailin.github.io/](https://fuhailin.github.io/)
 
-sudo apt-get install nodejs  # Install Node.js on Ubuntu
-node -v
-npm -v
+## Install NodeJS & Hexo
 
-git clone --recursive https://github.com/fuhailin/fuhailin.github.io.git
+`sudo apt-get install nodejs`  # Install Node.js on Ubuntu
+or
+`brew install node`  # Install Node.js on MacOS
+`node -v` and `npm -v` to check Node.js installation status
 
-git remote show origin
-# Add the remote, call it "upstream":
+`npm install hexo-cli -g` # Install Hexo
 
-git remote add upstream https://github.com/theme-next/hexo-theme-next.git
+## Clone blog & Update Next Theme
 
-# Fetch all the branches of that remote into remote-tracking branches,
-# such as upstream/master:
+`git clone --recursive https://github.com/fuhailin/fuhailin.github.io.git`
 
-git fetch upstream
+`cd fuhailin.github.io.git && npm install` 
 
-# Make sure that you're on your master branch:
+`cd theme/next && git remote show origin`
+Add the remote, call it "upstream":
 
-git checkout master
+`git remote add upstream https://github.com/theme-next/hexo-theme-next.git`
 
-# Rewrite your master branch so that any commits of yours that
-# aren't already in upstream/master are replayed on top of that
-# other branch:
+Fetch all the branches of that remote into remote-tracking branches,
+such as upstream/master:
 
-git rebase upstream/master
+`git fetch upstream`
+
+Make sure that you're on your master branch:
+
+`git checkout master`
+
+Rewrite your master branch so that any commits of yours that
+aren't already in upstream/master are replayed on top of that
+other branch:
+
+`git rebase upstream/master`
+## Start local server
+`hexo server`

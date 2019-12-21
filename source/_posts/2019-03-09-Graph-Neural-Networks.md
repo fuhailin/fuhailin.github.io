@@ -10,3 +10,4 @@ top:
 
 GNN综述:[A Comprehensive Survey on Graph Neural Networks](https://arxiv.org/abs/1901.00596v2) ,
 图神经网络方法与应用综述：[Graph Neural Networks: A Review of Methods and Applications](https://arxiv.org/abs/1812.08434v3)
+一文读懂图卷积GCN: https://mp.weixin.qq.com/s/X4kWloqPb2j4AuS1Q9N4PA

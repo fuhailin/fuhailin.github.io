@@ -1,3 +1,6 @@
 [submodule "themes/next"]
 	path = themes/next
 	url = https://github.com/fuhailin/hexo-theme-next.git
+[submodule "source/images"]
+	path = source/images
+	url = git@gitee.com:fuhailin/Object-Storage-Service.git

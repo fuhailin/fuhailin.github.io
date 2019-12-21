@@ -9,10 +9,14 @@ Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免�
 我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04
 下面记录一些使用过程中遇到的Linux命令：
 
+<p>
+<a href="https://github.com/jaywcjlove/linux-command"><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/linux-command.svg?sanitize=true" /></a>
+</p>
+
 <!-- more -->
 # linux的目录结构
 
-![/ 下级目录结构](proxy)
+![/ 下级目录结构](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/proxy)
 
  - bin (binaries)存放二进制可执行文件
  - sbin (super user binaries)存放二进制可执行文件，只有root才能访问
@@ -46,7 +50,33 @@ sudo apt-get purge <package-name>
 
 
 ### 解压*.tar.xz文件
+-c: 建立压缩档案
+-x：解压 --extract
+-t：查看内容
+-r：向压缩归档文件末尾追加文件
+-u：更新原压缩包中的文件
+
+这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。
+
+-z：有gzip属性的
+-j：有bz2属性的
+-Z：有compress属性的
+-v：显示所有过程
+-O：将文件解开到标准输出
+
+下面的参数-f是必须的
+
+-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接filename。
+```
+tar -xvf file.tar //解压 tar包
+tar -xzvf file.tar.gz //解压tar.gz
+tar -xjvf file.tar.bz2   //解压 tar.bz2
+tar -xZvf file.tar.Z   //解压tar.Z
+unrar e file.rar //解压rar
+unzip file.zip //解压zip
 `tar -xf file.tar.xz`
+```
+https://www.cnblogs.com/nhdlb/p/11568991.html
 https://scottlinux.com/2014/01/07/extracting-or-uncompressing-tar-xz-files-in-linux/
 
 #### 压缩文件成*.tar.xz
@@ -240,7 +270,7 @@ WantedBy=multi-user.target
 *************
 
 
-![BASIC LINUX COMMAND](isnefnt32wn21.jpg)
+![BASIC LINUX COMMAND](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/isnefnt32wn21.jpg)
 [Linux Cheat Sheet David Relyea | PDF](Linux-Cheat-Sheet-David-Relyea.pdf)
 [Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube](https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ)
 [Linux 下的这些高效指令，是你快速入门运维的神器](https://mlog.club/article/28876)
