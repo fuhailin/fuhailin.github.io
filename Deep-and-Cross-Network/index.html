@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Deep &amp; Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide &amp; Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。">
+<meta name="keywords" content="CTR,Recommender system,Deep Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统CTR实战——Deep &amp; Cross">
+<meta property="og:url" content="https://fuhailin.github.io/Deep-and-Cross-Network/index.html">
+<meta property="og:site_name" content="趙大寳">
+<meta property="og:description" content="Deep &amp; Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide &amp; Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-26T02:52:39.200Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统CTR实战——Deep &amp; Cross">
+<meta name="twitter:description" content="Deep &amp; Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide &amp; Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。">
+
+<link rel="canonical" href="https://fuhailin.github.io/Deep-and-Cross-Network/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
+  <title>推荐系统CTR实战——Deep & Cross | 趙大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129037882-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">趙大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Program Artist</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Deep-and-Cross-Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="description" content="趙大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="趙大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          推荐系统CTR实战——Deep & Cross
+        </h1>
+
+        <div class="post-meta">
+
+          
+              <i class="fa fa-thumb-tack"></i>
+              <font color=7D26CD>Top</font>
+              <span class="post-meta-divider">|</span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-10 01:03:39" itemprop="dateCreated datePublished" datetime="2018-11-10T01:03:39+08:00">2018-11-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习与算法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <div class="post-description">Deep & Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide & Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>特征工程一直是很多预测模型效果突出的关键，许多有效的特征都来自于原始特征的交叉组合，传统特征工程寻找有效交叉特征往往要耗费大量精力。比如，在Wide&amp;Deep中，wide侧的交叉组合特征依然需要依靠hand-craft来完成；而FM虽然可以自动进行特征交叉，但也只限于二阶交叉。本文提出了一种交叉的网络结构的深度学习模型DCN，Deep &amp; Cross Network，能对sparse和dense的输入自动学习特征交叉，可以有效地捕获有限阶（bounded degrees）上的有效特征交叉，无需人工特征工程或暴力搜索（exhaustive searching），并且计算代价较低。，在CTR预估方面可以取得较好的效果。</p>
+<p>Deep&amp;Cross的主要特点:</p>
+<ol>
+<li><strong>自动提取交叉组合特征，并不需要人为设计复杂的的特征工程</strong>；</li>
+<li><strong>交叉网络（DCN）在LogLoss上与DNN相比少了近一个量级的参数量，所以模型更小</strong>。</li>
+</ol>
+<hr>
+<h1 id="DCN网络结构"><a href="#DCN网络结构" class="headerlink" title="DCN网络结构"></a>DCN网络结构</h1><p>DCN模型以一个嵌入和堆叠层(embedding and stacking layer)开始，接着并列连一个cross network和一个deep network，接着通过一个combination layer将两个network的输出进行组合。</p>
+<p>整体网络结构如下:</p>
+<p><img width="70%" height="70%" title="The Deep &amp; Cross Network." alt="The Deep &amp; Cross Network." data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/DCN.png"></p>
+<h2 id="Embedding-and-Stacking-Layer"><a href="#Embedding-and-Stacking-Layer" class="headerlink" title="Embedding and Stacking Layer"></a>Embedding and Stacking Layer</h2><p>在大规模推荐系统中，如CTR预测，通常会有大量的类别特征需要处理，如“country=usa”。为了将这些信息变成计算机能处理的特征，通常使用one_hot编码处理成独热向量如“[ 0,1,0 ]”；然而，这些大量的词汇往往导致处理后的特征空间维度过高。</p>
+<p>为了减少维数，一种常用的做法是采用嵌入过程将这些离散特征转换成实数值的稠密向量（通常称为嵌入向量）：</p>
+<script type="math/tex; mode=display">
+\mathbf { x } _ { \text { embed, } i } = W _ { \text { embed } , i } \mathbf { x } _ { i }</script><p>其中<script type="math/tex">x_{embed,i}</script>是embedding vector，<script type="math/tex">x_i</script>是第i个category的二元输入，<script type="math/tex">W_{embed,i} \in R^{n_e \times n_v}</script>是对应的embedding matrix，会与网络中的其它参数一起进行优化，$n_e$, $n_v$分别是embedding size和vocabulary size。</p>
+<p>然后，我们将嵌入向量与连续特征向量叠加起来形成一个向量：</p>
+<script type="math/tex; mode=display">
+x_0 = [ x_{embed,1}^T, ..., X_{embed,k}^T, X_{dense}^T]。</script><p>拼接起来的向量$X0$将作为我们Cross Network和Deep Network的输入.</p>
+<p>这一部分在tensorflow中，使用tf.feature_columnAPI可以很容易实现，大致代码结构如下：</p>
+<figure class="highlight py"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">embed0 = tf.feature_column.embedding_column(...)</span><br><span class="line">...</span><br><span class="line">dense0 = tf.feature_column.indicator_column(...)</span><br><span class="line">dense1 = tf.feature_column.numeric_column(...)</span><br><span class="line">...</span><br><span class="line">columns = [embed0, ..., dense0, dense1, ...]</span><br><span class="line">x0 = tf.feature_column.input_layer(features, feature_columns)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="Cross-Network"><a href="#Cross-Network" class="headerlink" title="Cross Network"></a>Cross Network</h2><p>在广告场景下，特征交叉的组合与点击率是有显著相关的，例如，“USA”与“Thanksgiving”、“China”与“Chinese New Year”这样的关联特征，对用户的点击有着正向的影响。换句话说，来自“China”的用户很可能会在“Chinese New Year”有大量的浏览、购买行为，而在“Thanksgiving”却不会有特别的消费行为。这种关联特征与label的正向相关性在实际问题中是普遍存在的，如“化妆品”类商品与“女性”，“球类运动配件”的商品与“男性”，“电影票”的商品与“电影”品类偏好等。因此，引入特征的组合是非常有意义的。而这部分正是FM存在的意义。</p>
+<p>DCN的特点之一就在于提出了一个创新的结构来计算组合特征：<br><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/cross_layer.webp"></p>
+<p>交叉网络的核心思想是以有效的方式应用显式特征交叉。交叉网络由交叉层组成，每个层具有以下公式：</p>
+<script type="math/tex; mode=display">
+x_{l+1} = x_0 x_l^T w_l + b_l + x_l = f(x_l, w_l, b_l) + x_l</script><p>其中:</p>
+<ul>
+<li><script type="math/tex">x_l,x_{l+1}</script>是列向量（column vectors），分别表示来自第l层和第(l+1)层cross layers的输出；</li>
+<li>$w_l, b_l \in R^d$是第l层layer的weight和bias参数。</li>
+</ul>
+<p>可以看到，交叉网络的特殊结构使交叉特征的程度随着层深度的增加而增大。多项式的最高程度（就输入X0而言）为L层交叉网络L + 1。如果用Lc表示交叉层数，d表示输入维度。然后，参数的数量参与跨网络参数为：d <em> Lc </em> 2 (w和b).</p>
+<p>在完成一个特征交叉f后，每个cross layer会将它的输入加回去，对应的mapping function $f：R^d \rightarrow R^d$，刚好等于残差$x_{l+1} - x_l$，这里借鉴了残差网络的思想。这种方式有两个好处：</p>
+<ul>
+<li>通过拟合残差的方式，提高权重的敏感度，更适合稀疏的输入。</li>
+<li>方便网络整体的反向传播，提高网络训练效率。</li>
+</ul>
+<p>ResNet的原理，参见笔记：<a href="http://leanote.com/s/5b0eaf5a7968705f10000002" target="_blank" rel="noopener">http://leanote.com/s/5b0eaf5a7968705f10000002</a></p>
+<h2 id="Deep-Network"><a href="#Deep-Network" class="headerlink" title="Deep Network"></a>Deep Network</h2><p>深度网络就是一个全连接的前馈神经网络，每个深度层具有如下公式：</p>
+<script type="math/tex; mode=display">
+h _ { l + 1 } = f \left( W _ { l } h _ { l } + b _ { l } \right)</script><p>和传统DNN一样，input进来，简单的N层full-connected layer的叠加，所以参数量主要还是在deep侧。<br>参数数量为：$d∗m+m+(m2+m)∗(Ld−1)$<br>L_d denote the number of deep layers, m denote the deep layer size, d denote the input dimension.<br>Output</p>
+<h2 id="Combination-Layer"><a href="#Combination-Layer" class="headerlink" title="Combination Layer"></a>Combination Layer</h2><p>将Cross layer和Deep layer两个并行网络出来的输出做一次concat，对于多分类问题，过一个softmax就OK了。</p>
+<p>链接层将两个并行网络的输出连接起来，经过一层激活函数得到输出：</p>
+<script type="math/tex; mode=display">
+p = \sigma \left( \left[ \mathbf { x } _ { L _ { 1 } } ^ { T } , \mathbf { h } _ { L _ { 2 } } ^ { T } \right] \mathbf { w } _ { \operatorname { logits } } \right)</script><p>如果是二分类就是$sigmoid$激活函数，损失函数可用$logloss$，多分类就是$softmax$.</p>
+<h2 id="TensorFlow实现代码"><a href="#TensorFlow实现代码" class="headerlink" title="TensorFlow实现代码"></a>TensorFlow实现代码</h2><p><a href="https://github.com/RyanDeepLearning/Deep-Cross-Net" target="_blank" rel="noopener">https://github.com/RyanDeepLearning/Deep-Cross-Net</a></p>
+<p><strong>References</strong>:</p>
+<ol>
+<li><a href="https://arxiv.org/pdf/1708.05123.pdf" target="_blank" rel="noopener">DEEP &amp; CROSS NETWORK FOR AD CLICK PREDICTIONS</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/38461541" target="_blank" rel="noopener">Deep &amp; Cross 与广告不得不说的秘密</a></li>
+<li><a href="http://blog.leanote.com/post/ryan_fan/Deep-Cross-Network" target="_blank" rel="noopener">http://blog.leanote.com/post/ryan_fan/Deep-Cross-Network</a></li>
+<li><a href="https://www.jiqizhixin.com/articles/2018-07-16-17" target="_blank" rel="noopener">https://www.jiqizhixin.com/articles/2018-07-16-17</a></li>
+<li><a href="https://yangxudong.github.io/dcn/" target="_blank" rel="noopener">距离玩转企业级DCN(Deep &amp; Cross Network)模型，你只差一步|小毛驴</a></li>
+<li><a href="https://www.jianshu.com/p/77719fc252fa" target="_blank" rel="noopener">推荐系统遇上深度学习(五)—Deep&amp;Cross Network模型理论和实践|石晓文的学习日记</a></li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    <div class="post-widgets">
+    <div class="likely">
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+        <div class="reward-container">
+  <div>打赏一次，年薪百万.</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CTR/" rel="tag"><i class="fa fa-tag"></i> CTR</a>
+              <a href="/tags/Recommender-system/" rel="tag"><i class="fa fa-tag"></i> Recommender system</a>
+              <a href="/tags/Deep-Learning/" rel="tag"><i class="fa fa-tag"></i> Deep Learning</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/offer24-Binary-searchtree/" rel="next" title="【剑指Offer】24. 二叉搜索树的后序遍历">
+                  <i class="fa fa-chevron-left"></i> 【剑指Offer】24. 二叉搜索树的后序遍历
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/Deep-Interest-Network/" rel="prev" title="推荐系统CTR实战——Deep Interest Network">
+                  推荐系统CTR实战——Deep Interest Network <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DCN网络结构"><span class="nav-number">1.</span> <span class="nav-text">DCN网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Embedding-and-Stacking-Layer"><span class="nav-number">1.1.</span> <span class="nav-text">Embedding and Stacking Layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cross-Network"><span class="nav-number">1.2.</span> <span class="nav-text">Cross Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deep-Network"><span class="nav-number">1.3.</span> <span class="nav-text">Deep Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Combination-Layer"><span class="nav-number">1.4.</span> <span class="nav-text">Combination Layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TensorFlow实现代码"><span class="nav-number">1.5.</span> <span class="nav-text">TensorFlow实现代码</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="趙大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">趙大寳</p>
+  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

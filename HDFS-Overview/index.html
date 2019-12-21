@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Hadoop Distributed File System——HDFS，是世界上最可靠的存储系统。 HDFS是Hadoop的文件系统，是Hadoop不可缺少的一部分，其为2003年Google发表的Google文件系统GFS的克隆版。Hadoop文件系统使用分布式文件系统设计开发，设计原则是存储较少数量的大文件而不是大量的小文件。用于存储在硬件集群上运行的非常大的文件。不像其他的分布式系统，HD">
+<meta name="keywords" content="HDFS,Hadoop">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HDFS学习笔记">
+<meta property="og:url" content="https://fuhailin.github.io/HDFS-Overview/index.html">
+<meta property="og:site_name" content="趙大寳">
+<meta property="og:description" content="Hadoop Distributed File System——HDFS，是世界上最可靠的存储系统。 HDFS是Hadoop的文件系统，是Hadoop不可缺少的一部分，其为2003年Google发表的Google文件系统GFS的克隆版。Hadoop文件系统使用分布式文件系统设计开发，设计原则是存储较少数量的大文件而不是大量的小文件。用于存储在硬件集群上运行的非常大的文件。不像其他的分布式系统，HD">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-26T02:52:39.214Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HDFS学习笔记">
+<meta name="twitter:description" content="Hadoop Distributed File System——HDFS，是世界上最可靠的存储系统。 HDFS是Hadoop的文件系统，是Hadoop不可缺少的一部分，其为2003年Google发表的Google文件系统GFS的克隆版。Hadoop文件系统使用分布式文件系统设计开发，设计原则是存储较少数量的大文件而不是大量的小文件。用于存储在硬件集群上运行的非常大的文件。不像其他的分布式系统，HD">
+
+<link rel="canonical" href="https://fuhailin.github.io/HDFS-Overview/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
+  <title>HDFS学习笔记 | 趙大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129037882-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">趙大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Program Artist</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/HDFS-Overview/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="description" content="趙大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="趙大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HDFS学习笔记
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-25 16:52:13" itemprop="dateCreated datePublished" datetime="2019-04-25T16:52:13+08:00">2019-04-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>Hadoop Distributed File System</strong>——HDFS，是世界上最可靠的存储系统。 HDFS是Hadoop的文件系统，是Hadoop不可缺少的一部分，其为2003年Google发表的Google文件系统GFS的克隆版。<br><br>Hadoop文件系统使用分布式文件系统设计开发，设计原则是存储较少数量的大文件而不是大量的小文件。用于存储在硬件集群上运行的非常大的文件。不像其他的分布式系统，HDFS是高度容错以及使用低成本的硬件设计。<br><a id="more"></a></p>
+<h2 id="HDFS的特点"><a href="#HDFS的特点" class="headerlink" title="HDFS的特点"></a>HDFS的特点</h2><ul>
+<li>分布式存储和处理超大型的数据量。</li>
+<li>单个文件冗余式存储避免单节点失效可能造成的数据损失</li>
+<li>Hadoop提供的命令接口与HDFS进行交互。</li>
+<li>名称节点和数据节点的帮助用户内置的服务器能够轻松地检查集群的状态。</li>
+<li>流式访问文件系统数据。</li>
+<li>HDFS提供了文件的权限和验证。</li>
+<li>不依赖硬件，能够运行在普通廉价的机器上</li>
+</ul>
+<h2 id="HDFS架构"><a href="#HDFS架构" class="headerlink" title="HDFS架构"></a>HDFS架构</h2><p>下面给出是Hadoop的文件系统的体系结构。<br>  <img alt="HDFS架构" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/HDFS-Architecture.jpg"><br>HDFS遵循主/从式架构，它具有以下元素。</p>
+<h3 id="命名节点-Namenode"><a href="#命名节点-Namenode" class="headerlink" title="命名节点 - Namenode"></a>命名节点 - Namenode</h3><p>一个HDFS集群会有一个NameNode（简称NN）命名节点，该节点作为主服务器存在（master server），它执行以下任务：</p>
+<ul>
+<li>管理文件系统命名空间</li>
+<li>调节客户端对文件的访问。</li>
+<li>它也执行文件系统操作，如重命名，关闭和打开的文件和目录。</li>
+</ul>
+<h3 id="数据节点-Datanode"><a href="#数据节点-Datanode" class="headerlink" title="数据节点 - Datanode"></a>数据节点 - Datanode</h3><p>一个HDFS集群还会有多个DataNode（简称DN）数据节点，数据节点作为从节点存在（slave server），它执行以下任务：</p>
+<ul>
+<li>Datanode根据客户的请求在文件系统上执行读写操作。</li>
+<li>根据Namenode的指令执行操作，如块的创建，删除和复制。</li>
+</ul>
+<h3 id="数据块"><a href="#数据块" class="headerlink" title="数据块"></a>数据块</h3><p>往HDFS中写入的任何文件，都会分成称为<strong>块</strong>的小块数据。 HDFS的默认块大小为128 MB，可根据要求增加，即便一个数据块大小为130M，也会被拆分为2个Block，一个大小为128M，一个大小为2M。 这些块以分布式方式存储在集群中的不同节点上。这为MapReduce提供了一种在集群中并行处理数据的机制。默认情况下，每个数据块都会有三个副本，每个副本都会被存放在不同的机器上，而且每一个副本都有自己唯一的编号。这就提供了容错、可靠性和高可用性。如下图：<br><img alt="HDFS副本机制" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/7e142940a0feb4c119be2d8df7fad13c.png"></p>
+<p><a href="http://images.linoxide.com/hadoop-hdfs-commands-cheatsheet.pdf" target="_blank" rel="noopener">Hadoop HDFS Command Cheatsheet.pdf</a></p>
+<p><strong>References</strong>:</p>
+<ol>
+<li><a href="https://data-flair.training/blogs/hadoop-hdfs-tutorial/" target="_blank" rel="noopener">HDFS Tutorial – A Complete Hadoop HDFS Overview</a></li>
+<li><a href="https://blog.51cto.com/zero01/2090716" target="_blank" rel="noopener">HDFS伪分布式环境搭建</a></li>
+<li><a href="https://blog.51cto.com/zero01/2090901" target="_blank" rel="noopener">Java操作HDFS开发环境搭建以及HDFS的读写流程</a></li>
+<li><a href="https://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html" target="_blank" rel="noopener">HDFS Architecture官方文档</a></li>
+<li><a href="https://www.yiibai.com/hadoop/hadoop_hdfs_operations.html#article-start" target="_blank" rel="noopener">Hadoop HDFS操作</a></li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    <div class="post-widgets">
+    <div class="likely">
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+        <div class="reward-container">
+  <div>打赏一次，年薪百万.</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/HDFS/" rel="tag"><i class="fa fa-tag"></i> HDFS</a>
+              <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/Hadoop-Install/" rel="next" title="Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境）">
+                  <i class="fa fa-chevron-left"></i> Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境）
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/Spark-Tutorial/" rel="prev" title="Spark入门笔记—基本概念与环境配置">
+                  Spark入门笔记—基本概念与环境配置 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS的特点"><span class="nav-number">1.</span> <span class="nav-text">HDFS的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HDFS架构"><span class="nav-number">2.</span> <span class="nav-text">HDFS架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名节点-Namenode"><span class="nav-number">2.1.</span> <span class="nav-text">命名节点 - Namenode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据节点-Datanode"><span class="nav-number">2.2.</span> <span class="nav-text">数据节点 - Datanode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据块"><span class="nav-number">2.3.</span> <span class="nav-text">数据块</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="趙大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">趙大寳</p>
+  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="沪深300指数由上海和深圳证券市场中市值大、流动性好的300只股票组成，综合反映中国A股市场上市股票价格的整体表现。恒生指数(Hang Seng Index)是以反映香港股市行情的重要指标，指数由五十只恒指成份股的市值计算出来的，代表了香港交易所所有上市公司的十二个月平均市值涵盖率的63%。标普500是由标准普尔於1957年创立的，被广泛认为是三只股指中衡量美国经济状况最好的一项指标。标普500股">
+<meta name="keywords" content="算法工程师">
+<meta property="og:type" content="article">
+<meta property="og:title" content="machine learning in finance">
+<meta property="og:url" content="https://fuhailin.github.io/ML-in-Finance/index.html">
+<meta property="og:site_name" content="趙大寳">
+<meta property="og:description" content="沪深300指数由上海和深圳证券市场中市值大、流动性好的300只股票组成，综合反映中国A股市场上市股票价格的整体表现。恒生指数(Hang Seng Index)是以反映香港股市行情的重要指标，指数由五十只恒指成份股的市值计算出来的，代表了香港交易所所有上市公司的十二个月平均市值涵盖率的63%。标普500是由标准普尔於1957年创立的，被广泛认为是三只股指中衡量美国经济状况最好的一项指标。标普500股">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-26T02:52:39.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="machine learning in finance">
+<meta name="twitter:description" content="沪深300指数由上海和深圳证券市场中市值大、流动性好的300只股票组成，综合反映中国A股市场上市股票价格的整体表现。恒生指数(Hang Seng Index)是以反映香港股市行情的重要指标，指数由五十只恒指成份股的市值计算出来的，代表了香港交易所所有上市公司的十二个月平均市值涵盖率的63%。标普500是由标准普尔於1957年创立的，被广泛认为是三只股指中衡量美国经济状况最好的一项指标。标普500股">
+
+<link rel="canonical" href="https://fuhailin.github.io/ML-in-Finance/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
+  <title>machine learning in finance | 趙大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129037882-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">趙大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Program Artist</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/ML-in-Finance/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="description" content="趙大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="趙大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          machine learning in finance
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-02 14:31:09" itemprop="dateCreated datePublished" datetime="2019-08-02T14:31:09+08:00">2019-08-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>沪深300指数</strong>由上海和深圳证券市场中市值大、流动性好的300只股票组成，综合反映中国A股市场上市股票价格的整体表现。<br><strong>恒生指数</strong>(Hang Seng Index)是以反映香港股市行情的重要指标，指数由五十只恒指成份股的市值计算出来的，代表了香港交易所所有上市公司的十二个月平均市值涵盖率的63%。<br><strong>标普500</strong>是由标准普尔於1957年创立的，被广泛认为是三只股指中衡量美国经济状况最好的一项指标。标普500股票平均价格指数是由每支成分股公司的市场价值之和除以一个由标准普尔设定的除数得到的终值。简而言之就是，所有股票的市值总和除以标普除数，或总市值/标普除数。<br><strong>道琼斯工业平均指数</strong>，简称道指，是三只股指中历史最为悠久也是全球最知名的股指。道指最早是在1884年由道琼斯公司的创始人查尔斯·亨利·道开始编制的一种算术平均股价指数。道指代表了华尔街日报确认的30只大盘股。不同於标普500和纳指，道指成分股的比重是根据股票价格排序的，也就是说股票价格越高的公司越能影响道指的表现。道指股票价格平均指数是入选股票的价格之和除以道指除数得到的终值。<br><strong>纳斯达克指数</strong>，简称纳指，1985年开始交易，是三只股指中最为年轻的股指。纳指代表著在纳斯达克上市的最大的非金融公司，其中科技股所占比重较大，因此通常被认为是一只科技股指。该股指是根据每个公司的市场价值来设置权重，这意味著每个公司对指数的影响力是由其市场价值决定的。</p>
+<a id="more"></a>
+<p><strong>市场（或代表性指数）收益率market rate of return</strong>：国内市场通常使用沪深300指数作为市场代表，美股则常用标普500指数，港股则常用恒生指数</p>
+<p><strong>无风险利率risk-free rate</strong>：这是投资者将资金投资于某一项没有任何风险的投资对象而能得到的利息率，例如以人民币投资的中国国债、美元投资的美国国库券、以欧元交易和投资的德国政府债券等。该数字通常以百分比表示。<br><img alt="Investing.com - 中国政府债券" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-08-12-11-34-20.png"></p>
+<h1 id="Capital-Asset-Pricing-Model资本资产定价模型"><a href="#Capital-Asset-Pricing-Model资本资产定价模型" class="headerlink" title="Capital Asset Pricing Model资本资产定价模型"></a>Capital Asset Pricing Model资本资产定价模型</h1><p>在金融世界，人们手持多余的资金时候本能欲望都会寻求让资金尽量增长，投资因此诞生。但并不是每项投资都能带来收益，人的本能让人追求收益畏惧风险。<br>在现实世界的自由投资途径中，低风险高收益的投资项人们会蜂拥而至进行瓜分，高风险低收益的对象会逐渐被人抛弃。<br>现实世界的投资途径如此之多，有一类投资能让你保证获得收益，这类投资称为无风险收益，例如以国家信用做背书的国债和银行定期存款。但有些人为了获得更高的收益愿意承担一定的风险选择投资股市，因此有一个市场的平均收益。有没有一个收益最大风险最小的投资组合？它在哪里？这是每一个投资者每天都在考虑的问题。为了搞清这个问题，经济学家尝试简化世界，构建了CAPM模型来进行风险评估和收益预计：</p>
+<script type="math/tex; mode=display">
+E(r_{i})=r_{f}+\beta[E(r_{m})-r_{f}]</script><p>其中</p>
+<ul>
+<li>$E(r_{i})$是资产$i$的期望收益率;</li>
+<li>$r_{f}$是无风险收益率，通常以短期国债的利率来近似替代;</li>
+<li>$\beta$是资产$i$的系统性风险系数;</li>
+<li>$E(r_{m})$是市场收益率，通常用股票价格指数收益率的平均值或所有股票的平均收益率来代替;<!-- - $E(r_{m})-r_{f}$是市场风险溢价(Market Risk Premium)，即市场投资组合的期望收益率与无风险收益率之差。 -->
+这个简洁的模型将无风险收益与市场平均收益都考虑进来，毕竟如果没有一个预估的高收益吸引投资者，那还不如把钱存个定期。</li>
+</ul>
+<h1 id="Beta系数"><a href="#Beta系数" class="headerlink" title="Beta系数"></a>Beta系数</h1><p><strong>Beta系数$\beta$</strong>作为一个统计学上的概念，用以度量一项资产系统性风险的指标，是资本资产定价模型的参数之一。指用以衡是资产i的系统性风险系数，量一种证券或一个投资证券组合相对总体市场的波动性的一种证券系统性风险的评估工具。Beta系数可用于计算股票的预期收益率。Beta系数是股票分析师们在选择资产组合中的股票时要考虑的基本因素之一，其他因素包括市盈率、股东权益、资本负债比率等。</p>
+<ul>
+<li>如果是负值，则显示其变化的方向与大盘的变化方向相反;大盘涨的时候它跌，大盘跌的时候它涨；有一些行业组织，如黄金矿工，其中负beta很常见。</li>
+<li>$\beta$ =0，表示投资组合和市场走向没有相关性，如固定收益类；</li>
+<li>当$\beta$=1，说明投资对象的价值与市场强烈相关。在投资组合中加入Beta为1的股票并没有增加任何风险，也没有增加获得超额收益的可能性。</li>
+<li>当$\beta$&lt;1，显示其价值波动理论上小于市场，意味着在投资组合中加入这样的对象能减小风险，公共事业股票utility stocks通常有较低的beta，因为它们变化往往比市场平均值更慢。</li>
+<li>当$\beta$&gt;1，显示其价值波动理论上大于市场。例如如果一个股票的Beta为1.2，说明其比市场还多20%的波动性，科技股通常拥有比市场基准更高的beta，这样的对象会增加投资组合的风险但也更可能带来超额收益。</li>
+</ul>
+<h2 id="Beta系数有什么用"><a href="#Beta系数有什么用" class="headerlink" title="Beta系数有什么用;"></a>Beta系数有什么用;</h2><ul>
+<li>使用Beta来选择股票是减少波动性和创建更多元化投资组合的工具之一。</li>
+<li>计算资本成本，进行资产估值、做出投资决策、制定考核及激励标准</li>
+<li>计算单个资产或组合的系统风险(投资组合的Beta等于单个Beta系数的加权求和)，进行投资管理</li>
+<li>牛市时选择高Beta证券，将成倍放大市场收益；熊市时选择低Beta证券以抵御市场风险</li>
+</ul>
+<!-- ![](v4-728px-Calculate-Beta-Step-3-Version-4.jpg.jfif) -->
+<p><img alt="图中我们可以看出，谷歌股票的回报波动比较大（蓝色），标普500的回报波动比较小（橙色）" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/download.png"></p>
+<h1 id="Beta系数计算方法"><a href="#Beta系数计算方法" class="headerlink" title="Beta系数计算方法"></a>Beta系数计算方法</h1><h2 id="通过相关系数计算Beta"><a href="#通过相关系数计算Beta" class="headerlink" title="通过相关系数计算Beta"></a>通过相关系数计算Beta</h2><p>既然Beta是衡量股票收益相对于市场收益的风险程度，于是可以通过计算两者的相关系数来确定Beta：</p>
+<script type="math/tex; mode=display">
+Beta=\beta_{p}=\frac{Cov(D_{p},D_{m})}{Var(D_{m})}</script><p>其中<script type="math/tex">D_{p}</script>为策略每日收益，<script type="math/tex">D_{m}</script>为大盘每日收益，<script type="math/tex">Cov(D_{p},D_{m})</script>是策略每日收益与大盘每日收益的协方差,<script type="math/tex">Var(D_{m})</script>为大盘每日收益方差</p>
+<h2 id="通过历史已知的策略收益反推"><a href="#通过历史已知的策略收益反推" class="headerlink" title="通过历史已知的策略收益反推"></a>通过历史已知的策略收益反推</h2><p>在CAPM模型中如果已知历史策略收益，那么带入已知项可求得Beta：</p>
+<script type="math/tex; mode=display">
+Beta=\beta_{p}=\frac{E(r_{i})-r_{f}}{E(r_{m})-r_{f}}</script><h2 id="通过线性回归拟合"><a href="#通过线性回归拟合" class="headerlink" title="通过线性回归拟合"></a>通过线性回归拟合</h2><p>既然在CAPM模型中Beta作为市场收益减去无风险收益的系数，对于历史已知的股票收益，</p>
+<script type="math/tex; mode=display">
+R_{p}=\alpha+\beta_{p} R_{m}+\varepsilon</script><p>将大盘收益率作为Y，将策略历史收益率作为X进行回归，$\varepsilon$是建模误差。通过最小化回归方程预测的 y 值与实际 y 值之间的平方差（垂直距离），能够得到一条最合理的回归直线，直线与Y轴截距是事后的 $\alpha$，即与市场指数回报相比，超额回报的衡量。如果截距是负数，则意味着策略在风险调整的基础上表现落后于大盘，而截距是正数，则意味着其在风险调整基础上有超额收益。回归线的斜率系数 Beta 被计算为 x 和 y 的协方差除以 x 的方差，在数学上与方式一是一致的。</p>
+<p>这种方式得出的Beta值相对稳定<br><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/download1.png"></p>
+<h1 id="Alpha系数"><a href="#Alpha系数" class="headerlink" title="Alpha系数"></a>Alpha系数</h1><p>实际风险回报和平均预期风险回报的差额即 α 系数。<br>投资中面临着系统性风险(即$\beta$)和非系统性风险(即$\alpha$)，$\alpha$是投资者获得与市场波动无关的回报。比如</p>
+<ul>
+<li>α&gt;0，表示一基金或股票的价格可能被低估，建议买入。亦即表示该基金或股票以投资技术获得比平均预期回报大的实际回报。较高的α一般由股票的个性特征所决定，与大势和行业无关，应尽可能寻找高α的个股。</li>
+<li>α&lt;0，表示一基金或股票的价格可能被高估，建议卖空。亦即表示该基金或股票以投资技术获得比平均预期回报小的实际回报。</li>
+<li>α=0，表示一基金或股票的价格准确反映其内在价值，未被高估也未被低估。亦即表示该基金或股票以投资技术获得平均与预期回报相等的实际回报。</li>
+</ul>
+<h1 id="Alpha的计算"><a href="#Alpha的计算" class="headerlink" title="Alpha的计算"></a>Alpha的计算</h1><p>alpha是超额收益，它与市场波动无关，也就是说不是靠系统性的上涨而获得收益。</p>
+<script type="math/tex; mode=display">
+Alpha=\alpha=\mathrm{R}_{p}-\left[R_{f}+\beta *\left(R_{m}-R_{f}\right)\right]</script><h1 id="使用Python计算Beta及Alpha系数"><a href="#使用Python计算Beta及Alpha系数" class="headerlink" title="使用Python计算Beta及Alpha系数"></a>使用Python计算Beta及Alpha系数</h1><h2 id="CAPM及Beta、Alpha系数的局限"><a href="#CAPM及Beta、Alpha系数的局限" class="headerlink" title="CAPM及Beta、Alpha系数的局限"></a>CAPM及Beta、Alpha系数的局限</h2><p>Beta系数为股票评估提供了参考，但它具有它固有的局限性。尽管Beta可用于确定证券的短期风险，并用于CAPM分析波动率以计算股权成本，由于β系数是使用历史数据点计算的，因此对于希望预测股票未来走势的投资者来说，它变得没那么有意义。Beta对长期投资的作用也不大，因为股票的波动性每年都会发生显着变化，具体取决于公司的增长阶段和其他因素。</p>
+<p>CAPM(资产资本定价模型)是在金融经济学中发挥了广泛的应用，但其作为对理想情况的一个建模，建立在假设投资者信息对等、投资行为不会对股票价格产生影响的前提下。有研究学者指出，CAPM不适用于中国股票市场，收益率和Beta之间并不是线性相关。</p>
+<p>许多学者提出异议，认为市场过于“有效”，投资者除非碰巧，否则无法重复地赚得超额收益。另一方面，由Russ Wermers领衔的对共同基金的实证研究得到的结论认为，基金经理寻找、挑选有正α值的证券是有价值的。然而这一研究结论遭到非议，批评者认为Russ的结论受到“幸存者偏差”的影响。虽然受到争议，詹森阿尔法仍然被广泛的用于评价基金经理表现。</p>
+<p><strong>Good References:</strong></p>
+<ol>
+<li><a href="https://www.cnvar.cn/2019/01/11/beta-calculation-linear-regression/" target="_blank" rel="noopener">贝塔值（beta）的线性回归方法实践</a></li>
+<li><a href="https://zh.wikihow.com/%E8%AE%A1%E7%AE%97%E8%82%A1%E7%A5%A8%E7%9A%84-Beta-%E7%B3%BB%E6%95%B0" target="_blank" rel="noopener">如何计算股票的 Beta 系数</a></li>
+<li><a href="https://www.money-zine.com/investing/stocks/stock-beta-and-volatility/" target="_blank" rel="noopener">Stock Beta and Volatility</a></li>
+<li><a href="https://www.cnvar.cn/2017/08/28/negative-betas/" target="_blank" rel="noopener">贝塔系数(Betas)能否为负数?一个经常被问到的面试问题</a></li>
+<li><a href="https://xueqiu.com/2551686004/129137796" target="_blank" rel="noopener">沪深300指数与标普500指数差距有多大？</a></li>
+<li><a href="https://xueqiu.com/2551686004/102206316" target="_blank" rel="noopener">跨越半个世纪的资产配置量化研究，少踩坑，多赚钱</a></li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    <div class="post-widgets">
+    <div class="likely">
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+        <div class="reward-container">
+  <div>打赏一次，年薪百万.</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/Outfits-dataset/" rel="next" title="Outfits dataset">
+                  <i class="fa fa-chevron-left"></i> Outfits dataset
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/elasticsearch/" rel="prev" title="Elasticsearch">
+                  Elasticsearch <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Capital-Asset-Pricing-Model资本资产定价模型"><span class="nav-number">1.</span> <span class="nav-text">Capital Asset Pricing Model资本资产定价模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Beta系数"><span class="nav-number">2.</span> <span class="nav-text">Beta系数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Beta系数有什么用"><span class="nav-number">2.1.</span> <span class="nav-text">Beta系数有什么用;</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Beta系数计算方法"><span class="nav-number">3.</span> <span class="nav-text">Beta系数计算方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#通过相关系数计算Beta"><span class="nav-number">3.1.</span> <span class="nav-text">通过相关系数计算Beta</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过历史已知的策略收益反推"><span class="nav-number">3.2.</span> <span class="nav-text">通过历史已知的策略收益反推</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过线性回归拟合"><span class="nav-number">3.3.</span> <span class="nav-text">通过线性回归拟合</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alpha系数"><span class="nav-number">4.</span> <span class="nav-text">Alpha系数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Alpha的计算"><span class="nav-number">5.</span> <span class="nav-text">Alpha的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Python计算Beta及Alpha系数"><span class="nav-number">6.</span> <span class="nav-text">使用Python计算Beta及Alpha系数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CAPM及Beta、Alpha系数的局限"><span class="nav-number">6.1.</span> <span class="nav-text">CAPM及Beta、Alpha系数的局限</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="趙大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">趙大寳</p>
+  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>

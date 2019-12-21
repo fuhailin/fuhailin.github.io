@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: true,
+    lazyload: true,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用Git操作清单">
+<meta property="og:url" content="https://fuhailin.github.io/Git-command/index.html">
+<meta property="og:site_name" content="趙大寳">
+<meta property="og:description" content="欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-26T02:52:39.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用Git操作清单">
+<meta name="twitter:description" content="欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。">
+
+<link rel="canonical" href="https://fuhailin.github.io/Git-command/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
+  <title>常用Git操作清单 | 趙大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129037882-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
+    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">趙大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Program Artist</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Git-command/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="description" content="趙大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="趙大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用Git操作清单
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-15 19:07:09" itemprop="dateCreated datePublished" datetime="2019-01-15T19:07:09+08:00">2019-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tools/" itemprop="url" rel="index">
+                    <span itemprop="name">Tools</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p> <strong>欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。</strong></p>
+<a id="more"></a>
+<p>几个专用名词的译名如下。</p>
+<blockquote>
+<p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
+</blockquote>
+<h1 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h1><blockquote>
+<p><code>git init</code>: 在当前目录新建一个Git代码库<br><code>git init [project-name]</code>: 新建一个目录，将其初始化为Git代码库<br><code>git clone [url]</code>: 下载一个项目和它的整个代码历史</p>
+</blockquote>
+<h1 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h1><p>Git的设置文件为 .gitconfig ，它可以在用户主目录下（全局配置），也可以在项目目录下（项目配置）。</p>
+<blockquote>
+<p><code>git config --list</code> : 显示当前的Git配置<br><code>git config -e [--global]</code> : 编辑Git配置文件</p>
+</blockquote>
+<p><strong>git命令行下面显示中文字符</strong>:</p>
+<blockquote>
+<p><code>git config --global core.quotepath false</code>: 由于Git默认引用非ASCII 字符，disable它的引用行为可以用这个命令<br> 设置提交代码时的用户信息<br><code>git config [--global] user.name "Your Name"</code><br><code>git config [--global] user.email you@example.com</code></p>
+</blockquote>
+<h1 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h1><p><strong>git add</strong>: 把文件加入暂存区</p>
+<blockquote>
+<p><code>git add -A</code> : stages All<br><code>git add .</code> : stages new and modified, without deleted<br><code>git add -u</code> ： stages modified and deleted, without new<br>所以<code>git add -A</code> 等于  <code>git add .; git add -u</code><br><code>git add [file1] [file2] ...</code>: 添加指定文件到暂存区staging area<br><code>git add [dir]</code>: 添加指定目录到暂存区，包括子目录<br><code>git add -p</code>: 添加每个变化前，都会要求确认; 对于同一个文件的多处变化，可以实现分次提交</p>
+</blockquote>
+<p> 删除工作区文件：</p>
+<blockquote>
+<p><code>git rm [file1] [file2] ...</code>: 删除工作区文件，并且将这次删除放入暂存区<br><code>git rm --cached [file]</code>: 停止追踪指定文件，但该文件会保留在工作区<br><code>git mv [file-original] [file-renamed]</code>: 改名文件，并且将这个改名放入暂存区</p>
+</blockquote>
+<h1 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h1><p> <strong>git commit</strong>: To save t    he changes in the staging area.</p>
+<blockquote>
+<p><code>git commit -m "write your log message here."</code> : to save the changes in the staging area with your log message.<br><code>git commit [file1] [file2] ... -m [message]</code>: 提交暂存区的指定文件到仓库区</p>
+</blockquote>
+<p> If you use a command <code>git commit</code> without message ,you will open a log editors.<br> <strong>【Tip】</strong>:To save what you have written, type <kbd>Ctrl</kbd>+<kbd>O </kbd>to write the file out, then<kbd> Enter </kbd>to confirm the filename, then <kbd>Ctrl</kbd>+<kbd>X</kbd> and <kbd>Enter</kbd> to exit the editor.</p>
+<blockquote>
+<p><code>git commit -a</code>：—all       提交工作区自上次commit之后的变化，直接到仓库区<br>  Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected.<br><code>git commit -v</code>：提交时显示所有diff信息<br><code>git commit --amend -m [message]</code>: 使用一次新的commit，替代上一次提交;如果代码没有任何新变化，则用来改写上一次commit的提交信息<br><code>git commit --amend [file1] [file2] ...</code>: 重做上一次commit，并包括指定文件的新变化</p>
+</blockquote>
+<h1 id="五、分支"><a href="#五、分支" class="headerlink" title="五、分支"></a>五、分支</h1><blockquote>
+<p><code>git branch</code>: 列出所有本地分支<br><code>git branch -r</code>: 列出所有远程分支<br><code>git branch -a</code>: 列出所有本地分支和远程分支<br><code>git branch [branch-name]</code>: 新建一个分支，但依然停留在当前分支<br><code>git checkout -b [branch]</code>: 新建一个分支，并切换到该分支<br><code>git branch [branch] [commit]</code>: 新建一个分支，指向指定commit<br><code>git branch --track [branch] [remote-branch]</code>: 新建一个分支，与指定的远程分支建立追踪关系<br><code>git checkout [branch-name]</code>: 切换到指定分支，并更新工作区<br><code>git checkout -</code>: 切换到上一个分支<br><code>git branch --set-upstream [branch] [remote-branch]</code>: 建立追踪关系，在现有分支与指定的远程分支之间<br><code>git checkout -b Hailin/leetcode：</code> : 新建一个在“Hailin”目录下的“leetcode”分支，并切换到其上<br>  <img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180312111635714.png"></p>
+<p><code>git merge [branch]</code>: 合并指定分支到当前分支<br><code>git cherry-pick [commit]</code>: 选择一个commit，合并进当前分支<br><code>git branch -d [branch-name]</code>: 删除分支<br> 删除远程分支:<br><code>git push origin --delete [branch-name]</code><br><code>git branch -dr [remote/branch]</code></p>
+</blockquote>
+<p> <img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180312111754710.png"></p>
+<h1 id="六、标签"><a href="#六、标签" class="headerlink" title="六、标签"></a>六、标签</h1><blockquote>
+<p><code>git tag</code>: 列出所有tag<br><code>git tag [tag]</code> # 新建一个tag在当前commit<br><code>git tag [tag] [commit]</code> # 新建一个tag在指定commit<br><code>git tag -d [tag]</code> # 删除本地tag<br><code>git push origin :refs/tags/[tagName]</code>  # 删除远程tag<br><code>git show [tag]</code> # 查看tag信息<br><code>git push [remote] [tag]</code> # 提交指定tag<br><code>git push [remote] --tags</code> # 提交所有tag<br><code>git checkout -b [branch] [tag]</code>  # 新建一个分支，指向某个tag</p>
+</blockquote>
+<h1 id="七、查看信息"><a href="#七、查看信息" class="headerlink" title="七、查看信息"></a>七、查看信息</h1><blockquote>
+<p><code>git status</code> # 显示有变更的文件 Which displays a list of the files that have been modified since the last time changes were saved.</p>
+</blockquote>
+<p><strong>git log</strong>: 显示当前分支的版本历史 To view the log of the project’s history. When you run <code>git log</code>, Git automatically uses a pager to show one screen of output at a time. Press the <kbd>space </kbd>bar to go down a page or the<kbd> q </kbd>key to quit.</p>
+<blockquote>
+<p><code>git log path"</code> : to inspect only the changes to particular files or directories.where <code>path</code> is the path to a specific file or directory. The log for a file shows changes made to that file; the log for a directory shows when files were added or deleted in that directory, rather than when the contents of the directory’s files were changed.<br><code>git log --stat</code> # 显示commit历史，以及每次commit发生变更的文件<br><code>git log -S [keyword]</code> # 搜索提交历史，根据关键词<br><code>git log [tag] HEAD --pretty=format:%s</code> # 显示某个commit之后的所有变动，每个commit占据一行<br><code>git log [tag] HEAD --grep feature</code> # 显示某个commit之后的所有变动，其”提交说明”必须符合搜索条件</p>
+</blockquote>
+<p> 显示某个文件的版本历史，包括文件改名:</p>
+<blockquote>
+<p>git log —follow [file]<br><code>git whatchanged [file]</code></p>
+<p><code>git log -p [file]</code> # 显示指定文件相关的每一次diff<br><code>git log -5 --pretty --oneline</code> # 显示过去5次提交<br><code>git shortlog -sn</code> # 显示所有提交过的用户，按提交次数排序<br><code>git blame [file]</code> # 显示指定文件是什么人在什么时间修改过</p>
+</blockquote>
+<p> <strong>git diff</strong>: 显示暂存区和工作区的差异 Without any filenames will show you all the changes in your repository</p>
+<blockquote>
+<p><code>git diff --cached [file]</code> # 显示暂存区和上一个commit的差异<br><code>git diff HEAD</code> # 显示工作区与当前分支最新commit之间的差异<br><code>git diff [first-branch]...[second-branch]</code> # 显示两次提交之间的差异<br><code>git diff --shortstat "@{0 day ago}"</code> # 显示今天你写了多少行代码<br><code>git diff filename</code> : to compare the file as it currently is to what you last saved<br><code>git diff directory</code>: will show you the changes to the files in some directory.<br><code>git diff -r HEAD path/to/file</code>: To compare a file’s current state to the changes in the staging area.  The<code>-r</code>flag means “compare to a particular revision”, <code>HEAD</code> is a shortcut meaning “the most recent commit”<br><code>git diff -r HEAD~1</code>: The label <code>HEAD~1</code> then refers to the commit before it, while <code>HEAD~2</code> refers to the commit before that, and so on.</p>
+</blockquote>
+<p>  <strong>git show</strong>: To view the details of a specific commit.</p>
+<blockquote>
+<p><code>git show 77d3</code> : you can use the command <code>git show</code> with the first few characters of the commit’s hash.<br><code>git show [commit]</code> # 显示某次提交的元数据和内容变化<br><code>git show --name-only [commit]</code> # 显示某次提交发生变化的文件<br><code>git show [commit]:[filename]</code> # 显示某次提交时，某个文件的内容<br><code>git reflog</code> # 显示当前分支的最近几次提交</p>
+</blockquote>
+<h1 id="八、远程同步"><a href="#八、远程同步" class="headerlink" title="八、远程同步"></a>八、远程同步</h1><blockquote>
+<p><code>git fetch [remote]</code> # 下载远程仓库的所有变动<br><code>git remote -v</code> # 显示所有远程仓库<br><code>git remote show [remote]</code> # 显示某个远程仓库的信息<br><code>git remote add [shortname] [url]</code> # 增加一个新的远程仓库，并命名<br><code>git pull [remote] [branch]</code> # 取回远程仓库的变化，并与本地分支合并<br><code>git push [remote] [branch]</code> # 上传本地指定分支到远程仓库<br><code>git push [remote] --force</code> # 强行推送当前分支到远程仓库，即使有冲突<br><code>git push [remote] --all</code> # 推送所有分支到远程仓库</p>
+</blockquote>
+<h1 id="九、撤销"><a href="#九、撤销" class="headerlink" title="九、撤销"></a>九、撤销</h1><blockquote>
+<p><code>git checkout [file]</code> # 恢复暂存区的指定文件到工作区<br><code>git checkout [commit] [file]</code> # 恢复某个commit的指定文件到暂存区和工作区<br><code>git checkout .</code> # 恢复暂存区的所有文件到工作区<br><code>git reset [file]</code> # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变<br><code>git reset --hard</code> # 重置暂存区与工作区，与上一次commit保持一致<br><code>git reset [commit]</code> # 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变<br><code>git reset --hard [commit]</code> # 重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致<br><code>git reset --keep [commit]</code> # 重置当前HEAD为指定commit，但保持暂存区和工作区不变<br>  新建一个commit，用来撤销指定commit<br> 后者的所有变化都将被前者抵消，并且应用到当前分支:<br><code>git revert [commit]</code></p>
+</blockquote>
+<p><strong>git stash</strong>: 暂时将未提交的变化移除,保存当前工作进度，会把暂存区和工作区的改动保存起来</p>
+<blockquote>
+<p><code>git stash save 'message...'</code> : 可以添加一些注释<br><code>git stash list</code> : 显示保存进度的列表。也就意味着，git stash命令可以多次执行。<br><code>git stash pop</code>  :恢复最新的进度到工作区。git默认会把工作区和暂存区的改动都恢复到工作区。<br><code>git stash pop --index</code> : 恢复最新的进度到工作区和暂存区。（尝试将原来暂存区的改动还恢复到暂存区）<br><code>git stash pop stash@{1}</code> : 恢复指定的进度到工作区。stash_id是通过git stash list命令得到的<br> 通过 <code>git stash pop</code> 命令恢复进度后，会删除当前进度。<br><code>git stash drop [stash_id]</code> : 删除一个存储的进度。如果不指定stash_id，则默认删除最新的存储进度<br><code>git stash clear</code>: 删除所有存储的进度。<br><code>git stash apply [–index] [stash_id]</code> :  除了不删除恢复的进度之外，其余和git stash pop 命令一样。</p>
+</blockquote>
+<h1 id="十、其他"><a href="#十、其他" class="headerlink" title="十、其他"></a>十、其他</h1><blockquote>
+<p><code>git archive</code> # 生成一个可供发布的压缩包</p>
+</blockquote>
+<h1 id="十一、中国大陆地区下载Github源代码速度慢的解决办法"><a href="#十一、中国大陆地区下载Github源代码速度慢的解决办法" class="headerlink" title="十一、中国大陆地区下载Github源代码速度慢的解决办法"></a>十一、中国大陆地区下载Github源代码速度慢的解决办法</h1><p>这里记录在Windows系统下clone github代码速度太慢的解决办法，亲测有效！</p>
+<p>由于网络环境的限制，clone github代码速度只有4kb/s，实在是太慢了挂了VPN也一样。通过添加DNS可以解除一些网络限制：</p>
+<ol>
+<li>查询网站的IP地址，进入( <a href="http://tool.chinaz.com/dns" target="_blank" rel="noopener">http://tool.chinaz.com/dns</a> )，输入 github.com，结果如下所示：<img alt data-src="http://www.pianshen.com/images/926/09c9ece225c2cde531d00373dfc6a72e.JPEG"> 得到github.com对应两个IP地址，使用<code>ping</code>命令测试两个地址，选择一个TTL值较小的IP地址。</li>
+<li>接着，我们打开电脑的 <code>C:\Windows\System32\drivers\etc</code> 目录，找到hosts文件; Linux系统下在<code>/etc/hosts</code></li>
+<li>在文件末追加<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">151.101.197.194 github.global.ssl.fastly.net</span><br><span class="line">192.30.253.112 github.com</span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>保存后刷新DNS缓存。重新clone github， 速度得到明显提升，从4kb/s到300kb/s.</p>
+<h1 id="十二、Sync-Git-Fork-to-the-Original-Repo"><a href="#十二、Sync-Git-Fork-to-the-Original-Repo" class="headerlink" title="十二、Sync Git Fork to the Original Repo"></a>十二、Sync Git Fork to the Original Repo</h1><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add upstream https://github.com/[Original Owner Username]/[Original Repository].git</span><br><span class="line">$ git fetch upstream</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge upstream/master</span><br><span class="line">$ git push</span><br></pre></td></tr></tbody></table></figure>
+<p><a href="https://digitaldrummerj.me/git-syncing-fork-with-original-repo/" target="_blank" rel="noopener">Sync your Git Fork to the Original Repo</a></p>
+<h1 id="十三、Git-submodules"><a href="#十三、Git-submodules" class="headerlink" title="十三、Git submodules"></a>十三、Git submodules</h1><p>git submodules子模块功能允许你将其他的git 项目包含在你的项目当中，它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。</p>
+<blockquote>
+<p><code>git submodule add [url]</code> ： 为当前项目添加子模块<br><code>cat .gitmodules</code> : submodules 存储在 <code>.gitmodules</code>项目配置文件中:<br>  <img alt data-src="2019-02-17-123643.png"></p>
+<p><code>git submodule add [url]</code> ： 为当前项目添加子模块</p>
+</blockquote>
+<h2 id="Project-workflow-with-submodules："><a href="#Project-workflow-with-submodules：" class="headerlink" title="Project workflow with submodules："></a>Project workflow with submodules：</h2>  <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> [parent_url]</span><br><span class="line">git submodule init</span><br><span class="line">git submodule update</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="如何删除submodules："><a href="#如何删除submodules：" class="headerlink" title="如何删除submodules："></a>如何删除submodules：</h2><ol>
+<li>Delete the relevant line from the .gitmodules file.</li>
+<li>Delete the relevant section from .git/config.</li>
+<li>Run git rm –cached path_to_submodule (no trailing slash).</li>
+<li>Commit and delete the now untracked submodule files.<br><a href="http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule" target="_blank" rel="noopener">(Stack Overflow reference)</a></li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    <div class="post-widgets">
+    <div class="likely">
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+        <div class="reward-container">
+  <div>打赏一次，年薪百万.</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+                <a href="/Essential-Apps/" rel="next" title="Ubuntu、macOS必备软件配置记录帖">
+                  <i class="fa fa-chevron-left"></i> Ubuntu、macOS必备软件配置记录帖
+                </a>
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+                <a href="/LeetCode38-count-and-say/" rel="prev" title="【LeetCode】38.count-and-say">
+                  【LeetCode】38.count-and-say <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments" id="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+  </div>
+  
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、新建代码库"><span class="nav-number">1.</span> <span class="nav-text">一、新建代码库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、配置"><span class="nav-number">2.</span> <span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、增加-删除文件"><span class="nav-number">3.</span> <span class="nav-text">三、增加/删除文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、代码提交"><span class="nav-number">4.</span> <span class="nav-text">四、代码提交</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、分支"><span class="nav-number">5.</span> <span class="nav-text">五、分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六、标签"><span class="nav-number">6.</span> <span class="nav-text">六、标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七、查看信息"><span class="nav-number">7.</span> <span class="nav-text">七、查看信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八、远程同步"><span class="nav-number">8.</span> <span class="nav-text">八、远程同步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#九、撤销"><span class="nav-number">9.</span> <span class="nav-text">九、撤销</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十、其他"><span class="nav-number">10.</span> <span class="nav-text">十、其他</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十一、中国大陆地区下载Github源代码速度慢的解决办法"><span class="nav-number">11.</span> <span class="nav-text">十一、中国大陆地区下载Github源代码速度慢的解决办法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十二、Sync-Git-Fork-to-the-Original-Repo"><span class="nav-number">12.</span> <span class="nav-text">十二、Sync Git Fork to the Original Repo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十三、Git-submodules"><span class="nav-number">13.</span> <span class="nav-text">十三、Git submodules</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Project-workflow-with-submodules："><span class="nav-number">13.1.</span> <span class="nav-text">Project workflow with submodules：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何删除submodules："><span class="nav-number">13.2.</span> <span class="nav-text">如何删除submodules：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="趙大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">趙大寳</p>
+  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('div.pdf').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
+    document.querySelectorAll('div.pdf').forEach(element => {
+      PDFObject.embed(element.getAttribute('target'), element, {
+        pdfOpenParams: {
+          navpanes: 0,
+          toolbar: 0,
+          statusbar: 0,
+          pagemode: 'thumbs',
+          view: 'FitH'
+        },
+        PDFJS_URL: '/lib/pdf/web/viewer.html',
+        height: element.getAttribute('height') || '500px'
+      });
+    });
+  }, window.PDFObject);
+}
+</script>
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+</script>
+
+</body>
+</html>
