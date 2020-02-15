@@ -1,6 +1,6 @@
 ---
 title: Docker Cheat Sheet
-tags: Docker
+tags: [Docker,Kubernets]
 date: 2019-09-18 23:37:29
 categories:
 top:
@@ -94,6 +94,7 @@ sudo sh get-docker.sh
 https://www.linode.com/docs/applications/containers/docker-commands-quick-reference-cheat-sheet/
 
 *******
+
 # Kubernets
 **Deploying the Dashboard UI**：`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml`
 [使用 kubeconfig 或 token 进行用户身份认证](https://jimmysong.io/kubernetes-handbook/guide/auth-with-kubeconfig-or-token.html)
@@ -117,3 +118,6 @@ kubectl proxy
 
 ![/ ](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screen Shot 2019-12-20 at 11.16.39 AM.png)
 [Docker Volumes: Why, When, and Which Ones?](https://spin.atomicobject.com/2019/07/11/docker-volumes-explained/)
+
+[Python项目容器化实践(四) - Kubernetes基础篇](https://www.dongwm.com/post/use-kubernetes-1/)
+[Deploying Python ML Models with Flask, Docker and Kubernetes](https://alexioannides.com/2019/01/10/deploying-python-ml-models-with-flask-docker-and-kubernetes/)

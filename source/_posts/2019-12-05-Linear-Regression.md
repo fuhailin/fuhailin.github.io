@@ -64,9 +64,12 @@ $$
 
 ## 参考资料
 
-1. [线性回归笔记]([http://rvdsd.top/2017/06/07/BioStatistics/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1-09%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/](http://rvdsd.top/2017/06/07/BioStatistics/生物统计-09线性回归/))
+1. [线性回归笔记]([http://rvdsd.top/2017/06/07/BioStatistics/%E7%94%9F%E7%89%A9%E7%BB%9F%E8%AE%A1-09%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/](http://rvdsd.top/2017/06/07/BioStatistics/生物统计-09线性回归/)
 2. [Logistic regression](http://chenyuan.date/2017/11/Logistic-regression/)
 3. [《数理统计讲义》](https://bookdown.org/hezhijian/book/)
 4. 王斌会. 多元统计分析及R语言建模[M]. 暨南大学出版社, 2010.
 5. 汤银才. R语言与统计分析[M]. 高等教育出版社, 2008.
 6. 卡巴科弗. R语言实战[M]. 人民邮电出版社, 2016.
+7. [线性回归(实战)](https://zhuanlan.zhihu.com/p/54129885)
+8. [机器学习之线性回归法](https://juejin.im/entry/5bdc130051882516d326946c)
+9. [R语言解读一元线性回归模型](http://blog.fens.me/r-linear-regression/)
