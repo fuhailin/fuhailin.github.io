@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://fuhailin.github.io/activation-functions/</loc>
+    
+    <lastmod>2020-02-20T17:37:17.554Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://fuhailin.github.io/Books-read/</loc>
+    
+    <lastmod>2020-02-19T09:49:45.623Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://fuhailin.github.io/Wide-Deep/</loc>
     
     <lastmod>2020-02-19T09:26:18.730Z</lastmod>
@@ -124,13 +138,6 @@
     <loc>https://fuhailin.github.io/Calculating-TF-IDF-With-Apache-Spark/</loc>
     
     <lastmod>2020-02-19T09:19:56.753Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://fuhailin.github.io/activation-functions/</loc>
-    
-    <lastmod>2020-02-19T09:19:09.319Z</lastmod>
     
   </url>
   
@@ -439,13 +446,6 @@
     <loc>https://fuhailin.github.io/Embedding/</loc>
     
     <lastmod>2019-11-26T02:52:39.204Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://fuhailin.github.io/Books-read/</loc>
-    
-    <lastmod>2019-11-26T02:52:39.203Z</lastmod>
     
   </url>
   
