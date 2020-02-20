@@ -4,61 +4,42 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-  <meta name="description" content="本教程使用 Ubuntu 18.04 64位 作为系统环境（Ubuntu16.04 也行，32位、64位均可），请自行安装系统。如果用的是 CentOS/RedHat 系统，请查看相应的CentOS安装Hadoop教程_单机伪分布式配置。本教程基于原生最新 Hadoop 3，在 Hadoop 3.1.2 (stable) 版本下验证通过，可适合任何 Hadoop 3.x.y 版本，其他版本类似。">
-<meta name="keywords" content="HDFS,Hadoop">
+  <meta name="description" content="本教程使用 Ubuntu 18.04 64位 作为系统环境（Ubuntu16.04 也行，32位、64位均可），请自行安装系统。如果用的是 CentOS&#x2F;RedHat 系统，请查看相应的CentOS安装Hadoop教程_单机伪分布式配置。本教程基于原生最新 Hadoop 3，在 Hadoop 3.1.2 (stable) 版本下验证通过，可适合任何 Hadoop 3.x.y 版本，其他版本类似。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境）">
 <meta property="og:url" content="https://fuhailin.github.io/Hadoop-Install/index.html">
-<meta property="og:site_name" content="趙大寳">
-<meta property="og:description" content="本教程使用 Ubuntu 18.04 64位 作为系统环境（Ubuntu16.04 也行，32位、64位均可），请自行安装系统。如果用的是 CentOS/RedHat 系统，请查看相应的CentOS安装Hadoop教程_单机伪分布式配置。本教程基于原生最新 Hadoop 3，在 Hadoop 3.1.2 (stable) 版本下验证通过，可适合任何 Hadoop 3.x.y 版本，其他版本类似。">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T02:52:39.214Z">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="本教程使用 Ubuntu 18.04 64位 作为系统环境（Ubuntu16.04 也行，32位、64位均可），请自行安装系统。如果用的是 CentOS&#x2F;RedHat 系统，请查看相应的CentOS安装Hadoop教程_单机伪分布式配置。本教程基于原生最新 Hadoop 3，在 Hadoop 3.1.2 (stable) 版本下验证通过，可适合任何 Hadoop 3.x.y 版本，其他版本类似。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop-version.png">
+<meta property="og:image" content="https://fuhailin.github.io/Hadoop-Install/2019-04-25%2014%2056%2011.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/namenode-format.png">
+<meta property="og:image" content="https://fuhailin.github.io/Hadoop-Install/2019-04-25%2015%2038%2008.png">
+<meta property="og:image" content="https://fuhailin.github.io/Hadoop-Install/2019-04-25%2015%2052%2037.png">
+<meta property="og:image" content="https://fuhailin.github.io/Hadoop-Install/2019-04-25%2016%2021%2024.png">
+<meta property="article:published_time" content="2019-04-25T03:33:41.000Z">
+<meta property="article:modified_time" content="2019-11-26T02:52:39.214Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="HDFS">
+<meta property="article:tag" content="Hadoop">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境）">
-<meta name="twitter:description" content="本教程使用 Ubuntu 18.04 64位 作为系统环境（Ubuntu16.04 也行，32位、64位均可），请自行安装系统。如果用的是 CentOS/RedHat 系统，请查看相应的CentOS安装Hadoop教程_单机伪分布式配置。本教程基于原生最新 Hadoop 3，在 Hadoop 3.1.2 (stable) 版本下验证通过，可适合任何 Hadoop 3.x.y 版本，其他版本类似。">
+<meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop-version.png">
 
 <link rel="canonical" href="https://fuhailin.github.io/Hadoop-Install/">
 
@@ -68,18 +49,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isPost: true
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境） | 趙大寳</title>
+
+  <title>Ubuntu18.04下Hadoop 3的安装与配置（伪分布式环境） | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -129,23 +107,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -153,6 +117,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -184,34 +162,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -242,12 +195,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,8 +208,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -278,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
                     <span itemprop="name">大数据</span>
                   </a>
                 </span>
@@ -306,30 +257,20 @@
 <h1 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h1><h2 id="创建hadoop用户"><a href="#创建hadoop用户" class="headerlink" title="创建hadoop用户"></a>创建hadoop用户</h2><p>如果你安装 Ubuntu 的时候不是用的 “hadoop” 用户，那么需要增加一个名为 hadoop 的用户。<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd -m hadoop -s /bin/bash  #创建hadoop用户，并使用/bin/bash作为shell</span><br><span class="line">sudo passwd hadoop                   #为hadoop用户设置密码，之后需要连续输入两次密码</span><br><span class="line">sudo adduser hadoop sudo             #为hadoop用户增加管理员权限</span><br><span class="line">su - hadoop                          #切换当前用户为用户hadoop</span><br><span class="line">sudo apt-get update                  #更新hadoop用户的apt,方便后面的安装</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h2 id="安装SSH-设置SSH无密码登陆"><a href="#安装SSH-设置SSH无密码登陆" class="headerlink" title="安装SSH,设置SSH无密码登陆"></a>安装SSH,设置SSH无密码登陆</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server   <span class="comment">#安装SSH server</span></span><br><span class="line">ssh localhost                         <span class="comment">#登陆SSH，第一次登陆输入yes</span></span><br><span class="line"><span class="built_in">exit</span>                                  <span class="comment">#退出登录的ssh localhost</span></span><br><span class="line"><span class="built_in">cd</span> ~/.ssh/                            <span class="comment">#如果没法进入该目录，执行一次ssh localhost</span></span><br><span class="line">ssh-keygen -t rsa　　</span><br><span class="line">cat ./id_rsa.pub &gt;&gt; ./authorized_keys <span class="comment">#加入授权</span></span><br><span class="line">ssh localhost                         <span class="comment">#此时已不需密码即可登录localhost，并可见下图。如果失败则可以搜索SSH免密码登录来寻求答案</span></span><br></pre></td></tr></tbody></table></figure>
 <h1 id="安装Java环境"><a href="#安装Java环境" class="headerlink" title="安装Java环境"></a>安装Java环境</h1><p>此处参考 <a href="https://fuhailin.github.io/Essential-Apps-for-Ubuntu/#JAVA">https://fuhailin.github.io/Essential-Apps-for-Ubuntu/#JAVA</a></p>
-<h1 id="安装-Hadoop-3"><a href="#安装-Hadoop-3" class="headerlink" title="安装 Hadoop 3"></a>安装 Hadoop 3</h1><p>通过Apache Hadoop官方下载页面( <a href="https://hadoop.apache.org/releases.html" target="_blank" rel="noopener">https://hadoop.apache.org/releases.html</a> )选择最新的Binary版本进行下载（截止2019年4月25日，Hadoop最新稳定版本为3.1.2）。<br>Binary版本是编译好的二进制版本，可以直接解压安装；另一个包含 src 的则是 Hadoop 源代码，需要进行编译才可使用。<br>下面进行安装：<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.cuhk.edu.hk/pub/packages/apache.org/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz</span><br><span class="line">sudo tar -zxvf  hadoop-3.1.2.tar.gz -C /usr/<span class="built_in">local</span>    <span class="comment">#解压到/usr/local目录下</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">sudo mv ./hadoop-3.1.2/ ./hadoop                      <span class="comment">#重命名为hadoop</span></span><br><span class="line">sudo chown -R hadoop ./hadoop                        <span class="comment">#修改文件权限</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>给hadoop配置环境变量，将下面代码添加到.bashrc文件:<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=$(<span class="variable">$HADOOP_HOME</span>/bin/hadoop classpath):<span class="variable">$CLASSPATH</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="variable">$HADOOP_HOME</span>/lib/native</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>执行source ~./bashrc使设置生效，并查看hadoop是否安装成功<br><img alt="hadoop version" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop-version.png"></p>
+<h1 id="安装-Hadoop-3"><a href="#安装-Hadoop-3" class="headerlink" title="安装 Hadoop 3"></a>安装 Hadoop 3</h1><p>通过Apache Hadoop官方下载页面( <a href="https://hadoop.apache.org/releases.html" target="_blank" rel="noopener">https://hadoop.apache.org/releases.html</a> )选择最新的Binary版本进行下载（截止2019年4月25日，Hadoop最新稳定版本为3.1.2）。<br>Binary版本是编译好的二进制版本，可以直接解压安装；另一个包含 src 的则是 Hadoop 源代码，需要进行编译才可使用。<br>下面进行安装：<br></p><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.cuhk.edu.hk/pub/packages/apache.org/hadoop/common/hadoop-3.1.2/hadoop-3.1.2.tar.gz</span><br><span class="line">sudo tar -zxvf  hadoop-3.1.2.tar.gz -C /usr/<span class="built_in">local</span>    <span class="comment">#解压到/usr/local目录下</span></span><br><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span></span><br><span class="line">sudo mv ./hadoop-3.1.2/ ./hadoop                      <span class="comment">#重命名为hadoop</span></span><br><span class="line">sudo chown -R hadoop ./hadoop                        <span class="comment">#修改文件权限</span></span><br></pre></td></tr></tbody></table></figure><br>给hadoop配置环境变量，将下面代码添加到.bashrc文件:<br><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HADOOP_HOME=/usr/<span class="built_in">local</span>/hadoop</span><br><span class="line"><span class="built_in">export</span> CLASSPATH=$(<span class="variable">$HADOOP_HOME</span>/bin/hadoop classpath):<span class="variable">$CLASSPATH</span></span><br><span class="line"><span class="built_in">export</span> HADOOP_COMMON_LIB_NATIVE_DIR=<span class="variable">$HADOOP_HOME</span>/lib/native</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HADOOP_HOME</span>/bin:<span class="variable">$HADOOP_HOME</span>/sbin</span><br></pre></td></tr></tbody></table></figure><br>执行source ~./bashrc使设置生效，并查看hadoop是否安装成功<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop-version.png" alt="hadoop version"><p></p>
 <h1 id="伪分布式配置"><a href="#伪分布式配置" class="headerlink" title="伪分布式配置"></a>伪分布式配置</h1><p>Hadoop 可以在单节点上以伪分布式的方式运行，Hadoop 进程以分离的 Java 进程来运行，节点既作为 NameNode 也作为 DataNode，同时，读取的是 HDFS 中的文件。</p>
-<p>Hadoop 的配置文件位于 /usr/local/hadoop/etc/hadoop/ 中，伪分布式需要修改2个配置文件 core-site.xml 和 hdfs-site.xml 。Hadoop的配置文件是 xml 格式，每个配置以声明 property 的 name 和 value 的方式来实现。<br>首先将<code>JDK</code>的路径(echo $JAVA_HOME)添加到hadoop-env.sh文件，修改<code>vim ./etc/hadoop/hadoop-env.sh</code>:<br><img alt data-src="2019-04-25 14 56 11.png"></p>
-<p>接下来修改配置文件 <code>./etc/hadoop/core-site.xml</code>:<br></p><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Abase for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>修改配置文件 <code>./etc/hadoop/hdfs-site.xml</code>：<br></p><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp/dfs/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>Hadoop 的配置文件位于 /usr/local/hadoop/etc/hadoop/ 中，伪分布式需要修改2个配置文件 core-site.xml 和 hdfs-site.xml 。Hadoop的配置文件是 xml 格式，每个配置以声明 property 的 name 和 value 的方式来实现。<br>首先将<code>JDK</code>的路径(echo $JAVA_HOME)添加到hadoop-env.sh文件，修改<code>vim ./etc/hadoop/hadoop-env.sh</code>:<br><img src="2019-04-25 14 56 11.png" alt=""></p>
+<p>接下来修改配置文件 <code>./etc/hadoop/core-site.xml</code>:<br></p><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hadoop.tmp.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">description</span>&gt;</span>Abase for other temporary directories.<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>fs.defaultFS<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure><br>修改配置文件 <code>./etc/hadoop/hdfs-site.xml</code>：<br><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.replication<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>1<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.namenode.name.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp/dfs/name<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>dfs.datanode.data.dir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>file:/usr/local/hadoop/tmp/dfs/data<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure><p></p>
 <h2 id="Hadoop配置文件说明"><a href="#Hadoop配置文件说明" class="headerlink" title="Hadoop配置文件说明"></a>Hadoop配置文件说明</h2><p>Hadoop 的运行方式是由配置文件决定的（运行 Hadoop 时会读取配置文件），因此如果需要从伪分布式模式切换回非分布式模式，需要删除 core-site.xml 中的配置项。</p>
 <p>此外，伪分布式虽然只需要配置 fs.defaultFS 和 dfs.replication 就可以运行（官方教程如此），不过若没有配置 hadoop.tmp.dir 参数，则默认使用的临时目录为 /tmp/hadoo-hadoop，而这个目录在重启时有可能被系统清理掉，导致必须重新执行 format 才行。所以我们进行了设置，同时也指定 dfs.namenode.name.dir 和 dfs.datanode.data.dir，否则在接下来的步骤中可能会出错。</p>
-<p>配置完成后，执行 NameNode 的格式化:<br><code>./bin/hdfs namenode -format</code><br><img alt="./bin/hdfs namenode -format" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/namenode-format.png"><br>启动namenode和datanode进程，并查看启动结果<br><code>./sbin/start-dfs.sh</code><br>启动完成后，可以通过命令 <code>jps</code> 来判断是否成功启动，若成功启动则会列出如下进程: “NameNode”、”DataNode” 和 “SecondaryNameNode”<br><img alt data-src="2019-04-25 15 38 08.png"><br>成功启动后，可以访问 HDFS的Web 界面 <a href="http://localhost:9870" target="_blank" rel="noopener">http://localhost:9870</a> 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。<br><img alt="HDFS Web界面" data-src="2019-04-25 15 52 37.png"><br>至此，hadoop的安装就已经完成啦！enjoy it！</p>
+<p>配置完成后，执行 NameNode 的格式化:<br><code>./bin/hdfs namenode -format</code><br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/namenode-format.png" alt="./bin/hdfs namenode -format"><br>启动namenode和datanode进程，并查看启动结果<br><code>./sbin/start-dfs.sh</code><br>启动完成后，可以通过命令 <code>jps</code> 来判断是否成功启动，若成功启动则会列出如下进程: “NameNode”、”DataNode” 和 “SecondaryNameNode”<br><img src="2019-04-25 15 38 08.png" alt=""><br>成功启动后，可以访问 HDFS的Web 界面 <a href="http://localhost:9870" target="_blank" rel="noopener">http://localhost:9870</a> 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。<br><img src="2019-04-25 15 52 37.png" alt="HDFS Web界面"><br>至此，hadoop的安装就已经完成啦！enjoy it！</p>
 <h1 id="运行Hadoop伪分布式实例"><a href="#运行Hadoop伪分布式实例" class="headerlink" title="运行Hadoop伪分布式实例"></a>运行Hadoop伪分布式实例</h1><p>由于前面已经配置了Hadoop的环境变量，Hadoop和HDFS的命令已经包含在了系统当中，HDFS有三种shell命令方式：</p>
 <ul>
 <li>hadoop fs         ： 适用于任何不同的文件系统，比如本地文件系统和HDFS文件系统</li>
 <li>hadoop dfs        ： 只能适用于HDFS文件系统</li>
 <li>hdfs dfs          ： 跟hadoop dfs的命令作用一样，也只能适用于HDFS文件系统</li>
 </ul>
-<p>上面的单机模式，grep 例子读取的是本地数据，伪分布式读取的则是 HDFS 上的数据。要使用 HDFS，首先需要在 HDFS 中创建用户目录：<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir -p /user/hadoop</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>接着将 ./etc/hadoop 中的 xml 文件作为输入文件复制到分布式文件系统中，即将 /usr/local/hadoop/etc/hadoop 复制到分布式文件系统中的 /user/hadoop/input 中。我们使用的是 hadoop 用户，并且已创建相应的用户目录 /user/hadoop ，因此在命令中就可以使用相对路径如 input，其对应的绝对路径就是 /user/hadoop/input:<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir input</span><br><span class="line">hdfs dfs -put ./etc/hadoop/*.xml input</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>复制完成后，可以通过如下命令查看文件列表：<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls input</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>伪分布式运行 MapReduce 作业的方式跟单机模式相同，区别在于伪分布式读取的是HDFS中的文件（可以将单机步骤中创建的本地 input 文件夹，输出结果 output 文件夹都删掉来验证这一点）。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep input output 'dfs[a-z.]+'</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>查看运行结果的命令（查看的是位于 HDFS 中的输出结果）：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -cat output/*</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>结果如下，注意到刚才我们已经更改了配置文件，所以运行结果不同。<br><img alt data-src="2019-04-25 16 21 24.png"><br>我们也可以将运行结果取回到本地：<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -r ./output    # 先删除本地的 output 文件夹（如果存在）</span><br><span class="line">hdfs dfs -get output ./output     # 将 HDFS 上的 output 文件夹拷贝到本机</span><br><span class="line">cat ./output/*</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>Hadoop 运行程序时，输出目录不能存在，否则会提示错误 “org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://localhost:9000/user/hadoop/output already exists” ，因此若要再次执行，需要执行如下命令删除 output 文件夹:<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm -r output    # 删除 output 文件夹</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>若要关闭 Hadoop，则运行<br><code>./sbin/stop-dfs.sh</code><br>下次启动 hadoop 时，无需进行 NameNode 的初始化，只需要运行 <code>./sbin/start-dfs.sh</code> 就可以！</p>
+<p>上面的单机模式，grep 例子读取的是本地数据，伪分布式读取的则是 HDFS 上的数据。要使用 HDFS，首先需要在 HDFS 中创建用户目录：<br></p><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir -p /user/hadoop</span><br></pre></td></tr></tbody></table></figure><br>接着将 ./etc/hadoop 中的 xml 文件作为输入文件复制到分布式文件系统中，即将 /usr/local/hadoop/etc/hadoop 复制到分布式文件系统中的 /user/hadoop/input 中。我们使用的是 hadoop 用户，并且已创建相应的用户目录 /user/hadoop ，因此在命令中就可以使用相对路径如 input，其对应的绝对路径就是 /user/hadoop/input:<br><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -mkdir input</span><br><span class="line">hdfs dfs -put ./etc/hadoop/*.xml input</span><br></pre></td></tr></tbody></table></figure><br>复制完成后，可以通过如下命令查看文件列表：<br><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -ls input</span><br></pre></td></tr></tbody></table></figure><br>伪分布式运行 MapReduce 作业的方式跟单机模式相同，区别在于伪分布式读取的是HDFS中的文件（可以将单机步骤中创建的本地 input 文件夹，输出结果 output 文件夹都删掉来验证这一点）。<br><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep input output 'dfs[a-z.]+'</span><br></pre></td></tr></tbody></table></figure><br>查看运行结果的命令（查看的是位于 HDFS 中的输出结果）：<br><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -cat output/*</span><br></pre></td></tr></tbody></table></figure><br>结果如下，注意到刚才我们已经更改了配置文件，所以运行结果不同。<br><img src="2019-04-25 16 21 24.png" alt=""><br>我们也可以将运行结果取回到本地：<br><figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -r ./output    # 先删除本地的 output 文件夹（如果存在）</span><br><span class="line">hdfs dfs -get output ./output     # 将 HDFS 上的 output 文件夹拷贝到本机</span><br><span class="line">cat ./output/*</span><br></pre></td></tr></tbody></table></figure><br>Hadoop 运行程序时，输出目录不能存在，否则会提示错误 “org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory hdfs://localhost:9000/user/hadoop/output already exists” ，因此若要再次执行，需要执行如下命令删除 output 文件夹:<br><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdfs dfs -rm -r output    # 删除 output 文件夹</span><br></pre></td></tr></tbody></table></figure><br>若要关闭 Hadoop，则运行<br><code>./sbin/stop-dfs.sh</code><br>下次启动 hadoop 时，无需进行 NameNode 的初始化，只需要运行 <code>./sbin/start-dfs.sh</code> 就可以！<p></p>
 <p><strong>References</strong>:</p>
 <ol>
 <li><a href="http://dblab.xmu.edu.cn/blog/install-hadoop/" target="_blank" rel="noopener">Hadoop安装教程_单机/伪分布式配置_Hadoop2.6.0/Ubuntu14.04</a></li>
@@ -359,30 +300,26 @@
 
     
     
-    <div class="post-widgets">
-    <div class="likely">
-    </div>
-  </div>
-  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+    
         <div class="reward-container">
-  <div>打赏一次，年薪百万.</div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     Donate
   </button>
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
         <p>Alipay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
         <p>Bitcoin</p>
       </div>
 
@@ -399,21 +336,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/tips-tricks-in-LaTeX/" rel="next" title="tips & tricks in LaTeX">
-                  <i class="fa fa-chevron-left"></i> tips & tricks in LaTeX
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/HDFS-Overview/" rel="prev" title="HDFS学习笔记">
-                  HDFS学习笔记 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tips-tricks-in-LaTeX/" rel="prev" title="tips & tricks in LaTeX">
+      <i class="fa fa-chevron-left"></i> tips & tricks in LaTeX
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/HDFS-Overview/" rel="next" title="HDFS学习笔记">
+      HDFS学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -427,10 +361,32 @@
           </div>
           
     
-  <div class="comments" id="comments">
+  <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
   </div>
   
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -461,17 +417,17 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -484,25 +440,17 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -547,7 +495,7 @@
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -569,16 +517,16 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -610,26 +558,27 @@
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -638,34 +587,12 @@
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -678,6 +605,7 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
 <script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -689,6 +617,7 @@ if (document.querySelectorAll('div.pdf').length) {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
+});
 </script>
 
 </body>

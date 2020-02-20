@@ -4,61 +4,37 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="快速、简洁且高效的博客框架Hexo">
-<meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的Hexo博客搭建过程与扩展功能记录">
 <meta property="og:url" content="https://fuhailin.github.io/Hello-Hexo/index.html">
-<meta property="og:site_name" content="趙大寳">
+<meta property="og:site_name" content="赵大寳">
 <meta property="og:description" content="快速、简洁且高效的博客框架Hexo">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-21T05:42:48.839Z">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime2.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime1.png">
+<meta property="article:published_time" content="2018-11-08T07:35:15.000Z">
+<meta property="article:modified_time" content="2020-02-19T04:36:27.168Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="Hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的Hexo博客搭建过程与扩展功能记录">
-<meta name="twitter:description" content="快速、简洁且高效的博客框架Hexo">
+<meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime2.png">
 
 <link rel="canonical" href="https://fuhailin.github.io/Hello-Hexo/">
 
@@ -68,18 +44,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isPost: true
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>我的Hexo博客搭建过程与扩展功能记录 | 趙大寳</title>
+
+  <title>我的Hexo博客搭建过程与扩展功能记录 | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -129,23 +102,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -153,6 +112,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -184,34 +157,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -242,12 +190,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,8 +203,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -270,7 +216,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-21 13:42:48" itemprop="dateModified" datetime="2019-12-21T13:42:48+08:00">2019-12-21</time>
+                <time title="Modified: 2020-02-19 12:36:27" itemprop="dateModified" datetime="2020-02-19T12:36:27+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,8 +272,7 @@
 <h3 id="7-Create-a-new-post-file"><a href="#7-Create-a-new-post-file" class="headerlink" title="7. Create a new post file"></a>7. Create a new post file</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new first-post</span><br><span class="line">INFO  Created: ~/***/fuhailin.github.io/source/_posts/first-post.md</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="8-Edit-the-above-file-with-Markdown-or-Hexo’s-Helper"><a href="#8-Edit-the-above-file-with-Markdown-or-Hexo’s-Helper" class="headerlink" title="8. Edit the above file with Markdown or Hexo’s Helper"></a>8. Edit the above file with Markdown or Hexo’s Helper</h3><p>Hexo’s Helper<br><a href="https://hexo.io/docs/helpers.html" target="_blank" rel="noopener">https://hexo.io/docs/helpers.html</a><br>I use Atom with “shift + control + m” when I use Markdown :-)<br><a href="https://atom.io/" target="_blank" rel="noopener">https://atom.io/</a></p>
 <h3 id="9-Delete-“source-posts-hello-world-md”"><a href="#9-Delete-“source-posts-hello-world-md”" class="headerlink" title="9. Delete “source/_posts/hello-world.md”"></a>9. Delete “source/_posts/hello-world.md”</h3><p>It’s not necessary to deploy.</p>
-<h3 id="10-Deploy-your-new-blog"><a href="#10-Deploy-your-new-blog" class="headerlink" title="10. Deploy your new blog!!"></a>10. Deploy your new blog!!</h3><p><a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>After writting the above command, you can see your new blog on GitHub Pages.<br><a href="http://******.github.io/" target="_blank" rel="noopener">http://******.github.io/</a></p>
+<h3 id="10-Deploy-your-new-blog"><a href="#10-Deploy-your-new-blog" class="headerlink" title="10. Deploy your new blog!!"></a>10. Deploy your new blog!!</h3><p><a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">https://hexo.io/docs/deployment.html</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean</span><br><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure><br>After writting the above command, you can see your new blog on GitHub Pages.<br><a href="http://******.github.io/" target="_blank" rel="noopener">http://******.github.io/</a><p></p>
 <h3 id="11-Change-your-blog-theme"><a href="#11-Change-your-blog-theme" class="headerlink" title="11. Change your blog theme"></a>11. Change your blog theme</h3><p><a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">For instance, How to use the following theme.</span><br><span class="line">https://hexo.io/hexo-theme-light/</span><br><span class="line"></span><br><span class="line">## Install it</span><br><span class="line">$ cd fuhailin.github.io</span><br><span class="line">$ git clone https://github.com/theme-next/hexo-theme-next themes/next</span><br><span class="line"></span><br><span class="line">## Update the above files</span><br><span class="line">$ themes/light</span><br><span class="line">$ git pull</span><br><span class="line"></span><br><span class="line">## Set information to use the theme</span><br><span class="line">$ cd fuhailin.github.io</span><br><span class="line">$ vi _config.yml</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~ _config.yml ~~~~~~~~~~~~~~~~~~</span><br><span class="line"># Extensions</span><br><span class="line">## Plugins: http://hexo.io/plugins/</span><br><span class="line">## Themes: http://hexo.io/themes/</span><br><span class="line">theme: light</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h3 id="12-Create-a-new-page-file"><a href="#12-Create-a-new-page-file" class="headerlink" title="12. Create a new page file"></a>12. Create a new page file</h3><p><a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">https://hexo.io/docs/writing.html</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page aboutme</span><br><span class="line">INFO  Created: ~/***/fuhailin.github.io/source/aboutme/index.md</span><br><span class="line"></span><br><span class="line">$ cd source/aboutme/</span><br><span class="line"></span><br><span class="line">$ vi index.md</span><br></pre></td></tr></tbody></table></figure><p></p>
 <h3 id="13-Use-“Read-More”"><a href="#13-Use-“Read-More”" class="headerlink" title="13. Use “Read More”"></a>13. Use “Read More”</h3><p>Write <code>&lt;!-- more --&gt;</code> in your articles.</p>
@@ -351,8 +296,8 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime2.png"></td>
-<td style="text-align:center"><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime1.png"></td>
+<td style="text-align:center"><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime2.png" alt=""></td>
+<td style="text-align:center"><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hexo_updatetime1.png" alt=""></td>
 </tr>
 </tbody>
 </table>
@@ -366,48 +311,14 @@
 <h2 id="在文章中插入代码"><a href="#在文章中插入代码" class="headerlink" title="在文章中插入代码"></a>在文章中插入代码</h2><p>自定义 Hexo 博客代码块: <a href="https://www.w3ctrain.com/2017/12/11/hexo-code-block/" target="_blank" rel="noopener">https://www.w3ctrain.com/2017/12/11/hexo-code-block/</a><br><a href="http://octopress.org/docs/plugins/codeblock/" target="_blank" rel="noopener">http://octopress.org/docs/plugins/codeblock/</a></p>
 <p>插入代码文件</p>
 <p>把整个文件作为代码插入，这样做的好处是作为可运行的代码后续如果修正了bug，重新hexo g一下文章中的代码就会自动更新；不需要每次从文件中拷贝粘贴代码到文章中。</p>
-<p><strong>配置code存放路径</strong><br>在hexo的配置文件<code>hexo/_config.yml</code>中看到<code>code_dir: downloads/code</code>,说明所有的code文件都放到<code>source/downloads/code</code>文件夹下。<br><strong>语法</strong><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{% include_code [title] [lang:language] path/to/file %}</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><code>[title]</code>:可选，标题名，默认是文件名<br><code>[lang:language]</code>:可选设置语言后，根据不同的语言设置语法高亮</p>
+<p><strong>配置code存放路径</strong><br>在hexo的配置文件<code>hexo/_config.yml</code>中看到<code>code_dir: downloads/code</code>,说明所有的code文件都放到<code>source/downloads/code</code>文件夹下。<br><strong>语法</strong><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{% include_code [title] [lang:language] path/to/file %}</span><br></pre></td></tr></tbody></table></figure><br><code>[title]</code>:可选，标题名，默认是文件名<br><code>[lang:language]</code>:可选设置语言后，根据不同的语言设置语法高亮<p></p>
 <p><strong>举例</strong><br>代码文件存放在<code>source/uploads/code/hello_world.c</code>.</p>
 <figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{% include_code lang:c hello world in c lang hello_world.c %}</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight c"><figcaption><span> hello world in c lang</span><a href="/downloads/code/hello_world.c">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"hello world!"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <script src="//gist.github.com/55e8446e255abd3ee2900c3691cca09f.js?file=trie.py"></script>
-<p>插入gist代码<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>插入github代码<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{% ghcode github_code_link start_line end_line %}</span><br></pre></td></tr></tbody></table></figure><p></p>
-<hr>
-<h2 id="搜索引擎优化SEO"><a href="#搜索引擎优化SEO" class="headerlink" title="搜索引擎优化SEO"></a>搜索引擎优化SEO</h2><p><a href="https://fuhailin.github.io/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%E4%B9%8BSEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/">https://fuhailin.github.io/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%E4%B9%8BSEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/</a></p>
-<hr>
-<h2 id="Hexo博客文章添加置顶属性"><a href="#Hexo博客文章添加置顶属性" class="headerlink" title="Hexo博客文章添加置顶属性"></a>Hexo博客文章添加置顶属性</h2><p>使用插件<a href="https://github.com/netcan/hexo-generator-index-pin-top" target="_blank" rel="noopener">hexo-generator-index-pin-top</a><br>安装：</p>
-<blockquote>
-<p>$ npm uninstall hexo-generator-index —save<br>$ npm install hexo-generator-index-pin-top —save</p>
-</blockquote>
-<p>使用：在需要置顶的<strong>Front-matter</strong>中加上<code>top: 数字</code>即可，数字越大，置顶越靠前。</p>
-<hr>
-<h2 id="自定义Hexo博客的文章模板"><a href="#自定义Hexo博客的文章模板" class="headerlink" title="自定义Hexo博客的文章模板"></a>自定义Hexo博客的文章模板</h2><p>博客模版存放在<strong>scaffolds</strong>文件夹<br>scaffolds文件夹：<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">├── scaffolds					//保存着默认模板，自定义模板就是修改该目录下的文件</span><br><span class="line">│   ├── draft.md 				//默认的草稿模板</span><br><span class="line">│   ├── page.md 				//默认的页面模板</span><br><span class="line">│   └── post.md 				//默认的文章模板</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>在新建文章时，Hexo 会根据 scaffolds 文件夹内相对应的文件来建立文件，例如：<br><code>hexo new draft "My Gallery"</code><br>在执行这行指令时，Hexo 会尝试在 scaffolds 文件夹中寻找 draft.md</p>
-<p><a href="http://www.mashangxue123.com/Hexo/353523292.html" target="_blank" rel="noopener">http://www.mashangxue123.com/Hexo/353523292.html</a></p>
-<hr>
-<h2 id="博文中嵌入PDF插件"><a href="#博文中嵌入PDF插件" class="headerlink" title="博文中嵌入PDF插件"></a>博文中嵌入PDF插件</h2><p><a href="https://github.com/superalsrk/hexo-pdf" target="_blank" rel="noopener">https://github.com/superalsrk/hexo-pdf</a></p>
-<hr>
-<h2 id="在博客中显示LaTeX数学公式"><a href="#在博客中显示LaTeX数学公式" class="headerlink" title="在博客中显示LaTeX数学公式"></a>在博客中显示LaTeX数学公式</h2><p>我这里使用的是<code>MathJax</code> LaTeX渲染引擎和<del><code>hexo-renderer-markdown-it</code></del> <a href="https://github.com/sun11/hexo-renderer-kramed" target="_blank" rel="noopener">hexo-renderer-kramed</a> Markdown解析器<br><a href="https://theme-next.org/docs/third-party-services/math-equations/" target="_blank" rel="noopener">https://theme-next.org/docs/third-party-services/math-equations/</a></p>
-<hr>
-<h2 id="扩展支持emoji表情"><a href="#扩展支持emoji表情" class="headerlink" title="扩展支持emoji表情"></a>扩展支持emoji表情</h2><p><a href="https://github.com/crimx/hexo-filter-github-emojis" target="_blank" rel="noopener">https://github.com/crimx/hexo-filter-github-emojis</a><br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-filter-github-emojis --save</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><strong>emoji使用方法</strong></p>
-<p>这里有一份emoji与markdown编码的对照表:<br><a href="https://gist.github.com/rxaviers/7360908" target="_blank" rel="noopener">Complete list of github markdown emoji markup · GitHub</a></p>
-<p>Emoji test：<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f60a.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60a.png?v8">😊</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f498.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f498.png?v8">💘</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f4a9.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a9.png?v8">💩</span>:+1:<span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f437.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f437.png?v8">🐷</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f1e8-1f1f3.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f1e8-1f1f3.png?v8">🇨🇳</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f51e.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f51e.png?v8">🔞</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f393.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f393.png?v8">🎓</span><span class="github-emoji" style="color: transparent;background:no-repeat url(https://github.githubassets.com/images/icons/emoji/unicode/1f60d.png?v8) center/contain" data-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60d.png?v8">😍</span></p>
-<p>但是发现在主页上的emoji表情没有显示出来</p>
-<hr>
-<h2 id="文章置顶标签及排序"><a href="#文章置顶标签及排序" class="headerlink" title="文章置顶标签及排序"></a>文章置顶标签及排序</h2>
-<p><strong>添加置顶属性</strong><br>使用插件<a href="https://github.com/netcan/hexo-generator-index-pin-top" target="_blank" rel="noopener">hexo-generator-index-pin-top</a><br>安装：</p>
-<blockquote>
-<p>$ npm uninstall hexo-generator-index —save<br>$ npm install hexo-generator-index-pin-top —save</p>
-</blockquote>
-<p>使用：在需要置顶的<strong>Front-matter</strong>中加上<code>top: 数字</code>即可，数字越大，置顶越靠前。</p>
-<p>但是我使用的Next主题这样配置目前还不能实现自动给置顶的博文加上置顶标签，需要手动修改代码解决。</p>
-<p><strong>设置置顶标志</strong></p>
-<p>打开：<code>/blog/themes/next/layout/_macro/post.swig</code>文件，定位到<code>&lt;span class="post-time"&gt;</code>标签下，插入如下代码：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{% if post.top %}</span><br><span class="line">  &lt;i class="fa fa-thumb-tack"&gt;&lt;/i&gt;</span><br><span class="line">  &lt;font color=7D26CD&gt;置顶&lt;/font&gt;</span><br><span class="line">  &lt;span class="post-meta-divider"&gt;|&lt;/span&gt;</span><br><span class="line">{% endif %}</span><br></pre></td></tr></tbody></table></figure>
-<p>重新编译博客之后就可以显示了</p>
+<p>插入gist代码<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">{% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}</span><br></pre></td></tr></tbody></table></figure><br><!--
+插入github代码
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;% ghcode github_code_link start_line end_line %&#125;</span><br><span class="line">&#96;&#96;&#96; --&gt;</span><br><span class="line"></span><br><span class="line">***********************</span><br><span class="line">## 搜索引擎优化SEO</span><br><span class="line">https:&#x2F;&#x2F;fuhailin.github.io&#x2F;Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%BF%9B%E9%98%B6%E4%B9%8BSEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96&#x2F;</span><br><span class="line">****************</span><br><span class="line">## Hexo博客文章添加置顶属性</span><br><span class="line">使用插件[hexo-generator-index-pin-top](https:&#x2F;&#x2F;github.com&#x2F;netcan&#x2F;hexo-generator-index-pin-top)</span><br><span class="line">安装：</span><br><span class="line">&gt; $ npm uninstall hexo-generator-index --save</span><br><span class="line">&gt; $ npm install hexo-generator-index-pin-top --save</span><br><span class="line"></span><br><span class="line">使用：在需要置顶的**Front-matter**中加上&#96;top: 数字&#96;即可，数字越大，置顶越靠前。</span><br><span class="line"></span><br><span class="line">********************</span><br><span class="line">## 自定义Hexo博客的文章模板</span><br><span class="line">博客模版存放在**scaffolds**文件夹</span><br><span class="line">scaffolds文件夹：</span><br></pre></td></tr></table></figure><br>├── scaffolds                    //保存着默认模板，自定义模板就是修改该目录下的文件<br>│   ├── draft.md                 //默认的草稿模板<br>│   ├── page.md                 //默认的页面模板<br>│   └── post.md                 //默认的文章模板<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">在新建文章时，Hexo 会根据 scaffolds 文件夹内相对应的文件来建立文件，例如：</span><br><span class="line">&#96;hexo new draft &quot;My Gallery&quot;&#96;</span><br><span class="line">在执行这行指令时，Hexo 会尝试在 scaffolds 文件夹中寻找 draft.md</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;www.mashangxue123.com&#x2F;Hexo&#x2F;353523292.html</span><br><span class="line"></span><br><span class="line">*********************</span><br><span class="line"></span><br><span class="line">##  博文中嵌入PDF插件</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;superalsrk&#x2F;hexo-pdf</span><br><span class="line"></span><br><span class="line">********************</span><br><span class="line"></span><br><span class="line">## 在博客中显示LaTeX数学公式</span><br><span class="line"></span><br><span class="line">我这里使用的是&#96;MathJax&#96; LaTeX渲染引擎和~~&#96;hexo-renderer-markdown-it&#96;~~ [hexo-renderer-kramed](https:&#x2F;&#x2F;github.com&#x2F;sun11&#x2F;hexo-renderer-kramed) Markdown解析器</span><br><span class="line">https:&#x2F;&#x2F;theme-next.org&#x2F;docs&#x2F;third-party-services&#x2F;math-equations&#x2F;</span><br><span class="line"></span><br><span class="line">**********************</span><br><span class="line"></span><br><span class="line">## 扩展支持emoji表情</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;crimx&#x2F;hexo-filter-github-emojis</span><br></pre></td></tr></table></figure><br>npm install hexo-filter-github-emojis —save<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">**emoji使用方法**</span><br><span class="line"></span><br><span class="line">这里有一份emoji与markdown编码的对照表:</span><br><span class="line">[Complete list of github markdown emoji markup · GitHub](https:&#x2F;&#x2F;gist.github.com&#x2F;rxaviers&#x2F;7360908)</span><br><span class="line"></span><br><span class="line">Emoji test：:blush::cupid::star::hankey::+1::pig::cn::underage::mortar_board::heart_eyes:</span><br><span class="line"></span><br><span class="line">但是发现在主页上的emoji表情没有显示出来</span><br><span class="line">****************</span><br><span class="line"></span><br><span class="line">## 文章置顶标签及排序</span><br><span class="line">&#123;% asset_img TIM20181212171732.png &#39;Hexo文章置顶及排序问题+置顶标签&#39; %&#125;</span><br><span class="line">**添加置顶属性**</span><br><span class="line">使用插件[hexo-generator-index-pin-top](https:&#x2F;&#x2F;github.com&#x2F;netcan&#x2F;hexo-generator-index-pin-top)</span><br><span class="line">安装：</span><br><span class="line">&gt; $ npm uninstall hexo-generator-index --save</span><br><span class="line">&gt; $ npm install hexo-generator-index-pin-top --save</span><br><span class="line"></span><br><span class="line">使用：在需要置顶的**Front-matter**中加上&#96;top: 数字&#96;即可，数字越大，置顶越靠前。</span><br><span class="line"></span><br><span class="line">但是我使用的Next主题这样配置目前还不能实现自动给置顶的博文加上置顶标签，需要手动修改代码解决。</span><br><span class="line"></span><br><span class="line">**设置置顶标志**</span><br><span class="line"></span><br><span class="line">打开：&#96;&#x2F;blog&#x2F;themes&#x2F;next&#x2F;layout&#x2F;_macro&#x2F;post.swig&#96;文件，定位到&#96;&lt;span class&#x3D;&quot;post-time&quot;&gt;&#96;标签下，插入如下代码：</span><br></pre></td></tr></table></figure><br><br>```<br>重新编译博客之后就可以显示了</p>
 <p>希望有人能把这个功能提一个pull request到官方库里面，我现在能力还有限。</p>
 <p><strong>References</strong>:</p>
 <ol>
@@ -418,7 +329,7 @@
 <hr>
 <p><strong>Good References:</strong></p>
 <p>Hexo+NexT 打造一个炫酷博客：<a href="https://juejin.im/post/5bcd2d395188255c3b7dc1db" target="_blank" rel="noopener">https://juejin.im/post/5bcd2d395188255c3b7dc1db</a><br>Hexo官方中文文档：<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/</a><br>hexo进阶: <a href="http://stevenshi.me/2017/05/09/hexo-advance/" target="_blank" rel="noopener">http://stevenshi.me/2017/05/09/hexo-advance/</a><br>博客写作模板: <a href="https://blog.baoyukun.win/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/a-writing-model/" target="_blank" rel="noopener">https://blog.baoyukun.win/%E6%8A%80%E6%9C%AF/%E5%89%8D%E7%AB%AF/a-writing-model/</a><br>搭建 Hexo 博客的填坑经历和必要的优化：<a href="https://kris2d.info/posts/b706980b/" target="_blank" rel="noopener">https://kris2d.info/posts/b706980b/</a><br>Hexo程序archive页面数量设置：<a href="http://www.yuzhewo.com/2015/11/21/Hexo%E7%A8%8B%E5%BA%8Farchive%E9%A1%B5%E9%9D%A2%E6%95%B0%E9%87%8F%E8%AE%BE%E7%BD%AE/" target="_blank" rel="noopener">http://www.yuzhewo.com/2015/11/21/Hexo%E7%A8%8B%E5%BA%8Farchive%E9%A1%B5%E9%9D%A2%E6%95%B0%E9%87%8F%E8%AE%BE%E7%BD%AE/</a><br>Hexo博客归档不分页显示设置方法：<a href="https://sobaigu.com/hexo-archives-show-all-in-one-page.html" target="_blank" rel="noopener">https://sobaigu.com/hexo-archives-show-all-in-one-page.html</a><br>搭建Hexo博客进阶篇—-主题自定义（三）：<a href="https://www.jianshu.com/p/4b9ee8fec3a3" target="_blank" rel="noopener">https://www.jianshu.com/p/4b9ee8fec3a3</a><br><a href="http://saili.science/2017/04/02/github-for-win/#" target="_blank" rel="noopener">Git Pages 使用指南</a><br><a href="https://theme-next.org/docs/third-party-services/search-services" target="_blank" rel="noopener">NexT官方文档</a></p>
-<script>
+--><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -441,30 +352,26 @@
 
     
     
-    <div class="post-widgets">
-    <div class="likely">
-    </div>
-  </div>
-  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+    
         <div class="reward-container">
-  <div>打赏一次，年薪百万.</div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     Donate
   </button>
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
         <p>Alipay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
         <p>Bitcoin</p>
       </div>
 
@@ -480,18 +387,15 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/offer24-Binary-searchtree/" rel="prev" title="【剑指Offer】24. 二叉搜索树的后序遍历">
-                  【剑指Offer】24. 二叉搜索树的后序遍历 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/Deep-and-Cross-Network/" rel="next" title="推荐系统CTR实战——Deep & Cross">
+      推荐系统CTR实战——Deep & Cross <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -505,10 +409,32 @@
           </div>
           
     
-  <div class="comments" id="comments">
+  <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
   </div>
   
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -533,23 +459,23 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use-Hexo-and-deploy-to-GitHub-Pages"><span class="nav-number">2.</span> <span class="nav-text">How to use Hexo and deploy to GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Install-Hexo"><span class="nav-number">2.1.</span> <span class="nav-text">1. Install Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Create-a-project-for-your-GitHub-Pages"><span class="nav-number">2.2.</span> <span class="nav-text">2. Create a project for your GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Run-a-test-server-for-your-page-on-Mac"><span class="nav-number">2.3.</span> <span class="nav-text">3. Run a test server for your page on Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Set-information-for-your-new-blog"><span class="nav-number">2.4.</span> <span class="nav-text">4. Set information for your new blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Set-information-to-use-Git"><span class="nav-number">2.5.</span> <span class="nav-text">5. Set information to use Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Set-“watch”-before-starting-your-work"><span class="nav-number">2.6.</span> <span class="nav-text">6. Set “watch” before starting your work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Create-a-new-post-file"><span class="nav-number">2.7.</span> <span class="nav-text">7. Create a new post file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Edit-the-above-file-with-Markdown-or-Hexo’s-Helper"><span class="nav-number">2.8.</span> <span class="nav-text">8. Edit the above file with Markdown or Hexo’s Helper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Delete-“source-posts-hello-world-md”"><span class="nav-number">2.9.</span> <span class="nav-text">9. Delete “source/_posts/hello-world.md”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Deploy-your-new-blog"><span class="nav-number">2.10.</span> <span class="nav-text">10. Deploy your new blog!!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Change-your-blog-theme"><span class="nav-number">2.11.</span> <span class="nav-text">11. Change your blog theme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Create-a-new-page-file"><span class="nav-number">2.12.</span> <span class="nav-text">12. Create a new page file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Use-“Read-More”"><span class="nav-number">2.13.</span> <span class="nav-text">13. Use “Read More”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Use-Plugins"><span class="nav-number">2.14.</span> <span class="nav-text">14. Use Plugins</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为blog添加评论区"><span class="nav-number">3.</span> <span class="nav-text">为blog添加评论区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给-Github-添加-README"><span class="nav-number">4.</span> <span class="nav-text">给 Github 添加 README</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Fork-Me-on-github书签"><span class="nav-number">5.</span> <span class="nav-text">添加Fork Me on github书签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NexT主题下修改文章底部-号tag标签"><span class="nav-number">6.</span> <span class="nav-text">NexT主题下修改文章底部#号tag标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加分享按钮"><span class="nav-number">7.</span> <span class="nav-text">添加分享按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示每篇文章的更新时间"><span class="nav-number">8.</span> <span class="nav-text">显示每篇文章的更新时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在文章中插入图片"><span class="nav-number">9.</span> <span class="nav-text">在文章中插入图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-create-and-sync-your-hexo-blog-in-one-repo"><span class="nav-number">10.</span> <span class="nav-text">How to create and sync your hexo blog in one repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo标签插件的使用"><span class="nav-number">11.</span> <span class="nav-text">Hexo标签插件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在文章中插入代码"><span class="nav-number">12.</span> <span class="nav-text">在文章中插入代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索引擎优化SEO"><span class="nav-number">13.</span> <span class="nav-text">搜索引擎优化SEO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo博客文章添加置顶属性"><span class="nav-number">14.</span> <span class="nav-text">Hexo博客文章添加置顶属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义Hexo博客的文章模板"><span class="nav-number">15.</span> <span class="nav-text">自定义Hexo博客的文章模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#博文中嵌入PDF插件"><span class="nav-number">16.</span> <span class="nav-text">博文中嵌入PDF插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在博客中显示LaTeX数学公式"><span class="nav-number">17.</span> <span class="nav-text">在博客中显示LaTeX数学公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展支持emoji表情"><span class="nav-number">18.</span> <span class="nav-text">扩展支持emoji表情</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章置顶标签及排序"><span class="nav-number">19.</span> <span class="nav-text">文章置顶标签及排序</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-use-Hexo-and-deploy-to-GitHub-Pages"><span class="nav-number">2.</span> <span class="nav-text">How to use Hexo and deploy to GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Install-Hexo"><span class="nav-number">2.1.</span> <span class="nav-text">1. Install Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Create-a-project-for-your-GitHub-Pages"><span class="nav-number">2.2.</span> <span class="nav-text">2. Create a project for your GitHub Pages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Run-a-test-server-for-your-page-on-Mac"><span class="nav-number">2.3.</span> <span class="nav-text">3. Run a test server for your page on Mac</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Set-information-for-your-new-blog"><span class="nav-number">2.4.</span> <span class="nav-text">4. Set information for your new blog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Set-information-to-use-Git"><span class="nav-number">2.5.</span> <span class="nav-text">5. Set information to use Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Set-“watch”-before-starting-your-work"><span class="nav-number">2.6.</span> <span class="nav-text">6. Set “watch” before starting your work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-Create-a-new-post-file"><span class="nav-number">2.7.</span> <span class="nav-text">7. Create a new post file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-Edit-the-above-file-with-Markdown-or-Hexo’s-Helper"><span class="nav-number">2.8.</span> <span class="nav-text">8. Edit the above file with Markdown or Hexo’s Helper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-Delete-“source-posts-hello-world-md”"><span class="nav-number">2.9.</span> <span class="nav-text">9. Delete “source&#x2F;_posts&#x2F;hello-world.md”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-Deploy-your-new-blog"><span class="nav-number">2.10.</span> <span class="nav-text">10. Deploy your new blog!!</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-Change-your-blog-theme"><span class="nav-number">2.11.</span> <span class="nav-text">11. Change your blog theme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-Create-a-new-page-file"><span class="nav-number">2.12.</span> <span class="nav-text">12. Create a new page file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-Use-“Read-More”"><span class="nav-number">2.13.</span> <span class="nav-text">13. Use “Read More”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#14-Use-Plugins"><span class="nav-number">2.14.</span> <span class="nav-text">14. Use Plugins</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为blog添加评论区"><span class="nav-number">3.</span> <span class="nav-text">为blog添加评论区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给-Github-添加-README"><span class="nav-number">4.</span> <span class="nav-text">给 Github 添加 README</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Fork-Me-on-github书签"><span class="nav-number">5.</span> <span class="nav-text">添加Fork Me on github书签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NexT主题下修改文章底部-号tag标签"><span class="nav-number">6.</span> <span class="nav-text">NexT主题下修改文章底部#号tag标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加分享按钮"><span class="nav-number">7.</span> <span class="nav-text">添加分享按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示每篇文章的更新时间"><span class="nav-number">8.</span> <span class="nav-text">显示每篇文章的更新时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在文章中插入图片"><span class="nav-number">9.</span> <span class="nav-text">在文章中插入图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-create-and-sync-your-hexo-blog-in-one-repo"><span class="nav-number">10.</span> <span class="nav-text">How to create and sync your hexo blog in one repo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo标签插件的使用"><span class="nav-number">11.</span> <span class="nav-text">Hexo标签插件的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在文章中插入代码"><span class="nav-number">12.</span> <span class="nav-text">在文章中插入代码</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -562,25 +488,17 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -625,7 +543,7 @@
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -647,16 +565,16 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -688,26 +606,27 @@
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -716,34 +635,12 @@
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -756,6 +653,7 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
 <script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -767,6 +665,7 @@ if (document.querySelectorAll('div.pdf').length) {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
+});
 </script>
 
 </body>

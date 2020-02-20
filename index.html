@@ -4,60 +4,32 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-  <meta name="description" content="趙大寳個人小站">
-<meta name="keywords" content="算法工程师">
+  <meta name="description" content="赵大寳個人小站">
 <meta property="og:type" content="website">
-<meta property="og:title" content="趙大寳">
+<meta property="og:title" content="赵大寳">
 <meta property="og:url" content="https://fuhailin.github.io/index.html">
-<meta property="og:site_name" content="趙大寳">
-<meta property="og:description" content="趙大寳個人小站">
-<meta property="og:locale" content="en">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="赵大寳個人小站">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="趙大寳">
-<meta name="twitter:description" content="趙大寳個人小站">
 
 <link rel="canonical" href="https://fuhailin.github.io/">
 
@@ -67,18 +39,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: true,
-    isPost: false,
-    isPage: false,
-    isArchive: false
+    isPost: false
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>趙大寳</title>
+
+  <title>赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -128,23 +97,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -152,6 +107,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -183,34 +152,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -241,12 +185,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,12 +199,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
-              <i class="fa fa-thumb-tack"></i>
-              <font color=7D26CD>Top</font>
-              <span class="post-meta-divider">|</span>
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -282,7 +220,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书/" itemprop="url" rel="index">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
                     <span itemprop="name">读书</span>
                   </a>
                 </span>
@@ -335,12 +273,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -349,12 +287,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
-              <i class="fa fa-thumb-tack"></i>
-              <font color=7D26CD>Top</font>
-              <span class="post-meta-divider">|</span>
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -368,7 +300,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+                <time title="Modified: 2020-02-19 17:17:19" itemprop="dateModified" datetime="2020-02-19T17:17:19+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -376,7 +308,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习与算法</span>
                   </a>
                 </span>
@@ -393,7 +325,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          Deep & Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide & Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。
+          <p>Deep & Cross Network(DCN)[1]是来自于 2017 年 google 和 Stanford 共同完成的一篇工作，对比同样来自 google 的工作 Wide & Deep[2]，DCN 不需要特征工程来获得高阶的交叉特征，对比 FM 系列[3][4]的模型，DCN 拥有更高的计算效率并且能够提取到更高阶的交叉特征。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Deep-and-Cross-Network/">
@@ -424,12 +356,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -438,12 +370,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
-              <i class="fa fa-thumb-tack"></i>
-              <font color=7D26CD>Top</font>
-              <span class="post-meta-divider">|</span>
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -457,7 +383,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+                <time title="Modified: 2020-02-19 17:18:30" itemprop="dateModified" datetime="2020-02-19T17:18:30+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -465,7 +391,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习与算法</span>
                   </a>
                 </span>
@@ -482,10 +408,76 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          算法工程师常见面经问题(机器学习基础题 + 数据结构算法题 + 实践题)
+          <p>算法工程师常见面经问题(机器学习基础题 + 数据结构算法题 + 实践题)</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/InterviewQuestion4ML/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/activation-functions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/activation-functions/" class="post-title-link" itemprop="url">激活函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-02-19 11:43:45 / Modified: 17:19:09" itemprop="dateCreated datePublished" datetime="2020-02-19T11:43:45+08:00">2020-02-19</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>激活函数之性质</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/activation-functions/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -513,12 +505,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -527,8 +519,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -542,7 +532,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-20 14:24:36" itemprop="dateModified" datetime="2019-12-20T14:24:36+08:00">2019-12-20</time>
+                <time title="Modified: 2020-01-02 11:37:04" itemprop="dateModified" datetime="2020-01-02T11:37:04+08:00">2020-01-02</time>
               </span>
 
           
@@ -587,12 +577,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -601,8 +591,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -624,7 +612,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习与算法</span>
                   </a>
                 </span>
@@ -683,12 +671,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -697,8 +685,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -769,12 +755,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -783,8 +769,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -798,7 +782,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-12-21 13:40:24" itemprop="dateModified" datetime="2019-12-21T13:40:24+08:00">2019-12-21</time>
+                <time title="Modified: 2019-12-23 22:46:42" itemprop="dateModified" datetime="2019-12-23T22:46:42+08:00">2019-12-23</time>
               </span>
 
           
@@ -843,12 +827,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -857,8 +841,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -880,13 +862,13 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
                     <span itemprop="name">操作系统</span>
                   </a>
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/操作系统/Raspbian/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Raspbian/" itemprop="url" rel="index">
                     <span itemprop="name">Raspbian</span>
                   </a>
                 </span>
@@ -934,12 +916,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -948,8 +930,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1018,12 +998,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1032,8 +1012,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1092,12 +1070,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1106,8 +1084,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1169,12 +1145,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1183,8 +1159,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1243,12 +1217,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1257,8 +1231,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1315,101 +1287,16 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Cross-Validation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/Cross-Validation/" class="post-title-link" itemprop="url">交叉验证Cross Validation</a>
-        </h1>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-06-23 20:29:35" itemprop="dateCreated datePublished" datetime="2019-06-23T20:29:35+08:00">2019-06-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习与算法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>模型效果评估是机器学习开发中相当重要的一步，无论使用哪种最先进的state-of-the-art算法来构建假设函数并训练机器学习模型，都必须评估其性能后才能继续使用它。Evaluate模型最简单、最快捷的方法就是将数据集拆分为训练和测试集，使用训练集数据训练模型，并通过计算accuracy检查其准确性。并且在执行拆分之前不要忘记对数据集进行shuffle。但是这种方法并不能保证万无一失，简单来说，在最终确定模型时不能完全依赖这种方法。你可知道为什么？<br></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Cross-Validation/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Spark-Programming-Tutorial/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1418,8 +1305,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1441,7 +1326,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
                     <span itemprop="name">大数据</span>
                   </a>
                 </span>
@@ -1489,12 +1374,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1503,8 +1388,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1526,7 +1409,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
                     <span itemprop="name">大数据</span>
                   </a>
                 </span>
@@ -1543,7 +1426,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          Scala上手教程
+          <p>Scala上手教程</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Hello-Scala/">
@@ -1574,12 +1457,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1588,8 +1471,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1611,7 +1492,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数学/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
                     <span itemprop="name">数学</span>
                   </a>
                 </span>
@@ -1659,12 +1540,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1673,8 +1554,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1734,12 +1613,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1748,8 +1627,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1771,7 +1648,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
                     <span itemprop="name">大数据</span>
                   </a>
                 </span>
@@ -1788,7 +1665,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          spark-sql或者hive-sql 很多业务场景都会有表关联的的操作，在hive中有map side join优化，对应的在spark-sql中也有map side join。spark中如果在参与join的表中存在小表，可以采用cache broadcast的方式进行优化，避免数据的shuffle，从而一定程度上可以避免数据倾斜，增加spark作业的执行速度。本文主要阐述怎么使用spark sql的map side join进行优化，及使用过程需要注意的内容，同时mark自己研究spark的过程。
+          <p>spark-sql或者hive-sql 很多业务场景都会有表关联的的操作，在hive中有map side join优化，对应的在spark-sql中也有map side join。spark中如果在参与join的表中存在小表，可以采用cache broadcast的方式进行优化，避免数据的shuffle，从而一定程度上可以避免数据倾斜，增加spark作业的执行速度。本文主要阐述怎么使用spark sql的map side join进行优化，及使用过程需要注意的内容，同时mark自己研究spark的过程。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Spark-Performance-Tuning-with-Broadcast-Join/">
@@ -1819,12 +1696,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -1833,8 +1710,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -1856,7 +1731,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
                     <span itemprop="name">大数据</span>
                   </a>
                 </span>
@@ -1900,13 +1775,35 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
 
           </div>
           
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -1936,17 +1833,17 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1959,25 +1856,17 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -2022,7 +1911,7 @@
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -2044,16 +1933,16 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -2085,26 +1974,27 @@
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -2113,34 +2003,12 @@
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -2150,50 +2018,49 @@ if (document.querySelectorAll('div.pdf').length) {
 
   
       
-<script type="text/x-mathjax-config">
 
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
 </script>
 
     

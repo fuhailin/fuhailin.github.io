@@ -4,61 +4,49 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="XGBoost总结">
-<meta name="keywords" content="XGBoost">
 <meta property="og:type" content="article">
 <meta property="og:title" content="XGBoost">
 <meta property="og:url" content="https://fuhailin.github.io/XGBoost/index.html">
-<meta property="og:site_name" content="趙大寳">
+<meta property="og:site_name" content="赵大寳">
 <meta property="og:description" content="XGBoost总结">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T02:52:39.208Z">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://pic.yupoo.com/wangdren23/GuX11b5Q/medish.jpg">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120132853309.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120133022856.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120133105821.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112013333025.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-approximate-algorithm-for-split-finding-example-with-second-gradient-weighted.png">
+<meta property="og:image" content="http://pic.yupoo.com/wangdren23/GuX6iIMd/medish.jpg">
+<meta property="og:image" content="https://fuhailin.github.io/XGBoost/20181120134436182.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-sparsity-aware-split-finding-vs-basic-algorithm.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-column-block.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-missing.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-aware-access-exact-greedy.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-aware-access-approximate-algorithm.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181120142201723.png">
+<meta property="article:published_time" content="2019-02-18T15:42:43.000Z">
+<meta property="article:modified_time" content="2020-02-19T09:21:08.857Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="XGBoost">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XGBoost">
-<meta name="twitter:description" content="XGBoost总结">
+<meta name="twitter:image" content="http://pic.yupoo.com/wangdren23/GuX11b5Q/medish.jpg">
 
 <link rel="canonical" href="https://fuhailin.github.io/XGBoost/">
 
@@ -68,18 +56,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isPost: true
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>XGBoost | 趙大寳</title>
+
+  <title>XGBoost | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -129,23 +114,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -153,6 +124,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -184,34 +169,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -242,12 +202,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,8 +215,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -270,7 +228,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+                <time title="Modified: 2020-02-19 17:21:08" itemprop="dateModified" datetime="2020-02-19T17:21:08+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,7 +236,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习与算法</span>
                   </a>
                 </span>
@@ -308,6 +266,7 @@
 <li>一种新的tree-learning算法(a novel tree learning algorithm)：用于处理稀疏数据(sparse data)</li>
 <li>一种理论正确的加权分位数略图过程（a theoretically justified weighted quantile sketch procedure）：用于处理在近似的tree-learning中实例权重</li>
 </ul>
+<a id="more"></a>
 <p>由于XGBoost的<strong>并行化和分布式计算</strong>，使得learning过程比其它模型实现要快。更重要地，XGBoost实现了<strong>核外计算(out-of-core computation: 基于外存)</strong>，使得数据科学家们可以在pc机上处理上亿的训练实例。最终，会把这些技术结合起来实现一个end-to-end的系统，可以扩展到集群上。</p>
 <p>主要内容：</p>
 <ul>
@@ -337,14 +296,14 @@ L^{(t)} = \sum_{i=1}^{n} [g_i f_t(x_i) + \frac{1}{2} h_i f_t^{2}(x_i)] + \gamma 
 w_j^{\ast}=-\frac{\sum_{i \in I_j}g_i}{\sum_{i \in I_j}h_i+\lambda} \tag 5</script><p>代入(5)计算得到对应的loss最优解为：</p>
 <script type="math/tex; mode=display">
 L^{(t)}(q)=-\frac{1}{2} \sum_{j=1}^{T}\frac{(\sum_{i \in I_j}g_i)^2}{\sum_{i \in I_j}h_i+\lambda} + \gamma T \tag 6</script><p><strong>等式(6)可以作为一个得分函数（scoring function）来衡量一棵树结构q的质量（quality）</strong>。该分值类似于决策树里的不纯度(impurity score)，只不过它从一个更宽范围的目标函数求导得到。图2展示了该分值是如何被计算的。</p>
-<p>  <img alt="img" data-src="http://pic.yupoo.com/wangdren23/GuX11b5Q/medish.jpg"></p>
+<p>  <img src="http://pic.yupoo.com/wangdren23/GuX11b5Q/medish.jpg" alt="img"></p>
 <p>图2:结构得分(structure score)计算。我们只需要在每个叶子上对梯度和二阶梯度统计求和，然后应用得分公式（scoring formula）来获得质量分（quality score）。</p>
 <p>通常，<strong>不可能枚举所有可能的树结构q</strong>。而贪婪算法会从单个叶子出发，迭代添加分枝到树中。<strong>假设$I_L$和$I_R$是一次划分(split)后的左节点和右节点所对应的实例集合</strong>。$I=I_L \bigcup I_R$，接着，在split之后的loss reduction为：</p>
 <script type="math/tex; mode=display">
 L_{split}=\frac{1}{2}[ \frac{(\sum_{i \in I_L}g_i)^2}{\sum_{i \in I_L}h_i+\lambda} + \frac{(\sum_{i \in I_R}g_i)^2}{\sum_{i \in I_R}h_i+\lambda} - \frac{(\sum_{i \in I}g_i)^2}{\sum_{i \in I}h_i+\lambda}] - \gamma \tag 7</script><p>该式通常在实际中用于评估split的候选（split candidates）。</p>
 <h3 id="2-3-Shrinkage和列子抽样-column-subsampling"><a href="#2-3-Shrinkage和列子抽样-column-subsampling" class="headerlink" title="2.3 Shrinkage和列子抽样(column subsampling)"></a>2.3 Shrinkage和列子抽样(column subsampling)</h3><p>除了2.1节所提到的正则化目标函数外，还会使用两种额外的技术来进一步阻止overfitting。<strong>第一种技术是Friedman介绍的Shrinkage</strong>。Shrinkage会在每一步tree boosting时，<strong>会将新加入的weights通过一个因子$η$进行缩放</strong>。与随机优化中的learning rate相类似，对于用于提升模型的新增树(future trees)，shrinkage可以减少每棵单独的树、以及叶子空间（leaves space）的影响。<strong>第二个技术是列特征子抽样(column feature subsampling)</strong>。该技术也会在RandomForest中使用，在商业软件TreeNet中的gradient boosting也有实现，但开源包中没实现。根据用户的反馈，比起传统的行子抽样（row sub-sampling：同样也支持），使用列子抽样可以阻止overfitting。列子抽样的使用可以加速并行算法的计算(后面会描述)。</p>
 <h2 id="3-SPLIT-FINDING-ALGORITHMS"><a href="#3-SPLIT-FINDING-ALGORITHMS" class="headerlink" title="3. SPLIT FINDING ALGORITHMS"></a>3. SPLIT FINDING ALGORITHMS</h2><h3 id="3-1-Basic-Exact-Greedy-Algorithm"><a href="#3-1-Basic-Exact-Greedy-Algorithm" class="headerlink" title="3.1 Basic Exact Greedy Algorithm"></a>3.1 Basic Exact Greedy Algorithm</h3><p>tree learning的其中一个关键问题是，找到等式(7)的最好划分(best split)。为了达到这个目标，<strong>split finding算法</strong>会在所有特征（features）上，枚举所有可能的划分（splits）。我们称它为“<strong>完全贪婪算法(exact greedy algorithm)</strong>”。许多单机版tree-boosting实现中，包括scikit-learn，R’s gbm以及单机版的XGBoost，都支持完全贪婪算法(exact greedy algorithm)。该算法如算法1所示。它会对连续型特征（continuous features）枚举所有可能的split。为了更高效，该算法必须首先根据特征值对数据进行排序，以有序的方式访问数据来枚举等式(7)中的结构得分（structure score）的梯度统计(gradient statistics)。</p>
-<p><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120132853309.png"><br>[算法1]</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120132853309.png" alt="在这里插入图片描述"><br>[算法1]</p>
 <p>(1) for j in sorted(I, by $x_{jk}$)：表示对第m个特征，对叶子节点j，依据特征k进行对该节点内的所有实例进行从小到大的排序，依据下面Score公式计算该split下的Score。</p>
 <p>(2) 算法总结：对每个叶子节点j，对叶子节点的每个特征k，依据k对实例进行排序，然后计算该特征下的Score，对该叶子节点，遍历所有特征后，得到该节点下对应的score及split进行输出（即最佳割特征下对应的最佳分割点）。</p>
 <p>(3) However, it is impossible to efficiently do so when the data does notfit entirely into memory.</p>
@@ -352,12 +311,12 @@ L_{split}=\frac{1}{2}[ \frac{(\sum_{i \in I_L}g_i)^2}{\sum_{i \in I_L}h_i+\lambd
 <p><strong>当数据量十分庞大，以致于不能全部放入内存时，Exact Greedy 算法就会很慢。</strong> 因此XGBoost引入了近似的算法。</p>
 <p>我们总结了一个近似框架（approximate framework），重组了在文献[17,2,22]中提出的思想，如算法2所示。为了进行总结(summarize)，<strong>该算法会首先根据特征分布的百分位数(percentiles of feature distribution)，提出候选划分点(candidate splitting points)。接着，该算法将连续型特征映射到由这些候选点划分的分桶(buckets)中，聚合统计信息，基于该聚合统计找到在建议（proposal）间的最优解</strong>。</p>
 <p>简单的说，就是根据特征 $k$ 的分布来确定 $l$ 个候选切分点 <script type="math/tex">S_k=\{s_{k1}, s_{k2}, \dots,s_{kl}\}</script>，然后根据这些候选切分点把相应的样本放入对应的<strong>桶</strong>中，对每个桶的G,H进行累加。最后在候选切分点集合上贪心查找，和Exact Greedy Algorithm类似。该算法描述如下：</p>
-<p><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120133022856.png"><br>[算法2]</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120133022856.png" alt="在这里插入图片描述"><br>[算法2]</p>
 <blockquote>
 <p><strong>算法讲解：</strong><br>第一个<code>for</code>循环做的工作：对特征<code>K</code>根据该特征分布的分位数找到切割点的候选集合 $S<em>k=s</em>{k1},s<em>{k2},…,s</em>{kl}$ ，这样做的目的是提取出部分的切分点不用遍历所有的切分点。其中获取某个特征<code>K</code>的候选切割点的方式叫<code>proposal</code>。主要有两种<code>proposal</code>方式：<code>global proposal</code>和<code>local proposal</code>。<br>第二个<code>for</code>循环的工作：将每个特征的取值映射到由这些该特征对应的候选点集划分的分桶(buckets)区间 <script type="math/tex">\{s_{k,v}≥x_{jk}>s_{k,v−1}\}</script> 中，对每个桶（区间）内的样本统计值 $G$, $H$ 进行累加统计，最后在这些累计的统计量上寻找最佳分裂点。这样做的主要目的是获取每个特征的候选分割点的 $G$, $H$ 量。</p>
 </blockquote>
 <p>给定了候选切分点后，一个例子为：</p>
-<p><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120133105821.png"></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181120133105821.png" alt="在这里插入图片描述"></p>
 <p>分桶当然是越多越好，但越多意味计算量也就更大，极端情况下就是一个数据一个桶，但这违背了分桶的初衷。所有，需要综合balance考虑。</p>
 <p>那么，现在有两个问题：</p>
 <ol>
@@ -374,7 +333,7 @@ L_{split}=\frac{1}{2}[ \frac{(\sum_{i \in I_L}g_i)^2}{\sum_{i \in I_L}h_i+\lambd
 <p>由于global variant后续不再改变，因此往往需要更多的候选点。（However, usually more candidate points are needed for the global proposal because candidates are not refined after each split.）</p>
 <p>当然，后者更好，但带来的复杂度也更大。通常情况下，都会优先选用global的形式。</p>
 <p>可以预见到的是，local不用像global方式那样设定分桶分的很细，因为它是有针对性的设置，可以在很粗粒度上就达到相同的效果。</p>
-<p>对比如下：<br><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112013333025.png"></p>
+<p>对比如下：<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112013333025.png" alt="在这里插入图片描述"></p>
 <p>从实验结果可以看到：</p>
 <p>（1） 在全局分桶分的很细时，和exact greedy效果几乎完全相同。（紫色，蓝色）</p>
 <p>（2） 当local较大时，几乎可以达到global较小值一样的效果。（紫色，绿色）</p>
@@ -420,7 +379,7 @@ L_{split}=\frac{1}{2}[ \frac{(\sum_{i \in I_L}g_i)^2}{\sum_{i \in I_L}h_i+\lambd
 <blockquote>
 <p>(1) 一开始选好，然后每次树切分都不变，也就是说是在总体样本里选 $\min<em>i {x}</em>{ik} , \max<em>i {x}</em>{ik}$，这就是我们之前定义的<code>global proposal</code>；<br>(2) 是树每次确定好切分点的分割后样本也需要进行分割，$\min<em>i {x}</em>{ik} , \max<em>i {x}</em>{ik}$来自子树的样本集 $D_k$ ，这就是<code>local proposal</code>。</p>
 </blockquote>
-<p>关于 <code>global &amp; local</code>来自 <a href="http://link.zhihu.com/?target=http%3A//d0evi1.com/xgboost/" target="_blank" rel="noopener">解析XGBoost</a> 的解读：</p>
+<p>关于 <code>global &amp; local</code>来自 <a href="http://link.zhihu.com/?target=http%3A//d0evi1.com/xgboost/">解析XGBoost</a> 的解读：</p>
 <blockquote>
 <p><strong>全局变种（global variant）</strong> 会在树构建的初始阶段，建议所有的候选划分，并在所有的层级（level）上使用相同的建议。<strong>局部变种（local variant）</strong>则在每次划分后重新建议（re-proposes）。比起局部法，全局法需要更少的建议步骤。然而，对于全局建议，通常需要更多的候选点，因为在每次划分之后，不需要重新定义候选。局部建议会在每次划分后重新定义候选，对于更深的树更合适。原文图3展示了在Higgs boson数据集上不同算法的比较。发现局部建议确实需要更少的候选。如果两者的候选一样多，全局建议比局部建议会更精确。</p>
 <p>注：global variant 与 local variant 的差别主要体现在候选点建议上，global variant 想要一劳永逸，在树构建的初始阶段，直接提出所有的候选可能切分点，以后进行进行split finding 就直接在这些候选点中进行增益计算，进而得到每个节点下的最佳切分特征及最佳切分点；而local variant 则是采用每次进行节点split finding 时，重新确认候选可能切分点，重新确认候选的过程与global variant 一样，但由于各个节点覆盖的样本不一样了，故而其重新确定候选可以带来更精确的候选划分，带也大大提升了计算量。</p>
@@ -434,7 +393,7 @@ r_{k}(z)=\frac{1}{\sum_{(x,h) \in D_k} h} \sum_{(x,k) \in D_k,x<z}^{} h %]]></sc
 <script type="math/tex; mode=display">
 |r_k(s_{k,j})-r_k(s_{k,j+1})|<\varepsilon,\hspace{5ex} s_{k1}= \min_i x_{ik}, \ s_{kl}=\max_i x_{ik}</script><p>用大白话说就是让相邻两个候选分裂点相差不超过某个值 $\epsilon$。因此，总共会得到 $\frac{1}{\epsilon}$​ 个切分点。</p>
 <p>一个例子如下：</p>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-approximate-algorithm-for-split-finding-example-with-second-gradient-weighted.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-approximate-algorithm-for-split-finding-example-with-second-gradient-weighted.png" alt="img"></p>
 <p>其中 $\epsilon$ 是近似因子（approximation factor）。直觉上，这意味着大约是 $\frac{1}{\epsilon}$ 个候选点。这里，<strong>每个数据点通过 $h_i$ 加权</strong>。为什么$h_i$可以表示权重呢？我们可以重写(3)式：</p>
 <p>要切分为3个，总和为1.8，因此第1个在0.6处，第2个在1.2处。</p>
 <p>那么，<strong>为什么要用二阶梯度加权</strong>？将前面我们泰勒二阶展开后的目标函数2-4进行配方：</p>
@@ -462,18 +421,18 @@ r_{k}(z)=\frac{1}{\sum_{(x,h) \in D_k} h} \sum_{(x,k) \in D_k,x<z}^{} h %]]></sc
 <li>统计中常见的0条目</li>
 <li>特征工程：比如one-hot encoding</li>
 </ul>
-<p><img alt="图4: 带缺省方向的树结构。当在split时相应的feature缺失时，一个样本可以被归类到缺省方向上" data-src="http://pic.yupoo.com/wangdren23/GuX6iIMd/medish.jpg"></p>
+<p><img src="http://pic.yupoo.com/wangdren23/GuX6iIMd/medish.jpg" alt="图4: 带缺省方向的树结构。当在split时相应的feature缺失时，一个样本可以被归类到缺省方向上"></p>
 <p>图4: 带缺省方向的树结构。当在split时相应的feature缺失时，一个样本可以被归类到缺省方向上</p>
 <p>让算法意识到数据中的稀疏模式很重要。为了这么做，我们提出了在每个树节点上增加一个 <strong>缺省的方向（default direction）</strong>，如图4所示。当稀疏矩阵x中的值缺失时，样本实例被归类到缺省方向上。在每个分枝上，缺省方向有两种选择，<strong>最优的缺省方向可以从数据中学到。</strong></p>
 <p><strong>如算法3所示</strong>。关键的改进点是：<strong>只访问非缺失的条目</strong> $I_k$ 。上述算法会将未出现值（non-presence）当成是一个missing value，学到最好的方向来处理 missing values。</p>
-<p>XGBoost能对缺失值自动进行处理，其思想是<strong>对于缺失值自动学习出它该被划分的方向</strong>（左子树or右子树）<br><img alt="在这里插入图片描述" data-src="20181120134436182.png"></p>
+<p>XGBoost能对缺失值自动进行处理，其思想是<strong>对于缺失值自动学习出它该被划分的方向</strong>（左子树or右子树）<br><img src="20181120134436182.png" alt="在这里插入图片描述"></p>
 <p>注意，<strong>上述的算法只遍历非缺失值</strong>。划分的方向怎么学呢？很naive但是很有效的方法：</p>
 <ol>
 <li>让特征k的所有缺失值的都到右子树，然后和之前的一样，枚举划分点，计算最大的gain</li>
 <li>让特征k的所有缺失值的都到左子树，然后和之前的一样，枚举划分点，计算最大的gain</li>
 </ol>
 <p>这样最后求出最大增益的同时，也知道了缺失值的样本应该往左边还是往右边。使用了该方法，相当于比传统方法多遍历了一次，但是它只在非缺失值的样本上进行迭代，因此其复杂度与非缺失值的样本成线性关系。在Allstate-10k数据集上，比传统方法快了50倍:</p>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-sparsity-aware-split-finding-vs-basic-algorithm.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-sparsity-aware-split-finding-vs-basic-algorithm.png" alt="img"></p>
 <h2 id="4-SYSTEM-DESIGN"><a href="#4-SYSTEM-DESIGN" class="headerlink" title="4. SYSTEM DESIGN"></a>4. SYSTEM DESIGN</h2><h3 id="4-1-Column-Block-for-Parallel-Learning-用于并行学习的Column-Block"><a href="#4-1-Column-Block-for-Parallel-Learning-用于并行学习的Column-Block" class="headerlink" title="4.1 Column Block for Parallel Learning(用于并行学习的Column Block)"></a>4.1 Column Block for Parallel Learning(用于并行学习的Column Block)</h3><p>在建树的过程中，最耗时是找最优的切分点，而这个过程中，最耗时的部分是将数据排序。为了减少排序的时间，提出Block结构存储数据。</p>
 <ul>
 <li>Block中的数据以稀疏格式<strong>CSC</strong>进行存储</li>
@@ -481,7 +440,7 @@ r_{k}(z)=\frac{1}{\sum_{(x,h) \in D_k} h} \sum_{(x,k) \in D_k,x<z}^{} h %]]></sc
 <li>Block 中特征还需存储指向样本的<strong>索引</strong>，这样才能根据特征的值来取梯度。</li>
 <li>一个Block中存储一个或多个特征的值</li>
 </ul>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-column-block.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-column-block.png" alt="img"></p>
 <p>可以看出，<strong>只需在建树前排序一次</strong>，后面节点分裂时可以直接根据索引得到梯度信息。</p>
 <p><strong>时间复杂度分析</strong></p>
 <p>d为树的最大深度，K为树的总树目。对于exact greedy algorithm，原始的稀疏感知算法的时间复杂度：</p>
@@ -516,13 +475,13 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 <p>利用列块进行并行计算：在我们训练过程中我们主要是做分支处理，分支处理就要对每一列（特征）找出适合的分裂点。通常来说，我们更青睐使用csc存储，这样我们就方便取出来。再者我们在分支的时候都会预先对数据按照其特征值进行排序。所以我们将数据按照列存储成一个数据块方便我们在分支的时候并行处理。<strong>所以我们要知道XGB的并行计算的粒度不在树上，而是在特征上，尤其是不同分支节点上（leaf-wise）。</strong>当然这也成为XGB的一个问题所在，需要额外的空间存储pre-sort的数据。而且每次分支后，我们都要找处落在下一个子节点上的样本，并组织好它。<strong>后来就有了LightGBM，下次我再将其整理出来</strong>。</p>
 </blockquote>
 <h3 id="4-2-Cache-aware-Access"><a href="#4-2-Cache-aware-Access" class="headerlink" title="4.2 Cache-aware Access"></a>4.2 Cache-aware Access</h3><p>使用Block结构的一个缺点是取梯度的时候，是通过索引来获取的，而这些梯度的获取顺序是按照特征的大小顺序的。这将导致<strong>非连续</strong>的内存访问，可能使得CPU cache缓存命中率低，从而影响算法效率。</p>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-missing.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-missing.png" alt="img"></p>
 <p>图8: 短范围内的数据依赖模式，由于cache miss，可引起停转（stall）</p>
 <p>因此，对于exact greedy算法中, 使用<strong>缓存预取</strong>。具体来说，对每个线程分配一个连续的buffer，读取梯度信息并存入Buffer中（这样就实现了非连续到连续的转化），然后再统计梯度信息。该方式在训练样本数大的时候特别有用，见下图：</p>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-aware-access-exact-greedy.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-aware-access-exact-greedy.png" alt="img"></p>
 <p>图7: 在exact greedy algorithm中，cache-aware prefetching的影响。我们发现，cache-miss会在大数据集（1000w实例）上影响性能。使用cache-aware prefetching，可以提升数据集很大时的性能。</p>
 <p>在approximate 算法中，对Block的大小进行了合理的设置。定义Block的大小为Block中最多的样本数。选择一个过小的block size会导致每个thread会小负载（small workload）运行，并引起低效的并行化(inefficient parallelization)。在另一方面，过大的block size会导致cache miss，梯度统计将不能装载到CPU cache中。block size的好的选择会平衡两者。设置合适的大小是很重要的，设置过大则容易导致命中率低，过小则容易导致并行化效率不高。经过实验，发现2^16比较好。</p>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-aware-access-approximate-algorithm.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/XGBoost-cache-aware-access-approximate-algorithm.png" alt="img"></p>
 <p>图9: 在近似算法中，block size的影响。我们发现，过小的块会引起并行化很低效，过大的块由于cache miss会让训练慢下来</p>
 <blockquote>
 <p>缓存处理能力：对于有大量数据或者说分布式系统来说，我们不可能将所有的数据都放进内存里面。因此我们都需要将其放在外存上或者分布式存储。但是这有一个问题，这样做每次都要从外存上读取数据到内存，这将会是十分耗时的操作。<strong>因此我们使用预读取（prefetching）将下一块将要读取的数据预先放进内存里面。</strong>其实就是多开一个线程，该线程与训练的线程独立并负责数据读取。此外，我还要考虑block的大小问题。如果我们设置最大的block来存储所有样本在k特征上的值和梯度的话，cache未必能一次性处理如此多的梯度做统计。如果我们设置过少block size，这样不能充分利用的多线程的优势，也就是训练线程已经训练完数据，但是prefetching thread还没把数据放入内存或者cache中。经过测试，作者发现block size设置为2^16个examples最好：</p>
@@ -608,7 +567,7 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 <li>训练的时候，为了结果可复现，记得设置随机数种子。</li>
 <li>XGBoost的特征重要性是如何得到的？某个特征的重要性（feature score），等于它被选中为树节点分裂特征的次数的和，比如特征A在第一次迭代中（即第一棵树）被选中了1次去分裂树节点，在第二次迭代被选中2次…..那么最终特征A的feature score就是 1+2+….</li>
 </ul>
-<h3 id="5-6-类别特征必须编码"><a href="#5-6-类别特征必须编码" class="headerlink" title="5.6 类别特征必须编码"></a>5.6 类别特征必须编码</h3><p>无论是XGBoost还是其他的Boosting Tree，使用的Tree都是cart回归树，这也就意味着该类提升树算法只接受数值特征输入，不直接支持类别特征，事实上，对于类别特征的处理，参考XGBoost PPT如下（XGBoost accepts only numeric features）：<br><img alt="在这里插入图片描述" data-src="https://img-blog.csdnimg.cn/20181120142201723.png"></p>
+<h3 id="5-6-类别特征必须编码"><a href="#5-6-类别特征必须编码" class="headerlink" title="5.6 类别特征必须编码"></a>5.6 类别特征必须编码</h3><p>无论是XGBoost还是其他的Boosting Tree，使用的Tree都是cart回归树，这也就意味着该类提升树算法只接受数值特征输入，不直接支持类别特征，事实上，对于类别特征的处理，参考XGBoost PPT如下（XGBoost accepts only numeric features）：<br><img src="https://img-blog.csdnimg.cn/20181120142201723.png" alt="在这里插入图片描述"></p>
 <p>而XGBoost具有支持稀疏数据的优势，对one-hot并不抗拒。</p>
 <blockquote>
 <p>xgboost是不支持category特征的，在训练模型之前，需要我们进行预处理，可以根据特征的具体形式 来选择one-hot encoding（无序）还是label encoding（有序）。<br>当category的特征值非常多时，one-hot encoding会非常稀疏。这时候one-hot encoding的效果可能不好，可以用NN训练一个该category的向量，或者用其他方式来编码。</p>
@@ -664,30 +623,26 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 
     
     
-    <div class="post-widgets">
-    <div class="likely">
-    </div>
-  </div>
-  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+    
         <div class="reward-container">
-  <div>打赏一次，年薪百万.</div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     Donate
   </button>
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
         <p>Alipay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
         <p>Bitcoin</p>
       </div>
 
@@ -703,21 +658,18 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/Linux-basic-command/" rel="next" title="Linux常用command笔记">
-                  <i class="fa fa-chevron-left"></i> Linux常用command笔记
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/LightGBM/" rel="prev" title="LightGBM">
-                  LightGBM <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Linux-basic-command/" rel="prev" title="Linux常用command笔记">
+      <i class="fa fa-chevron-left"></i> Linux常用command笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/LightGBM/" rel="next" title="LightGBM">
+      LightGBM <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -731,10 +683,32 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
           </div>
           
     
-  <div class="comments" id="comments">
+  <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
   </div>
   
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -765,17 +739,17 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -788,25 +762,17 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -851,7 +817,7 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -873,16 +839,16 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -914,26 +880,27 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -942,34 +909,12 @@ O(K d{|x|}_{0} + {|x|}_{0} logB)</script><p>其中B是在每个块中的行的�
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -979,50 +924,49 @@ if (document.querySelectorAll('div.pdf').length) {
 
   
       
-<script type="text/x-mathjax-config">
 
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
 </script>
 
     
@@ -1030,6 +974,7 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
 <script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -1041,6 +986,7 @@ if (document.querySelectorAll('div.pdf').length) {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
+});
 </script>
 
 </body>

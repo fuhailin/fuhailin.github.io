@@ -4,61 +4,42 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="《An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling》1论文阅读笔记。说来惭愧，这篇论文去年4月份就曾在技术圈里刷屏，号称横扫序列模型中如RNN、GRU、LSTM等基本模型，当时第一时间就听说了，但是一直没有弄懂技术原理，这一年来的面试中，有两次对方提到了CNN用">
-<meta name="keywords" content="TCN,TrellisNet,Sequence Modeling">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Temporal Convolutional Network (TCN与TrellisNet)">
 <meta property="og:url" content="https://fuhailin.github.io/Temporal-Convolutional-Network/index.html">
-<meta property="og:site_name" content="趙大寳">
+<meta property="og:site_name" content="赵大寳">
 <meta property="og:description" content="《An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling》1论文阅读笔记。说来惭愧，这篇论文去年4月份就曾在技术圈里刷屏，号称横扫序列模型中如RNN、GRU、LSTM等基本模型，当时第一时间就听说了，但是一直没有弄懂技术原理，这一年来的面试中，有两次对方提到了CNN用">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T02:52:39.211Z">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-192324.png">
+<meta property="og:image" content="https://fuhailin.github.io/Temporal-Convolutional-Network/causal-convolution.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screen-Shot-2016-05-12-at-09-47-12.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-222900.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-223110.png">
+<meta property="article:published_time" content="2019-02-27T10:57:06.000Z">
+<meta property="article:modified_time" content="2019-11-26T02:52:39.211Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="TCN">
+<meta property="article:tag" content="TrellisNet">
+<meta property="article:tag" content="Sequence Modeling">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Temporal Convolutional Network (TCN与TrellisNet)">
-<meta name="twitter:description" content="《An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling》1论文阅读笔记。说来惭愧，这篇论文去年4月份就曾在技术圈里刷屏，号称横扫序列模型中如RNN、GRU、LSTM等基本模型，当时第一时间就听说了，但是一直没有弄懂技术原理，这一年来的面试中，有两次对方提到了CNN用">
+<meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-192324.png">
 
 <link rel="canonical" href="https://fuhailin.github.io/Temporal-Convolutional-Network/">
 
@@ -68,18 +49,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isPost: true
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>Temporal Convolutional Network (TCN与TrellisNet) | 趙大寳</title>
+
+  <title>Temporal Convolutional Network (TCN与TrellisNet) | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -129,23 +107,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -153,6 +117,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -184,34 +162,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -242,12 +195,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,8 +208,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -278,7 +229,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习与算法</span>
                   </a>
                 </span>
@@ -304,7 +255,7 @@
       
         <p>《An Empirical Evaluation of Generic Convolutional and Recurrent Networks for Sequence Modeling》<sup><a href="#fn_1" id="reffn_1">1</a></sup>论文阅读笔记。说来惭愧，这篇论文去年4月份就曾在技术圈里刷屏，号称横扫序列模型中如RNN、GRU、LSTM等基本模型，当时第一时间就听说了，但是一直没有弄懂技术原理，这一年来的面试中，有两次对方提到了CNN用来序列建模的优点，然而我却没有深入去理解它，今天就来攻克它。</p>
 <a id="more"></a>
-<p><img alt="An Overview of TCNs" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-192324.png"></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-192324.png" alt="An Overview of TCNs"></p>
 <h1 id="Temporal-Convolutional-Network简介"><a href="#Temporal-Convolutional-Network简介" class="headerlink" title="Temporal Convolutional Network简介"></a>Temporal Convolutional Network简介</h1><p>本文就序列建模, 对 CNN 和 RNN 进行了比较. 按照文章的说法, 在 RNN 的主场打了一架, 结果 CNN 完胜. 使用的模型包括针对序列建模特殊构造的CNN, 称为 Temporal Convolutional Network, TCN 和普通 RNN, GRU, LSTM.</p>
 <p>为了比较 RNN 和 CNN 在 Sequence Modeling 上的性能, 文章构造了一种能用于序列建模的简单通用的 CNN 架构 TCN, 结合了 causal convolution, residual connection 和 dilation convolution.</p>
 <blockquote>
@@ -319,12 +270,12 @@
 <p>Causal convolution 的叠加, 高层的感受野野/历史信息与网络层数呈线性关系. 对于超长序列, 网络必须很深, 才能捕捉到足够长的历史信息. 针对这个问题, 文中使用了 dilation convolution, 使得随网络的加深, 高层的感受野呈指数扩大.</p>
 <script src="//gist.github.com/b8af96d5d36dc12226cc9129c410afeb.js?file=causal_conv1d.py"></script>
 <h2 id="Dilated-Convolutions扩张卷积"><a href="#Dilated-Convolutions扩张卷积" class="headerlink" title="Dilated Convolutions扩张卷积"></a>Dilated Convolutions扩张卷积</h2><p>使用Dilated Convolutions<sup><a href="#fn_2" id="reffn_2">2</a></sup>的关键是为了通过较少的参数和较少的层数实现更大的 <em>感受野 (receptive field)</em> 。 考虑一个由<script type="math/tex">k\times k</script>个卷积组成，没有池化层pooling的普通卷积网络，很容易得出每一个单元 <em>感受野</em> 的大小(影响激活的像素点)是<script type="math/tex">l*(k-1)+k</script>，其中$l$是第几层，所以有效感受野的单元数与层数成正比。这样得到的感受野是非常有限的，特别是对于高分辨率输入图像。</p>
-<p>卷积Dilated Convolutions的出现拯救了这一问题，<br>Dilation convolution<sup><a href="#fn_2" id="reffn_2">2</a></sup> 的运算如下:  <script type="math/tex">F ( s ) = \left( \mathbf { x } * _ { d } f \right) ( s ) = \sum _ { i = 0 } ^ { k - 1 } f ( i ) \cdot \mathbf { x } _ { s - d \cdot i }</script>( <script type="math/tex">\mathbf { x }</script>表示输入序列, $f$ 表示 filter, $d$ 是 dilation factor, $k$ 是 filter size,  <script type="math/tex">s - d \cdot i</script>意味着只对过去的状态作卷积). 看图最直观.<br><img alt="A dilated causal convolution with dilation factors d = 1, 2, 4 and filter size k = 3" data-src="causal-convolution.png"><br>和传统卷积不同的是，扩张卷积允许卷积时的输入存在间隔采样，采样率受图中的d控制。 最下面一层的d=1，表示输入时每个点都采样，中间层d=2，表示输入时每2个点采样一个作为输入。一般来讲，越高的层级使用的d的大小越大。所以，扩张卷积使得有效窗口的大小随着层数呈指数型增长。这样卷积网络用比较少的层，就可以获得很大的感受野。<br><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screen-Shot-2016-05-12-at-09-47-12.png"></p>
+<p>卷积Dilated Convolutions的出现拯救了这一问题，<br>Dilation convolution<sup><a href="#fn_2" id="reffn_2">2</a></sup> 的运算如下:  <script type="math/tex">F ( s ) = \left( \mathbf { x } * _ { d } f \right) ( s ) = \sum _ { i = 0 } ^ { k - 1 } f ( i ) \cdot \mathbf { x } _ { s - d \cdot i }</script>( <script type="math/tex">\mathbf { x }</script>表示输入序列, $f$ 表示 filter, $d$ 是 dilation factor, $k$ 是 filter size,  <script type="math/tex">s - d \cdot i</script>意味着只对过去的状态作卷积). 看图最直观.<br><img src="causal-convolution.png" alt="A dilated causal convolution with dilation factors d = 1, 2, 4 and filter size k = 3"><br>和传统卷积不同的是，扩张卷积允许卷积时的输入存在间隔采样，采样率受图中的d控制。 最下面一层的d=1，表示输入时每个点都采样，中间层d=2，表示输入时每2个点采样一个作为输入。一般来讲，越高的层级使用的d的大小越大。所以，扩张卷积使得有效窗口的大小随着层数呈指数型增长。这样卷积网络用比较少的层，就可以获得很大的感受野。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screen-Shot-2016-05-12-at-09-47-12.png" alt=""></p>
 <blockquote>
 <p>(a). 普通卷积，1-dilated convolution，卷积核的感受野为<script type="math/tex">3 \times 3 = 9</script><br>(b). 扩张卷积，2-dilated convolution，卷积核的感受野为<script type="math/tex">7 \times 7 = 49</script><br>(c). 扩张卷积，4-dilated convolution，卷积核的感受野为<script type="math/tex">15 \times 15 = 225</script><br>一个扩张率为2的3×3卷积核，感受野与5×5的卷积核相同，但参数数量仅为$9$个，是5×5卷积参数数量的<script type="math/tex">36%</script>。</p>
 </blockquote>
-<h2 id="Residual-Connections残差链接"><a href="#Residual-Connections残差链接" class="headerlink" title="Residual Connections残差链接"></a>Residual Connections残差链接</h2><p>TCN 的感受野依赖于上式中的 dilation factor d 和 filter/kernel size k, 以及网络深度 n. 为获得足够大的感受野, TCN 还是不得不增加网络的深度, 因此它构造了残差单元来训练更深的网络. (残差单元在 ResNet 的笔记中有详细介绍)<br><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-222900.png"><br>残差链接被证明是训练深层网络的有效方法，它使得网络可以以跨层的方式传递信息。本文构建了一个残差块来代替一层的卷积。如上图所示，一个残差块包含两层的卷积和非线性映射，在每层中还加入了WeightNorm和Dropout来正则化网络。</p>
-<h2 id="讨论和总结"><a href="#讨论和总结" class="headerlink" title="讨论和总结"></a>讨论和总结</h2><p>总体来讲，TCN模型上的创新并不是很大，因果卷积和扩展卷积也并不是本论文提出来，本文主要是将TCN的结构梳理了一下，相比于wavenet中的结构，去掉了门机制，加入了残差结构，并在很多的序列问题上进行了实验。实验效果如下：<br><img alt data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-223110.png"><br>在多个任务上，都比标准的LSTM、GRU等效果好。</p>
+<h2 id="Residual-Connections残差链接"><a href="#Residual-Connections残差链接" class="headerlink" title="Residual Connections残差链接"></a>Residual Connections残差链接</h2><p>TCN 的感受野依赖于上式中的 dilation factor d 和 filter/kernel size k, 以及网络深度 n. 为获得足够大的感受野, TCN 还是不得不增加网络的深度, 因此它构造了残差单元来训练更深的网络. (残差单元在 ResNet 的笔记中有详细介绍)<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-222900.png" alt=""><br>残差链接被证明是训练深层网络的有效方法，它使得网络可以以跨层的方式传递信息。本文构建了一个残差块来代替一层的卷积。如上图所示，一个残差块包含两层的卷积和非线性映射，在每层中还加入了WeightNorm和Dropout来正则化网络。</p>
+<h2 id="讨论和总结"><a href="#讨论和总结" class="headerlink" title="讨论和总结"></a>讨论和总结</h2><p>总体来讲，TCN模型上的创新并不是很大，因果卷积和扩展卷积也并不是本论文提出来，本文主要是将TCN的结构梳理了一下，相比于wavenet中的结构，去掉了门机制，加入了残差结构，并在很多的序列问题上进行了实验。实验效果如下：<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-02-27-223110.png" alt=""><br>在多个任务上，都比标准的LSTM、GRU等效果好。</p>
 <h2 id="TCN优缺点"><a href="#TCN优缺点" class="headerlink" title="TCN优缺点"></a>TCN优缺点</h2><p><strong>TCN 在序列建模方面的优势是</strong>:</p>
 <ol>
 <li>可并行性 (只要抛弃了 RNN, 神经网络基本都具有了这一优点);</li>
@@ -370,30 +321,26 @@
 
     
     
-    <div class="post-widgets">
-    <div class="likely">
-    </div>
-  </div>
-  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+    
         <div class="reward-container">
-  <div>打赏一次，年薪百万.</div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     Donate
   </button>
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
         <p>Alipay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
         <p>Bitcoin</p>
       </div>
 
@@ -411,21 +358,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/AutoML-Hyperpam-Optimize/" rel="next" title="AutoML之超参数优化">
-                  <i class="fa fa-chevron-left"></i> AutoML之超参数优化
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/NOWCODER/" rel="prev" title="牛客网笔试形式">
-                  牛客网笔试形式 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/AutoML-Hyperpam-Optimize/" rel="prev" title="AutoML之超参数优化">
+      <i class="fa fa-chevron-left"></i> AutoML之超参数优化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Inline-and-Virtual-Function-in-CPP/" rel="next" title="C++中的Virtual和Inline关键字">
+      C++中的Virtual和Inline关键字 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -439,10 +383,32 @@
           </div>
           
     
-  <div class="comments" id="comments">
+  <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
   </div>
   
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -473,17 +439,17 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -496,25 +462,17 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -559,7 +517,7 @@
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -581,16 +539,16 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -622,26 +580,27 @@
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -650,34 +609,12 @@
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -687,50 +624,49 @@ if (document.querySelectorAll('div.pdf').length) {
 
   
       
-<script type="text/x-mathjax-config">
 
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
 </script>
 
     
@@ -738,6 +674,7 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
 <script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -749,6 +686,7 @@ if (document.querySelectorAll('div.pdf').length) {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
+});
 </script>
 
 </body>

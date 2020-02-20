@@ -4,61 +4,58 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="LightGBM总结">
-<meta name="keywords" content="LightGBM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LightGBM">
 <meta property="og:url" content="https://fuhailin.github.io/LightGBM/index.html">
-<meta property="og:site_name" content="趙大寳">
+<meta property="og:site_name" content="赵大寳">
 <meta property="og:description" content="LightGBM总结">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T02:52:39.209Z">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164828201.jpg">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164905512.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164934564.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165007914.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165050390.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165309340.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165335641.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165939298.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170048718.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170109848.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170131803.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170158451.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170217435.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170238801.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112617025697.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-feature-parallelization.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-data-parallelization.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-pv-tree.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-voting-parallelization.png">
+<meta property="og:image" content="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-VS-XGBoost.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112617035394.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170425907.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170451256.png">
+<meta property="article:published_time" content="2019-02-22T13:19:21.000Z">
+<meta property="article:modified_time" content="2020-02-19T09:20:53.078Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="LightGBM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LightGBM">
-<meta name="twitter:description" content="LightGBM总结">
+<meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164828201.jpg">
 
 <link rel="canonical" href="https://fuhailin.github.io/LightGBM/">
 
@@ -68,18 +65,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isPost: true
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>LightGBM | 趙大寳</title>
+
+  <title>LightGBM | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -129,23 +123,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -153,6 +133,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -184,34 +178,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -242,12 +211,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,8 +224,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -270,7 +237,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+                <time title="Modified: 2020-02-19 17:20:53" itemprop="dateModified" datetime="2020-02-19T17:20:53+08:00">2020-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,7 +245,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习与算法/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
                     <span itemprop="name">机器学习与算法</span>
                   </a>
                 </span>
@@ -304,6 +271,7 @@
 
       
         <h2 id="1-Abstract"><a href="#1-Abstract" class="headerlink" title="1. Abstract"></a>1. Abstract</h2><p>在之前我介绍过XGBoost，这次想跟大家分享一下LightGBM，它是一款常用的GBDT工具包，由微软亚洲研究院（MSRA）进行开发。LightGBM论文的标题为A <strong>Highly Efficient</strong> Gradient Boosting Decision Tree。这说明LightGBM它是对于XGB提升性能的版本。而LightGBM相对于其他GBM来说具有相近的准确率而且是其训练速度20倍。</p>
+<a id="more"></a>
 <h2 id="2-Comparse-with-XGB"><a href="#2-Comparse-with-XGB" class="headerlink" title="2. Comparse with XGB"></a>2. Comparse with XGB</h2><p>LightGBM主要的对比对象就是XGB，所以我们先说一下XGB有什么优缺点先。</p>
 <p><strong>优点：</strong></p>
 <ul>
@@ -346,7 +314,7 @@
 <p>[0.3,0.7)—-&gt;1</p>
 <p>就是将某个区间的数据映射到离散的数据值。</p>
 <p>说完了装箱操作现在看一下微软论文中提到的直方图优化的流程图：</p>
-<p><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164828201.jpg"></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164828201.jpg" alt="在这里插入图片描述"></p>
 <p>最外面的 for 循环表示的意思是对当前模型下所有的叶子节点处理，gbdt 会训练多个树模型，这个举例可能是其中任何一个模型吧。</p>
 <p>第二个 for 循环开始要对某个叶子分裂处理处理，这一步就开始遍历所有的特征了，你选取的样本可能有 50、100 或者 1000 维等特征，为了找出的最佳的特征作为分裂的依据，那么这一个 for 循环就是干这件事情。</p>
 <p>依次往下看，对于当前这个特征新建一个直方图，现在又碰到一个 for 循环了 ，这个 for 循环干的事情就是遍历所有的样本来构建直方图，哈哈，此时就用到了之前所描述的装箱操作了，直方图的每个 bin 中包含了一定的样本，在此计算每个 bin 中的样本的梯度之和并对 bin 中的样本记数。</p>
@@ -384,7 +352,7 @@
 <p>要减少样本数，一个直接的想法是抛弃那些梯度很小的样本，但是这样训练集的分布会被改变，可能会使得模型准确率下降。LightGBM提出 Gradient-based One-Side Sampling (GOSS)来解决这个问题。</p>
 <p>GOSS的做法伪代码描述如下：</p>
 <div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164905512.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164905512.png" width="60%" height="60%">
 </div>
 
 
@@ -424,7 +392,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <p>更进一步的，通常有少量的特征，它们之间并非完全的独立，但是绝大多数情况下，并不会同时取非0值。若构建Bundle的算法允许小的冲突，就能得到更少数的bundle，进一步提高效率。可以证明，随机的污染一部分特征则最多影响精度$O([1-\gamma]n)^{-2/3}$, $\gamma$ 为最大的特征冲突率，也是在速度和精度之间达到平衡的有效手段。</p>
 <p>因此，LightGBM的构建bundle算法描述如下（算法3）：</p>
 <div align="center">
-<img width="40%" height="40%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164934564.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126164934564.png" width="40%" height="40%">
 </div>
 
 <p>即：</p>
@@ -441,7 +409,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <p>这可以通过<strong>对原始特征的值添加偏移来实现</strong>，从而将互斥的特征放在不同的bins中。例如，一个Bundle中有两个特征A和B，$A \in [0,10),\ B \in [0,20)$，可以给特征B添加偏移量10，使得B的值域范围变为 $B \in [10,30)$，然后，A和B就可以合并成值域为[0,30]新特征。这就是Merge Exclusive Features（MEF）算法。</p>
 <p>伪代码描述如下：</p>
 <div align="center">
-<img width="40%" height="40%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165007914.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165007914.png" width="40%" height="40%">
 </div>
 
 
@@ -449,7 +417,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <p>通过MEF算法，将许多互斥的稀疏特征转化为稠密的特征，降低了特征的数量，提高了建直方图的效率。</p>
 <h2 id="5-补充"><a href="#5-补充" class="headerlink" title="5. 补充"></a>5. 补充</h2><h3 id="5-1-树的生成策略"><a href="#5-1-树的生成策略" class="headerlink" title="5.1 树的生成策略"></a>5.1 树的生成策略</h3><p>在XGBoost中，树是按层生长的，称为<strong>Level</strong>-wise tree growth，同一层的所有节点都做分裂，最后剪枝，如下图所示：</p>
 <div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165050390.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165050390.png" width="60%" height="60%">
 </div>
 
 <p>Level-wise过一次数据可以同时分裂同一层的叶子，<strong>容易进行多线程优化</strong>，也好控制模型复杂度，不容易过拟合。<strong>但实际上Level-wise是一种低效的算法，因为它不加区分的对待同一层的叶子，带来了很多没必要的开销，因为实际上很多叶子的分裂增益较低，没必要进行搜索和分裂。</strong></p>
@@ -459,22 +427,22 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 </blockquote>
 <p>注：当采用相同叶子节点时候，leaf-wise tree growth 策略比level-wise tree growth 策略，模型准确率更高。</p>
 <div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165309340.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165309340.png" width="60%" height="60%">
 </div>
 
 
 <h3 id="5-2-LightGBM具体优化"><a href="#5-2-LightGBM具体优化" class="headerlink" title="5.2 LightGBM具体优化"></a>5.2 LightGBM具体优化</h3><h4 id="5-2-1-Histogram-optimization"><a href="#5-2-1-Histogram-optimization" class="headerlink" title="5.2.1 Histogram optimization"></a>5.2.1 Histogram optimization</h4><div align="center">
-<img width="70%" height="70%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165335641.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165335641.png" width="70%" height="70%">
 </div>
 
 <p>一个区间的范围内作为一个bin，简化为以分桶为粒度的直方图来做，这样一来，数据的表示更加简化，减少了内存的适用，而且直方图带来了一定的正则化的效果，使得我们训练出的模型不容易over-fitting到training-data上面，从而具备更好的推广性。</p>
 <div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165939298.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126165939298.png" width="60%" height="60%">
 </div>
 
 <p>上图是做过直方图优化之后的求解直方图的算法细节。这是按照bin来索引histogram的，所以不需要按照每个feature来排序，也不需要一一地对比不同feature的值，大大地减少了运算量。</p>
 <h4 id="5-2-2-Memory-usage-optimization"><a href="#5-2-2-Memory-usage-optimization" class="headerlink" title="5.2.2 Memory usage optimization"></a>5.2.2 Memory usage optimization</h4><div align="center">
-<img width="80%" height="80%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170048718.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170048718.png" width="80%" height="80%">
 </div>
 
 
@@ -482,14 +450,14 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <p>其二是我们使用bin来表示feature，一般bin的个数都是控制在比较小的范围内，这样我们可以使用更少的Byte来存储，如上图，使用Byte来存，而原先的feature value可能是float，需要用4个Bytes来存储。</p>
 <p>所以总体上来说，LightGBM内存的使用量往往会降到XGBoost对应sorted策略的八分之一，</p>
 <h4 id="5-2-3-Leaf-wise-with-max-depth-limitation"><a href="#5-2-3-Leaf-wise-with-max-depth-limitation" class="headerlink" title="5.2.3 Leaf-wise with max depth limitation"></a>5.2.3 Leaf-wise with max depth limitation</h4><div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170109848.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170109848.png" width="60%" height="60%">
 </div>
 
 
 <p>LightGBM使用了带有深度性质的leaf-wise长树的方法，来提高模型的精度；leaf-wise是一种比较level-wise更高效的长树的方法，在叶子数量一样的时候，leaf-wise可以降到更多的训练误差，带来更好的精度。</p>
 <p>但单纯地使用leaf-wise的生长，可能会长出比较深的树，在小数据集上可能会造成过拟合，因此，我们在leaf-wise的基础之上，多加了深度的限制。</p>
 <h4 id="5-2-4-Histogram-subtraction"><a href="#5-2-4-Histogram-subtraction" class="headerlink" title="5.2.4 Histogram subtraction"></a>5.2.4 Histogram subtraction</h4><div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170131803.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170131803.png" width="60%" height="60%">
 </div>
 
 
@@ -497,7 +465,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <p>可以观察到：一个叶子节点的直方图，可以由它的父亲节点的直方图减去它的兄弟节点的直方图得到。</p>
 <p>根据这一点，我们可以构造出来计算 数据量比较小的叶子节点上的直方图，然后用直方图做差，得到数据量较大的叶子节点上的直方图，达到加速的效果。</p>
 <h4 id="5-2-5-Increase-cache-hit-chance"><a href="#5-2-5-Increase-cache-hit-chance" class="headerlink" title="5.2.5 Increase cache hit chance"></a>5.2.5 Increase cache hit chance</h4><div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170158451.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170158451.png" width="60%" height="60%">
 </div>
 
 
@@ -509,21 +477,21 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 </li>
 </ul>
 <div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170217435.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170217435.png" width="60%" height="60%">
 </div>
 
 
 <p>LightGBM使用直方图算法则是天然的cache friendly，首先，对梯度的访问，因为不需要对feature进行排序，同时，所有的feature都采用同样的方式进行访问，所以只需要对梯度访问的顺序进行一个重新的排序，所有的feature都能连续地访问梯度。</p>
 <p>此外，直方图算法不需要数据id到叶子id的一个索引表，没有这样一个cache-miss的问题。事实上，在cache-miss这样一个方面，对速度的影响是很大的，尤其在数据量很大的时候，MRSA研究人员进行过测试，在数据量很多的时候，相比于随机访问，顺序访问的速度可以快4倍以上，这其中速度的差异基本上就是由cache-miss而带来的。</p>
 <h4 id="5-2-6-Categorical-feature-support"><a href="#5-2-6-Categorical-feature-support" class="headerlink" title="5.2.6 Categorical feature support"></a>5.2.6 Categorical feature support</h4><div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170238801.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170238801.png" width="60%" height="60%">
 </div>
 
 
 <p>传统的机器学习工具一般，不能直接输入类别特征，需要预先做离散化，抓换为很多，多维的0,1特征，这样的做法无论在时间上还是空间上，效率都不高。</p>
 <p>LightGBM通过更改决策树算法的决策规则，直接原生支持类别特征，不需要额外的离散化。并且通过一些实验，MRSA研究人员验证了直接使用离散特征可以比使用0-1离散化后的特征，速度快到8倍以上 。</p>
 <h4 id="5-2-7-Parallel-Learning-Support"><a href="#5-2-7-Parallel-Learning-Support" class="headerlink" title="5.2.7 Parallel Learning Support"></a>5.2.7 Parallel Learning Support</h4><div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112617025697.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112617025697.png" width="60%" height="60%">
 </div>
 
 
@@ -546,7 +514,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <li>具有全局最佳切分点的worker进行节点分裂，然后广播切分后的结果（左右子树的instance indices）</li>
 <li>其它worker根据收到的instance indices也进行划分</li>
 </ol>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-feature-parallelization.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-feature-parallelization.png" alt="img"></p>
 <p>传统算法的缺点是：</p>
 <ol>
 <li>无法加速split的过程，该过程复杂度为O(#data)，当数据量大的时候效率不高</li>
@@ -572,7 +540,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <li>合并所有的局部直方图得到全部直方图</li>
 <li>根据全局直方图找到最优切分点并进行分裂</li>
 </ol>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-data-parallelization.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-data-parallelization.png" alt="img"></p>
 <p>在第3步中，有两种合并的方式：</p>
 <ul>
 <li>采用点对点方式(point-to-point communication algorithm)进行通讯，每个worker通讯量为O(#machine∗#feature∗#bin)</li>
@@ -588,7 +556,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <h4 id="5-2-3-Voting-Parallel"><a href="#5-2-3-Voting-Parallel" class="headerlink" title="5.2.3 Voting Parallel"></a>5.2.3 Voting Parallel</h4><p>LightGBM采用一种称为<strong>PV-Tree</strong>的算法进行投票并行(Voting Parallel)，其实这本质上也是一种<strong>数据并行</strong>。</p>
 <p>PV-Tree和普通的决策树差不多，只是在寻找最优切分点上有所不同。</p>
 <p>其算法伪代码描述如下：</p>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-pv-tree.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-pv-tree.png" alt="img"></p>
 <ol>
 <li>水平切分数据，不同的worker拥有部分数据。</li>
 <li>Local voting: 每个worker构建直方图，找到top-k个最优的本地划分特征</li>
@@ -596,11 +564,11 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <li>Best Attribute Identification： 中心节点向worker收集这top-2k个特征的直方图，并进行合并，然后计算得到全局的最优划分</li>
 <li>中心节点将全局最优划分广播给所有的worker，worker进行本地划分。</li>
 </ol>
-<p><img alt="img" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-voting-parallelization.png"></p>
+<p><img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-voting-parallelization.png" alt="img"></p>
 <p>可以看出，PV-tree将原本需要#feature×#bin 变为了2k×#bin，通信开销得到降低。此外，可以证明，当每个worker的数据足够多的时候，top-2k个中包含全局最佳切分点的概率非常高。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>LightGBM 和 XGBoost对比如下：</p>
 <div align="center">
-<img width="60%" height="60%" data-src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-VS-XGBoost.png">
+<img src="https://www.hrwhisper.me/wp-content/uploads/2018/07/LightGBM-VS-XGBoost.png" width="60%" height="60%">
 </div>
 
 
@@ -612,7 +580,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <p>即不仅考虑了当前特征与bundle的冲突数（即当前特征与bundle中任意特征同时存在的个数），也考虑了bundle内部累积的冲突数。</p>
 </li>
 <li><p>AdaBoost与Gradient Boosting区别：</p>
-<p><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112617035394.png"></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018112617035394.png" alt="在这里插入图片描述"></p>
 <ul>
 <li><p>Adaboost：<strong>Emphases error by changing the distribution of samples.</strong></p>
 </li>
@@ -626,7 +594,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <li><p>Gradient Boosting</p>
 </li>
 </ol>
-<p><img alt="在这里插入图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170425907.png"></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170425907.png" alt="在这里插入图片描述"></p>
 <p>   对Gradient Boosting，完整的模型是由很多base learner组成的，学习过程当中，是一个个增加这些子模型，并在这个过程当中，希望loss能不断减小，如果我们把符合函数 f 当做自变量来看，我们希望能能够改变这个符合函数 f 使得loss下降，那么无疑沿着loss相对于 f 的梯度方向是一个合理的选择。换句话说，我们新加入的子模型，使得 f 沿着loss相对于f的梯度方向变了，那么我就得到了我们希望要的新一轮的子模型 f。</p>
 <p>   当损失函数用平法损失时候，新加入的 f 沿着 loss的梯度方向进行拟合，其实质就是拟合残差 $\hat{y}<em>i = y_i - F</em>{m-1}(x_i)$</p>
 <ol>
@@ -651,7 +619,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <li>XGBoost 两种树生成方案优劣：</li>
 </ol>
 <div align="center">
-<img width="60%" height="60%" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170451256.png">
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20181126170451256.png" width="60%" height="60%">
 </div>
 
 
@@ -686,30 +654,26 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 
     
     
-    <div class="post-widgets">
-    <div class="likely">
-    </div>
-  </div>
-  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+    
         <div class="reward-container">
-  <div>打赏一次，年薪百万.</div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     Donate
   </button>
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
         <p>Alipay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
         <p>Bitcoin</p>
       </div>
 
@@ -725,21 +689,18 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/XGBoost/" rel="next" title="XGBoost">
-                  <i class="fa fa-chevron-left"></i> XGBoost
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/GBDT/" rel="prev" title="GBDT">
-                  GBDT <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/XGBoost/" rel="prev" title="XGBoost">
+      <i class="fa fa-chevron-left"></i> XGBoost
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/GBDT/" rel="next" title="GBDT">
+      GBDT <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -753,10 +714,32 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
           </div>
           
     
-  <div class="comments" id="comments">
+  <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
   </div>
   
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -787,17 +770,17 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -810,25 +793,17 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -873,7 +848,7 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -895,16 +870,16 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -936,26 +911,27 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -964,34 +940,12 @@ V_{j|O}(d) = \frac{1}{n_O}\left(\frac{(\sum_{x_i\in O:x_{ij} \le d}g_i)^2}{n_{l|
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -1001,50 +955,49 @@ if (document.querySelectorAll('div.pdf').length) {
 
   
       
-<script type="text/x-mathjax-config">
 
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') {
-          next = next.nextSibling;
-        }
-        if (next && next.nodeName.toLowerCase() === 'br') {
-          next.parentNode.removeChild(next);
-        }
-      }
-    });
-  });
-
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
-      if (element.nodeName.toLowerCase() == 'li') {
-        element = element.parentNode;
-      }
-      element.classList.add('has-jax');
-    }
-  });
-</script>
 <script>
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
-    MathJax.Hub.Typeset();
-  }, window.MathJax);
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
 </script>
 
     
@@ -1052,6 +1005,7 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
 <script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -1063,6 +1017,7 @@ if (document.querySelectorAll('div.pdf').length) {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
+});
 </script>
 
 </body>

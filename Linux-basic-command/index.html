@@ -4,61 +4,47 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 4.2.0">
   <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
-  <link rel="alternate" href="/atom.xml" title="趙大寳" type="application/atom+xml">
 
 <link rel="stylesheet" href="/css/main.css">
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
-
 
 <script id="hexo-configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '7.5.0',
-    exturl: false,
-    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
-    copycode: {"enable":true,"show_result":true,"style":null},
-    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
-    bookmark: {"enable":true,"color":"#222","save":"auto"},
-    fancybox: true,
-    mediumzoom: true,
-    lazyload: true,
-    pangu: false,
-    algolia: {
-      appID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    },
-    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: 'search.xml',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    sidebarPadding: 40
-  };
-</script>
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
   <meta name="description" content="Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机Android、路由器OpenWRT等，最底层就是运行在linux系统上的。我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04下面记录一">
-<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用command笔记">
 <meta property="og:url" content="https://fuhailin.github.io/Linux-basic-command/index.html">
-<meta property="og:site_name" content="趙大寳">
+<meta property="og:site_name" content="赵大寳">
 <meta property="og:description" content="Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机Android、路由器OpenWRT等，最底层就是运行在linux系统上的。我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04下面记录一">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-20T06:28:58.578Z">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/linux-command.svg?sanitize=true">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/proxy">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018071513101933">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180715131139920">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718110351393">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150831127">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150928345">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809174303523">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809180429836">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211613210">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211819829">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/isnefnt32wn21.jpg">
+<meta property="article:published_time" content="2019-02-18T12:05:47.000Z">
+<meta property="article:modified_time" content="2019-12-20T06:28:58.578Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux常用command笔记">
-<meta name="twitter:description" content="Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机Android、路由器OpenWRT等，最底层就是运行在linux系统上的。我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04下面记录一">
+<meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/linux-command.svg?sanitize=true">
 
 <link rel="canonical" href="https://fuhailin.github.io/Linux-basic-command/">
 
@@ -68,18 +54,15 @@
   CONFIG.page = {
     sidebar: "",
     isHome: false,
-    isPost: true,
-    isPage: false,
-    isArchive: false
+    isPost: true
   };
 </script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css">
-  <title>Linux常用command笔记 | 趙大寳</title>
+
+  <title>Linux常用command笔记 | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
     <script>
-      var host = window.location.hostname;
-      if (host !== "localhost" || !true) {
+      if (CONFIG.hostname === location.hostname) {
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
@@ -129,23 +112,9 @@
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
     <div class="headband"></div>
-    <a href="https://github.com/fuhailin"><img style="position: absolute; top: 0; right: 0; border: 0;"
-    src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
 
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
-  <div class="site-meta">
-
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">趙大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Program Artist</p>
-  </div>
-
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar">
       <span class="toggle-line toggle-line-first"></span>
@@ -153,6 +122,20 @@
       <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
 </div>
 
 
@@ -184,34 +167,9 @@
     <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
-           type="text" id="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result"></div>
-
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -242,12 +200,12 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="趙大寳">
-      <meta itemprop="description" content="趙大寳個人小站">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="趙大寳">
+      <meta itemprop="name" content="赵大寳">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -255,8 +213,6 @@
         </h1>
 
         <div class="post-meta">
-
-          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -304,11 +260,11 @@
       
         <p>Linux是目前应用最广泛的服务器操作系统，基于Unix，开源免费，由于系统的稳定性和安全性，市场占有率很高，几乎成为程序代码运行的最佳系统环境。linux不仅可以长时间的运行我们编写的程序代码，还可以安装在各种计算机硬件设备中，如手机Android、路由器OpenWRT等，最底层就是运行在linux系统上的。<br>我安装的Linux发行版本是Ubuntu 16.04和Ubuntu 18.04<br>下面记录一些使用过程中遇到的Linux命令：</p>
 <p>
-<a href="https://github.com/jaywcjlove/linux-command" target="_blank" rel="noopener"><img data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/linux-command.svg?sanitize=true"></a>
+<a href="https://github.com/jaywcjlove/linux-command" target="_blank" rel="noopener"><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/linux-command.svg?sanitize=true"></a>
 </p>
 
 <a id="more"></a>
-<h1 id="linux的目录结构"><a href="#linux的目录结构" class="headerlink" title="linux的目录结构"></a>linux的目录结构</h1><p><img alt="/ 下级目录结构" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/proxy"></p>
+<h1 id="linux的目录结构"><a href="#linux的目录结构" class="headerlink" title="linux的目录结构"></a>linux的目录结构</h1><p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/proxy" alt="/ 下级目录结构"></p>
 <ul>
 <li>bin (binaries)存放二进制可执行文件</li>
 <li>sbin (super user binaries)存放二进制可执行文件，只有root才能访问</li>
@@ -330,8 +286,7 @@
 <p>这五个是独立的命令，压缩解压都要用到其中一个，可以和别的命令连用但只能用其中一个。下面的参数是根据需要在压缩或解压档案时可选的。</p>
 <p>-z：有gzip属性的<br>-j：有bz2属性的<br>-Z：有compress属性的<br>-v：显示所有过程<br>-O：将文件解开到标准输出</p>
 <p>下面的参数-f是必须的</p>
-<p>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接filename。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf file.tar //解压 tar包</span><br><span class="line">tar -xzvf file.tar.gz //解压tar.gz</span><br><span class="line">tar -xjvf file.tar.bz2   //解压 tar.bz2</span><br><span class="line">tar -xZvf file.tar.Z   //解压tar.Z</span><br><span class="line">unrar e file.rar //解压rar</span><br><span class="line">unzip file.zip //解压zip</span><br><span class="line">`tar -xf file.tar.xz`</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><a href="https://www.cnblogs.com/nhdlb/p/11568991.html" target="_blank" rel="noopener">https://www.cnblogs.com/nhdlb/p/11568991.html</a><br><a href="https://scottlinux.com/2014/01/07/extracting-or-uncompressing-tar-xz-files-in-linux/" target="_blank" rel="noopener">https://scottlinux.com/2014/01/07/extracting-or-uncompressing-tar-xz-files-in-linux/</a></p>
+<p>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接filename。<br></p><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf file.tar //解压 tar包</span><br><span class="line">tar -xzvf file.tar.gz //解压tar.gz</span><br><span class="line">tar -xjvf file.tar.bz2   //解压 tar.bz2</span><br><span class="line">tar -xZvf file.tar.Z   //解压tar.Z</span><br><span class="line">unrar e file.rar //解压rar</span><br><span class="line">unzip file.zip //解压zip</span><br><span class="line">`tar -xf file.tar.xz`</span><br></pre></td></tr></tbody></table></figure><br><a href="https://www.cnblogs.com/nhdlb/p/11568991.html" target="_blank" rel="noopener">https://www.cnblogs.com/nhdlb/p/11568991.html</a><br><a href="https://scottlinux.com/2014/01/07/extracting-or-uncompressing-tar-xz-files-in-linux/" target="_blank" rel="noopener">https://scottlinux.com/2014/01/07/extracting-or-uncompressing-tar-xz-files-in-linux/</a><p></p>
 <h4 id="压缩文件成-tar-xz"><a href="#压缩文件成-tar-xz" class="headerlink" title="压缩文件成*.tar.xz"></a>压缩文件成*.tar.xz</h4><p><code>tar -zcvf archive-name.tar.gz directory-name</code></p>
 <h3 id="删除目录或文件"><a href="#删除目录或文件" class="headerlink" title="删除目录或文件"></a>删除目录或文件</h3><p>删除空文件夹：<code>rmdir directoryname</code><br>Remove a directory with files and subdirectories (non-empty directory)：<code>rm -r directoryname</code><br>Remove a single file：<code>rm file.txt</code></p>
 <h3 id="mv移动或重命名文件或目录"><a href="#mv移动或重命名文件或目录" class="headerlink" title="mv移动或重命名文件或目录"></a><code>mv</code>移动或重命名文件或目录</h3><p><code>mv</code> can do two jobs.</p>
@@ -358,21 +313,21 @@
 <h3 id="新建文件"><a href="#新建文件" class="headerlink" title="新建文件"></a>新建文件</h3><blockquote>
 <p>vi filename     :打开或新建文件，并将光标置于第一行首</p>
 </blockquote>
-<p>查看显卡型号：<code>lspci |grep VGA</code> （lspci是linux查看硬件信息的命令），屏幕会打印出主机的集显几独显信息<br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018071513101933"></p>
-<p>查看nvidia芯片信息：<code>lspci |grep -i nvidia</code>，会打印出nvidia系列的硬件信息，如果主机安装了没有视频输出的GPU（如tesla系列），这个命令会很有用<br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180715131139920"></p>
-<h3 id="du-DiskUsage"><a href="#du-DiskUsage" class="headerlink" title="du: DiskUsage"></a>du: DiskUsage</h3><p>查看硬盘使用情况<br><code>df -hl</code> 查看磁盘剩余空间<br><code>df -h</code> 查看每个根路径的分区大小;<code>-h</code>:human readable<br><code>du -sh</code> [目录名] ：<strong>D</strong>isk <strong>U</strong>sage返回该目录的大小<br><code>du -sm</code> [文件夹] 返回该文件夹总M数<br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718110351393"></p>
+<p>查看显卡型号：<code>lspci |grep VGA</code> （lspci是linux查看硬件信息的命令），屏幕会打印出主机的集显几独显信息<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2018071513101933" alt="这里写图片描述"></p>
+<p>查看nvidia芯片信息：<code>lspci |grep -i nvidia</code>，会打印出nvidia系列的硬件信息，如果主机安装了没有视频输出的GPU（如tesla系列），这个命令会很有用<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180715131139920" alt="这里写图片描述"></p>
+<h3 id="du-DiskUsage"><a href="#du-DiskUsage" class="headerlink" title="du: DiskUsage"></a>du: DiskUsage</h3><p>查看硬盘使用情况<br><code>df -hl</code> 查看磁盘剩余空间<br><code>df -h</code> 查看每个根路径的分区大小;<code>-h</code>:human readable<br><code>du -sh</code> [目录名] ：<strong>D</strong>isk <strong>U</strong>sage返回该目录的大小<br><code>du -sm</code> [文件夹] 返回该文件夹总M数<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718110351393" alt="这里写图片描述"></p>
 <h3 id="df-Disk-space-being-used-by-File-ystem"><a href="#df-Disk-space-being-used-by-File-ystem" class="headerlink" title="df: Disk space being used by File ystem"></a>df: Disk space being used by File ystem</h3><p>df -h: human readable</p>
 <h3 id="man-view-the-system’s-reference-MANuals"><a href="#man-view-the-system’s-reference-MANuals" class="headerlink" title="man: view the system’s reference MANuals"></a>man: view the system’s reference MANuals</h3><p>man pwd: get the manual for PWD command</p>
-<h3 id="top"><a href="#top" class="headerlink" title="top"></a><code>top</code></h3><p>查看CPU使用情况<br><code>top</code><br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150831127"><br><code>top</code> <code>1</code><br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150928345"></p>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a><code>top</code></h3><p>查看CPU使用情况<br><code>top</code><br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150831127" alt="这里写图片描述"><br><code>top</code> <code>1</code><br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180718150928345" alt="这里写图片描述"></p>
 <h3 id="tail-命令"><a href="#tail-命令" class="headerlink" title="tail 命令"></a><code>tail</code> 命令</h3><p><a href="https://www.cnblogs.com/mfryf/p/3336804.html" target="_blank" rel="noopener">https://www.cnblogs.com/mfryf/p/3336804.html</a><br><code>tail -f filename</code>：监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），刷新显示在屏幕上。退出，按下CTRL+C。</p>
 <p><code>tail -n 20 filename</code>：显示filename最后20行。</p>
 <p><code>tail -r -n 10 filename</code>：逆序显示filename最后10行。</p>
 <h3 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a><code>pwd</code></h3><p>print working directory</p>
 <p><a href="http://linux.51yip.com/search/awk" target="_blank" rel="noopener">http://linux.51yip.com/search/awk</a></p>
-<h3 id="md5sum-MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。"><a href="#md5sum-MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。" class="headerlink" title="md5sum : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。"></a><code>md5sum</code> : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。</h3><p><code>md5sum filename</code><br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809174303523"></p>
+<h3 id="md5sum-MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。"><a href="#md5sum-MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。" class="headerlink" title="md5sum : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。"></a><code>md5sum</code> : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。</h3><p><code>md5sum filename</code><br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809174303523" alt="这里写图片描述"></p>
 <h3 id="scp"><a href="#scp" class="headerlink" title="scp"></a><code>scp</code></h3><p>secure copy，远程拷贝文件</p>
 <ol>
-<li><strong>将本地文件上传到服务器上</strong><br><code>scp -P 2222 /home/lnmp0.4.tar.gz root@www.vpser.net:/root/lnmp0.4.tar.gz</code><br><img alt="这里写图片描述" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809180429836"></li>
+<li><strong>将本地文件上传到服务器上</strong><br><code>scp -P 2222 /home/lnmp0.4.tar.gz root@www.vpser.net:/root/lnmp0.4.tar.gz</code><br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20180809180429836" alt="这里写图片描述"></li>
 </ol>
 <h3 id="unzip"><a href="#unzip" class="headerlink" title="unzip"></a><code>unzip</code></h3><p>解压zip文件<br><code>unzip file.zip</code><br><code>unzip file.zip -d destination_folder</code></p>
 <h3 id="diff"><a href="#diff" class="headerlink" title="diff"></a><code>diff</code></h3><p>比较文件不同<br><code>diff file1 file2</code></p>
@@ -380,8 +335,8 @@
 <h3 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a><code>nohup</code></h3><p>allows to run job in the background after you log out from a shell<br><a href="https://linuxhint.com/nohup_command_linux/" target="_blank" rel="noopener">Nohup Command in Linux</a></p>
 <h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a><code>cat</code></h3><p><strong>cat</strong>enate 命令用于连接文件并打印到标准输出设备上<br><code>cat file.txt</code>：将<em>file.txt</em>的内容打印在屏幕上<br><a href="https://www.tecmint.com/13-basic-cat-command-examples-in-linux/" target="_blank" rel="noopener">13 Basic Cat Command Examples in Linux</a></p>
 <h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a><code>touch</code></h3><p>创建空文件，或者改变文件的时间戳属性<br><code>touch file.txt</code>：创建一个新的空文件<em>file.txt</em></p>
-<h3 id="查看NVIDIA显卡信息"><a href="#查看NVIDIA显卡信息" class="headerlink" title="查看NVIDIA显卡信息"></a>查看NVIDIA显卡信息</h3><p>由于我已经切换到ＮＶＩＤＩＡ专有驱动：<code>nvidia-smi</code><br><img alt="驱动" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211613210"></p>
-<p><img alt="nvidia-smi" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211819829"></p>
+<h3 id="查看NVIDIA显卡信息"><a href="#查看NVIDIA显卡信息" class="headerlink" title="查看NVIDIA显卡信息"></a>查看NVIDIA显卡信息</h3><p>由于我已经切换到ＮＶＩＤＩＡ专有驱动：<code>nvidia-smi</code><br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211613210" alt="驱动"></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20171228211819829" alt="nvidia-smi"></p>
 <p><code>watch -n 5 nvidia-smi</code>:每隔5秒更新一下显卡使用情况, <code>ctrl+c</code>退出</p>
 <h3 id="more"><a href="#more" class="headerlink" title="more"></a><code>more</code></h3><p>more 允许你向前查看文本文件。<br><code>more file.txt</code>：创建一个新的空文件<em>file.txt</em><br>使用<kbd>Enter</kbd>可以向下翻页，输入 <kbd>q</kbd> 可以退出，输入 <kbd>/</kbd> 字符并在其后加上你想要查找的文字(<strong>区分大小写</strong>)可以搜索。例如你要查看的字段是 “terminal”，只需输入：<code>/terminal</code></p>
 <h3 id="管道符"><a href="#管道符" class="headerlink" title="管道符|"></a>管道符<kbd>|</kbd></h3><p>将管道符<kbd>|</kbd>左边命令的输出输入给右边的命令<br><code>ls | more</code>：有很多文件的目录，可以组合 <code>more</code> 跟 <code>ls</code> 命令完整查看这个目录当中的内容<br><code>grep ‘productivity’ core.md Dict.md lctt2014.md lctt2016.md lctt2018.md README.md | more</code> ：组合 more 和 grep 命令，实现在多个文件中找到指定的文本 “productivity”<br><code>ps -u Hailin | more</code>：列出你用户下(Hailin)正在运行的进程</p>
@@ -391,18 +346,15 @@
 <h3 id="sed-Stream-EDitor"><a href="#sed-Stream-EDitor" class="headerlink" title="sed: Stream EDitor"></a><code>sed</code>: Stream EDitor</h3><p>$<code>sed -i -e 's/abc/ABC/g' feature_list.csv</code>: 将文件中的<code>abc</code>全局替换为<code>ABC</code><br>$<code>sed -e 's/$/hello/' -i feature_list.csv</code>: 为每一行末尾append <code>hello</code><br>$<code>sed -i '/#/d' feature_list.csv</code>: remove包含<code>#</code>的每一行<br><a href="https://www.runoob.com/linux/linux-comm-sed.html" target="_blank" rel="noopener">Linux sed 命令</a></p>
 <h3 id="设置开机自启动程序"><a href="#设置开机自启动程序" class="headerlink" title="设置开机自启动程序"></a>设置开机自启动程序</h3><ol>
 <li>Run this command：<code>sudo vim /etc/systemd/system/YOUR_SERVICE_NAME.service</code></li>
-<li><p>输入以下的配置：</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Description=GIVE_YOUR_SERVICE_A_DESCRIPTION</span><br><span class="line"></span><br><span class="line">Wants=network.target</span><br><span class="line">After=syslog.target network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=YOUR_COMMAND_HERE</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=10</span><br><span class="line">KillMode=process</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></tbody></table></figure>
-</li>
-<li><p>重启服务：<code>sudo systemctl daemon-reload</code></p>
-</li>
+<li>输入以下的配置：<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Description=GIVE_YOUR_SERVICE_A_DESCRIPTION</span><br><span class="line"></span><br><span class="line">Wants=network.target</span><br><span class="line">After=syslog.target network-online.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">ExecStart=YOUR_COMMAND_HERE</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=10</span><br><span class="line">KillMode=process</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></tbody></table></figure></li>
+<li>重启服务：<code>sudo systemctl daemon-reload</code></li>
 <li>启用服务：<code>sudo systemctl enable YOUR_SERVICE_NAME</code></li>
 <li>开始服务：<code>sudo systemctl start YOUR_SERVICE_NAME</code></li>
 <li>检查服务状态：<code>systemctl status YOUR_SERVICE_NAME</code></li>
 <li>尝试重启设备检查服务有没有重新开始运行</li>
 </ol>
 <hr>
-<p><img alt="BASIC LINUX COMMAND" data-src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/isnefnt32wn21.jpg"><br><a href="Linux-Cheat-Sheet-David-Relyea.pdf">Linux Cheat Sheet David Relyea | PDF</a><br><a href="https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ" target="_blank" rel="noopener">Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube</a><br><a href="https://mlog.club/article/28876" target="_blank" rel="noopener">Linux 下的这些高效指令，是你快速入门运维的神器</a><br><a href="https://mlog.club/article/31049" target="_blank" rel="noopener">Linux最常用命令：简单易学，但能解决95%以上的问题</a></p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/isnefnt32wn21.jpg" alt="BASIC LINUX COMMAND"><br><a href="Linux-Cheat-Sheet-David-Relyea.pdf">Linux Cheat Sheet David Relyea | PDF</a><br><a href="https://www.youtube.com/playlist?list=PLdfA2CrAqQ5kB8iSbm5FB1ADVdBeOzVqZ" target="_blank" rel="noopener">Introduction to Linux Commands/Shell Scripting for Data Scientists | YouTube</a><br><a href="https://mlog.club/article/28876" target="_blank" rel="noopener">Linux 下的这些高效指令，是你快速入门运维的神器</a><br><a href="https://mlog.club/article/31049" target="_blank" rel="noopener">Linux最常用命令：简单易学，但能解决95%以上的问题</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -426,30 +378,26 @@
 
     
     
-    <div class="post-widgets">
-    <div class="likely">
-    </div>
-  </div>
-  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script>
+    
         <div class="reward-container">
-  <div>打赏一次，年薪百万.</div>
-  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
     Donate
   </button>
   <div id="qr" style="display: none;">
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="趙大寳 WeChat Pay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="趙大寳 Alipay">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
         <p>Alipay</p>
       </div>
       
       <div style="display: inline-block;">
-        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="趙大寳 Bitcoin">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
         <p>Bitcoin</p>
       </div>
 
@@ -465,21 +413,18 @@
 
         
 
-          <div class="post-nav">
-            <div class="post-nav-next post-nav-item">
-                <a href="/LeetCode322-Coin-Change/" rel="next" title="【LeetCode】Coin Change">
-                  <i class="fa fa-chevron-left"></i> 【LeetCode】Coin Change
-                </a>
-            </div>
 
-            <span class="post-nav-divider"></span>
-
-            <div class="post-nav-prev post-nav-item">
-                <a href="/XGBoost/" rel="prev" title="XGBoost">
-                  XGBoost <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/C-Error-C2678-no-operator-found-which-takes-a-left-hand-operand-of-type-const-ty/" rel="prev" title="C++ Error C2678: no operator found which takes a left-hand operand of type 'const_ty'">
+      <i class="fa fa-chevron-left"></i> C++ Error C2678: no operator found which takes a left-hand operand of type 'const_ty'
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/XGBoost/" rel="next" title="XGBoost">
+      XGBoost <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -493,10 +438,32 @@
           </div>
           
     
-  <div class="comments" id="comments">
+  <div class="comments">
     <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
   </div>
   
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
 
         </div>
           
@@ -521,23 +488,23 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux的目录结构"><span class="nav-number">1.</span> <span class="nav-text">linux的目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux常用命令"><span class="nav-number">2.</span> <span class="nav-text">linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-list"><span class="nav-number">2.0.1.</span> <span class="nav-text">ls: list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd-change-directory"><span class="nav-number">2.0.2.</span> <span class="nav-text">cd: change directory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd-print-name-of-current-working-directory"><span class="nav-number">2.0.3.</span> <span class="nav-text">pwd: print name of current/working directory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除软件"><span class="nav-number">2.0.4.</span> <span class="nav-text">删除软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压-tar-xz文件"><span class="nav-number">2.0.5.</span> <span class="nav-text">解压*.tar.xz文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩文件成-tar-xz"><span class="nav-number">2.0.5.1.</span> <span class="nav-text">压缩文件成*.tar.xz</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除目录或文件"><span class="nav-number">2.0.6.</span> <span class="nav-text">删除目录或文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv移动或重命名文件或目录"><span class="nav-number">2.0.7.</span> <span class="nav-text">mv移动或重命名文件或目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wget下载命令"><span class="nav-number">2.0.8.</span> <span class="nav-text">wget下载命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp复制命令"><span class="nav-number">2.0.9.</span> <span class="nav-text">cp复制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建文件"><span class="nav-number">2.0.10.</span> <span class="nav-text">新建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#du-DiskUsage"><span class="nav-number">2.0.11.</span> <span class="nav-text">du: DiskUsage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#df-Disk-space-being-used-by-File-ystem"><span class="nav-number">2.0.12.</span> <span class="nav-text">df: Disk space being used by File ystem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#man-view-the-system’s-reference-MANuals"><span class="nav-number">2.0.13.</span> <span class="nav-text">man: view the system’s reference MANuals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#top"><span class="nav-number">2.0.14.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tail-命令"><span class="nav-number">2.0.15.</span> <span class="nav-text">tail 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd"><span class="nav-number">2.0.16.</span> <span class="nav-text">pwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum-MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。"><span class="nav-number">2.0.17.</span> <span class="nav-text">md5sum : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scp"><span class="nav-number">2.0.18.</span> <span class="nav-text">scp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unzip"><span class="nav-number">2.0.19.</span> <span class="nav-text">unzip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff"><span class="nav-number">2.0.20.</span> <span class="nav-text">diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taskset"><span class="nav-number">2.0.21.</span> <span class="nav-text">taskset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup"><span class="nav-number">2.0.22.</span> <span class="nav-text">nohup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat"><span class="nav-number">2.0.23.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#touch"><span class="nav-number">2.0.24.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看NVIDIA显卡信息"><span class="nav-number">2.0.25.</span> <span class="nav-text">查看NVIDIA显卡信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more"><span class="nav-number">2.0.26.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道符"><span class="nav-number">2.0.27.</span> <span class="nav-text">管道符|</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看Linux系统的发行版（Ubuntu还是CentOS）"><span class="nav-number">2.0.28.</span> <span class="nav-text">查看Linux系统的发行版（Ubuntu还是CentOS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">2.0.29.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk"><span class="nav-number">2.0.30.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed-Stream-EDitor"><span class="nav-number">2.0.31.</span> <span class="nav-text">sed: Stream EDitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置开机自启动程序"><span class="nav-number">2.0.32.</span> <span class="nav-text">设置开机自启动程序</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#linux的目录结构"><span class="nav-number">1.</span> <span class="nav-text">linux的目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linux常用命令"><span class="nav-number">2.</span> <span class="nav-text">linux常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ls-list"><span class="nav-number">2.0.1.</span> <span class="nav-text">ls: list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cd-change-directory"><span class="nav-number">2.0.2.</span> <span class="nav-text">cd: change directory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd-print-name-of-current-working-directory"><span class="nav-number">2.0.3.</span> <span class="nav-text">pwd: print name of current&#x2F;working directory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除软件"><span class="nav-number">2.0.4.</span> <span class="nav-text">删除软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压-tar-xz文件"><span class="nav-number">2.0.5.</span> <span class="nav-text">解压*.tar.xz文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#压缩文件成-tar-xz"><span class="nav-number">2.0.5.1.</span> <span class="nav-text">压缩文件成*.tar.xz</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除目录或文件"><span class="nav-number">2.0.6.</span> <span class="nav-text">删除目录或文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mv移动或重命名文件或目录"><span class="nav-number">2.0.7.</span> <span class="nav-text">mv移动或重命名文件或目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wget下载命令"><span class="nav-number">2.0.8.</span> <span class="nav-text">wget下载命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cp复制命令"><span class="nav-number">2.0.9.</span> <span class="nav-text">cp复制命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新建文件"><span class="nav-number">2.0.10.</span> <span class="nav-text">新建文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#du-DiskUsage"><span class="nav-number">2.0.11.</span> <span class="nav-text">du: DiskUsage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#df-Disk-space-being-used-by-File-ystem"><span class="nav-number">2.0.12.</span> <span class="nav-text">df: Disk space being used by File ystem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#man-view-the-system’s-reference-MANuals"><span class="nav-number">2.0.13.</span> <span class="nav-text">man: view the system’s reference MANuals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#top"><span class="nav-number">2.0.14.</span> <span class="nav-text">top</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tail-命令"><span class="nav-number">2.0.15.</span> <span class="nav-text">tail 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwd"><span class="nav-number">2.0.16.</span> <span class="nav-text">pwd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#md5sum-MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。"><span class="nav-number">2.0.17.</span> <span class="nav-text">md5sum : MD5算法一般用于检查文件完整性，不同的文件内容生成相同的报文摘要的概率是极其小的。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scp"><span class="nav-number">2.0.18.</span> <span class="nav-text">scp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#unzip"><span class="nav-number">2.0.19.</span> <span class="nav-text">unzip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diff"><span class="nav-number">2.0.20.</span> <span class="nav-text">diff</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#taskset"><span class="nav-number">2.0.21.</span> <span class="nav-text">taskset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nohup"><span class="nav-number">2.0.22.</span> <span class="nav-text">nohup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cat"><span class="nav-number">2.0.23.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#touch"><span class="nav-number">2.0.24.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看NVIDIA显卡信息"><span class="nav-number">2.0.25.</span> <span class="nav-text">查看NVIDIA显卡信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more"><span class="nav-number">2.0.26.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道符"><span class="nav-number">2.0.27.</span> <span class="nav-text">管道符|</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看Linux系统的发行版（Ubuntu还是CentOS）"><span class="nav-number">2.0.28.</span> <span class="nav-text">查看Linux系统的发行版（Ubuntu还是CentOS）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find"><span class="nav-number">2.0.29.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk"><span class="nav-number">2.0.30.</span> <span class="nav-text">awk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed-Stream-EDitor"><span class="nav-number">2.0.31.</span> <span class="nav-text">sed: Stream EDitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置开机自启动程序"><span class="nav-number">2.0.32.</span> <span class="nav-text">设置开机自启动程序</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="趙大寳"
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">趙大寳</p>
-  <div class="site-description" itemprop="description">趙大寳個人小站</div>
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">89</span>
+          <span class="site-state-item-count">74</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -550,25 +517,17 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">53</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="feed-link motion-element">
-    <a href="/atom.xml" rel="alternate">
-      <i class="fa fa-rss"></i>RSS
-    </a>
-  </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
         <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://instagram.com/hailinfufu" title="Instagram → https://instagram.com/hailinfufu" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
       </span>
       <span class="links-of-author-item">
         <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
@@ -613,7 +572,7 @@
           <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
         </li>
         <li class="links-of-blogroll-item">
-          <a href="https://liam.page/" title="https://liam.page/" rel="noopener" target="_blank">始终|不忘初心</a>
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
         </li>
     </ul>
   </div>
@@ -635,16 +594,16 @@
 <div class="copyright">
   
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-snowflake-o"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">趙大寳</span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
   </div>
   <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
   </div>
 
         
@@ -676,26 +635,27 @@
 
 
 
-
-
-
-
-        
       </div>
     </footer>
   </div>
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
-  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
 <script src="/js/schemes/muse.js"></script>
-<script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
 
 
 
@@ -704,34 +664,12 @@
 
 
 
-  <script src="/js/local-search.js"></script>
 
 
 
 
 
 
-
-
-<script>
-if (document.querySelectorAll('div.pdf').length) {
-  NexT.utils.getScript('//cdn.jsdelivr.net/npm/pdfobject@2/pdfobject.min.js', () => {
-    document.querySelectorAll('div.pdf').forEach(element => {
-      PDFObject.embed(element.getAttribute('target'), element, {
-        pdfOpenParams: {
-          navpanes: 0,
-          toolbar: 0,
-          statusbar: 0,
-          pagemode: 'thumbs',
-          view: 'FitH'
-        },
-        PDFJS_URL: '/lib/pdf/web/viewer.html',
-        height: element.getAttribute('height') || '500px'
-      });
-    });
-  }, window.PDFObject);
-}
-</script>
 
 
 
@@ -744,6 +682,7 @@ if (document.querySelectorAll('div.pdf').length) {
   
 
 <script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
   window.livereOptions = {
     refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
   };
@@ -755,6 +694,7 @@ if (document.querySelectorAll('div.pdf').length) {
     j.async = true;
     e.parentNode.insertBefore(j, e);
   })(document, 'script');
+});
 </script>
 
 </body>
