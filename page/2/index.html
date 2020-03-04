@@ -181,6 +181,172 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Spark-Performance-Tuning-with-Broadcast-Join/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/Spark-Performance-Tuning-with-Broadcast-Join/" class="post-title-link" itemprop="url">Spark学习笔记之Broadcast Join性能调优</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-07 11:06:40" itemprop="dateCreated datePublished" datetime="2019-05-07T11:06:40+08:00">2019-05-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>spark-sql或者hive-sql 很多业务场景都会有表关联的的操作，在hive中有map side join优化，对应的在spark-sql中也有map side join。spark中如果在参与join的表中存在小表，可以采用cache broadcast的方式进行优化，避免数据的shuffle，从而一定程度上可以避免数据倾斜，增加spark作业的执行速度。本文主要阐述怎么使用spark sql的map side join进行优化，及使用过程需要注意的内容，同时mark自己研究spark的过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Spark-Performance-Tuning-with-Broadcast-Join/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Data-Persistence-in-Spark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/Data-Persistence-in-Spark/" class="post-title-link" itemprop="url">Cache() or not Cache() in Spark, 这是一个价值百万的问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-05-06 16:34:19" itemprop="dateCreated datePublished" datetime="2019-05-06T16:34:19+08:00">2019-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Spark一个重要的功能就是将RDD持久化到内存中。当对RDD进行持久化操作时，每个节点都会将自己操作的RDD的partition持久化到内存中，并在之后对RDD的反复使用中，直接使用内存中缓存的partition。这样的话，对于一个RDD反复执行的操作场景中，就只需要对RDD计算一次即可，而不需要反复计算RDD。巧妙使用RDD持久化,甚至在某种场景下，可以将Spark应用程序性能提升10倍。对于迭代式算法和快速交互应用来说，RDD的持久化是非常必要的。<br></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Data-Persistence-in-Spark/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
     <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/ssh-login-without-passwd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -505,7 +671,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/Spark-Tutorial/" class="post-title-link" itemprop="url">Spark入门笔记—基本概念与环境配置</a>
+            <a href="/Spark-Tutorial/" class="post-title-link" itemprop="url">Spark入门笔记—基本概念与单机环境配置</a>
         </h1>
 
         <div class="post-meta">
@@ -522,7 +688,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-22 18:21:12" itemprop="dateModified" datetime="2020-02-22T18:21:12+08:00">2020-02-22</time>
+                <time title="Modified: 2020-03-02 22:47:20" itemprop="dateModified" datetime="2020-03-02T22:47:20+08:00">2020-03-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -688,7 +854,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
+                <time title="Modified: 2020-02-29 00:41:47" itemprop="dateModified" datetime="2020-02-29T00:41:47+08:00">2020-02-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1679,175 +1845,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/C-Error-C2678-no-operator-found-which-takes-a-left-hand-operand-of-type-const-ty/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="赵大寳">
-      <meta itemprop="description" content="赵大寳個人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵大寳">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/C-Error-C2678-no-operator-found-which-takes-a-left-hand-operand-of-type-const-ty/" class="post-title-link" itemprop="url">C++ Error C2678: no operator found which takes a left-hand operand of type 'const_ty'</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-01-29 18:24:36" itemprop="dateCreated datePublished" datetime="2019-01-29T18:24:36+08:00">2019-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天在Windows平台下面用Visual Studio编写C++程序时遇到了一个这样的错误：</p>
-<blockquote>
-<p>Severity    Code    Description    Project    File    Line    Suppression State<br>Error    C2678    binary ‘&lt;’: no operator found which takes a left-hand operand of type ‘const _Ty’ (or there is no acceptable conversion)</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/C-Error-C2678-no-operator-found-which-takes-a-left-hand-operand-of-type-const-ty/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/C-CPP-Structer/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-      <meta itemprop="name" content="赵大寳">
-      <meta itemprop="description" content="赵大寳個人小站">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="赵大寳">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/C-CPP-Structer/" class="post-title-link" itemprop="url">C/C++中结构体的定义以及实例化</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-01-25 20:58:02" itemprop="dateCreated datePublished" datetime="2019-01-25T20:58:02+08:00">2019-01-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-02-19 17:21:37" itemprop="dateModified" datetime="2020-02-19T17:21:37+08:00">2020-02-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C/" itemprop="url" rel="index">
-                    <span itemprop="name">C++</span>
-                  </a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>如何在C/C++中定义结构体，以及进行实例化</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/C-CPP-Structer/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1920,7 +1917,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">75</span>
+          <span class="site-state-item-count">77</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="HBase是运行在Hadoop分布式文件系统HDFS上进行数据存储的开源非关系型分布式数据库，2020年我尝试在Mac上配置一个伪分布式的v2.2.3 HBase环境，看看能不能进行一些基本的读写操作，以便熟悉一下分布式数据库有什么特点。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="配置HBase伪分布式娱乐环境">
+<meta property="og:url" content="https://fuhailin.github.io/HBase-install-on-UNIX/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="HBase是运行在Hadoop分布式文件系统HDFS上进行数据存储的开源非关系型分布式数据库，2020年我尝试在Mac上配置一个伪分布式的v2.2.3 HBase环境，看看能不能进行一些基本的读写操作，以便熟悉一下分布式数据库有什么特点。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-03-at-5.39.03-PM.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-03-at-7.32.34-PM.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/1583235497008.jpg">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-2.21.55-PM.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-11.13.50-AM.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-12.16.47-PM.png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-7.59.26-PM.png">
+<meta property="article:published_time" content="2020-03-03T07:35:19.000Z">
+<meta property="article:modified_time" content="2020-03-04T13:41:44.460Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="HDFS">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="HBase">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-03-at-5.39.03-PM.png">
+
+<link rel="canonical" href="https://fuhailin.github.io/HBase-install-on-UNIX/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>配置HBase伪分布式娱乐环境 | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129037882-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/HBase-install-on-UNIX/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          配置HBase伪分布式娱乐环境
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-03 15:35:19" itemprop="dateCreated datePublished" datetime="2020-03-03T15:35:19+08:00">2020-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-04 21:41:44" itemprop="dateModified" datetime="2020-03-04T21:41:44+08:00">2020-03-04</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>HBase是运行在Hadoop分布式文件系统HDFS上进行数据存储的开源非关系型分布式数据库，2020年我尝试在Mac上配置一个伪分布式的v2.2.3 HBase环境，看看能不能进行一些基本的读写操作，以便熟悉一下分布式数据库有什么特点。</p>
+<a id="more"></a>
+<h1 id="三种运行模式"><a href="#三种运行模式" class="headerlink" title="三种运行模式"></a>三种运行模式</h1><p><strong>单机模式</strong></p>
+<ol>
+<li><p>Hbase不使用HDFS,仅使用本地文件系统</p>
+</li>
+<li><p>ZooKeeper与Hbase运行在同一个JVM中</p>
+</li>
+</ol>
+<p><strong>伪分布式模式</strong></p>
+<ol>
+<li>所有进程运行在同一个节点上,不同进程运行在不同的JVM当中</li>
+<li>比较适合实验测试</li>
+</ol>
+<p><strong>完全分布式模式</strong></p>
+<ol>
+<li>进程运行在多个服务器集群中</li>
+<li>分布式依赖于HDFS系统，因此布署Hbase之前一定要有一个正常工作的HDFS集群</li>
+</ol>
+<p>那么HBase伪分布式环境部署要分几步呢？我们现在梳理一下。</p>
+<ol>
+<li>JDK 1.8</li>
+<li><a href="https://fuhailin.github.io/Hadoop-Install/">Hadoop环境</a></li>
+<li>HBase环境</li>
+</ol>
+<p>截止目前(2020年03月03日)我使用最新的stable HBase版本2.2.3进行配置。</p>
+<h1 id="JDK-1-8"><a href="#JDK-1-8" class="headerlink" title="JDK 1.8"></a>JDK 1.8</h1><p>HBase是使用Java开发的，因此配置需要JDK环境，目前长期稳定版LTS只支持到JDK 8(LTS JDK支持进度可到 <a href="https://hbase.apache.org/book.html#java" target="_blank" rel="noopener">https://hbase.apache.org/book.html#java</a> 查看)</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-03-at-5.39.03-PM.png" alt="Screen-Shot-2020-03-03-at-5.39.03-PM"></p>
+<p>可以翻阅我之前的博客查看在Ubuntu和MacOS上安装JDK 8的过程，这里不再细述。</p>
+<h1 id="Hadoop"><a href="#Hadoop" class="headerlink" title="Hadoop"></a>Hadoop</h1><p>在MacOS上配置伪分布式环境的详细办法可以查看我的上一篇博文👉🏻<a href="https://fuhailin.github.io/Hadoop-on-MacOS/">https://fuhailin.github.io/Hadoop-on-MacOS/</a> 。HBase是运行在HDFS之上的分布式数据库，所以在启动HBase之前必须先启动HDFS，运行<code>$HADOOP_HOME//sbin/start-dfs.sh</code>启动HDFS。</p>
+<h1 id="HBase"><a href="#HBase" class="headerlink" title="HBase"></a>HBase</h1><h2 id="Zookeeper"><a href="#Zookeeper" class="headerlink" title="Zookeeper"></a>Zookeeper</h2><p>顾名思义 Zookeeper 就是动物园管理员，它是用来管 Hadoop（大象）、Hive(蜜蜂)、Pig(小猪)的管理员， Apache Hbase 和 Apache Solr 的分布式集群都用到了 Zookeeper；Zookeeper是一个分布式的、开源的程序协调服务，是 Hadoop 项目下的一个子项目，它提供的主要功能包括：配置维护、域名服务、分布式同步、集群管理。</p>
+<blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">注：如果为了简单的话，可以选择不安装Zookeeper集群，就跟Spark默认提供自己的Scala一样，HBase默认配置自己提供的Zookeeper支持。</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h2 id="HBase安装"><a href="#HBase安装" class="headerlink" title="HBase安装"></a>HBase安装</h2><p>很多资料提到可以使用Hombrew直接通过’brew install hbase’进行HBase的下载配置，但是由于之前Hadoop的安装过程中Homebrew总是下载最新的JDK依赖这让我无法掌控是否兼容，于是我就直接在官网(<a href="https://hbase.apache.org/downloads.html)下载编译好的二进制版HBase进行配置。将下载好的hbase-2.2.3-bin.tar.gz解压到程序存放目录，然后将得到的`bin`路径添加到环境变量里，我是这样做的，`vim" target="_blank" rel="noopener">https://hbase.apache.org/downloads.html)下载编译好的二进制版HBase进行配置。将下载好的hbase-2.2.3-bin.tar.gz解压到程序存放目录，然后将得到的`bin`路径添加到环境变量里，我是这样做的，`vim</a> ~/.bash_profile`，添加：</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HBASE</span></span><br><span class="line"><span class="built_in">export</span> HBASE_HOME=/Users/vincent/opt/hbase/hbase-2.2.3</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HBASE_HOME</span>/bin</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="伪分布式配置"><a href="#伪分布式配置" class="headerlink" title="伪分布式配置"></a>伪分布式配置</h2><ol>
+<li>将<code>JAVA_HOME</code>的路径添加到hbase-env.sh文件，修改<code>vim $HBASE_HOME/conf/hbase-env.sh</code>:</li>
+</ol>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The java implementation to use.  Java 1.8+ required.</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home</span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li>在hbase-site.xml中添加如下内容：<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.rootdir<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>hdfs://localhost:9000/hbase<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.cluster.distributed<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>true<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">name</span>&gt;</span>hbase.unsafe.stream.capability.enforce<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">value</span>&gt;</span>false<span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+</li>
+</ol>
+<p>hbase.rootdir：该参数制定了HReion服务器的位置，即数据存放的位置。主要端口号要和Hadoop相应配置一致。<br>hbase.cluster.distributed：HBase的运行模式。false是单机模式，true是分布式模式。若为false, HBase和Zookeeper会运行在同一个JVM里面，默认为false。</p>
+<h2 id="启动HBase"><a href="#启动HBase" class="headerlink" title="启动HBase"></a>启动HBase</h2><p>如果完成了以上步骤，通过<code>source ~/.bash_profile</code>操作使修改的环境变量生效并启动了Hadoop(<code>$HADOOP_HOME/bin/start-dfs.sh</code>)，就可以通过<code>$HBASE_HOME/bin/start-hbase.sh</code>脚本来启动HBase了，启动完成后通过<code>jps</code>命令检查HBase进程：</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-03-at-7.32.34-PM.png" alt="Screen-Shot-2020-03-03-at-7.32.34-PM"></p>
+<p>启动成功后可以看到几个正在运行的Java进程，包括Hadoop(DataNode、NameNode)、Zookeeper(HQuorumPeer)和HBase(HMaster、HRegionServer)。</p>
+<p>通过<code>hbase version</code>命令查看HBase是否正常运行打印版本信息：</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/1583235497008.jpg" alt="1583235497008"></p>
+<p>成功启动后，可以访问 HBase的Web 界面 <a href="http://localhost:16020/" target="_blank" rel="noopener">http://localhost:16020</a> 查看集群的运行状态信息。</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-2.21.55-PM.png" alt="Screen-Shot-2020-03-04-at-2.21.55-PM"></p>
+<p>进入HBase交互式界面<code>hbase shell</code>，<code>status</code>命令查看HBase集群运行状态，<code>list</code>命令列出HBase库中的表：</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-11.13.50-AM.png" alt="Screen-Shot-2020-03-04-at-11.13.50-AM"></p>
+<blockquote>
+<p>【注意】：我几次在尝试hbase shell交互式编程时遇到<code>ERROR: KeeperErrorCode = NoNode for /hbase/master</code>的错误信息，通过查看<code>$HBASE_HOME/logs/</code>中日志可以查看详细异常信息，怀疑是HBase自带的Zookeeper存在管理问题，重启HBase后又没有问题，但还没有找出错误的规律，可以尝试单独下载配置Zookeeper程序，有线索的朋友欢迎留言</p>
+</blockquote>
+<p>这里启动关闭Hadoop和HBase的顺序一定是：<br>启动Hadoop—&gt;启动HBase—&gt;关闭HBase—&gt;关闭Hadoop</p>
+<h1 id="HBase-Shell-编程实践"><a href="#HBase-Shell-编程实践" class="headerlink" title="HBase Shell 编程实践"></a>HBase Shell 编程实践</h1><h4 id="1-1-HBase建表"><a href="#1-1-HBase建表" class="headerlink" title="1.1 HBase建表"></a>1.1 HBase建表</h4><p>HBase中用create命令创建表，具体如下：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create <span class="string">'student'</span>,<span class="string">'Sname'</span>,<span class="string">'Ssex'</span>,<span class="string">'Sage'</span>,<span class="string">'Sdept'</span>,<span class="string">'course'</span></span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-12.16.47-PM.png" alt="Screen-Shot-2020-03-04-at-12.16.47-PM"></p>
+<h4 id="1-2-HBase增删查改"><a href="#1-2-HBase增删查改" class="headerlink" title="1.2 HBase增删查改"></a>1.2 HBase增删查改</h4><p><strong>添加数据</strong><br>HBase中用put命令添加数据，注意：一次只能为一个表的一行数据的一个列，也就是一个单元格添加一个数据，所以直接用shell命令插入数据效率很低，在实际应用中，一般都是利用编程操作数据。</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 为student表添加了学号为95001，名字为LiYing的一行数据，其行键为95001</span></span><br><span class="line">put <span class="string">'student'</span>,<span class="string">'95001'</span>,<span class="string">'Sname'</span>,<span class="string">'LiYing'</span></span><br><span class="line"><span class="comment"># 为95001行下的course列族的math列添加了一个数据</span></span><br><span class="line">put <span class="string">'student'</span>,<span class="string">'95001'</span>,<span class="string">'course:math'</span>,<span class="string">'80'</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>删除数据</strong><br>在HBase中用delete以及deleteall命令进行删除数据操作，它们的区别是：1. delete用于删除一个数据，是put的反向操作；2. deleteall操作用于删除一行数据。</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除一个数据，是put的反向操作</span></span><br><span class="line">delete <span class="string">'student'</span>,<span class="string">'95001'</span>,<span class="string">'Ssex'</span></span><br><span class="line"><span class="comment"># 删除student表中的95001行的全部数据</span></span><br><span class="line">deleteall <span class="string">'student'</span>,<span class="string">'95001'</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>查看数据</strong><br>HBase中有两个用于查看数据的命令：1. get命令，用于查看表的某一行数据；2. scan命令用于查看某个表的全部数据</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看‘student’表‘95001’行的数据</span></span><br><span class="line">get <span class="string">'student'</span>,<span class="string">'95001'</span></span><br><span class="line"><span class="comment"># 查看‘student’表的全部数据</span></span><br><span class="line">scan <span class="string">'student'</span></span><br></pre></td></tr></tbody></table></figure>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/hadoop/Screen-Shot-2020-03-04-at-7.59.26-PM.png" alt="Screen-Shot-2020-03-04-at-7.59.26-PM"></p>
+<p><strong>删除表</strong><br>删除表有两步，第一步先让该表不可用，第二步删除表。</p>
+<figure class="highlight sh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#先禁用表</span></span><br><span class="line"><span class="built_in">disable</span> <span class="string">'student'</span></span><br><span class="line"><span class="comment">#删除表</span></span><br><span class="line">drop <span class="string">'student'</span></span><br></pre></td></tr></tbody></table></figure>
+<p>至此我们已经完成了HBase的伪分布式配置与基本的增删查改操作，那它能替换我们的MySQL和Oracle吗？</p>
+<h2 id="HBase与传统关系数据库对比分析："><a href="#HBase与传统关系数据库对比分析：" class="headerlink" title="HBase与传统关系数据库对比分析："></a>HBase与传统关系数据库对比分析：</h2><p>HBase与传统的关系数据库的区别主要体现在以下几个方面：</p>
+<ol>
+<li>数据类型：关系数据库采用关系模型，具有丰富的数据类型和存储方式，HBase则采用了更加简单的数据模型，它把数据存储为未经解释的字符串。</li>
+<li>数据操作：关系数据库中包含了丰富的操作，其中会涉及复杂的多表连接。HBase操作则不存在复杂的表与表之间的关系，只有简单的插入、查询、删除、清空等，因为HBase在设计上就避免了复杂的表和表之间的关系。</li>
+<li>存储模式：关系数据库是基于行模式存储的。HBase是基于列存储的，每个列族都由几个文件保存，不同列族的文件是分离的。</li>
+<li>数据索引：关系数据库通常可以针对不同列构建复杂的多个索引，以提高数据访问性能。HBase只有一个索引——行键，通过巧妙的设计，HBase中的所有访问方法，或者通过行键访问，或者通过行键扫描，从而使得整个系统不会慢下来。</li>
+<li>数据维护：在关系数据库中，更新操作会用最新的当前值去替换记录中原来的旧值，旧值被覆盖后就不会存在。而在HBase中执行更新操作时，并不会删除数据旧的版本，而是生成一个新的版本，旧有的版本仍然保留。</li>
+<li>可伸缩性：关系数据库很难实现横向扩展，纵向扩展的空间也比较有限。相反，HBase和BigTable这些分布式数据库就是为了实现灵活的水平扩展而开发的，能够轻易地通过在集群中增加或者减少硬件数量来实现性能的伸缩</li>
+</ol>
+<h1 id="HBase的适用业务场景"><a href="#HBase的适用业务场景" class="headerlink" title="HBase的适用业务场景"></a>HBase的适用业务场景</h1><ol>
+<li><strong>写密集型应用</strong>：每天写入量巨大，而相对读数量较小的应用，比如IM的历史消息、游戏的日志等等</li>
+<li><strong>不需要复杂查询条件来查询数据的应用</strong>：HBase只支持基于rowkey的查询，对于HBase来说，单条记录或者小范围的查询是可以接受的，大范围的查询由于分布式的原因，可能在性能上有点影响，而对于像SQL的join等查询，HBase无法支持。</li>
+<li><strong>对性能和可靠性要求非常高的应用</strong>：由于HBase本身没有单点故障，可用性非常高。</li>
+<li><strong>海量数据，而且增长量无法预估的应用</strong>：HBase支持在线扩展，即使在一段时间内数据量呈井喷式增长，也可以通过HBase横向扩展来满足功能。</li>
+</ol>
+<p><strong>References</strong>:</p>
+<ol>
+<li><p><a href="https://www.cnblogs.com/ivictor/p/5906433.html" target="_blank" rel="noopener">Hbase的伪分布式安装|SlowTech</a></p>
+</li>
+<li><p><a href="http://dblab.xmu.edu.cn/blog/2442-2/" target="_blank" rel="noopener">HBase2.2.2安装和编程实践指南|林子雨</a></p>
+</li>
+<li><p><a href="https://cshihong.github.io/2018/05/17/HBase%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">HBase技术原理|曹世宏</a></p>
+</li>
+<li><p><a href="https://hbase.apache.org/book.html" target="_blank" rel="noopener">Apache HBase ™ Reference Guide</a></p>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechat_channel.png">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">微信搜一搜：赵大寳Note</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/HDFS/" rel="tag"><i class="fa fa-tag"></i> HDFS</a>
+              <a href="/tags/Hadoop/" rel="tag"><i class="fa fa-tag"></i> Hadoop</a>
+              <a href="/tags/HBase/" rel="tag"><i class="fa fa-tag"></i> HBase</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Spark-read-CSV/" rel="prev" title="Spark read CSV">
+      <i class="fa fa-chevron-left"></i> Spark read CSV
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三种运行模式"><span class="nav-number">1.</span> <span class="nav-text">三种运行模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JDK-1-8"><span class="nav-number">2.</span> <span class="nav-text">JDK 1.8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hadoop"><span class="nav-number">3.</span> <span class="nav-text">Hadoop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HBase"><span class="nav-number">4.</span> <span class="nav-text">HBase</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Zookeeper"><span class="nav-number">4.1.</span> <span class="nav-text">Zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase安装"><span class="nav-number">4.2.</span> <span class="nav-text">HBase安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪分布式配置"><span class="nav-number">4.3.</span> <span class="nav-text">伪分布式配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动HBase"><span class="nav-number">4.4.</span> <span class="nav-text">启动HBase</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HBase-Shell-编程实践"><span class="nav-number">5.</span> <span class="nav-text">HBase Shell 编程实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-HBase建表"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">1.1 HBase建表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-HBase增删查改"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">1.2 HBase增删查改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HBase与传统关系数据库对比分析："><span class="nav-number">5.1.</span> <span class="nav-text">HBase与传统关系数据库对比分析：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HBase的适用业务场景"><span class="nav-number">6.</span> <span class="nav-text">HBase的适用业务场景</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">77</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
