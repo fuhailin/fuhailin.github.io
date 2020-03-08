@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://fuhailin.github.io/Spark-Tutorial/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
     <loc>https://fuhailin.github.io/HBase-install-on-UNIX/</loc>
     <lastmod>2020-03-04</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Spark-read-CSV/</loc>
-    <lastmod>2020-03-02</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/Spark-Tutorial/</loc>
     <lastmod>2020-03-02</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Hadoop-on-MacOS/</loc>

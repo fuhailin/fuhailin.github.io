@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://fuhailin.github.io/Spark-Tutorial/</loc>
+    
+    <lastmod>2020-03-08T16:53:37.031Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://fuhailin.github.io/HBase-install-on-UNIX/</loc>
     
     <lastmod>2020-03-04T14:04:11.997Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://fuhailin.github.io/Spark-read-CSV/</loc>
     
     <lastmod>2020-03-02T16:34:44.773Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://fuhailin.github.io/Spark-Tutorial/</loc>
-    
-    <lastmod>2020-03-02T14:47:20.333Z</lastmod>
     
   </url>
   
