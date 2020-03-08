@@ -10,6 +10,8 @@ description: 在Hexo博客中插入图片的各种方式
 ## 在文章中插入图片
 [Hexo博客搭建之在文章中插入图片](https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/)
 
+<!-- more -->
+
 ### 绝对路径本地引用
 当Hexo项目中只用到少量图片时，可以将图片统一放在source/images文件夹中，通过markdown语法访问它们。
 ```

@@ -30,7 +30,7 @@ ssh localhost                         #此时已不需密码即可登录localhos
 ```
 
 # 安装Java环境
-此处参考 https://fuhailin.github.io/Essential-Apps-for-Ubuntu/#JAVA
+此处参考 https://fuhailin.github.io/Essential-Apps/#JAVA
 # 安装 Hadoop 3
 通过Apache Hadoop官方下载页面( https://hadoop.apache.org/releases.html )选择最新的Binary版本进行下载（截止2019年4月25日，Hadoop最新稳定版本为3.1.2）。
 Binary版本是编译好的二进制版本，可以直接解压安装；另一个包含 src 的则是 Hadoop 源代码，需要进行编译才可使用。
@@ -101,9 +101,9 @@ Hadoop 的运行方式是由配置文件决定的（运行 Hadoop 时会读取�
 启动namenode和datanode进程，并查看启动结果
 `./sbin/start-dfs.sh`
 启动完成后，可以通过命令 `jps` 来判断是否成功启动，若成功启动则会列出如下进程: “NameNode”、”DataNode” 和 “SecondaryNameNode”
-![](2019-04-25 15 38 08.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-04-25 15 38 08.png)
 成功启动后，可以访问 HDFS的Web 界面 http://localhost:9870 查看 NameNode 和 Datanode 信息，还可以在线查看 HDFS 中的文件。
-![HDFS Web界面](2019-04-25 15 52 37.png)
+![HDFS Web界面](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-04-25 15 52 37.png)
 至此，hadoop的安装就已经完成啦！enjoy it！
 # 运行Hadoop伪分布式实例
 由于前面已经配置了Hadoop的环境变量，Hadoop和HDFS的命令已经包含在了系统当中，HDFS有三种shell命令方式：
@@ -133,7 +133,7 @@ hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-*.jar grep input o
 hdfs dfs -cat output/*
 ```
 结果如下，注意到刚才我们已经更改了配置文件，所以运行结果不同。
-![](2019-04-25 16 21 24.png)
+![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-04-25-16-21-24.png)
 我们也可以将运行结果取回到本地：
 ```shell
 rm -r ./output    # 先删除本地的 output 文件夹（如果存在）

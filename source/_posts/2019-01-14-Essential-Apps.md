@@ -9,6 +9,8 @@ description: Ubuntu必备软件配置记录帖
 # For Ubuntu
 ## 安装编辑器&编译器
 
+<!-- more -->
+
 ### 1、安装Sublime Text 3：
 https://www.sublimetext.com/docs/3/linux_repositories.html
 apt Install the GPG key:
@@ -236,7 +238,7 @@ wget "http://cdn2.ime.sogou.com/dl/index/1524572264/sogoupinyin_2.2.0.0108_amd64
 
 第一步               |                第二步      |               第三步
 :-------------------------:|:-------------------------:|:-------------------------:
-![](http://blog.zedyeung.com/2018/08/05/Ubuntu-18-04-fcitx-chinese-input-setup-google-and-sogou/input2.png)|![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screenshot_from_2019-01-15_10-55-12.png) | ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screenshot_from_2019-01-15_10-55-36.png) 
+![](http://blog.zedyeung.com/2018/08/05/Ubuntu-18-04-fcitx-chinese-input-setup-google-and-sogou/input2.png)|![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screenshot_from_2019-01-15_10-55-12.png) | ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screenshot_from_2019-01-15_10-55-36.png)
 
  <kbd>Ctrl</kbd>+<kbd>Space</kbd>切换中英文输入
 
@@ -354,6 +356,12 @@ brew cask install atom
 $ sudo apt install aria2
 # For macOS
 $ brew install aria2
+```
+
+## sublime-text & Skim
+```sh
+brew cask install sublime-text
+brew cask install skim
 ```
 
 ## Bazel

@@ -6,10 +6,10 @@ categories: Tools
 top:
 description: Windows10+Ubuntu18.04双系统安装成功的记录
 ---
-
-
 ### Step:1 在硬盘上为Ubuntu在硬盘上创建一块空闲空间
 登录Windows10系统，打开磁盘管理工具，我这里从D盘压缩出来了100G的空闲分区，保持此分区未分配；
+
+<!-- more -->
 
 ### Step:2 制作Ubuntu安装镜像
  1. 下载Ubuntu18.04镜像文件

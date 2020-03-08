@@ -13,6 +13,8 @@ description: 理解Linux操作系统下文件权限的相关问题，如何在�
 
 ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1.png)
 
+<!-- more -->
+
 在命令行中查看权限的结果是这样的：
 
 ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/03-01-02.png)

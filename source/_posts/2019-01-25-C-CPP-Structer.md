@@ -12,6 +12,9 @@ description: 如何在C/C++中定义结构体，以及进行实例化
 在C和C++结构体之间还有重要的区别：
  1. 结构体中的成员函数：在C的结构体中不能有成员函数，在C++的结构体中可以有成员函数和数据成员。
  2. 直接初始化：在C中不能直接初始化结构体的数据成员，但是在C++中可以。
+
+<!-- more -->
+
 ```c
 // C program to demonstrate that direct member initialization is not possible in C
 #include <stdio.h>

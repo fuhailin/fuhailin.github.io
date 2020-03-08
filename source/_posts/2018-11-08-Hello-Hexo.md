@@ -275,11 +275,11 @@ http://octopress.org/docs/plugins/codeblock/
 ```
 {% gist d27c69e5852f3d0f4e7dc15bb90a2e24 trie.py %}
 ```
-
+<!--
 插入github代码
 ```
 {% ghcode github_code_link start_line end_line %}
-```
+``` -->
 
 ***********************
 ## 搜索引擎优化SEO

@@ -55,5 +55,5 @@ jupyter notebook
 ```
 
 # 本地浏览器访问远程
-http://202.116.46.256:8888/tree?
+<!-- http://202.116.46.256:8888/tree? -->
 ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/2019-03-02-232043.png)

@@ -15,6 +15,7 @@ PostgreSQL的一些特点：PostgreSQL中可以插入重复数据，也就是说
 sudo apt update
 sudo apt install postgresql postgresql-contrib
 ```
+<!-- more -->
 
 安装完成后，默认会：
 
