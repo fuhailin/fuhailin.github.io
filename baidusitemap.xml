@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://fuhailin.github.io/DeePray-Start/</loc>
+    <lastmod>2020-06-05</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/kafka-HelloWorld/</loc>
+    <lastmod>2020-03-13</lastmod>
+  </url>  <url>
     <loc>https://fuhailin.github.io/Spark-Tutorial/</loc>
     <lastmod>2020-03-08</lastmod>
   </url>  <url>
@@ -115,9 +121,6 @@
     <loc>https://fuhailin.github.io/Smart-Beta/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Outfits-dataset/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
     <loc>https://fuhailin.github.io/DeepWalk/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
@@ -127,28 +130,31 @@
     <loc>https://fuhailin.github.io/ML-in-Finance/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Euler-number/</loc>
+    <loc>https://fuhailin.github.io/Outfits-dataset/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/Spark-Programming-Tutorial/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Hello-Scala/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Spark-Programming-Tutorial/</loc>
+    <loc>https://fuhailin.github.io/Euler-number/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/How-to-access-intranet-hosts-with-reverse-proxy/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/Spark-Performance-Tuning-with-Broadcast-Join/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/Data-Persistence-in-Spark/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/ssh-login-without-passwd/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Tmux/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/Data-Persistence-in-Spark/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/Spark-Performance-Tuning-with-Broadcast-Join/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/How-to-access-intranet-hosts-with-reverse-proxy/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Program-with-RDD-in-PySpark/</loc>
@@ -160,10 +166,10 @@
     <loc>https://fuhailin.github.io/cpp-strings/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Temporal-Convolutional-Network/</loc>
+    <loc>https://fuhailin.github.io/Inline-and-Virtual-Function-in-CPP/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Inline-and-Virtual-Function-in-CPP/</loc>
+    <loc>https://fuhailin.github.io/Temporal-Convolutional-Network/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/AutoML-Hyperpam-Optimize/</loc>
@@ -172,16 +178,19 @@
     <loc>https://fuhailin.github.io/C-Error-C2678-no-operator-found-which-takes-a-left-hand-operand-of-type-const-ty/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
+    <loc>https://fuhailin.github.io/Difference-between-the-dot-and-the-arrow-operator-in-C/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
     <loc>https://fuhailin.github.io/Git-command/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Difference-between-the-dot-and-the-arrow-operator-in-C/</loc>
+    <loc>https://fuhailin.github.io/KDD-China-2019/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/vi-vim/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/KDD-China-2019/</loc>
+    <loc>https://fuhailin.github.io/Pandas-Excel/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Evaluation-Credit-model/</loc>
@@ -190,40 +199,37 @@
     <loc>https://fuhailin.github.io/Embedding/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Pandas-Excel/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/Hexo-SEO/</loc>
+    <loc>https://fuhailin.github.io/Stock-Option/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/SQL-Join/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/Stock-Option/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/xDeepFM/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/NLP-material/</loc>
+    <loc>https://fuhailin.github.io/Hexo-SEO/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/SVM-notebooks/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/DeepFM/</loc>
+    <loc>https://fuhailin.github.io/NLP-material/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
-    <loc>https://fuhailin.github.io/FM/</loc>
-    <lastmod>2019-11-26</lastmod>
-  </url>  <url>
-    <loc>https://fuhailin.github.io/GBDT-LR/</loc>
+    <loc>https://fuhailin.github.io/xDeepFM/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Neural-Factorization-Machines-NFM/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Product-based-Neural-Network-PNN/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/GBDT-LR/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/FM/</loc>
+    <lastmod>2019-11-26</lastmod>
+  </url>  <url>
+    <loc>https://fuhailin.github.io/DeepFM/</loc>
     <lastmod>2019-11-26</lastmod>
   </url>  <url>
     <loc>https://fuhailin.github.io/Attentional-Factorization-Machines-AFM/</loc>

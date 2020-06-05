@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="开源项目 DeePray 发布啦！针对推荐算法，特别是点击率预估领域目不暇接的诞生新模型现状，如何将心仪模型快速应用于领域内一直是一项棘手的问题，DeePray这个项目通过统一构建数据流水线，提供各类网络层组件，在此之上，以模块化设计，用组件之砖，搭建各类网络之模型，并以灵活配置式的方式提供调用接口，你也可以在DeePray的基础上，选用各类组件模块，就像玩乐高积木一样建造你自己的模型。deepr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeePray:深度学习推荐算法新基建">
+<meta property="og:url" content="https://fuhailin.github.io/DeePray-Start/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="开源项目 DeePray 发布啦！针对推荐算法，特别是点击率预估领域目不暇接的诞生新模型现状，如何将心仪模型快速应用于领域内一直是一项棘手的问题，DeePray这个项目通过统一构建数据流水线，提供各类网络层组件，在此之上，以模块化设计，用组件之砖，搭建各类网络之模型，并以灵活配置式的方式提供调用接口，你也可以在DeePray的基础上，选用各类组件模块，就像玩乐高积木一样建造你自己的模型。deepr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-e99820394041aff5f3acd64817d4d621_1440w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-e1caf0a921c5bfb4b0e06e2cee55c2dc_1440w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-6ff7a6a39918c4bc023fcd42207fb32a_1440w.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-5965510232fe17c5cf1824b72ac40c77_1440w.jpg">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechat_channel.png">
+<meta property="article:published_time" content="2020-06-05T03:44:16.000Z">
+<meta property="article:modified_time" content="2020-06-05T13:40:04.018Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-e99820394041aff5f3acd64817d4d621_1440w.jpg">
+
+<link rel="canonical" href="https://fuhailin.github.io/DeePray-Start/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>DeePray:深度学习推荐算法新基建 | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-129037882-1');
+      }
+    </script>
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">赵大寳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right"></div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/DeePray-Start/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DeePray:深度学习推荐算法新基建
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-05 11:44:16 / Modified: 21:40:04" itemprop="dateCreated datePublished" datetime="2020-06-05T11:44:16+08:00">2020-06-05</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>开源项目 <strong>DeePray</strong> 发布啦！针对推荐算法，特别是点击率预估领域目不暇接的诞生新模型现状，如何将心仪模型快速应用于领域内一直是一项棘手的问题，DeePray这个项目通过统一构建数据流水线，提供各类网络层组件，在此之上，以模块化设计，用组件之砖，搭建各类网络之模型，并以灵活配置式的方式提供调用接口，你也可以在DeePray的基础上，选用各类组件模块，就像玩乐高积木一样建造你自己的模型。<code>deepray.model</code>目录下已实现LR、FM、FFM、DeepFM、Wide&amp;Deep、Deep&amp;Cross、NFM、xDeepFM、FLEN、AutoInt、DIN等各具特色的分类模型，你只需要处理好自己的数据，然后<code>import deepray as dp</code>就可以使用啦！</p>
+<p>总之DeePray的目标是：</p>
+<ul>
+<li>容易使用, 即使新手也可以快速上手深度学习工具</li>
+<li>面对大规模数据也能快速处理</li>
+<li>易于扩展的模块化架构可以像玩乐高游戏一样构建神经网络！</li>
+</ul>
+<p>由于开始动手做这个项目的时候是在2020年1月份左右，那时候TensorFlow 2.0正式版已经推出3个月了，而TensorFlow1.x静态图运行和TensorFlow2.x默认动态图运行方式让TensorFlow的使用就像两套不同的语言，于是我选择向前看直接从TensorFlow 2.0开始，边学习TF2的使用边开始DeePray的开发，历时半年的业余时间，中间又经历了两次TensorFlow正式版的升级，因此你在使用DeePray时候需要保证已经安装了最新版本的TensorFlow（TensorFlow&gt;=2.2.0）。</p>
+<p>DeePray的诞生免不了与另一个前辈DeepCTR进行比较，DeePray具有比DeepCTR更高的模块复用结构，因此也更加容易扩展。<br>以Deep&amp;Cross模型为例，这是一个典型的双塔结构网络，Deep网络和Cross网络是并行的，Embedding层和Prediction层等公共网络层已抽取到父类BaseCTRModel中，因此新的个性化模型只需继承BaseCTRModel，然后从deepray.base.layers中选用组件DeepNet和CrossNet就可以搭建Deep&amp;Cross网络了，是不是就跟搭建积木一样简单。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>DeePray</th>
+<th>DeepCTR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://pic2.zhimg.com/80/v2-e99820394041aff5f3acd64817d4d621_1440w.jpg" alt="Screen Shot 2020-06-05 at 4.01.39 PM"></td>
+<td><img src="https://pic1.zhimg.com/80/v2-e1caf0a921c5bfb4b0e06e2cee55c2dc_1440w.jpg" alt="Screen Shot 2020-06-05 at 3.56.01 PM"></td>
+</tr>
+<tr>
+<td><img src="https://pic3.zhimg.com/80/v2-6ff7a6a39918c4bc023fcd42207fb32a_1440w.jpg" alt="Screen Shot 2020-06-05 at 4.40.30 PM"></td>
+<td><img src="https://pic4.zhimg.com/80/v2-5965510232fe17c5cf1824b72ac40c77_1440w.jpg" alt="Screen Shot 2020-06-05 at 4.41.04 PM"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>分别由DeePray和DeepCTR实现的DCN、DeepFM模型对比，窃以为DeePray中的实现更为简洁、也更为清晰易读。在一个个实现不同网络模型的过程中，我也参考了DeepCTR的实现方案，在此向浅梦大佬致敬！</p>
+<h1 id="Data-Pipeline"><a href="#Data-Pipeline" class="headerlink" title="Data Pipeline"></a>Data Pipeline</h1><p>面对海量的多到内存一次放不下的数据，构建数据流水线是一个好主意，因此DeePray选择与TensorFlow的DataSet api深度整合，支持TFRecords数据格式，通过调整数据读取相关参数以便获得最佳性能，当然你也可以继承<code>BaseCTRModel</code>类后重写<code>create_train_data_iterator()</code>方法来构造自己的数据迭代器，下面以Census Adult Data Set为例，进行数据处理准备DeePray的输入数据</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler, LabelEncoder</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> deepray.utils.converter <span class="keyword">import</span> CSV2TFRecord</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># http://archive.ics.uci.edu/ml/datasets/Adult</span></span><br><span class="line">train_data = <span class="string">'DeePray/examples/census/data/raw_data/adult_data.csv'</span></span><br><span class="line">df = pd.read_csv(train_data)</span><br><span class="line">df[<span class="string">'income_label'</span>] = (df[<span class="string">"income_bracket"</span>].apply(<span class="keyword">lambda</span> x: <span class="string">"&gt;50K"</span> <span class="keyword">in</span> x)).astype(int)</span><br><span class="line">df.pop(<span class="string">'income_bracket'</span>)</span><br><span class="line"></span><br><span class="line">NUMERICAL_FEATURES = [<span class="string">'age'</span>, <span class="string">'fnlwgt'</span>, <span class="string">'hours_per_week'</span>, <span class="string">'capital_gain'</span>, <span class="string">'capital_loss'</span>, <span class="string">'education_num'</span>]</span><br><span class="line">CATEGORY_FEATURES = [col <span class="keyword">for</span> col <span class="keyword">in</span> df.columns <span class="keyword">if</span> col != LABEL <span class="keyword">and</span> col <span class="keyword">not</span> <span class="keyword">in</span> NUMERICAL_FEATURES]</span><br><span class="line">LABEL = [<span class="string">'income_label'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> feat <span class="keyword">in</span> CATEGORY_FEATURES:</span><br><span class="line">    lbe = LabelEncoder()</span><br><span class="line">    df[feat] = lbe.fit_transform(df[feat])</span><br><span class="line"><span class="comment"># Feature normilization</span></span><br><span class="line">mms = MinMaxScaler(feature_range=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">df[NUMERICAL_FEATURES] = mms.fit_transform(df[NUMERICAL_FEATURES])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">prebatch = <span class="number">1</span>  <span class="comment"># flags.prebatch</span></span><br><span class="line">converter = CSV2TFRecord(LABEL, NUMERICAL_FEATURES, CATEGORY_FEATURES, VARIABLE_FEATURES=[], gzip=<span class="literal">False</span>)</span><br><span class="line">converter.write_feature_map(df, <span class="string">'./data/feature_map.csv'</span>)</span><br><span class="line"></span><br><span class="line">train_df, valid_df = train_test_split(df, test_size=<span class="number">0.2</span>)</span><br><span class="line">converter(train_df, out_file=<span class="string">'./data/train.tfrecord'</span>, prebatch=prebatch)</span><br><span class="line">converter(valid_df, out_file=<span class="string">'./data/valid.tfrecord'</span>, prebatch=prebatch)</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="快速实验"><a href="#快速实验" class="headerlink" title="快速实验"></a>快速实验</h1><p>完成数据预处理之后通过简单的几行代码，填写好必要配置之后便可进行试验，如果你想换用其他模型，只需修改<code>--model</code>一个参数即可</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> absl <span class="keyword">import</span> app, flags</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> deepray <span class="keyword">as</span> dp</span><br><span class="line"><span class="keyword">from</span> deepray.base.trainer <span class="keyword">import</span> train</span><br><span class="line"><span class="keyword">from</span> deepray.model.build_model <span class="keyword">import</span> BuildModel</span><br><span class="line"></span><br><span class="line">FLAGS = flags.FLAGS</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(flags=None)</span>:</span></span><br><span class="line">    FLAGS(flags, known_only=<span class="literal">True</span>)</span><br><span class="line">    flags = FLAGS</span><br><span class="line">    model = BuildModel(flags)</span><br><span class="line">    history = train(model)</span><br><span class="line">    print(history)</span><br><span class="line"></span><br><span class="line">argv = [</span><br><span class="line">    <span class="string">'--model=lr'</span>,</span><br><span class="line">    <span class="string">'--train_data=/Users/vincent/Projects/DeePray/examples/census/data/train'</span>,</span><br><span class="line">    <span class="string">'--valid_data=/Users/vincent/Projects/DeePray/examples/census/data/valid'</span>,</span><br><span class="line">    <span class="string">'--feature_map=/Users/vincent/Projects/DeePray/examples/census/data/feature_map.csv'</span>,</span><br><span class="line">    <span class="string">'--learning_rate=0.01'</span>,</span><br><span class="line">    <span class="string">'--epochs=10'</span>,</span><br><span class="line">    <span class="string">'--batch_size=64'</span>,</span><br><span class="line">]</span><br><span class="line">main(flags=argv)</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="构建个性化新网络模型"><a href="#构建个性化新网络模型" class="headerlink" title="构建个性化新网络模型"></a>构建个性化新网络模型</h1><p>只需要继承<code>BaseCTRModel</code>类，然后在<code>build</code>方法中选用你想要的网络组件，既可以是Keras中已有的、也可以是deepray.base.layers中提供的，还可以是你自己创造的.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomModel</span><span class="params">(BaseCTRModel)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build</span><span class="params">(self, input_shape)</span>:</span></span><br><span class="line">        self.lstm_block = tf.keras.layers.LSTM(<span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">build_network</span><span class="params">(self, features, is_training=None)</span>:</span></span><br><span class="line">        v = self.lstm_block(features)</span><br><span class="line">        <span class="keyword">return</span> v</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="开始尝试吧"><a href="#开始尝试吧" class="headerlink" title="开始尝试吧"></a>开始尝试吧</h1><p>目前DeePray的安装包已托管到pypi，只需要<code>pip install deepray</code>就可以快速安装，具体的CPU或GPU运行设备是由你的TensorFlow版本决定的，记住DeePray要配合最新的TensorFlow版本使用喔！</p>
+<p>DeePray这个项目还在持续开发中，新模型的开发、测试、文档，包括可能的PyTorch版本都需要补充，目前我个人精力有限，迭代会不及时，特别欢迎感兴趣的同学参与进来一起完善建设和维护！快来点个Star吧！</p>
+<p><a href="https://github.com/fuhailin/DeePray" target="_blank" rel="noopener">https://github.com/fuhailin/DeePray</a></p>
+<h1 id="题外记"><a href="#题外记" class="headerlink" title="题外记"></a>题外记</h1><p>2020年春节，突然爆发的病毒疫情，让我和父母在湖北家中整整隔离了近60天没有出门，这也迫使我有时间完成DeePray基础搭建工作，谨以此文纪念那段特殊时光。</p>
+<p>最后我也开通了微信公众号【公众号ID：StateOfTheArt】，欢迎大家关注一起交流！</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechat_channel.png" alt="关注公众号趙大寳Note"></p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <p>Bitcoin</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+            <div class="social-item">
+              <a target="_blank" class="social-link" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechat_channel.png">
+                <span class="icon">
+                  <i class="fa fa-wechat"></i>
+                </span>
+
+                <span class="label">微信搜一搜：赵大寳Note</span>
+              </a>
+            </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/kafka-HelloWorld/" rel="prev" title="kafka HelloWorld">
+      <i class="fa fa-chevron-left"></i> kafka HelloWorld
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Data-Pipeline"><span class="nav-number">1.</span> <span class="nav-text">Data Pipeline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#快速实验"><span class="nav-number">2.</span> <span class="nav-text">快速实验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建个性化新网络模型"><span class="nav-number">3.</span> <span class="nav-text">构建个性化新网络模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始尝试吧"><span class="nav-number">4.</span> <span class="nav-text">开始尝试吧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题外记"><span class="nav-number">5.</span> <span class="nav-text">题外记</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

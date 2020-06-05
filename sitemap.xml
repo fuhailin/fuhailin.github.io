@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://fuhailin.github.io/DeePray-Start/</loc>
+    
+    <lastmod>2020-06-05T13:40:04.018Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://fuhailin.github.io/kafka-HelloWorld/</loc>
+    
+    <lastmod>2020-03-13T09:39:25.146Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://fuhailin.github.io/Spark-Tutorial/</loc>
     
     <lastmod>2020-03-08T16:53:37.031Z</lastmod>
