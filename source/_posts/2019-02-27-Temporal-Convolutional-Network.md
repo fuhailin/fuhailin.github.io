@@ -33,9 +33,10 @@ Causal convolution 的叠加, 高层的感受野野/历史信息与网络层数�
 
 卷积Dilated Convolutions的出现拯救了这一问题，
 Dilation convolution[^2] 的运算如下:  `$F ( s ) = \left( \mathbf { x } * _ { d } f \right) ( s ) = \sum _ { i = 0 } ^ { k - 1 } f ( i ) \cdot \mathbf { x } _ { s - d \cdot i }$`( `$\mathbf { x }$`表示输入序列, $f$ 表示 filter, $d$ 是 dilation factor, $k$ 是 filter size,  `$s - d \cdot i $`意味着只对过去的状态作卷积). 看图最直观.
-![A dilated causal convolution with dilation factors d = 1, 2, 4 and filter size k = 3](causal-convolution.png)
+![A dilated causal convolution with dilation factors d = 1, 2, 4 and filter size k = 3](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/causal-convolution.png)
 和传统卷积不同的是，扩张卷积允许卷积时的输入存在间隔采样，采样率受图中的d控制。 最下面一层的d=1，表示输入时每个点都采样，中间层d=2，表示输入时每2个点采样一个作为输入。一般来讲，越高的层级使用的d的大小越大。所以，扩张卷积使得有效窗口的大小随着层数呈指数型增长。这样卷积网络用比较少的层，就可以获得很大的感受野。
 ![](https://gitee.com/fuhailin/Object-Storage-Service/raw/master/Screen-Shot-2016-05-12-at-09-47-12.png)
+
 > (a). 普通卷积，1-dilated convolution，卷积核的感受野为`$3 \times 3 = 9$`
 > (b). 扩张卷积，2-dilated convolution，卷积核的感受野为`$7 \times 7 = 49$`
 > (c). 扩张卷积，4-dilated convolution，卷积核的感受野为`$15 \times 15 = 225$`

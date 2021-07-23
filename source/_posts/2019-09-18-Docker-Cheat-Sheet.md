@@ -63,6 +63,8 @@ sudo sh get-docker.sh
 | docker tag user/image:tag user/image:newtag          | Add a new tag to an image.                                   |
 | docker exec [container name or ID] shell command     | Executes a command within a running container.               |
 
+--net=host : 使用host网络
+
 ## Image Creation
 
 | Docker语法                          | 描述                                                         |
@@ -95,7 +97,16 @@ https://www.linode.com/docs/applications/containers/docker-commands-quick-refere
 
 *******
 
+# nvidia-docker(可使用GPU的docker容器)
+
+https://blog.csdn.net/submarineas/article/details/108477031
+
+```
+nvidia-docker run --net=host --name='tf2.4' -it nvidia/cuda:10.1-base-ubuntu16.04 /bin/bash
+```
+
 # Kubernets
+
 **Deploying the Dashboard UI**：`kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml`
 [使用 kubeconfig 或 token 进行用户身份认证](https://jimmysong.io/kubernetes-handbook/guide/auth-with-kubeconfig-or-token.html)
 **生成 token**
@@ -121,3 +132,5 @@ kubectl proxy
 
 [Python项目容器化实践(四) - Kubernetes基础篇](https://www.dongwm.com/post/use-kubernetes-1/)
 [Deploying Python ML Models with Flask, Docker and Kubernetes](https://alexioannides.com/2019/01/10/deploying-python-ml-models-with-flask-docker-and-kubernetes/)
+
+[Docker cheat sheet](https://swissarmydevops.com/wp-content/uploads/2020/11/Docker_Cheat_Sheet-1.pdf)

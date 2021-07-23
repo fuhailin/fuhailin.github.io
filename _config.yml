@@ -4,18 +4,16 @@
 
 # Site
 title: 赵大寳
+subtitle: 鶸鸡程序员，新世纪农民工
 description: 赵大寳個人小站
 keywords: 算法工程师
 author: 赵大寳
-subtitle: 鶸鸡程序员，新世纪农民工
 language: en
 timezone: ''
 
 # URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-# permalink: :year/:month/:day/:title/
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://fuhailin.github.io/
-root: /
 permalink: :title/
 permalink_defaults:
 pretty_urls:
@@ -52,28 +50,23 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
+# $ npm install hexo-generator-index --save
+# Docs: https://github.com/hexojs/hexo-generator-index
 index_generator:
   path: ''
   per_page: 20
   order_by: -date
-
-# Archive page setting:
-# https://github.com/hexojs/hexo-generator-archive
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
-archive_generator:
-  enabled: true
-  per_page: 40
-  yearly: true
-  monthly: true
-  daily: false
-  order_by: -date
+  pagination_dir: page
 
 # Category & Tag
 default_category: uncategorized
@@ -90,8 +83,8 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -107,28 +100,52 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
+# $ npm install hexo-theme-next --save
 theme: next
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/one-command-deployment
+# $ npm install hexo-deployer-git --save
 deploy:
   type: git
   repo: git@github.com:fuhailin/fuhailin.github.io.git
   branch: master
 
-# hexo sitemap
-sitemap:
-  path: sitemap.xml
+# Archive page setting:
+# https://github.com/hexojs/hexo-generator-archive
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+# $ npm install hexo-generator-archive --save
+archive_generator:
+  enabled: true
+  per_page: 40
+  yearly: true
+  monthly: true
+  daily: false
+  order_by: -date
 
-baidusitemap:
-  path: baidusitemap.xml
-
-# Docs: https://github.com/sun11/hexo-renderer-kramed
-kramed:
+# Docs: https://github.com/hexojs/hexo-renderer-marked
+# $ npm install hexo-renderer-marked --save
+marked:
   gfm: true
   pedantic: false
-  sanitize: false
-  tables: true
   breaks: true
   smartLists: true
   smartypants: true
+  quotes: '“”‘’'
+  modifyAnchors: 0
+  anchorAlias: false
+  autolink: true
+  mangle: true
+  sanitizeUrl: false
+  headerIds: true
+  lazyload: false
+  prependRoot: false
+  postAsset: false
+  external_link:
+    enable: false
+    exclude: []
+    nofollow: false
+  disableNunjucks: false
+  descriptionLists: true

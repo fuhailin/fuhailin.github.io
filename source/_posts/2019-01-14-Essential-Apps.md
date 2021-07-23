@@ -200,7 +200,7 @@ sudo apt-get install docker-ce
 ### JAVA
 ```bash
 sudo apt-get update
-sudo apt-get install default-jre default-jdk
+sudo apt install openjdk-11-jdk
 ```
 vim ~/.bashrc: `export JAVA_HOME=/usr/lib/jvm/default-java`
 ```shell
@@ -322,10 +322,16 @@ brew install htop
 https://www.iterm2.com/index.html
 [iterm2 cheatsheet](https://gist.github.com/squarism/ae3613daf5c01a98ba3a )
 
-## Oh My Zsh
+## Zsh
+```
+sudo apt install zsh
+```
+
+## [Oh My Zsh](https://ohmyz.sh/#install)
 ```sh
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
+
 
 vim ~/.zshrc
 ```sh
@@ -333,10 +339,10 @@ source ~/.bash_Profile
 ```
 https://ohmyz.sh/
 
-**zsh-syntax-highlighting**: 配置语法高亮
-https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+**autojump**:
+https://learnku.com/tensorflow/t/5790/ultimate-terminal-zshautojump
 
-https://tonyxu.io/zh/posts/2018/ultimate-way-to-beautify-mac-terminal-and-recommendations-for-plugins/
+**zsh-syntax-highlighting**: 配置语法高亮
 
 ## Node.js & NPM
 ```sh
@@ -356,7 +362,13 @@ brew cask install atom
 $ sudo apt install aria2
 # For macOS
 $ brew install aria2
+
+aria2c -v  #查看版本信息
+aria2c ftp://local1/linux-distro.iso  #断点续传下载
+# 多源下载
+aria2c ftp://local1/linux-distro.iso http://local2/linux-distro.iso
 ```
+图形界面：https://www.centos.bz/2018/03/ubuntu%E4%B8%8Baria2%E6%90%AD%E5%BB%BA%E4%B8%8B%E8%BD%BD%E6%9C%BA%EF%BC%9Aaria2%E5%9B%BE%E5%BD%A2%E7%AE%A1%E7%90%86/
 
 ## sublime-text & Skim
 ```sh
@@ -366,3 +378,6 @@ brew cask install skim
 
 ## Bazel
 https://docs.bazel.build/versions/master/install-os-x.html#install-on-mac-os-x-homebrew
+
+## 宝塔Linux面板
+https://www.bt.cn/download/linux.html
