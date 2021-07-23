@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="矩阵求导（Matrix Derivative）也称作矩阵微分（Matrix Differential），在机器学习、图像处理、最优化等领域的公式推导中经常用到。矩阵求导实际上是多元变量的微积分问题，只是应用在矩阵空间上而已，即为标量求导的一个推广，他的定义为将自变量中的每一个数与因变量中的每一个数求导。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matrix Derivative">
+<meta property="og:url" content="https://fuhailin.github.io/Matrix-Derivative/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="矩阵求导（Matrix Derivative）也称作矩阵微分（Matrix Differential），在机器学习、图像处理、最优化等领域的公式推导中经常用到。矩阵求导实际上是多元变量的微积分问题，只是应用在矩阵空间上而已，即为标量求导的一个推广，他的定义为将自变量中的每一个数与因变量中的每一个数求导。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-22T11:36:58.000Z">
+<meta property="article:modified_time" content="2021-07-23T06:42:04.677Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Matrix-Derivative/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Matrix-Derivative/","path":"Matrix-Derivative/","title":"Matrix Derivative"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Matrix Derivative | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">赵大寳</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B3%95%E5%88%99"><span class="nav-number">1.</span> <span class="nav-text">基本法则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%95%E5%88%99-0-%EF%BC%9A%E6%A0%87%E9%87%8F%E5%AF%B9%E6%A0%87%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="nav-number">1.1.</span> <span class="nav-text">法则 0 ：标量对标量求导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%95%E5%88%99-1-%EF%BC%9A%E6%A0%87%E9%87%8F%E5%AF%B9%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="nav-number">1.2.</span> <span class="nav-text">法则 1 ：标量对向量求导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%95%E5%88%99-2-%EF%BC%9A%E5%90%91%E9%87%8F%E5%AF%B9%E6%A0%87%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="nav-number">1.3.</span> <span class="nav-text">法则 2 ：向量对标量求导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%95%E5%88%99-3-%EF%BC%9A%E5%90%91%E9%87%8F%E5%AF%B9%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="nav-number">1.4.</span> <span class="nav-text">法则 3 ：向量对向量求导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%95%E5%88%99-4-%EF%BC%9A%E6%A0%87%E9%87%8F%E5%AF%B9%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC"><span class="nav-number">1.5.</span> <span class="nav-text">法则 4 ：标量对矩阵求导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%95%E5%88%99-5-%EF%BC%9A%E7%9F%A9%E9%98%B5%E5%AF%B9%E5%90%91%E9%87%8F%E6%B1%82%E5%AF%BC"><span class="nav-number">1.6.</span> <span class="nav-text">法则 5 ：矩阵对向量求导</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BD%99%EF%BC%9A%E5%90%91%E9%87%8F%E4%B8%8E%E7%9F%A9%E9%98%B5%E4%B9%8B%E9%97%B4%E4%BB%A5%E5%8F%8A%E7%9F%A9%E9%98%B5%E4%B8%8E%E7%9F%A9%E9%98%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E6%B1%82%E5%AF%BC"><span class="nav-number">1.7.</span> <span class="nav-text">其余：向量与矩阵之间以及矩阵与矩阵之间的求导</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E5%AE%9A%E4%B9%89"><span class="nav-number">1.7.1.</span> <span class="nav-text">第一种定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E5%AE%9A%E4%B9%89%EF%BC%88%E4%B8%BB%E6%B5%81%EF%BC%89"><span class="nav-number">1.7.2.</span> <span class="nav-text">第二种定义（主流）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%94%A8%E7%9A%84%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">有用的公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%85%AC%E5%BC%8F%E7%9A%84%E8%AF%81%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">一些公式的证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F-1"><span class="nav-number">3.1.</span> <span class="nav-text">公式 1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F-2"><span class="nav-number">3.2.</span> <span class="nav-text">公式 2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%AC%E5%BC%8F-3"><span class="nav-number">3.3.</span> <span class="nav-text">公式 3</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+        </li>
+    </ul>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Matrix-Derivative/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Matrix Derivative
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-12-22 19:36:58" itemprop="dateCreated datePublished" datetime="2020-12-22T19:36:58+08:00">2020-12-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-23 14:42:04" itemprop="dateModified" datetime="2021-07-23T14:42:04+08:00">2021-07-23</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>矩阵求导（Matrix Derivative）也称作矩阵微分（Matrix Differential），在机器学习、图像处理、最优化等领域的公式推导中经常用到。矩阵求导实际上是多元变量的微积分问题，只是应用在矩阵空间上而已，即为标量求导的一个推广，他的定义为将自变量中的每一个数与因变量中的每一个数求导。</p>
+<span id="more"></span>
+
+<p>具体地，假设存在 $A_{m \times n}$ 和 $B_{p \times q}$ ，则 $\frac{\partial A}{\partial B}$ 会将 $A$ 中的每一个值对 $B$ 中的每一个值求导，最后一共会得到 $m \times n \times p \times q$ 个导数值。这么多的导数值，最后是排布成一个 $m \times(n \times p \times q)$ 的矩阵还是一个 $(m \times n \times p) \times q$ 的矩阵呢？矩阵求导的关键就在于规定如何排布这么多的导数值。</p>
+<p>以分布布局为例子，一共有以下几个矩阵求导法则。分母布局是什么意思呢？简单的说就是以分母为一个基准，希望求导出来的结果和分母的维度相同。除了分母布局以外还有分子布局。分子布局和分母布局的求导结果通常相差一个转置。</p>
+<h3 id="基本法则"><a href="#基本法则" class="headerlink" title="基本法则"></a>基本法则</h3><h4 id="法则-0-：标量对标量求导"><a href="#法则-0-：标量对标量求导" class="headerlink" title="法则 0 ：标量对标量求导"></a>法则 0 ：标量对标量求导</h4><p>略。详细的请参考高等数学。</p>
+<h4 id="法则-1-：标量对向量求导"><a href="#法则-1-：标量对向量求导" class="headerlink" title="法则 1 ：标量对向量求导"></a>法则 1 ：标量对向量求导</h4><p>考虑我们有 $f$ 是一个标量，$x=\left[\begin{array}{llll}x_{1} &amp; x_{2} &amp; \cdots &amp; x_{p}\end{array}\right]^{T}$ 是一个 $p \times 1$ 的列向量。则有：<br>$$<br>\frac{\partial f}{\partial x}=\left[\begin{array}{cccc}<br>\frac{\partial f}{\partial x_{1}} &amp; \frac{\partial f}{\partial x_{2}} &amp; \cdots &amp; \frac{\partial f}{\partial x_{p}}<br>\end{array}\right]^{T}<br>$$<br>可以看得出，求导出来的结果维度是和分母 $x$ 相同的。若 $x$ 为行向量同理。</p>
+<h4 id="法则-2-：向量对标量求导"><a href="#法则-2-：向量对标量求导" class="headerlink" title="法则 2 ：向量对标量求导"></a>法则 2 ：向量对标量求导</h4><p>考虑我们有 是一个 的列向量， 是一个标量。则有：</p>
+<p>可以看得出，这个时候求导出来的结果维度和分子 是相反的。若 为行向量同理。</p>
+<h4 id="法则-3-：向量对向量求导"><a href="#法则-3-：向量对向量求导" class="headerlink" title="法则 3 ：向量对向量求导"></a>法则 3 ：向量对向量求导</h4><p>考虑我们有 $f=\left[\begin{array}{llll}f_{1} &amp; f_{2} &amp; \cdots &amp; f_{m}\end{array}\right]^{T}$ 是一个 $m \times 1$ 的列向量，  是$x=\left[\begin{array}{llll}x_{1} &amp; x_{2} &amp; \cdots &amp; x_{p}\end{array}\right]^{T}$ 一个 $p \times 1$ 的列向量。则有：<br>$$<br>\frac{\partial f}{\partial x}=\left[\begin{array}{cccc}<br>\frac{\partial f_{1}}{\partial x_{1}} &amp; \frac{\partial f_{2}}{\partial x_{1}} &amp; \cdots &amp; \frac{\partial f_{m}}{\partial x_{1}} \<br>\frac{\partial f_{1}}{\partial x_{2}} &amp; \frac{\partial f_{2}}{\partial x_{2}} &amp; \cdots &amp; \frac{\partial f_{m}}{\partial x_{2}} \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial f_{1}}{\partial x_{p}} &amp; \frac{\partial f_{2}}{\partial x_{p}} &amp; \cdots &amp; \frac{\partial f_{m}}{\partial x_{p}}<br>\end{array}\right]<br>$$<br>这时求导结果的维度为 $p \times m$ .</p>
+<h4 id="法则-4-：标量对矩阵求导"><a href="#法则-4-：标量对矩阵求导" class="headerlink" title="法则 4 ：标量对矩阵求导"></a>法则 4 ：标量对矩阵求导</h4><p>考虑我们有 $f$ 是一个标量，$x_{p \times q}$ 是一个矩阵。则有：<br>$$<br>\frac{\partial f}{\partial x}=\left[\begin{array}{cccc}<br>\frac{\partial f}{\partial x_{11}} &amp; \frac{\partial f}{\partial x_{12}} &amp; \cdots &amp; \frac{\partial f}{\partial x_{1 q}} \<br>\frac{\partial f}{\partial x_{21}} &amp; \frac{\partial f}{\partial x_{22}} &amp; \cdots &amp; \frac{\partial f}{\partial x_{2 q}} \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial f}{\partial x_{p 1}} &amp; \frac{\partial f}{\partial x_{p 2}} &amp; \cdots &amp; \frac{\partial f}{\partial x_{p q}}<br>\end{array}\right]<br>$$<br>同样，我们求导结果和分母 $x$ 的维度一致，是 $p \times q$ 。</p>
+<h4 id="法则-5-：矩阵对向量求导"><a href="#法则-5-：矩阵对向量求导" class="headerlink" title="法则 5 ：矩阵对向量求导"></a>法则 5 ：矩阵对向量求导</h4><p>考虑我们有 $f_{m \times n}$ 是一个矩阵，$x$ 是一个标量。则有：<br>$$<br>\frac{\partial f}{\partial x}=\left[\begin{array}{cccc}<br>\frac{\partial f_{11}}{\partial x} &amp; \frac{\partial f_{21}}{\partial x} &amp; \cdots &amp; \frac{\partial f_{m 1}}{\partial x} \<br>\frac{\partial f_{21}}{\partial x} &amp; \frac{\partial f_{22}}{\partial x} &amp; \cdots &amp; \frac{\partial f_{m 2}}{\partial x_{2 q}} \<br>\vdots &amp; \vdots &amp; \ddots &amp; \vdots \<br>\frac{\partial f_{n 1}}{\partial x} &amp; \frac{\partial f_{n 2}}{\partial x} &amp; \cdots &amp; \frac{\partial f_{n m}}{\partial x}<br>\end{array}\right]<br>$$<br>我们求导的结果与分子相反，为 $n \times m$</p>
+<h4 id="其余：向量与矩阵之间以及矩阵与矩阵之间的求导"><a href="#其余：向量与矩阵之间以及矩阵与矩阵之间的求导" class="headerlink" title="其余：向量与矩阵之间以及矩阵与矩阵之间的求导"></a>其余：向量与矩阵之间以及矩阵与矩阵之间的求导</h4><p>当我们的自变量与因变量都为不为标量时，根据我们对矩阵求导实质的讨论，势必会得出大量的导数难以被排列。例如，一般情况下，假设我们有 $f m \times n$ 以及 $x_{p \times q}$ ，则求导后我们会得到 $m \times n \times p \times q$ 个导数结果。这时对这些导数一般有两种定义方法。</p>
+<h5 id="第一种定义"><a href="#第一种定义" class="headerlink" title="第一种定义"></a>第一种定义</h5><p>我们按照之前的法则，将 $\frac{\partial f}{\partial x}$ 理解为对每一个 $f$ 中的标量，使其对 $x$ 求导，然后将其放回矩阵 中的原位。即我们使用 $\frac{\partial f_{i j}}{\partial x}$ 替换 $f_{i j}$ ，最后会得到一个 $m p \times n q$ 的导数矩阵。</p>
+<h5 id="第二种定义（主流）"><a href="#第二种定义（主流）" class="headerlink" title="第二种定义（主流）"></a>第二种定义（主流）</h5><p>这种定义是将矩阵对矩阵求导问题归约到向量对向量求导。即对矩阵先做向量化处理，然后再求导：<br>$$<br>\frac{\partial f}{\partial x}=\frac{\partial v e c(f)}{\partial v e c(x)}<br>$$<br>其中，向量化的实现方法分为列向量化和行向量化。我们以列向量化为例，将 $f_{m \times n}$ 和 $x_{p \times q}$ 向量化为 $f_{m n \times 1}$ 和 $x_{p q \times 1}$ ，然后利用法则 3 求导得到维度为 $p q \times m n$ 的导数结果。</p>
+<h3 id="有用的公式"><a href="#有用的公式" class="headerlink" title="有用的公式"></a>有用的公式</h3><p>下列公式中，$A_{m \times 1}$ 和 $x_{m \times 1}$ 是列向量，$B_{m \times m}$ 是矩阵。下面 3 个公式在文末有证明。</p>
+<table>
+<thead>
+<tr>
+<th align="left">编号</th>
+<th align="left">公式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">$$\frac{\partial x^{T} A}{\partial x}=\frac{\partial A^{T} x}{\partial x}=A $$</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">$$ \frac{\partial x^{T} x}{\partial x}=x $$</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">$$ \frac{\partial x^{T} B x}{\partial x}=\left(B+B^{T}\right) x $$</td>
+</tr>
+</tbody></table>
+<p>下列公式是一些关于矩阵迹的公式。其中，$a$  是一个标量，$A$, $B$ , $C$ 分为三个矩阵。</p>
+<table>
+<thead>
+<tr>
+<th align="left">编号</th>
+<th align="left">公式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">$\operatorname{tr}(a)=a$</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">$\operatorname{tr}(A)=\operatorname{tr}\left(A^{T}\right)$</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">$\operatorname{tr}(A B)=\operatorname{tr}(B A)$</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">$\operatorname{tr}(A B C)=\operatorname{tr}(C A B)=\operatorname{tr}(B C A)$</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">$\frac{\partial t r(A B)}{\partial A}=B^{T}$</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">$\frac{\partial t r\left(A B A^{T} C\right)}{\partial A}=C A B+C^{T} A B^{T}$</td>
+</tr>
+</tbody></table>
+<h3 id="一些公式的证明"><a href="#一些公式的证明" class="headerlink" title="一些公式的证明"></a>一些公式的证明</h3><p>令：</p>
+<h4 id="公式-1"><a href="#公式-1" class="headerlink" title="公式 1"></a>公式 1</h4><p>因为 和 是列向量，所以 为一个标量，所以可以用法则 1 进行计算。</p>
+<h4 id="公式-2"><a href="#公式-2" class="headerlink" title="公式 2"></a>公式 2</h4><p>同理 公式 1</p>
+<h4 id="公式-3"><a href="#公式-3" class="headerlink" title="公式 3"></a>公式 3</h4><p>由题意可得， 为标量，则原式为标量对列向量求导，可以用法则 1 进行计算。</p>
+<p>由导数法则有：</p>
+<p>于是，原式继续有：</p>
+<p>References:</p>
+<p><a target="_blank" rel="noopener" href="https://soptq.me/2020/06/19/matrix-derivation/">https://soptq.me/2020/06/19/matrix-derivation/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Bazel-Starter/" rel="prev" title="bazel C++语法入门">
+                  <i class="fa fa-chevron-left"></i> bazel C++语法入门
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Cross-Entropy-Loss-Derivative/" rel="next" title="Cross Entropy Loss Derivative">
+                  Cross Entropy Loss Derivative <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

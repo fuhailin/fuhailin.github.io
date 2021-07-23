@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="在推荐领域 根据用户的历史活动记录预测用户下一次行为可能会选择什么项目也是一个重要 的问题，现有的推荐系统主要关注于找出用户或项目的近邻集，或者利 用隐式或显式信息 (如标签、评论、物品内容、用户属性) 来提升近邻感知能力。 然而，却少有工作利用数据当中的时序属性来参与构建推荐系统。在本篇文章中， 我将介绍数据的序列中其实包含着许多有价值的且激动人心的信息以及现代大型推荐系统是如何使用这种序列特性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="序列建模在推荐系统中的应用">
+<meta property="og:url" content="https://fuhailin.github.io/Sequential-Recommendation/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="在推荐领域 根据用户的历史活动记录预测用户下一次行为可能会选择什么项目也是一个重要 的问题，现有的推荐系统主要关注于找出用户或项目的近邻集，或者利 用隐式或显式信息 (如标签、评论、物品内容、用户属性) 来提升近邻感知能力。 然而，却少有工作利用数据当中的时序属性来参与构建推荐系统。在本篇文章中， 我将介绍数据的序列中其实包含着许多有价值的且激动人心的信息以及现代大型推荐系统是如何使用这种序列特性">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://coladrill.github.io/img/post/20200601/1.png">
+<meta property="og:image" content="https://cdn-images-1.medium.com/max/1250/1*sXNXYfAqfLUeiDXPCo130w.png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPjd0Az5UM4zLvRrOjeW9USSGAUF2sg6icTcPpnxfFYudaj6yMjEBwc0Cia6tjCpAthos7uqLyHMuAHA/640?wx_fmt=png">
+<meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/causal-convolution.png">
+<meta property="og:image" content="https://mdimg.wxwenku.com/getimg/6b990ce30fa9193e296dd37902816f4bfbb8d24231b6dd6d7ecfdf18313c7c0b1cde1cc82e10dab58c5cab1c00b60a3a.jpg">
+<meta property="og:image" content="https://coladrill.github.io/img/post/20200601/5.png">
+<meta property="og:image" content="https://static001.infoq.cn/resource/image/9f/34/9f961fa552445de7335d378283a56a34.png">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d6ae91afd26e314dec105142f84ee4f4_1440w.jpg">
+<meta property="article:published_time" content="2021-01-12T07:16:08.000Z">
+<meta property="article:modified_time" content="2021-07-23T06:44:12.996Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://coladrill.github.io/img/post/20200601/1.png">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Sequential-Recommendation/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Sequential-Recommendation/","path":"Sequential-Recommendation/","title":"序列建模在推荐系统中的应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>序列建模在推荐系统中的应用 | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">赵大寳</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%BB%BA%E6%A8%A1%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">序列建模的必要性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E7%BC%96%E7%A0%81%E6%96%B9%E6%A1%88"><span class="nav-number">2.</span> <span class="nav-text">序列编码方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Pooling"><span class="nav-number">2.1.</span> <span class="nav-text">Pooling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word2Vec"><span class="nav-number">2.2.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN"><span class="nav-number">2.3.</span> <span class="nav-text">RNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CNN"><span class="nav-number">2.4.</span> <span class="nav-text">CNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Attention"><span class="nav-number">2.5.</span> <span class="nav-text">Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GNN"><span class="nav-number">2.6.</span> <span class="nav-text">GNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.7.</span> <span class="nav-text">强化学习</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+        </li>
+    </ul>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Sequential-Recommendation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          序列建模在推荐系统中的应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-01-12 15:16:08" itemprop="dateCreated datePublished" datetime="2021-01-12T15:16:08+08:00">2021-01-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-23 14:44:12" itemprop="dateModified" datetime="2021-07-23T14:44:12+08:00">2021-07-23</time>
+      </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在推荐领域 根据用户的历史活动记录预测用户下一次行为可能会选择什么项目也是一个重要 的问题，现有的推荐系统主要关注于找出用户或项目的近邻集，或者利 用隐式或显式信息 (如标签、评论、物品内容、用户属性) 来提升近邻感知能力。 然而，却少有工作利用数据当中的时序属性来参与构建推荐系统。在本篇文章中， 我将介绍数据的序列中其实包含着许多有价值的且激动人心的信息以及现代大型推荐系统是如何使用这种序列特性来提升推荐的质量的。以视频网站 为例，一个用户看了纪录片《河西走廊》第一集《使者》之后，接下来看的另一个 节目很有可能会是《河西走廊》第二集《通道》。甚至早在 2011 年举办的 Recsys 推荐系统大会上，来自音乐应用 Pandora1的研究人员给出的演讲上都提到了许多 用户听音乐具有时序特点。 在某些特别的应用场景下，常规的推荐系统甚至无法起作用。现有的推荐系 统都需要分析用户的数据，因此每个网站和应用的使用到需要让用户完成注册以 及登录，然而用户每次使用网站或者应用的服务时都不一定会愿意登录，这种场 景下对匿名用户的推荐显然挑战更大，常规的推荐策略显然无法起作用，基于匿 名用户本地浏览器和缓存的会话所蕴含的序列进行推荐则显现出很重要的实践意 义与价值。</p>
+<span id="more"></span>
+
+<h1 id="序列建模的必要性"><a href="#序列建模的必要性" class="headerlink" title="序列建模的必要性"></a>序列建模的必要性</h1><p>理解用户是搜索排序中一个非常重要的问题，工业级的推荐系统一般需要大量的<code>泛化特征</code>来较好的表达用户。这些泛化特征可以分为两类：</p>
+<ul>
+<li>偏<code>静态</code>的特征，例如用户的基本属性（年龄、性别、职业等等）特征、长期偏好（品类、价格等等）特征；</li>
+<li><code>动态</code>变化的特征，例如刻画用户兴趣的实时行为序列特征。</li>
+</ul>
+<p>用户的实时行为特征能够明显加强不同样本之间的区分度，所以在模型中优化用户行为序列建模是让模型更好理解用户的关键环节。</p>
+<p>推荐系统中的用户兴趣<code>变化非常剧烈</code>，比如电商推荐中，用户一会看看服饰，一会看看电子产品，若只使用静态特征进行推荐，每次推荐的内容是一样的，这无疑是不能满足用户需求，实时性需要保障。</p>
+<p>大致来讲，用户行为序列建模包含以下几种方式：</p>
+<ul>
+<li><code>Pooling方法</code>：特点是将用户历史行为看做一个无序集合，方法有sum/max pooling等；</li>
+<li><code>Word2Vec方法</code>：利用Word2Vec预训练行为序列；</li>
+<li><code>RNN模型</code>：将用户行为看做一个具有时间属性的序列，方法有RNN、LSTN、GRU等；</li>
+<li><code>CNN模型</code>：将这些交互的所有嵌入信息放入一个矩阵中，然后将这个矩阵作为时间和潜在空间中的“图像”来处理;</li>
+<li><code>Attention模型</code>：属于Pooling方法的一种，优点在于灵活的捕捉全局和局部的联系；</li>
+<li><code>GNN方法</code>：将每个交互作为图中的一个节点，同时将每个序列映射到一条路径。</li>
+<li>强化学习的方法。</li>
+</ul>
+<h1 id="序列编码方案"><a href="#序列编码方案" class="headerlink" title="序列编码方案"></a>序列编码方案</h1><h2 id="Pooling"><a href="#Pooling" class="headerlink" title="Pooling"></a>Pooling</h2><p>这种方式的特点是将用户历史行为序列看做一个无序集合，序列集合通常通过 embedding 层得到序列向量后，pooling 层将序列向量聚合为定长的向量，一方面后继全连接层的输入需要固定长度的向量，另一方面通过 pooling 层我们可以获取到用户历史行为序列的全局信息。pooling 层通常采用的方式有 sum pooling 或者是 average pooling。sum pooling 将序列中每个元素的向量进行累加，average pooling 则是将 sum pooling 得到的向量进行平均。Pooling方式获取到序列特征Embedding向量通常是随机初始化的，参与后继网络的全局训练一起更新参数。</p>
+<p>代表工作有Google那篇<a href="https://link.zhihu.com/?target=https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/45530.pdf">《Deep Neural Networks for YouTube Recommendations》</a>，这篇文章提出的Deepmatch和Deep ranking model结构中，将用户观看过的视频序列取到embedding后，做了一个mean pooling作为用户历史兴趣的表达。</p>
+<p><img src="https://coladrill.github.io/img/post/20200601/1.png" alt="img"></p>
+<p>这种Pooling方案无法提取序列中隐含时序先后顺序关系，因为改变序列集合中元素的先后顺序其实对pooling结果并没有影响，而且这一假设基于所有行为内的 item 对用户的兴趣都是等价的，因而会引入一些噪声，通常用来作为序列建模中简单好用的一个baseline方案。</p>
+<h2 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h2><p>在word2vec诞生之后，embedding的思想迅速从NLP领域扩散到几乎所有机器学习的领域，语言其实是词汇按照一定的规律构成的序列，我们既然可以对一个序列中的词进行embedding，那自然可以对用户购买序列中的一个商品、用户观看序列中的一个电影进行embedding。而广告、推荐、搜索等领域用户数据的稀疏性几乎必然要求在构建DNN之前对user和item进行embedding后才能进行有效的训练。</p>
+<p>Word2vec本质上是一个只有两层的浅度MLP，利用skip-grams或CBOW方案进行无监督学习，在此不再赘述其原理。word2vec将所有的词向量化，词与词之间就可以定量的去度量他们之间的关系，挖掘词之间的联系，将这一特性迁移到推荐算法领域，自然可以联想到通过衡量不同物品Embedding后的向量相似度来做召回了，这方面有代表性的工作有Airbnb的《Real-time Personalization using Embeddings for Search Ranking at Airbnb》和Yahoo的《E-commerce in Your Inbox: Product Recommendations at Scale》。word2vec还有一个很好的特性：其本身的层次分类器或者采样方式实际上对热门item做了很大的惩罚，所以不会像一半的矩阵分解一样，最后算出来语义接近的都是热门词。word2vec的一个非常成功的应用场景是应用在用户app下载序列上，根据用户下载App的顺序，把App看做单词，训练每个App对应的向量，用这个向量计算App之间的相似度，这样能把真正内容相关的App聚合在一起，同时规避热门App的影响，在商品点击序列上也有类似的效果。</p>
+<p>用户对于某个物品的相关行为会encode很多与物品相关的属性进去，这些属性是很难用直接的方式去显性衡量的。就比如说，Airbnb中，”architecture，style and feel”这个属性你要怎么定义？而word2vec算法能够有效地抽取出这些隐藏的属性，可以进行比较、分类，因此推荐效果更好。这套方法在Yahoo的广告CTR预估中有9%的提升，在Airbnb的物品CTR预估中有21%的提升。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1250/1*sXNXYfAqfLUeiDXPCo130w.png" alt="word embeddings"></p>
+<p>既然用word2vec处理用户行为序列后得到的浅层网络参数就是Embedding矩阵，用户的行为序列特征已经参数化到了Embedding当中，因此另一种合理的做法是将Word2Vec当做序列特征提取器，因此预训练思想也便迁移到了推荐算法领域，利用Word2Vec无监督学习用户行为序列得到的预训练Embedding替换Pooling方案的Embedding作为NN的特征输入说不定可以得到更好的性能和效果。</p>
+<h2 id="RNN"><a href="#RNN" class="headerlink" title="RNN"></a>RNN</h2><p>为提取用户的行为序列特征，最最直观的想法便是套用NLP领域常用的RNN/LSTM/GRU方法来进行建模。从2016年开始，学术界开始涌现大量利用RNN及其变体进行召回任务的研究，既有将点击序列Embedding化后直接输入GRU，用softmax/hierarchical softmax预测概率的next item prediction任务，即召回任务；也有利用RNN/LSTM/GRU提取序列特征，结合其他静态特征的混合分类模型，我将这类工作统称为Session-based Recommendation</p>
+<p>可以参考的论文有GRU4REC，将seesion中点击item的行为看做一个序列，使用GRU进行刻画。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/zHbzQPKIBPjd0Az5UM4zLvRrOjeW9USSGAUF2sg6icTcPpnxfFYudaj6yMjEBwc0Cia6tjCpAthos7uqLyHMuAHA/640?wx_fmt=png" alt="img"></p>
+<p>RNN由于梯度消失只有短期记忆，而LSTM网络通过精妙的门控制，一定程度上缓解了梯度消失的问题。GRU是LSTM的一种变体，也是为了解决梯度消失（即长期记忆问题）而提出来的。相较于LSTM，GRU的网络结构更加简单</p>
+<p>但受限于RNN/LSTM/GRU之类结构本身的缺陷，其存在梯度消失、难以训练收敛，更为致命的是，这类循环结构无法并行训练，在动辄需要训练上亿样本量Serving又需要低时延的推荐系统工业场景，基本对这类网络结构判了死刑。说来惭愧，我研究生阶段在刚刚入门推荐算法领域时（17~18年时），也借用NLP领域的类循环网络结构提出了一个自己的推荐算法召回模型，与一些前人的工作不谋而合，现在回头来看，我的这份工作根本无法应用于工业领域，”滤水“之后更多的是锻炼我的学术能力，写到这里希望不会有好事者前去挖坟。。。</p>
+<h2 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h2><p>RNN 结构用于序列建模的优点是结构简单，训练和预测的资源占用小，缺点是随着序列变长容易出现梯度消失的问题，同时 RNN 的训练不容易实现并行，CNN 结构通过矩阵运算的并行性容易实现模型训练的并行化，同时相对不容易出现序列变长后的梯度消失问题。因此我们希望能够像 RNN 一样在整个时间序列上通过 CNN 进行建模，这样便产生了 TCN ( TemporalCNN ) [17]。TCN 采用多层的一维卷积架构在序列长度的维度进行卷积，通过 zero padding 保证每一层的长度相同。TCN 架构结合了 casual convolution ( 因果卷积 )，residual connection ( 残差连接 ) 以及 dilated convolution ( 空洞卷积 )，其特点包括：</p>
+<ol>
+<li>采用因果卷积，保证训练过程中未来的信息不会泄露到过去时间的建模中；</li>
+<li>将任意长度的序列如同 RNN 那样映射为相同长度的输出序列。</li>
+</ol>
+<p>首先我们看看什么是因果卷积，如下图所示，在事件序列中每个时间步 t 的状态输出仅与前一层的 t 时刻以及 t 时刻之前的状态进行卷积：</p>
+<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/causal-convolution.png" alt="img"></p>
+<p>图22 TCN causual convolution</p>
+<p>在具体实现因果卷积时，我们可以采用在序列的开头进行补齐的方法保证输出序列的长度与输入序列保持一致，每层输入补齐的长度是：</p>
+<p><img src="https://mdimg.wxwenku.com/getimg/6b990ce30fa9193e296dd37902816f4bfbb8d24231b6dd6d7ecfdf18313c7c0b1cde1cc82e10dab58c5cab1c00b60a3a.jpg" alt="img"></p>
+<p>TCN能够捕获局部序列特征，通过多层的因果卷积网络叠加，高层的感受野的大小与网络层数呈线性关系增加，做深TCN的网络结构，加大TCN的感受野，也能够捕获长距离特征，虽然CNN相比于RNN的递归串行结构具有天生自带的高并行计算能力，但在上亿样本量的推荐系统场景下CNN结构还不是最简洁的。</p>
+<h2 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h2><p>我们回到历史，在NLP的发展过程中，专家学者们在做机器翻译时发现，在Seq2Seq结构中，Encoder把所有的输入序列都编码成一个统一的语义向量context，然后再由Decoder解码。其中，context自然也就成了限制模型性能的瓶颈，当要翻译的句子较长时，一个 context 可能存不下那么多信息。同时，只使用编码器的最后一个隐藏层状态，似乎不是很合理。因此，引入了Attention机制（<strong>将有限的认知资源集中到最重要的地方</strong>）。在生成 Target 序列的每个词时，用到的中间语义向量 context 是 Source 序列通过Encoder的隐藏层的加权和，而不是只用Encoder最后一个时刻的输出作为context，这样就能保证在解码不同词的时候，Source 序列对现在解码词的贡献是不一样的。</p>
+<p>以上的 RNN 和 TCN 模型在建立序列模型时没有显式的去考虑各个时刻行为之间的相互关系，而各个时刻事件之间的相关性在预测任务中也是比较重要的信息，为了捕获序列中历史事件之间的相互关系，推荐系统的工程师们迅速从NLP领域偷师到了Attention进行序列建模的独特优势，于是用<strong>scaled dot-product attention</strong> 把过去序列向量的平均变成序列向量的加权求和便是首先可以进行的尝试，使得推荐出来的物品能够根据用户的历史行为动态变化，并且对于对抗序列当中的噪音也具有一定的鲁棒性，这种对attention的尝试首先取得了收益。</p>
+<p>既然attention based Pooling方法可以替换简单的sum-pooling方法并有效，那么引入集成学习思想的multi head attention用来提取序列特征也应该有效，性能瓶颈问题能解决的话，将序列建模SOTA武器Transformer引入到推荐领域也就是顺水推舟的事情，于是用Transformer对长、短序列进行建模，学习用户的各种长期、短期兴趣，再拼接各种其它静态特征的“积木”，搭建各大召回、精排场景的“模型”。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.06978">DIN</a> 引入注意力机制，考虑行为序列中不同 item 对当前预测 item 有不同的影响；</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1809.03672">DIEN</a> 将网络分为兴趣提取层和兴趣演化层，解决了 DIN 无法捕捉用户兴趣动态变化的缺点；</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.06482">DSIN</a> 针对 DIN 和 DIEN 没有考虑用户历史行为中的 Session 信息，因为每个 Session 中的行为是相近的，而在不同 Session 之间的差别很大，它在 Session 层面上对用户的行为序列进行建模；</li>
+<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.06874">BST</a> 模型通过 Transformer 模型来捕捉用户历史行为序列中的各个 item 的关联特征，与此同时，加入待预测的 item 来达到抽取行为序列中的商品与待推荐商品之间的相关性。</li>
+<li><a href="https://link.zhihu.com/?target=https://arxiv.org/abs/1905.09248">MIMN</a>建模超长行为序列，设计了UIC(User Interest Center)模块，将用户兴趣表达模块单独进行拆分而不是每次请求进行计算。</li>
+</ul>
+<p>Transformer应用模型的主要构成：</p>
+<ul>
+<li>所有特征（user 维度、item 维度、query 维度、上下文维度、交叉维度）经过底层 Embedding Layer 得到对应的 Embedding 表示；</li>
+<li>建模用户行为序列得到用户的 Embedding 表示；</li>
+<li>所有 Embedding concat 一起送入到三层的 MLP 网络。</li>
+</ul>
+<p><img src="https://coladrill.github.io/img/post/20200601/5.png" alt="Transformer应用于精排"></p>
+<p>输入部分：</p>
+<ul>
+<li>分为短期行为序列和长期行为序列。</li>
+<li>行为序列内部的每个行为原始表示是由商户 ID，以及一些商户泛化信息的 Embedding 进行 concat 组成。</li>
+<li>每段行为序列的长度固定，不足部分使用零向量进行补齐。</li>
+</ul>
+<p>输出部分：</p>
+<ul>
+<li>对 Transformer Layer 输出的向量做 Sum-pooling （这里尝试过Mean-pooling、concat，效果差不多）得到行为序列的最终 Embedding 表示。</li>
+</ul>
+<p>在推荐系统的发展过程中，现代大型推荐系统都趋向于解耦合，各模块负责的工作越来越细致，排序阶段没有明确考虑项目之间的相互影响以及用户的偏好或意图的差异，因此引入重排序为用户展现的推荐列表达到整体最优为优化目标。既然重排序的输入是一个推荐列表，输出是一个优化后的推荐列表，那这不就是NLP中sequence2sequence干的事情吗？</p>
+<p>NLP领域sequence2sequence 的state of the art工具是哪一个？推荐系统的工程师们迅速把眼光投向了Transformer。因为在上面我们已经尝试过了利用self-attention计算候选物品与用户历史交互物品之间的距离，那么也可以利用self-attention计算重排阶段不同候选物品之间的距离，self-attention正是Transformer构成的基石，再利用position embedding编码重排序输入列表的顺序，Transformer本身可以并行化计算的特点使得该模块不至于成为性能的瓶颈，于是Transformer便完美迁移到了重排序领域。</p>
+<p><img src="https://static001.infoq.cn/resource/image/9f/34/9f961fa552445de7335d378283a56a34.png" alt="Transformer应用于重排序"></p>
+<h2 id="GNN"><a href="#GNN" class="headerlink" title="GNN"></a>GNN</h2><p>以上对序列的表达策略都是从微观的角度对每条序列分别处理，不同序列之间的item联系如果通过传统的“Sequence Embedding”其实是观察不出来的，但当我们从宏观角度来观察不同用户产生的不同序列时，其实是隐含了一定的关系的，例如，如果我们把超市中每个用户的购物单当做一个序列，会发现买啤酒的人往往也会买尿布，Apriori算法就是从全局宏观的角度来挖掘这种不同item之间的关联规则，但是Apriori算法性能不足以应用到大规模的推荐系统领域。既然从宏观角度看item之间隐藏着联系，那么把item连接起来不就是图这种最基本的数据结构了吗？</p>
+<p>把用户的行为序列转换为item 的图结构，DeepWalk首先做出了GNN建模序列特征的尝试，这里引用阿里论文中的一张图，来展现DeepWalk的算法流程：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-d6ae91afd26e314dec105142f84ee4f4_1440w.jpg" alt="DeepWalk的算法流程（引自阿里论文）"></p>
+<ol>
+<li>第一步：构建用户的行为序列</li>
+<li>第二步：我们基于这些行为序列构建了物品关系图，可以看出，物品A，B之间的边产生的原因就是因为用户U1先后购买了物品A和物品B，所以产生了一条由A到B的有向边。如果后续产生了多条相同的有向边，则有向边的权重被加强。在将所有用户行为序列都转换成物品相关图中的边之后，全局的物品相关图就建立起来了。</li>
+<li>第三步：采用随机游走的方式随机选择起始点，重新产生物品序列。</li>
+<li>第四步：最终将这些物品序列输入word2vec模型，生成最终的物品Embedding向量</li>
+</ol>
+<p>既然已经将序列特征建模到了Graph Embedding向量当中，再利用这个Graph Embedding向量是去做召回还是精排那就是各位算法工程师发挥才智的时候了，</p>
+<ul>
+<li><p>DeepWalk：使用DFS随机游走在图中进行节点采样，使用Word2Vec在采样的序列上学习图中节点的向量表示；</p>
+</li>
+<li><p>LINE（Large-scale Information Network Embedding）使用BFS（Breath First Search，广度优先搜索）构造邻域进行采样；</p>
+</li>
+<li><p>node2vec：调整随机游走权重的方法使Graph Embedding的结果更倾向于体现网络的同质性（homophily）或结构性（structural equivalence）</p>
+</li>
+<li><p>EGES（Enhanced Graph Embedding with Side Information）算法：Embedding过程中引入带权重的补充信息（Side Information），从而解决冷启动的问题</p>
+</li>
+<li><p>SR-GNN：利用GNN进行序列建模做召回</p>
+</li>
+</ul>
+<h2 id="强化学习"><a href="#强化学习" class="headerlink" title="强化学习"></a>强化学习</h2><p>时序推荐是基于用户的顺序行为，对未来的行为进行预测的任务。目前的工作利用深度学习技术的优势，取得了很好的效果。但是这些工作仅专注于所推荐商品的局部收益，并未考虑该商品对于序列长期的影响。强化学习（RL）通过最大化长期回报为这一问题提供了一个可能的解决方案<sup>【16】</sup>。</p>
+<p>这一节我们换个角度去看序列推荐问题。如果我们将用户的行为序列看做是一个顺序的决策过程，那么我们可以用马尔科夫决策过程 ( MDP ) 来表示用户的行为序列。马尔科夫决策过程包含以下几个方面：</p>
+<ol>
+<li><strong>状态空间 S</strong>：在t时刻用户的状态 <em>St</em> 定义为用户在 t 时间之前的历史行为，如用户在 t 之前点击过的 N 个物品。马尔科夫决策过程中每个状态具有马尔科夫性,因此序列中用户在各个时刻的状态可以只根据前一时刻的状态得到;</li>
+<li><strong>动作空间 A</strong>：动作定义为可以给用户推荐的候选物品空间。agent 的一次推荐相当于在候选物品空间内选择一个或者多个物品返回给用户;</li>
+<li><strong>奖励 R</strong>：agent 推荐物品给用户之后，根据用户对推荐列表的反馈 ( 忽略或者点击 ) 来得到 ( 状态-行为 ) 的即时奖励 reward；</li>
+<li><strong>转移概率 P</strong>：agent 为用户推荐了 K 个物品， 如果用户忽略了推荐的全部物品，那么下一个时刻的状态 $S_{t+1}$ 和当前的状态保持一致。如果用户点击了其中一个推荐的物品，那么下一个时刻的状态 $S_{t+1}$ 是在当前状态 $$S_t$$ 的基础上，加入该点击的推荐物品并且将原来的 N 个物品中点击时间最久远的那个物品去掉 ( 可以理解为一个先进先出的队列 );</li>
+<li>**折扣因子 $\gamma$**：实际情况下我们希望最大化的是长期回报而不仅是即时奖励。因此t时刻的回报为从该时间起的一个总折扣奖励;</li>
+<li><strong>策略</strong>：有了状态和行为，我们会用策略 ( policy ) 来形式化的刻画用户的决策过程。策略描述了用户在某个时间点的状态 s 下对候选物品 a 产生行为的概率;</li>
+<li><strong>值函数</strong>：用值函数来刻画行为的回报。</li>
+</ol>
+<p>这证明了将强化学习应用于时序推荐任务的可行性，通过将该任务定义为 MDP 过程，赋予了时序预测模型捕获推荐商品长期收益的能力。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们在做推荐系统时，面临不同业务场景，不同优化的阶段，常常面临不同的问题，了解了各类解决问题的策略才能不焦虑。以序列建模为了，为了快速搭建起方案，可以先以sum Pooling方法作为baseline，逐步尝试使用word2vec得到预训练的sequence embedding；为了提升对历史序列噪音的鲁棒性又不拖累性能以及时延，可以直接尝试基于attention的方案；而近来基于GNN和强化学习的方案证明了序列建模还有广阔的未知领域能够探索。</p>
+<p>References:</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2020/04/16/transformer-in-meituan.html">Transformer 在美团搜索排序中的实践</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4662964/blog/4652280">内容推荐算法：异构行为序列建模探索</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://tech.meituan.com/2020/07/09/bert-in-meituan-search.html">BERT在美团搜索核心排序的探索和实践</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/zhanzecheng/Interview_Notes-Chinese/blob/master/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-NLP/NLP-%E5%BA%8F%E5%88%97%E5%BB%BA%E6%A8%A1.md">专题-序列建模</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138136777">谈谈推荐系统中的用户行为序列建模</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1905.06874v1.pdf">Behavior Sequence Transformer for E-commerce Recommendation in Alibaba</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/261382944">推荐算法序列建模现状</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/30720579">推荐中的序列化建模：Session-based neural recommendation</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/nqCJOstJlZv6CrMST-tH8g">用户行为序列推荐模型@旺剑</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/144891038">广告行业中那些趣事系列11：推荐系统领域必学的Graph Embedding</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54743941">放弃幻想，全面拥抱Transformer：自然语言处理三大特征抽取器（CNN/RNN/TF）比较</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/like_red/article/details/88389918">《Real-time Personalization using Embeddings for Search Ranking at Airbnb》学习笔记</a></p>
+</li>
+<li><p><a href="https://fuhailin.github.io/Temporal-Convolutional-Network/">Temporal Convolutional Network (TCN与TrellisNet)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.06813">Personalized Re-ranking for Recommendation</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1811.00855">Session-based Recommendation with Graph Neural Networks</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/NCkKvpTc4KbJUh-SVXzn1A">让知识来指引你：序列推荐场景中以知识为导向的强化学习模型</a></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>您的支持将鼓励我继续创作！</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
+
+          <span class="label">WeChat</span>
+        </a>
+      </div>
+
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Cross-Entropy-Loss-Derivative/" rel="prev" title="Cross Entropy Loss Derivative">
+                  <i class="fa fa-chevron-left"></i> Cross Entropy Loss Derivative
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ZooKeeper-Starter/" rel="next" title="ZooKeeper Starter">
+                  ZooKeeper Starter <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2018 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">赵大寳</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script src="/js/third-party/comments/livere.js"></script>
+
+</body>
+</html>

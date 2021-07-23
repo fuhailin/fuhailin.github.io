@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
@@ -13,14 +15,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="自然常数$e$是一个奇妙的数字，这里的$e$并不仅仅代表一个字母，它还是一个数学中的无理常数，约等于2.718281828459。但你是否有想过，它到底怎么来的呢？为啥一个无理数却被人们称之为“自然常数”？">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="自然常数$e$是一个奇妙的数字，这里的$e$并不仅仅代表一个字母，它还是一个数学中的无理常数，约等于2.718281828459。但你是否有想过，它到底怎么来的呢？为啥一个无理数却被人们称之为“自然常数”？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自然常数e到底自然在哪？">
 <meta property="og:url" content="https://fuhailin.github.io/Euler-number/index.html">
@@ -39,141 +39,206 @@
 <meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112404.png">
 <meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112358.png">
 <meta property="article:published_time" content="2019-05-10T02:42:15.000Z">
-<meta property="article:modified_time" content="2019-11-26T02:52:39.217Z">
+<meta property="article:modified_time" content="2021-07-23T06:42:04.646Z">
 <meta property="article:author" content="赵大寳">
 <meta property="article:tag" content="自然常数">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/641.jfif">
 
+
 <link rel="canonical" href="https://fuhailin.github.io/Euler-number/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
 
-  <title>自然常数e到底自然在哪？ | 赵大寳</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Euler-number/","path":"Euler-number/","title":"自然常数e到底自然在哪？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自然常数e到底自然在哪？ | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-129037882-1');
-      }
-    </script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
-
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">赵大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">赵大寳</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
   </div>
 
-  <div class="site-nav-right"></div>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
+
 
 
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+        </li>
+    </ul>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -181,20 +246,22 @@
 
   <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content">
-            
+    <div class="main-inner post posts-expand">
 
-  <div class="posts-expand">
-      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Euler-number/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -211,42 +278,42 @@
           自然常数e到底自然在哪？
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-05-10 10:42:15" itemprop="dateCreated datePublished" datetime="2019-05-10T10:42:15+08:00">2019-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">数学</span>
-                  </a>
-                </span>
-            </span>
+      <time title="Created: 2019-05-10 10:42:15" itemprop="dateCreated datePublished" datetime="2019-05-10T10:42:15+08:00">2019-05-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-23 14:42:04" itemprop="dateModified" datetime="2021-07-23T14:42:04+08:00">2021-07-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -255,342 +322,165 @@
     
     
     <div class="post-body" itemprop="articleBody">
+        <p>自然常数$e$是一个奇妙的数字，这里的$e$并不仅仅代表一个字母，它还是一个数学中的无理常数，约等于2.718281828459。<br>但你是否有想过，它到底怎么来的呢？为啥一个无理数却被人们称之为“自然常数”？</p>
 
-      
-        <p>自然常数$e$是一个奇妙的数字，这里的$e$并不仅仅代表一个字母，它还是一个数学中的无理常数，约等于2.718281828459。<br>但你是否有想过，它到底怎么来的呢？为啥一个无理数却被人们称之为“自然常数”？<br></p>
-<a id="more"></a>
+
+
+<span id="more"></span>
+
 <p>说到$e$，我们会很自然地想起另一个无理常数$\pi$。$\pi$的含义可以通过下图中的内接与外切多边形的边长逼近来很形象的理解。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/641.jfif" alt="图片来源: betterexplained"></p>
 <p>假设一个圆的直径为1，其外切与内接多边形的周长可以构成$\pi$ 的估计值的取值范围上下限，内接与外切多边形的边越多，取值范围就越窄，只要边数足够多，取值范围上下限就可以越来越逼近圆周率$\pi$ 。</p>
 <p>如果说$\pi$ 的计算很直观，那$e$呢？所以在此也用一种图解法来直观理解e。</p>
 <p>首先，我们需要知道e 这个表示自然底数的符号是由瑞士数学和物理学家Leonhard Euler(莱昂纳德·欧拉)命名的，取的正是Euler的首字母“e ”。</p>
 <p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/640.jpg" alt="Leonhard Euler (1707-1783)"><br>但实际上，第一个发现这个常数的，并非欧拉本人，而是雅可比·伯努利（Jacob Bernoulli）。</p>
 <p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/641.jpg" alt="伯努利家族"></p>
-<p>伯努利家族是17〜18世纪瑞士的一个赫赫有名的家族，其中出了很多著名的数理科学家，雅可比·伯努利是约翰·伯努利（Johann Bernoulli）的哥哥，而约翰·伯努利则是欧拉的数学老师。总之，大佬们之间有着千丝万缕的联系。<br></p>
+<p>伯努利家族是17〜18世纪瑞士的一个赫赫有名的家族，其中出了很多著名的数理科学家，雅可比·伯努利是约翰·伯努利（Johann Bernoulli）的哥哥，而约翰·伯努利则是欧拉的数学老师。总之，大佬们之间有着千丝万缕的联系。</p>
+
+
 <p>要了解e 的由来，一个最直观的方法是引入一个经济学名称“<span style="color:red"><strong>复利(Compound Interest)</strong></span>”。</p>
 <blockquote>
 <p><strong>复利率法</strong>（英文：compound interest），是一种计算利息的方法。按照这种方法，利息除了会根据本金计算外，新得到的利息同样可以生息，因此俗称“利滚利”、“驴打滚”或“利叠利”。只要计算利息的周期越密，财富增长越快，而随着年期越长，复利效应亦会越为明显。—— 维基百科</p>
 </blockquote>
 <p>在引入“<strong>复利模型</strong>”之前，先试着看看更基本的 “指数增长模型”。</p>
 <p>我们知道，大部分细菌是通过二分裂进行繁殖的，假设某种细菌1天会分裂一次，也就是一个增长周期为1天，如下图，这意味着：<strong>每一天，细菌的总数量都是前一天的两倍</strong>。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510111844.png" alt="(图片来源: betterexplained)"></p>
-<p>显然，如果经过$x$天（或者说，经过个增长周期）的分裂，就相当于翻了$x$倍。在第$x$天时，细菌总数将是初始数量的$2x$倍。如果细菌的初始数量为1，那么$x$天后的细菌数量即为$2x$：</p>
-<script type="math/tex; mode=display">
-\mathbf{细菌数量}=2^{x}</script><p>如果假设初始数量为$K$，那么$x$天后的细菌数量则为$K\cdot 2x$：</p>
-<script type="math/tex; mode=display">
-\mathbf{细菌数量}=K\cdot 2^{x}</script><p>因此，只要保证所有细菌一天分裂一次，不管初始数量是多少，最终数量都将是初始数量的2x 倍。因此也可以写为：</p>
-<script type="math/tex; mode=display">
-Q=2^{x}</script><p>上式含义是：<strong>第$x$天时，细菌总数量是细菌初始数量的$Q$倍</strong>。</p>
-<p>如果将 “<strong>分裂</strong>”或“<strong>翻倍</strong>”换一种更文艺的说法，也可以说是：“<strong>增长率为100%</strong>”。那我们可以将上式写为：</p>
-<script type="math/tex; mode=display">
-Q=(1+100 \%)^{x}</script><p>当增长率不是100%，而是50%、25%之类的时候，则只需要将上式的100%换成想要的增长率即可。这样就可以得到更加普适的公式：</p>
-<script type="math/tex; mode=display">
-Q=(1+r)^{x}</script><p><strong>这个公式的数学内涵是</strong>：<span style="color:red"><strong>一个增长周期内的增长率为$r$，在增长了$x$个周期之后，总数量将为初始数量的$Q$倍</strong></span>。</p>
+<p>显然，如果经过$x$天（或者说，经过个增长周期）的分裂，就相当于翻了$x$倍。在第$x$天时，细菌总数将是初始数量的$2x$倍。如果细菌的初始数量为1，那么$x$天后的细菌数量即为$2x$：<br>$$<br>\mathbf{细菌数量}=2^{x}<br>$$<br>如果假设初始数量为$K$，那么$x$天后的细菌数量则为$K\cdot 2x$：<br>$$<br>\mathbf{细菌数量}=K\cdot 2^{x}<br>$$<br>因此，只要保证所有细菌一天分裂一次，不管初始数量是多少，最终数量都将是初始数量的2x 倍。因此也可以写为：<br>$$<br>Q=2^{x}<br>$$</p>
+<p>上式含义是：<strong>第$x$天时，细菌总数量是细菌初始数量的$Q$倍</strong>。</p>
+<p>如果将 “<strong>分裂</strong>”或“<strong>翻倍</strong>”换一种更文艺的说法，也可以说是：“**增长率为100%**”。那我们可以将上式写为：<br>$$<br>Q=(1+100 %)^{x}<br>$$<br>当增长率不是100%，而是50%、25%之类的时候，则只需要将上式的100%换成想要的增长率即可。这样就可以得到更加普适的公式：<br>$$<br>Q=(1+r)^{x}<br>$$<br><strong>这个公式的数学内涵是</strong>：<span style="color:red"><strong>一个增长周期内的增长率为$r$，在增长了$x$个周期之后，总数量将为初始数量的$Q$倍</strong></span>。</p>
 <p>以上为指数增长的简单实例，下面来看看雅可比·伯努利的发现：</p>
 <p>假设你有1元钱存在银行里，此时发生了严重的通货膨胀，银行的利率飙到了100%（夸张一下，为了方便计算）。如果银行一年付一次利息，自然在一年后你可以拿到1元的本金（蓝色圆）和1元的利息（绿色圆），总共两元的余额。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112331.png" alt="(图片来源: betterexplained)"><br>现在银行的年利率不变，但银行为了招揽客户，推出一项惠民政策，每半年就付一次利息。那么到第六个月的时候，你就能够提前从银行拿到0.5元的利息了。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112343.png" alt="(图片来源: betterexplained)"></p>
 <p>机智的你会马上把这0.5元的利息再次存入银行，这0.5元的利息也将在下一结算周期产生利息(红色圆)，专业术语叫“复利”，那么年底的存款余额将等于2.25元。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112351.png" alt="(图片来源: betterexplained)"></p>
-<p>此时，我们可以换个角度这样看：即，每个结算（增长）周期为半年，每半年的利率是50%（或者说100%/2），一年结算两次利息，且第一次结算完后，立马将利息存入。此时我们的计算公式和结果如下：</p>
-<script type="math/tex; mode=display">
-Q=\left(1+\frac{100 \%}{2}\right)^{2}=2.25</script><p>继续，假设现在银行为了和其他银行抢生意，短期不想赚钱了，每四个月就付一次利息！而机智的你依然一拿到利息就立马存入，与半年结算一次利息类似：即，每个结算周期为四个月，每四个月的利率是33.33%（或者说100%/3），一年结算三次利息，且前两次结算完后，都立马将所有利息存入。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112417.png" alt=""></p>
-<p>此时计算公式和结果如下：</p>
-<script type="math/tex; mode=display">
-Q=\left(1+\frac{100 \%}{3}\right)^{3} \approx 2.37037</script><p>我的天，年利率虽然没有变，但随着每年利息交付次数的增加，你年底能从银行拿到的钱居然也在增加！</p>
+<p>此时，我们可以换个角度这样看：即，每个结算（增长）周期为半年，每半年的利率是50%（或者说100%/2），一年结算两次利息，且第一次结算完后，立马将利息存入。此时我们的计算公式和结果如下：<br>$$<br>Q=\left(1+\frac{100 %}{2}\right)^{2}=2.25<br>$$<br>继续，假设现在银行为了和其他银行抢生意，短期不想赚钱了，每四个月就付一次利息！而机智的你依然一拿到利息就立马存入，与半年结算一次利息类似：即，每个结算周期为四个月，每四个月的利率是33.33%（或者说100%/3），一年结算三次利息，且前两次结算完后，都立马将所有利息存入。<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112417.png"></p>
+<p>此时计算公式和结果如下：<br>$$<br>Q=\left(1+\frac{100 %}{3}\right)^{3} \approx 2.37037<br>$$</p>
+<p>我的天，年利率虽然没有变，但随着每年利息交付次数的增加，你年底能从银行拿到的钱居然也在增加！</p>
 <p>那么是不是会一直增大到无穷大呢？想得倒美…</p>
 <p>现在假设存款人和银行都疯了，银行在保证年利率为100%的前提下连续不断地付给存款人利息，存款人天天呆在银行不走，拿到利息就往银行里存。这样，所得利息即所谓“<span style="color:red"><strong>连续复利</strong></span>”。</p>
-<p>但是，你会发现，似乎有一个“天花板”挡住了你企图靠1块钱疯狂赚取1个亿的小目标，这个“天花板”就是$e$ ！<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112410.jpg" alt=""></p>
-<p>如果，我们进行一系列的迭代运算，我们将看到以下结果：<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112404.png" alt=""><br>其中，$n$指的是一年中结算利息的次数。</p>
+<p>但是，你会发现，似乎有一个“天花板”挡住了你企图靠1块钱疯狂赚取1个亿的小目标，这个“天花板”就是$e$ ！<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112410.jpg"></p>
+<p>如果，我们进行一系列的迭代运算，我们将看到以下结果：<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112404.png"><br>其中，$n$指的是一年中结算利息的次数。</p>
 <p>只要在年利率保持100%不变的情况下，不断地提高利息的结算次数，余额就将会逼近$e$=2.718281845…</p>
-<p>然后，终于可以祭出这个高等数学微积分里计算$e$的一个重要极限了：</p>
-<script type="math/tex; mode=display">
-e = \mathop {\lim }\limits_{n \to \infty } \left( {1 + \frac{1}{n}} \right)^n</script><p>现在再回头看这个重要极限，想必会有更加直观的理解。</p>
+<p>然后，终于可以祭出这个高等数学微积分里计算$e$的一个重要极限了：<br>$$<br>e = \mathop {\lim }\limits_{n \to \infty } \left( {1 + \frac{1}{n}} \right)^n<br>$$<br>现在再回头看这个重要极限，想必会有更加直观的理解。</p>
 <p>也就是说，就算银行的年利率是100%，再怎么求银行给你“复利”，年底也不可能得到超过本金e 倍的余额。况且，我是没见过哪个银行的年利率是100%。</p>
 <p>虽然正常的银行不会推出连续复利这种优惠政策，但在自然界中，大多数事物都处在一种“无意识的连续增长”状态中。对于一个连续增长的事物，如果单位时间的增长率为100%，那么经过一个单位时间后，其将变成原来的$e$倍。生物的生长与繁殖，就也类似于“利滚利”的过程。</p>
 <p>再比如，在等角螺线中：<br><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/20190510112358.png" alt="等角螺线"></p>
-<p>如果用极坐标表示，其通用数学表达式为：</p>
-<script type="math/tex; mode=display">
-r=a \cdot e^{b \cdot \theta}</script><p>其中，$a$、$b$ 为系数，$r$ 螺线上的点到坐标原点的距离，$θ$ 为转角。这正是一个以自然常数$e$为底的指数函数。</p>
-<p>例如，鹦鹉螺外壳切面就呈现优美的等角螺线：<br><br>热带低气压的外观也像等角螺线：<br><br>就连旋涡星系的旋臂都像等角螺线：<br></p>
+<p>如果用极坐标表示，其通用数学表达式为：<br>$$<br>r=a \cdot e^{b \cdot \theta}<br>$$<br>其中，$a$、$b$ 为系数，$r$ 螺线上的点到坐标原点的距离，$θ$ 为转角。这正是一个以自然常数$e$为底的指数函数。</p>
+<p>例如，鹦鹉螺外壳切面就呈现优美的等角螺线：</p>
+
+<p>热带低气压的外观也像等角螺线：</p>
+
+<p>就连旋涡星系的旋臂都像等角螺线：</p>
+
+
 <p>或许这也是e 被称为“<span style="color:red"><strong>自然常数</strong></span>”的原因吧。当然，自然常数e 的奇妙之处还远不止这些，一本书都写不完。</p>
 <p><strong>Good References:</strong></p>
 <ol>
-<li><a href="https://mp.weixin.qq.com/s/yAZiYYJBUJuesBCTUL_tBg" target="_blank" rel="noopener">自然常数e到底自然在哪？|科研狗</a></li>
-<li><a href="https://betterexplained.com/articles/an-intuitive-guide-to-exponential-functions-e/" target="_blank" rel="noopener">An Intuitive Guide To Exponential Functions &amp; e</a></li>
-<li><a href="https://betterexplained.com/articles/prehistoric-calculus-discovering-pi/" target="_blank" rel="noopener">Prehistoric Calculus: Discovering Pi</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Compound_interest" target="_blank" rel="noopener">Compound interest</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Leonhard_Euler" target="_blank" rel="noopener">Leonhard Euler</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Logarithmic_spiral" target="_blank" rel="noopener">Logarithmic spiral</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/yAZiYYJBUJuesBCTUL_tBg">自然常数e到底自然在哪？|科研狗</a></li>
+<li><a target="_blank" rel="noopener" href="https://betterexplained.com/articles/an-intuitive-guide-to-exponential-functions-e/">An Intuitive Guide To Exponential Functions &amp; e</a></li>
+<li><a target="_blank" rel="noopener" href="https://betterexplained.com/articles/prehistoric-calculus-discovering-pi/">Prehistoric Calculus: Discovering Pi</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Compound_interest">Compound interest</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Leonhard_Euler">Leonhard Euler</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Logarithmic_spiral">Logarithmic spiral</a></li>
 </ol>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
     </div>
 
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div>您的支持将鼓励我继续创作！</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <button>
     Donate
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
+  <div class="post-reward">
+      <div>
         <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
-        <p>WeChat Pay</p>
+        <span>WeChat Pay</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
-        <p>Alipay</p>
+        <span>Alipay</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
-        <p>Bitcoin</p>
+        <span>Bitcoin</span>
       </div>
 
   </div>
 </div>
 
-        
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
+  <div class="social-list">
 
-    <div class="social-list">
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
 
-            <div class="social-item">
-              <a target="_blank" class="social-link" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechat_channel.png">
-                <span class="icon">
-                  <i class="fa fa-wechat"></i>
-                </span>
+          <span class="label">WeChat</span>
+        </a>
+      </div>
 
-                <span class="label">微信搜一搜：赵大寳Note</span>
-              </a>
-            </div>
-    </div>
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
   </div>
+</div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/%E8%87%AA%E7%84%B6%E5%B8%B8%E6%95%B0/" rel="tag"><i class="fa fa-tag"></i> 自然常数</a>
           </div>
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/How-to-access-intranet-hosts-with-reverse-proxy/" rel="prev" title="如何通过反向代理远程访问内网主机">
-      <i class="fa fa-chevron-left"></i> 如何通过反向代理远程访问内网主机
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/Hello-Scala/" rel="next" title="Scala刚刚入门的学习笔记">
-      Scala刚刚入门的学习笔记 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/How-to-access-intranet-hosts-with-reverse-proxy/" rel="prev" title="如何通过反向代理远程访问内网主机">
+                  <i class="fa fa-chevron-left"></i> 如何通过反向代理远程访问内网主机
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Hello-Scala/" rel="next" title="Scala刚刚入门的学习笔记">
+                  Scala刚刚入门的学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="赵大寳"
-      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">赵大寳</p>
-  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+    </footer>
+  </article>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">79</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">15</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">54</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      友情链接
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
 
 <div class="copyright">
-  
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-snowflake-o"></i>
+    <i class="snowflake-o"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -598,8 +488,7 @@ r=a \cdot e^{b \cdot \theta}</script><p>其中，$a$、$b$ 为系数，$r$ 螺�
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -608,122 +497,34 @@ r=a \cdot e^{b \cdot \theta}</script><p>其中，$a$、$b$ 为系数，$r$ 螺�
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
 
 
 
 
-
-
-
-
-
-
-
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
   
 
-  
-      
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
-    
-
-  
-
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
+<script src="/js/third-party/comments/livere.js"></script>
 
 </body>
 </html>

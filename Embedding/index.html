@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/180x180-logo.png">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
@@ -13,14 +15,12 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
 
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"fuhailin.github.io","root":"/","scheme":"Muse","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-  <meta name="description" content="这篇博客翻译自国外的深度学习系列文章的第四篇，想查看其他文章请点击下面的链接，人工翻译也是劳动，如果你觉得有用请打赏，转载请打赏:">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="这篇博客翻译自国外的深度学习系列文章的第四篇，想查看其他文章请点击下面的链接，人工翻译也是劳动，如果你觉得有用请打赏，转载请打赏:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[译]深度学习中Embedding层有什么用？">
 <meta property="og:url" content="https://fuhailin.github.io/Embedding/index.html">
@@ -30,142 +30,208 @@
 <meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_Di85w_0UTc6C3ilk5_LEgg.png">
 <meta property="og:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_m8Ahpl-lpVgm16CC-INGuw.png">
 <meta property="article:published_time" content="2018-12-15T16:02:56.000Z">
-<meta property="article:modified_time" content="2019-11-26T02:52:39.204Z">
+<meta property="article:modified_time" content="2021-07-23T06:42:04.591Z">
 <meta property="article:author" content="赵大寳">
 <meta property="article:tag" content="深度学习">
 <meta property="article:tag" content="Embedding">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_Di85w_0UTc6C3ilk5_LEgg.png">
 
+
 <link rel="canonical" href="https://fuhailin.github.io/Embedding/">
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome: false,
-    isPost: true
-  };
-</script>
 
-  <title>[译]深度学习中Embedding层有什么用？ | 赵大寳</title>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Embedding/","path":"Embedding/","title":"[译]深度学习中Embedding层有什么用？"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>[译]深度学习中Embedding层有什么用？ | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
-    <script>
-      if (CONFIG.hostname === location.hostname) {
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-129037882-1');
-      }
-    </script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
 
-
-  <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
 
 
 
   <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
+  <main class="main">
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">赵大寳</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">鶸鸡程序员，新世纪农民工</p>
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">赵大寳</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
   </div>
 
-  <div class="site-nav-right"></div>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
 </div>
+
 
 
 <nav class="site-nav">
-  
-  <ul id="menu" class="menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
-
-  </li>
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
+        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not-Just-Word-Embeddings"><span class="nav-number">1.</span> <span class="nav-text">Not Just Word Embeddings</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommender-Systems"><span class="nav-number">1.1.</span> <span class="nav-text">Recommender Systems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#References"><span class="nav-number">1.2.</span> <span class="nav-text">References</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Embedding-layers-in-keras"><span class="nav-number">1.3.</span> <span class="nav-text">Embedding layers in keras</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">90</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll site-overview-item animated">
+    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+        </li>
+    </ul>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
     </header>
 
     
-  <div class="back-to-top">
+  <div class="back-to-top" role="button" aria-label="Back to top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
@@ -173,20 +239,22 @@
 
   <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content">
-            
+    <div class="main-inner post posts-expand">
 
-  <div class="posts-expand">
-      
+
+  
+
+
+<div class="post-block">
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="en">
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Embedding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -203,42 +271,42 @@
           [译]深度学习中Embedding层有什么用？
         </h1>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2018-12-16 00:02:56" itemprop="dateCreated datePublished" datetime="2018-12-16T00:02:56+08:00">2018-12-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-11-26 10:52:39" itemprop="dateModified" datetime="2019-11-26T10:52:39+08:00">2019-11-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习与算法</span>
-                  </a>
-                </span>
-            </span>
+      <time title="Created: 2018-12-16 00:02:56" itemprop="dateCreated datePublished" datetime="2018-12-16T00:02:56+08:00">2018-12-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-23 14:42:04" itemprop="dateModified" datetime="2021-07-23T14:42:04+08:00">2021-07-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">机器学习与算法</span></a>
+        </span>
+    </span>
 
-          
-            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">Views: </span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span>
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
 
         </div>
       </header>
@@ -247,24 +315,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
+        
 
-      
-        <p><em>这篇博客翻译自国外的深度学习系列文章的第四篇，想查看其他文章请点击下面的链接，人工翻译也是劳动，如果你觉得有用请打赏，转载请打赏:</em></p>
-<a id="more"></a>
+<!-- ![word embeddings](1_sXNXYfAqfLUeiDXPCo130w.png) -->
+<p><em>这篇博客翻译自国外的深度学习系列文章的第四篇，想查看其他文章请点击下面的链接，人工翻译也是劳动，如果你觉得有用请打赏，转载请打赏:</em></p>
+<span id="more"></span>
+
 <ol>
-<li><a href="https://medium.com/towards-data-science/deep-learning-1-1a7e7d9e3c07" target="_blank" rel="noopener">Setting up AWS &amp; Image Recognition</a></li>
-<li><a href="https://medium.com/towards-data-science/deep-learning-2-f81ebe632d5c" target="_blank" rel="noopener">Convolutional Neural Networks</a></li>
-<li><a href="https://medium.com/towards-data-science/deep-learning-3-more-on-cnns-handling-overfitting-2bd5d99abe5d" target="_blank" rel="noopener">More on CNNs &amp; Handling Overfitting</a></li>
+<li> <a target="_blank" rel="noopener" href="https://medium.com/towards-data-science/deep-learning-1-1a7e7d9e3c07">Setting up AWS &amp; Image Recognition</a></li>
+<li> <a target="_blank" rel="noopener" href="https://medium.com/towards-data-science/deep-learning-2-f81ebe632d5c">Convolutional Neural Networks</a></li>
+<li> <a target="_blank" rel="noopener" href="https://medium.com/towards-data-science/deep-learning-3-more-on-cnns-handling-overfitting-2bd5d99abe5d">More on CNNs &amp; Handling Overfitting</a></li>
 </ol>
 <hr>
 <p>在深度学习实验中经常会遇Eembedding层,然而网络上的介绍可谓是相当含糊。比如 Keras中文文档中对嵌入层 Embedding的介绍除了一句 “<em>嵌入层将正整数（下标）转换为具有固定大小的向量</em>”之外就不愿做过多的解释。那么我们为什么要使用嵌入层 Embedding呢? 主要有这两大原因:</p>
 <ol>
-<li><p>使用One-hot 方法编码的向量会很高维也很稀疏。假设我们在做自然语言处理（NLP）中遇到了一个包含2000个词的字典，当使用One-hot编码时，每一个词会被一个包含2000个整数的向量来表示，其中1999个数字是0，要是我的字典再大一点的话这种方法的计算效率岂不是大打折扣？</p>
+<li><p> 使用One-hot 方法编码的向量会很高维也很稀疏。假设我们在做自然语言处理（NLP）中遇到了一个包含2000个词的字典，当使用One-hot编码时，每一个词会被一个包含2000个整数的向量来表示，其中1999个数字是0，要是我的字典再大一点的话这种方法的计算效率岂不是大打折扣？</p>
 </li>
-<li><p>训练神经网络的过程中，每个嵌入的向量都会得到更新。如果你看到了博客上面的图片你就会发现在多维空间中词与词之间有多少相似性，这使我们能可视化的了解词语之间的关系，不仅仅是词语，任何能通过嵌入层 Embedding 转换成向量的内容都可以这样做。</p>
+<li><p> 训练神经网络的过程中，每个嵌入的向量都会得到更新。如果你看到了博客上面的图片你就会发现在多维空间中词与词之间有多少相似性，这使我们能可视化的了解词语之间的关系，不仅仅是词语，任何能通过嵌入层 Embedding 转换成向量的内容都可以这样做。</p>
 </li>
 </ol>
-<p>上面说的概念可能还有点含糊. 那我们就举个栗子看看嵌入层 Embedding 对下面的句子做了什么：）。Embedding的概念来自于word embeddings，如果您有兴趣阅读更多内容，可以查询 <a href="https://arxiv.org/pdf/1301.3781.pdf" target="_blank" rel="noopener">word2vec</a> 。</p>
+<p>上面说的概念可能还有点含糊. 那我们就举个栗子看看嵌入层 Embedding 对下面的句子做了什么：）。Embedding的概念来自于word embeddings，如果您有兴趣阅读更多内容，可以查询 <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1301.3781.pdf">word2vec</a> 。</p>
 <blockquote>
 <p>“deep learning is very deep”</p>
 </blockquote>
@@ -274,8 +344,9 @@
 </blockquote>
 <p>接下来会创建嵌入矩阵，我们要决定每一个索引需要分配多少个‘潜在因子’，这大体上意味着我们想要多长的向量，通常使用的情况是长度分配为32和50。在这篇博客中，为了保持文章可读性这里为每个索引指定6个潜在因子。嵌入矩阵就会变成这样：</p>
 <p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_Di85w_0UTc6C3ilk5_LEgg.png" alt="Embedding Matrix"></p>
-<p>这样，我们就可以使用嵌入矩阵来而不是庞大的one-hot编码向量来保持每个向量更小。简而言之，嵌入层embedding在这里做的就是把单词“deep”用向量[.32,&nbsp;.02,&nbsp;.48,&nbsp;.21,&nbsp;.56,&nbsp;.15]来表达。然而并不是每一个单词都会被一个向量来代替，而是被替换为用于查找嵌入矩阵中向量的索引。其次这种方法面对大数据时也可有效计算。由于在深度神经网络的训练过程中嵌入向量也会被更新，我们就可以探索在高维空间中哪些词语之间具有彼此相似性，再通过使用<a href="https://lvdmaaten.github.io/tsne/" target="_blank" rel="noopener">t-SNE </a>这样的降维技术就可以将这些相似性可视化。</p>
-<p><img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_m8Ahpl-lpVgm16CC-INGuw.png" width="50%" height="50%" title="t-SNE visualization of word embeddings" alt="t-SNE visualization of word embeddings"></p>
+<p>这样，我们就可以使用嵌入矩阵来而不是庞大的one-hot编码向量来保持每个向量更小。简而言之，嵌入层embedding在这里做的就是把单词“deep”用向量[.32,&nbsp;.02,&nbsp;.48,&nbsp;.21,&nbsp;.56,&nbsp;.15]来表达。然而并不是每一个单词都会被一个向量来代替，而是被替换为用于查找嵌入矩阵中向量的索引。其次这种方法面对大数据时也可有效计算。由于在深度神经网络的训练过程中嵌入向量也会被更新，我们就可以探索在高维空间中哪些词语之间具有彼此相似性，再通过使用<a target="_blank" rel="noopener" href="https://lvdmaaten.github.io/tsne/">t-SNE </a>这样的降维技术就可以将这些相似性可视化。</p>
+<img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/1_m8Ahpl-lpVgm16CC-INGuw.png" width="50%" height="50%" title="t-SNE visualization of word embeddings" alt="t-SNE visualization of word embeddings"/>
+
 <hr>
 <h3 id="Not-Just-Word-Embeddings"><a href="#Not-Just-Word-Embeddings" class="headerlink" title="Not Just Word Embeddings"></a>Not Just Word Embeddings</h3><p>These previous examples showed that word embeddings are very important in the world of Natural Language Processing. They allow us to capture relationships in language that are very difficult to capture otherwise. However, embedding layers can be used to embed many more things than just words. In my current research project I am using embedding layers to embed online user behavior. In this case I am assigning indices to user behavior like ‘page view on page type X on portal Y’ or ‘scrolled X pixels’. These indices are then used for constructing a sequence of user behavior.</p>
 <p>In a comparison of ‘traditional’ machine learning models (SVM, Random Forest, Gradient Boosted Trees) with deep learning models (deep neural networks, recurrent neural networks) I found that this embedding approach worked very well for deep neural networks.</p>
@@ -284,121 +355,111 @@
 <p>Other research has explored the use of embedding layers to encode student behavior in MOOCs (Piech et al., 2016) and users’ path through an online fashion store (Tamhane et al., 2017).</p>
 <hr>
 <h4 id="Recommender-Systems"><a href="#Recommender-Systems" class="headerlink" title="Recommender Systems"></a>Recommender Systems</h4><p>Embedding layers can even be used to deal with the sparse matrix problem in recommender systems. Since the deep learning course (fast.ai) uses recommender systems to introduce embedding layers I want to explore them here as well.</p>
-<p>Recommender systems are being used everywhere and you are probably being influenced by them every day. The most common examples are Amazon’s product recommendation and Netflix’s program recommendation systems. Netflix actually held a $1,000,000 challenge to find the best collaborative filtering algorithm for their recommender system. You can see a visualization of one of these models <a href="http://abeautifulwww.com/wp-content/uploads/2007/04/netflixAllMovies-blackBack3[5].jpg" target="_blank" rel="noopener">here</a>.</p>
+<p>Recommender systems are being used everywhere and you are probably being influenced by them every day. The most common examples are Amazon’s product recommendation and Netflix’s program recommendation systems. Netflix actually held a $1,000,000 challenge to find the best collaborative filtering algorithm for their recommender system. You can see a visualization of one of these models <a target="_blank" rel="noopener" href="http://abeautifulwww.com/wp-content/uploads/2007/04/netflixAllMovies-blackBack3[5].jpg">here</a>.</p>
 <p>There are two main types of recommender systems and it is important to distinguish between the two.</p>
 <ol>
-<li>Content-based filtering. This type of filtering is based on data about the item/product. For example, we have our users fill out a survey on what movies they like. If they say that they like sci-fi movies we recommend them sci-fi movies. In this case al lot of meta-information has to be available for all items.</li>
-<li>Collaborative filtering: Let’s find other people like you, see what they liked and assume you like the same things. People like you = people who rated movies that you watched in a similar way. In a large dataset this has proven to work a lot better than the meta-data approach. Essentially asking people about their behavior is less good compared to looking at their actual behavior. Discussing this further is something for the psychologists among us.</li>
+<li> Content-based filtering. This type of filtering is based on data about the item/product. For example, we have our users fill out a survey on what movies they like. If they say that they like sci-fi movies we recommend them sci-fi movies. In this case al lot of meta-information has to be available for all items.</li>
+<li> Collaborative filtering: Let’s find other people like you, see what they liked and assume you like the same things. People like you = people who rated movies that you watched in a similar way. In a large dataset this has proven to work a lot better than the meta-data approach. Essentially asking people about their behavior is less good compared to looking at their actual behavior. Discussing this further is something for the psychologists among us.</li>
 </ol>
 <p>In order to solve this problem we can create a huge matrix of the ratings of all users against all movies. However, in many cases this will create an extremely sparse matrix. Just think of your Netflix account. What percentage of their total supply of series and movies have you watched? It’s probably a pretty small percentage. Then, through gradient descent we can train a neural network to predict how high each user would rate each movie. Let me know if you would like to know more about the use of deep learning in recommender systems and we can explore it further together. In conclusion, embedding layers are amazing and should not be overlooked.</p>
 <p>If you liked this posts be sure to recommend it so others can see it. You can also follow this profile to keep up with my process in the Fast AI course. See you there!</p>
 <h4 id="References"><a href="#References" class="headerlink" title="References"></a>References</h4><p>Piech, C., Bassen, J., Huang, J., Ganguli, S., Sahami, M., Guibas, L. J., &amp; Sohl-Dickstein, J. (2015). <em>Deep knowledge tracing. In Advances in Neural Information Processing Systems</em> (pp. 505–513).</p>
 <p>Tamhane, A., Arora, S., &amp; Warrier, D. (2017, May). <em>Modeling Contextual Changes in User Behaviour in Fashion e-Commerce</em>. In Pacific-Asia Conference on Knowledge Discovery and Data Mining (pp. 539–550). Springer, Cham.</p>
 <h4 id="Embedding-layers-in-keras"><a href="#Embedding-layers-in-keras" class="headerlink" title="Embedding layers in keras"></a>Embedding layers in keras</h4><p>嵌入层embedding用在网络的开始层将你的输入转换成向量，所以当使用 Embedding前应首先判断你的数据是否有必要转换成向量。如果你有categorical数据或者数据仅仅包含整数（像一个字典一样具有固定的数量）你可以尝试下Embedding 层。<br>如果你的数据是多维的你可以对每个输入共享嵌入层或尝试单独的嵌入层。</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from keras.layers.embeddings import Embedding</span><br><span class="line"></span><br><span class="line">Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, activity_regularizer=None, embeddings_constraint=None, mask_zero=False, input_length=None)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from keras.layers.embeddings import Embedding</span><br><span class="line"></span><br><span class="line">Embedding(input_dim, output_dim, embeddings_initializer=&#x27;uniform&#x27;, embeddings_regularizer=None, activity_regularizer=None, embeddings_constraint=None, mask_zero=False, input_length=None)</span><br></pre></td></tr></table></figure>
 <p>-The first value of the Embedding constructor is the range of values in the input. In the example it’s 2 because we give a binary vector as input.</p>
 <ul>
 <li>The second value is the target dimension.</li>
-<li>The third is the length of the vectors we give.<ul>
+<li>The third is the length of the vectors we give.</li>
 <li>input_dim: int &gt;= 0. Size of the vocabulary, ie. 1+maximum integer<br>index occuring in the input data.</li>
 </ul>
-</li>
-</ul>
-<p>本文译自：<a href="https://medium.com/towards-data-science/deep-learning-4-embedding-layers-f9a02d55ac12" target="_blank" rel="noopener">https://medium.com/towards-data-science/deep-learning-4-embedding-layers-f9a02d55ac12</a></p>
+<p>本文译自：<a target="_blank" rel="noopener" href="https://medium.com/towards-data-science/deep-learning-4-embedding-layers-f9a02d55ac12">https://medium.com/towards-data-science/deep-learning-4-embedding-layers-f9a02d55ac12</a></p>
 <p>How does embedding work? An example demonstrates best what is going on.</p>
 <p>Assume you have a sparse vector [0,1,0,1,1,0,0] of dimension seven. You can turn it into a non-sparse 2d vector like so:</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(2, 2, input_length=7))</span><br><span class="line">model.compile('rmsprop', 'mse')</span><br><span class="line">model.predict(np.array([[0,1,0,1,1,0,0]]))</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">array([[[ 0.03005414, -0.02224021],</span><br><span class="line">        [ 0.03396987, -0.00576888],</span><br><span class="line">        [ 0.03005414, -0.02224021],</span><br><span class="line">        [ 0.03396987, -0.00576888],</span><br><span class="line">        [ 0.03396987, -0.00576888],</span><br><span class="line">        [ 0.03005414, -0.02224021],</span><br><span class="line">        [ 0.03005414, -0.02224021]]], dtype=float32)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(2, 2, input_length=7))</span><br><span class="line">model.compile(&#x27;rmsprop&#x27;, &#x27;mse&#x27;)</span><br><span class="line">model.predict(np.array([[0,1,0,1,1,0,0]]))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">array([[[ 0.03005414, -0.02224021],</span><br><span class="line">        [ 0.03396987, -0.00576888],</span><br><span class="line">        [ 0.03005414, -0.02224021],</span><br><span class="line">        [ 0.03396987, -0.00576888],</span><br><span class="line">        [ 0.03396987, -0.00576888],</span><br><span class="line">        [ 0.03005414, -0.02224021],</span><br><span class="line">        [ 0.03005414, -0.02224021]]], dtype=float32)</span><br></pre></td></tr></table></figure>
 <p>Where do these numbers come from? It’s a simple map from the given range to a 2d space:</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.layers[0].W.get_value()</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0.03005414, -0.02224021],</span><br><span class="line">       [ 0.03396987, -0.00576888]], dtype=float32)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.layers[0].W.get_value()</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0.03005414, -0.02224021],</span><br><span class="line">       [ 0.03396987, -0.00576888]], dtype=float32)</span><br></pre></td></tr></table></figure>
 <p>The 0-value is mapped to the first index and the 1-value to the second as can be seen by comparing the two arrays. The first value of the Embedding constructor is the range of values in the input. In the example it’s 2 because we give a binary vector as input. The second value is the target dimension. The third is the length of the vectors we give.<br>So, there is nothing magical in this, merely a mapping from integers to floats.</p>
 <p>Now back to our ‘shining’ detection. The training data looks like a sequences of bits:</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0.,  1.,  1.,  1.,  0.,  1.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,</span><br><span class="line">         1.,  0.,  0.,  0.,  0.,  0.],</span><br><span class="line">       [ 0.,  1.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,</span><br><span class="line">         0.,  0.,  0.,  0.,  0.,  0.],</span><br><span class="line">       [ 0.,  1.,  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,</span><br><span class="line">         0.,  0.,  1.,  0.,  1.,  0.],</span><br><span class="line">       [ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,</span><br><span class="line">         0.,  1.,  0.,  1.,  0.,  0.],</span><br><span class="line">       [ 0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  1.,  0.,  1.,  0.,  0.,</span><br><span class="line">         0.,  0.,  0.,  0.,  0.,  1.]])</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0.,  1.,  1.,  1.,  0.,  1.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,</span><br><span class="line">         1.,  0.,  0.,  0.,  0.,  0.],</span><br><span class="line">       [ 0.,  1.,  0.,  0.,  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,</span><br><span class="line">         0.,  0.,  0.,  0.,  0.,  0.],</span><br><span class="line">       [ 0.,  1.,  1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,</span><br><span class="line">         0.,  0.,  1.,  0.,  1.,  0.],</span><br><span class="line">       [ 0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.,  0.,</span><br><span class="line">         0.,  1.,  0.,  1.,  0.,  0.],</span><br><span class="line">       [ 0.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  1.,  0.,  1.,  0.,  0.,</span><br><span class="line">         0.,  0.,  0.,  0.,  0.,  1.]])</span><br></pre></td></tr></table></figure>
 <p>If you want to use the embedding it means that the output of the embedding layer will have dimension (5, 19, 10). This works well with LSTM or GRU (see below) but if you want a binary classifier you need to flatten this to (5, 19*10):</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(3, 10, input_length= X.shape[1] ))</span><br><span class="line">model.add(Flatten())</span><br><span class="line">model.add(Dense(1, activation='sigmoid'))</span><br><span class="line">model.compile(loss='binary_crossentropy', optimizer='rmsprop')</span><br><span class="line">model.fit(X, y=y, batch_size=200, nb_epoch=700, verbose=0, validation_split=0.2, show_accuracy=True, shuffle=True)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line">model.add(Embedding(3, 10, input_length= X.shape[1] ))</span><br><span class="line">model.add(Flatten())</span><br><span class="line">model.add(Dense(1, activation=&#x27;sigmoid&#x27;))</span><br><span class="line">model.compile(loss=&#x27;binary_crossentropy&#x27;, optimizer=&#x27;rmsprop&#x27;)</span><br><span class="line">model.fit(X, y=y, batch_size=200, nb_epoch=700, verbose=0, validation_split=0.2, show_accuracy=True, shuffle=True)</span><br></pre></td></tr></table></figure>
 <p>It detects ‘shining’ flawlessly:</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.predict(X)</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array([[  1.00000000e+00],</span><br><span class="line">       [  8.39483363e-08],</span><br><span class="line">       [  9.71878720e-08],</span><br><span class="line">       [  7.35597965e-08],</span><br><span class="line">       [  9.91844118e-01]], dtype=float32)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.predict(X)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array([[  1.00000000e+00],</span><br><span class="line">       [  8.39483363e-08],</span><br><span class="line">       [  9.71878720e-08],</span><br><span class="line">       [  7.35597965e-08],</span><br><span class="line">       [  9.91844118e-01]], dtype=float32)</span><br></pre></td></tr></table></figure>
 <p>An LSTM layer has historical memory and so the dimension outputted by the embedding works in this case, no need to flatten things:</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line"></span><br><span class="line">model.add(Embedding(vocab_size, 10))</span><br><span class="line">model.add(LSTM(5))</span><br><span class="line">model.add(Dense(1, activation='sigmoid'))</span><br><span class="line">model.compile(loss='binary_crossentropy', optimizer='rmsprop')</span><br><span class="line">model.fit(X, y=y,  nb_epoch=500, verbose=0, validation_split=0.2, show_accuracy=True, shuffle=True)</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">model = Sequential()</span><br><span class="line"></span><br><span class="line">model.add(Embedding(vocab_size, 10))</span><br><span class="line">model.add(LSTM(5))</span><br><span class="line">model.add(Dense(1, activation=&#x27;sigmoid&#x27;))</span><br><span class="line">model.compile(loss=&#x27;binary_crossentropy&#x27;, optimizer=&#x27;rmsprop&#x27;)</span><br><span class="line">model.fit(X, y=y,  nb_epoch=500, verbose=0, validation_split=0.2, show_accuracy=True, shuffle=True)</span><br></pre></td></tr></table></figure>
 <p>Obviously, it predicts things as well:</p>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.predict(X)</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0.96855599],</span><br><span class="line">       [ 0.01917232],</span><br><span class="line">       [ 0.01917362],</span><br><span class="line">       [ 0.01917258],</span><br><span class="line">       [ 0.02341695]], dtype=float32)</span><br></pre></td></tr></tbody></table></figure>
-<p>本文译自：<a href="http://www.orbifold.net/default/2017/01/10/embedding-and-tokenizer-in-keras/" target="_blank" rel="noopener">http://www.orbifold.net/default/2017/01/10/embedding-and-tokenizer-in-keras/</a></p>
-<p>万物皆Embedding，从经典的word2vec到深度学习基本操作item2vec: <a href="https://zhuanlan.zhihu.com/p/53194407?utm_source=qq&amp;utm_medium=social&amp;utm_oi=1066622868011413504" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/53194407?utm_source=qq&amp;utm_medium=social&amp;utm_oi=1066622868011413504</a></p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.predict(X)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">array([[ 0.96855599],</span><br><span class="line">       [ 0.01917232],</span><br><span class="line">       [ 0.01917362],</span><br><span class="line">       [ 0.01917258],</span><br><span class="line">       [ 0.02341695]], dtype=float32)</span><br></pre></td></tr></table></figure>
+
+<p>本文译自：<a target="_blank" rel="noopener" href="http://www.orbifold.net/default/2017/01/10/embedding-and-tokenizer-in-keras/">http://www.orbifold.net/default/2017/01/10/embedding-and-tokenizer-in-keras/</a></p>
+<p>万物皆Embedding，从经典的word2vec到深度学习基本操作item2vec: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53194407?utm_source=qq&amp;utm_medium=social&amp;utm_oi=1066622868011413504">https://zhuanlan.zhihu.com/p/53194407?utm_source=qq&amp;utm_medium=social&amp;utm_oi=1066622868011413504</a></p>
+
     </div>
 
     
     
     
-        <div class="reward-container">
+
+    <footer class="post-footer">
+          <div class="reward-container">
   <div>您的支持将鼓励我继续创作！</div>
-  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+  <button>
     Donate
   </button>
-  <div id="qr" style="display: none;">
-      
-      <div style="display: inline-block;">
+  <div class="post-reward">
+      <div>
         <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
-        <p>WeChat Pay</p>
+        <span>WeChat Pay</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
-        <p>Alipay</p>
+        <span>Alipay</span>
       </div>
-      
-      <div style="display: inline-block;">
+      <div>
         <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
-        <p>Bitcoin</p>
+        <span>Bitcoin</span>
       </div>
 
   </div>
 </div>
 
-        
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
 
-  <div class="followme">
-    <p>Welcome to my other publishing channels</p>
+  <div class="social-list">
 
-    <div class="social-list">
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+          <span class="icon">
+            <i class="fab fa-weixin"></i>
+          </span>
 
-            <div class="social-item">
-              <a target="_blank" class="social-link" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechat_channel.png">
-                <span class="icon">
-                  <i class="fa fa-wechat"></i>
-                </span>
+          <span class="label">WeChat</span>
+        </a>
+      </div>
 
-                <span class="label">微信搜一搜：赵大寳Note</span>
-              </a>
-            </div>
-    </div>
+      <div class="social-item">
+        <a target="_blank" class="social-link" href="/atom.xml">
+          <span class="icon">
+            <i class="fa fa-rss"></i>
+          </span>
+
+          <span class="label">RSS</span>
+        </a>
+      </div>
   </div>
+</div>
 
-
-      <footer class="post-footer">
-          
           <div class="post-tags">
               <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 深度学习</a>
               <a href="/tags/Embedding/" rel="tag"><i class="fa fa-tag"></i> Embedding</a>
@@ -406,203 +467,45 @@
 
         
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/Books-read/" rel="prev" title="读过的书">
-      <i class="fa fa-chevron-left"></i> 读过的书
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/Evaluation-Credit-model/" rel="next" title="信用评分模型的评估指标">
-      信用评分模型的评估指标 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-  </div>
-
-
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Books-read/" rel="prev" title="读过的书">
+                  <i class="fa fa-chevron-left"></i> 读过的书
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Evaluation-Credit-model/" rel="next" title="信用评分模型的评估指标">
+                  信用评分模型的评估指标 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
           </div>
-          
-    
-  <div class="comments">
-    <div id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
-  </div>
-  
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let activeClass = CONFIG.comments.activeClass;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Not-Just-Word-Embeddings"><span class="nav-number">1.</span> <span class="nav-text">Not Just Word Embeddings</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recommender-Systems"><span class="nav-number">1.1.</span> <span class="nav-text">Recommender Systems</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#References"><span class="nav-number">1.2.</span> <span class="nav-text">References</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Embedding-layers-in-keras"><span class="nav-number">1.3.</span> <span class="nav-text">Embedding layers in keras</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="赵大寳"
-      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
-  <p class="site-author-name" itemprop="name">赵大寳</p>
-  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+    </footer>
+  </article>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">79</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">15</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">54</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
 </div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/fuhailin" title="GitHub → https://github.com/fuhailin" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" rel="noopener" target="_blank"><i class="fa fa-fw fa-linkedin"></i>Linkedin</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/u010412858" title="CSDN → https://blog.csdn.net/u010412858" rel="noopener" target="_blank"><i class="fa fa-fw fa-csdn"></i>CSDN</a>
-      </span>
-  </div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title">
-      <i class="fa fa-fw fa-link"></i>
-      友情链接
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://tcxx.info/" title="https://tcxx.info/" rel="noopener" target="_blank">甜欣屋</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://licstar.net/" title="http://licstar.net/" rel="noopener" target="_blank">Siwei Lai的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://wepon.me/" title="http://wepon.me/" rel="noopener" target="_blank">wepon的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://jd92.wang/" title="http://jd92.wang/" rel="noopener" target="_blank">迁移学习王晋东</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://www.yinwang.org/" title="http://www.yinwang.org/" rel="noopener" target="_blank">王垠的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://blog.sina.com.cn/weiyanzheng" title="http://blog.sina.com.cn/weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://iphysresearch.github.io/" title="https://iphysresearch.github.io/" rel="noopener" target="_blank">IPhysResearch</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://paperswithcode.com/task/recommendation-systems" title="https://paperswithcode.com/task/recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://jcf94.com/" title="http://jcf94.com/" rel="noopener" target="_blank">Chenfan Blog</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">左耳朵耗子</a>
-        </li>
-    </ul>
-  </div>
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
 
 <div class="copyright">
-  
   &copy; 2018 – 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-snowflake-o"></i>
+    <i class="snowflake-o"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">赵大寳</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v4.2.0
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.7.1
-  </div>
-
-        
 <div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
       </span>
@@ -610,8 +513,7 @@
         <span id="busuanzi_value_site_uv"></span>
       </span>
     </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
       <span class="post-meta-item-icon">
         <i class="fa fa-eye"></i>
       </span>
@@ -620,75 +522,34 @@
       </span>
     </span>
 </div>
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
   </div>
 
+    </div>
+  </footer>
+
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-<script src="/js/bookmark.js"></script>
-
-
-
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
 
   
 
 
 
 
-
-
-
-
-
-
-
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
   
 
-  
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
-  
 
-<script>
-NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
-  window.livereOptions = {
-    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
-  };
-  (function(d, s) {
-    var j, e = d.getElementsByTagName(s)[0];
-    if (typeof LivereTower === 'function') { return; }
-    j = d.createElement(s);
-    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-    j.async = true;
-    e.parentNode.insertBefore(j, e);
-  })(document, 'script');
-});
-</script>
+<script src="/js/third-party/comments/livere.js"></script>
 
 </body>
 </html>
