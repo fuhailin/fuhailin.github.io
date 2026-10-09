@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="一些常见的动态内存错误：1.对NULL指针解引用2.对动态开辟空间进行越界访问3.非动态开辟空间使用free进行释放4.在使用free释放一块动态开辟的空间只释放了部分5.一块空间多次释放6.忘记释放—-&gt;内存泄露 什么是内存泄露？？指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的控制，因">
+    <meta name="description" content="一些常见的动态内存错误： 1.对NULL指针解引用 2.对动态开辟空间进行越界访问 3.非动态开辟空间使用free进行释放 4.在使用free释放一块动态开辟的空间只释放了部分 5.一块空间多次释放 6.忘记释放—-&gt;内存泄露 什么是内存泄露？？ 指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Malloc tutorial">
 <meta property="og:url" content="https://fuhailin.github.io/Malloc-tutorial/index.html">
 <meta property="og:site_name" content="赵大寳">
-<meta property="og:description" content="一些常见的动态内存错误：1.对NULL指针解引用2.对动态开辟空间进行越界访问3.非动态开辟空间使用free进行释放4.在使用free释放一块动态开辟的空间只释放了部分5.一块空间多次释放6.忘记释放—-&gt;内存泄露 什么是内存泄露？？指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的控制，因">
+<meta property="og:description" content="一些常见的动态内存错误： 1.对NULL指针解引用 2.对动态开辟空间进行越界访问 3.非动态开辟空间使用free进行释放 4.在使用free释放一块动态开辟的空间只释放了部分 5.一块空间多次释放 6.忘记释放—-&gt;内存泄露 什么是内存泄露？？ 指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-09T11:26:33.000Z">
 <meta property="article:modified_time" content="2021-09-12T06:54:40.875Z">

@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="GPU 编译环境配置： 0、GPU驱动安装： 首先根据本机的显卡版本，确定nvidia显卡的驱动版本，然后根据驱动版本确定CUDA toolkit的版本。\1. 查看显卡类型 12$ lspci | grep -i nvidia00:07.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)  显示所有的pci设备信息 ls">
+    <meta name="description" content="GPU 编译环境配置： 0、GPU驱动安装： 首先根据本机的显卡版本，确定nvidia显卡的驱动版本，然后根据驱动版本确定CUDA toolkit的版本。 \1. 查看显卡类型 1 2 $ lspci | grep -i nvidia 00:07.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1) 显示所有的pci设备信息">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensorflow compile from source">
 <meta property="og:url" content="https://fuhailin.github.io/Tensorflow-compile-from-source/index.html">
 <meta property="og:site_name" content="赵大寳">
-<meta property="og:description" content="GPU 编译环境配置： 0、GPU驱动安装： 首先根据本机的显卡版本，确定nvidia显卡的驱动版本，然后根据驱动版本确定CUDA toolkit的版本。\1. 查看显卡类型 12$ lspci | grep -i nvidia00:07.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)  显示所有的pci设备信息 ls">
+<meta property="og:description" content="GPU 编译环境配置： 0、GPU驱动安装： 首先根据本机的显卡版本，确定nvidia显卡的驱动版本，然后根据驱动版本确定CUDA toolkit的版本。 \1. 查看显卡类型 1 2 $ lspci | grep -i nvidia 00:07.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1) 显示所有的pci设备信息">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://main.qcloudimg.com/raw/ada786e81334e5a88f8c95e54ff42f18.png">
 <meta property="og:image" content="https://main.qcloudimg.com/raw/0a9d385944669528d49544eb0bd6b8eb.png">

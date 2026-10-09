@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="C++11 中推出了三种智能指针，unique_ptr、shared_ptr 和 weak_ptr，同时也将 auto_ptr 置为废弃 (deprecated)。 但是在实际的使用过程中，很多人都会有这样的问题：  不知道三种智能指针的具体使用场景 无脑只使用 shared_ptr 认为应该禁用 raw pointer(裸指针，即 Widget * 这种形式)，全部使用智能指针  本文将从这几方">
+    <meta name="description" content="C++11 中推出了三种智能指针，unique_ptr、shared_ptr 和 weak_ptr，同时也将 auto_ptr 置为废弃 (deprecated)。 但是在实际的使用过程中，很多人都会有这样的问题： 不知道三种智能指针的具体使用场景 无脑只使用 shared_ptr 认为应该禁用 raw pointer(裸指针，即 Widget * 这种形式)，全部使用智能指针 本文将从这几方面讲">
 <meta property="og:type" content="article">
 <meta property="og:title" content="right-way-to-use-cpp-smart-pointer">
 <meta property="og:url" content="https://fuhailin.github.io/right-way-to-use-cpp-smart-pointer/index.html">
 <meta property="og:site_name" content="赵大寳">
-<meta property="og:description" content="C++11 中推出了三种智能指针，unique_ptr、shared_ptr 和 weak_ptr，同时也将 auto_ptr 置为废弃 (deprecated)。 但是在实际的使用过程中，很多人都会有这样的问题：  不知道三种智能指针的具体使用场景 无脑只使用 shared_ptr 认为应该禁用 raw pointer(裸指针，即 Widget * 这种形式)，全部使用智能指针  本文将从这几方">
+<meta property="og:description" content="C++11 中推出了三种智能指针，unique_ptr、shared_ptr 和 weak_ptr，同时也将 auto_ptr 置为废弃 (deprecated)。 但是在实际的使用过程中，很多人都会有这样的问题： 不知道三种智能指针的具体使用场景 无脑只使用 shared_ptr 认为应该禁用 raw pointer(裸指针，即 Widget * 这种形式)，全部使用智能指针 本文将从这几方面讲">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-09-13T02:08:30.000Z">
 <meta property="article:modified_time" content="2022-09-13T02:10:07.485Z">

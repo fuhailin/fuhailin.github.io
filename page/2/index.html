@@ -310,22 +310,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h1><p>To use clangd, you need:</p>
-<ul>
-<li>clangd installed</li>
-<li>a plugin for your editor</li>
-<li>to tell clangd how your project is built</li>
-</ul>
-<h2 id="Installing-clangd"><a href="#Installing-clangd" class="headerlink" title="Installing clangd#"></a>Installing clangd<a target="_blank" rel="noopener" href="https://clangd.llvm.org/installation.html#installing-clangd">#</a></h2><p>You’ll want a <strong>recent</strong> version of clangd. The current release is 13.0.</p>
-<p>After installing, <code>clangd --version</code> should print <code>clangd version 13.0.0</code> or later.</p>
-<p>(Version numbers are based on LLVM. clangd 7 was the first usable release).</p>
-<p>Mac OS X :</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install llvm</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>clangd --help-list</code>: 可以</p>
-
+          <p>Getting started To use clangd, you need: clangd installed a plugin for your editor to tell clangd how your project is built Installing clangd # You’ll want a recent version of clangd. The current rele…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/clangd-setup/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -400,12 +393,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/tfx-bsl/blob/master/third_party/arrow/util/config.h">https://github.com/tensorflow/tfx-bsl/blob/master/third_party/arrow/util/config.h</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/pixie-io/pixie/blob/62d4f0e0b5/bazel/external/arrow.BUILD">https://github.com/pixie-io/pixie/blob/62d4f0e0b5/bazel/external/arrow.BUILD</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/google/struct2tensor/blob/master/third_party/arrow.BUILD">https://github.com/google/struct2tensor/blob/master/third_party/arrow.BUILD</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/baidu/BaikalDB/blob/master/third-party/com_github_apache_arrow/BUILD">https://github.com/baidu/BaikalDB/blob/master/third-party/com_github_apache_arrow/BUILD</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/io/blob/master/third_party/arrow.BUILD">https://github.com/tensorflow/io/blob/master/third_party/arrow.BUILD</a></p>
-
+          <p>https://github.com/tensorflow/tfx-bsl/blob/master/third_party/arrow/util/config.h https://github.com/pixie-io/pixie/blob/62d4f0e0b5/bazel/external/arrow.BUILD https://github.com/google/struct2tensor/b…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/apache-arrow/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -480,20 +476,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>If on Linux you can install system dependencies to save building them:</p>
-<p>fbthrift</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Clone the repo</span><br><span class="line">wget https://apache.cs.utah.edu/thrift/0.12.0/thrift-0.12.0.tar.gz</span><br><span class="line">tar -xvf thrift-0.12.0.tar.gz</span><br><span class="line"># 进入thrift目录</span><br><span class="line">./configure</span><br><span class="line">make -j8</span><br><span class="line">sudo make install</span><br><span class="line"># 测试</span><br><span class="line">thrift -version</span><br><span class="line"># code generate</span><br><span class="line">thrift -r --gen &lt;language&gt; &lt;Thrift filename&gt;</span><br></pre></td></tr></table></figure>
-
-<p>boost</p>
-<p><a target="_blank" rel="noopener" href="https://kezunlin.me/post/d5d4a460/">https://kezunlin.me/post/d5d4a460/</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://boostorg.jfrog.io/artifactory/main/release/1.67.0/source/boost_1_67_0.tar.gz</span><br><span class="line">tar -xvf boost_1_67_0.tar.gz</span><br><span class="line">cd boost_1_67_0</span><br><span class="line">./bootstrap.sh</span><br><span class="line">./b2 -j16 variant=release link=shared threading=multi runtime-link=shared define=_GLIBCXX_USE_CXX11_ABI=0# build</span><br><span class="line">./b2 -j16 variant=release define=_GLIBCXX_USE_CXX11_ABI=0 install</span><br><span class="line">/root/tf_serving/</span><br></pre></td></tr></table></figure>
-
-<p>libevent</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/libevent/libevent/archive/refs/tags/release-2.1.12-stable.zip</span><br><span class="line">unzip release-2.1.12-stable.zip</span><br><span class="line">cd libevent-release-2.1.12-stable</span><br><span class="line">./configure</span><br><span class="line">make -j16</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>Apache Thrift</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">apt-get install libboost-all-dev libevent-dev libtool automake</span><br><span class="line"></span><br><span class="line">wget https://github.com/apache/thrift/archive/refs/tags/v0.12.0.zip</span><br><span class="line">unzip v0.12.0.zip</span><br><span class="line"></span><br><span class="line">sh bootstrap.sh</span><br><span class="line">export CXXFLAGS=&quot;-g -O2 -D_GLIBCXX_USE_CXX11_ABI=0&quot;</span><br><span class="line">./configure</span><br><span class="line">make -j`nproc&#x27;</span><br><span class="line">make install</span><br><span class="line"># 测试</span><br><span class="line">thrift -version</span><br></pre></td></tr></table></figure>
-
+          <p>If on Linux you can install system dependencies to save building them: fbthrift 1 2 3 4 5 6 7 8 9 10 11 # Clone the repo wget https://apache.cs.utah.edu/thrift/0.12.0/thrift-0.12.0.tar.gz tar -xvf thr…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/fbthrift/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -654,14 +645,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>DFS 找环模板</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; graph;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; visited;</span><br><span class="line">    <span class="type">bool</span> hasCycle = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">backtracking</span><span class="params">(<span class="type">int</span> idx)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        visited[idx] = <span class="number">1</span>; <span class="comment">// 将节点标记为遍历中</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> node : graph[idx]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (visited[node] == <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 发现环！！！</span></span><br><span class="line">                hasCycle = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (visited[node] == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">backtracking</span>(node);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visited[idx] = <span class="number">2</span>; <span class="comment">// 将节点标记为已遍历</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canFinish</span><span class="params">(<span class="type">int</span> numCourses, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; prerequisites)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        graph.<span class="built_in">resize</span>(numCourses);</span><br><span class="line">        visited.<span class="built_in">resize</span>(numCourses);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; edge : prerequisites) &#123;</span><br><span class="line">            graph[edge[<span class="number">1</span>]].<span class="built_in">emplace_back</span>(edge[<span class="number">0</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">				<span class="comment">// 图中并不是所有节点都相连，所以要用一个 for 循环将所有节点都作为起点调用一次 DFS 搜索算法</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numCourses; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!visited[i]) &#123;</span><br><span class="line">                <span class="built_in">backtracking</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> hasCycle;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Solution so;</span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; test = &#123;</span><br><span class="line">        &#123; <span class="number">1</span>, <span class="number">0</span> &#125;,</span><br><span class="line">        &#123; <span class="number">0</span>, <span class="number">1</span> &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">bool</span> res = so.<span class="built_in">canFinish</span>(<span class="number">2</span>, test);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>BFS 拓扑排序模板</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span></span></span><br><span class="line"><span class="function">    <span class="title">canFinish</span><span class="params">(<span class="type">int</span> numCourses, vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; prerequisites)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; graph;  <span class="comment">// 邻接表存储有向图</span></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">indegree</span><span class="params">(numCourses)</span></span>;  <span class="comment">// 计算各节点的入度</span></span><br><span class="line">        graph.<span class="built_in">resize</span>(numCourses);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; edge : prerequisites) &#123;</span><br><span class="line">            graph[edge[<span class="number">1</span>]].<span class="built_in">push_back</span>(edge[<span class="number">0</span>]);</span><br><span class="line">            indegree[edge[<span class="number">0</span>]]++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        queue&lt;<span class="type">int</span>&gt; que;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numCourses; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(indegree[i] == <span class="number">0</span>) &#123;</span><br><span class="line">                que.<span class="built_in">push</span>(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!que.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">            <span class="type">int</span> root = que.<span class="built_in">front</span>();</span><br><span class="line">            res.<span class="built_in">push_back</span>(root);</span><br><span class="line">            que.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> node : graph[root]) &#123;</span><br><span class="line">                indegree[node]--;</span><br><span class="line">                <span class="keyword">if</span>(indegree[node] == <span class="number">0</span>) &#123;</span><br><span class="line">                    que.<span class="built_in">push</span>(node);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res.<span class="built_in">size</span>() == numCourses;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+          <p>DFS 找环模板 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 # include &lt;iostream&gt; # include &lt;vector&gt; u…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Top-Sort/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -736,134 +728,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>prometheus pushgateway收集数据：<br>服务端配置</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull prom/pushgateway</span><br><span class="line">docker run -d -p 9091:9091 prom/pushgateway</span><br></pre></td></tr></table></figure>
-
-<p>客户端逻辑：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python </span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Time    : 2021/12/14 11:08 AM</span></span><br><span class="line"><span class="comment"># @Author  : Hailin.Fu</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> prometheus_client <span class="keyword">import</span> CollectorRegistry, Gauge, push_to_gateway</span><br><span class="line"></span><br><span class="line">registry = CollectorRegistry()</span><br><span class="line"></span><br><span class="line">labels = [</span><br><span class="line">    <span class="string">&#x27;instance_id&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;state&#x27;</span></span><br><span class="line">]</span><br><span class="line">gauge_test_metrics = Gauge(<span class="string">&quot;test_metrics&quot;</span>, <span class="string">&quot;Random count&quot;</span>, labels, registry=registry)</span><br><span class="line"></span><br><span class="line">test_list = [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;instance_id&quot;</span>: <span class="string">&quot;i-001&quot;</span>,</span><br><span class="line">        <span class="string">&quot;state&quot;</span>: <span class="string">&quot;running&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;instance_id&quot;</span>: <span class="string">&quot;i-001&quot;</span>,</span><br><span class="line">        <span class="string">&quot;state&quot;</span>: <span class="string">&quot;running&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;instance_id&quot;</span>: <span class="string">&quot;i-001&quot;</span>,</span><br><span class="line">        <span class="string">&quot;state&quot;</span>: <span class="string">&quot;stopped&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;instance_id&quot;</span>: <span class="string">&quot;i-001&quot;</span>,</span><br><span class="line">        <span class="string">&quot;state&quot;</span>: <span class="string">&quot;terminated&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;instance_id&quot;</span>: <span class="string">&quot;i-001&quot;</span>,</span><br><span class="line">        <span class="string">&quot;state&quot;</span>: <span class="string">&quot;waiting&quot;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> instance <span class="keyword">in</span> test_list:</span><br><span class="line">    gauge_test_metrics.labels(</span><br><span class="line">        instance[<span class="string">&#x27;instance_id&#x27;</span>],</span><br><span class="line">        instance[<span class="string">&#x27;state&#x27;</span>],</span><br><span class="line">    ).<span class="built_in">set</span>(<span class="number">12</span>)</span><br><span class="line">push_to_gateway(<span class="string">&quot;10.11.11.107:9091&quot;</span>, job=<span class="string">&#x27;ec2_stats&#x27;</span>, grouping_key=&#123;<span class="string">&quot;instance&quot;</span>: <span class="string">&quot;i-001&quot;</span>&#125;, registry=registry)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<table>
-<thead>
-<tr>
-<th><strong>服务</strong></th>
-<th><strong>端口</strong></th>
-<th><strong>是否有web界面</strong></th>
-<th><strong>作用</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>prometheus</strong></td>
-<td>9090</td>
-<td>有</td>
-<td>作为监控主服务器，拉取并存储时序数据</td>
-</tr>
-<tr>
-<td><strong>node-exporter</strong></td>
-<td>9100</td>
-<td>有</td>
-<td>收集内核公开的硬件和操作系统指标</td>
-</tr>
-<tr>
-<td><strong>grafana</strong></td>
-<td>3000</td>
-<td>有</td>
-<td>数据展示可视化</td>
-</tr>
-<tr>
-<td><strong>cadvisor</strong></td>
-<td>9595</td>
-<td>有</td>
-<td>收集宿主机上运行的所有容器的性能数据</td>
-</tr>
-</tbody></table>
-<h1 id="一、安装prometheus-server"><a href="#一、安装prometheus-server" class="headerlink" title="一、安装prometheus server"></a><strong>一、安装prometheus server</strong></h1><p>docker pull prom&#x2F;prometheus</p>
-<p># 拉取prometheus镜像</p>
-<p>docker run -d –name prometheus2020 prom&#x2F;prometheus</p>
-<p># 启动容器</p>
-<p>docker cp -a prometheus2020:&#x2F;etc&#x2F;prometheus&#x2F; $PWD&#x2F;prometheus</p>
-<p># 复制容器内部的配置文件到宿主机，不用事先创建$PWD&#x2F;prometheus目录</p>
-<p> docker rm -f prometheus2020</p>
-<p># 删除容器</p>
-<p>docker run -d –name prometheus2020 -p 9090:9090 -v $PWD&#x2F;prometheus:&#x2F;etc&#x2F;prometheus prom&#x2F;prometheus<br># 启动容器</p>
-<p> firewall-cmd –zone&#x3D;public –add-port&#x3D;9090&#x2F;tcp –permanent</p>
-<p>firewall-cmd –reload</p>
-<p># 开放防火墙9090端口</p>
-<p>访问</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.1.113:9090/">http://192.168.1.113:9090</a></p>
-<p>prometheus使用的是UTC时间，比当前的北京时间晚8个小时，可勾选Use local time选项使用本地时间</p>
-<p>![](<a target="_blank" rel="noopener" href="https://blogimgs-1256340525.cos.ap-chengdu.myqcloud.com/images/Screen">https://blogimgs-1256340525.cos.ap-chengdu.myqcloud.com/images/Screen</a> Shot 2021-12-13 at 2.45.59 PM.png)</p>
-<p><strong>二、安装node-exporter</strong></p>
-<p>docker pull prom&#x2F;node-exporter</p>
-<p># 拉取镜像</p>
-<p>docker run -d –name node-exporter2020 -p 9100:9100 -v “&#x2F;proc:&#x2F;host&#x2F;proc:ro” -v “&#x2F;sys:&#x2F;host&#x2F;sys:ro” -v “&#x2F;:&#x2F;rootfs:ro” –net&#x3D;”host” prom&#x2F;node-exporter</p>
-<p># 启动容器</p>
-<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;9100&#x2F;tcp –permanent</p>
-<p>firewall-cmd –reload</p>
-<p># 开放防火墙9100端口</p>
-<p>访问</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.1.113:9100/metrics">http://192.168.1.113:9100/metrics</a> </p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220180318990-2080230094.png" alt="img"></p>
-<p>vim prometheus&#x2F;prometheus.yml</p>
-<p># 修改宿主机prometheus配置文件，重启后会同步到容器内部</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220192901440-1069813564.png" alt="img"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrape_configs:`` ``# The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.`` ``-` `job_name: ``&#x27;prometheus&#x27;` `  ``# metrics_path defaults to &#x27;/metrics&#x27;``  ``# scheme defaults to &#x27;http&#x27;.` `  ``static_configs:``  ``-` `targets: [``&#x27;192.168.1.113:9090&#x27;``]``   ``labels:``     ``instance: prometheus` ` ``-` `job_name: ``&#x27;centos_1&#x27;``  ``static_configs:``  ``-` `targets: [``&#x27;192.168.1.113:9100&#x27;``]``   ``labels:``     ``instance: centos_1</span><br></pre></td></tr></table></figure>
-
-<p>docker restart prometheus2020</p>
-<p>重启容器</p>
-<p>此时再访问</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.1.113:9090/targets">http://192.168.1.113:9090/targets</a></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220193145796-983683885.png" alt="img"></p>
-<h1 id="三、安装grafana"><a href="#三、安装grafana" class="headerlink" title="三、安装grafana"></a><strong>三、安装grafana</strong></h1><p>docker pull grafana&#x2F;grafana</p>
-<p># 拉取镜像</p>
-<p>mkdir grafana</p>
-<p># 在宿主机的当前目录下创建grafana目录</p>
-<p>chmod 777 -R .&#x2F;grafana&#x2F;</p>
-<p># 赋予grafana目录读写权限</p>
-<p># grafana是以grafana用户启动，不是以root用户启动</p>
-<p>docker run -d –name&#x3D;grafana2020 -p 3000:3000 -v $PWD&#x2F;grafana:&#x2F;var&#x2F;lib&#x2F;grafana grafana&#x2F;grafana<br># 启动容器</p>
-<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;3000&#x2F;tcp –permanent</p>
-<p>firewall-cmd –reload</p>
-<p># 开放防火墙3000端口</p>
-<p>访问</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.1.113:3000/">http://192.168.1.113:3000</a></p>
-<p>用户名：admin</p>
-<p>密码：admin</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220181935831-1307801466.png" alt="img"></p>
-<p>修改密码为：123456</p>
-<p>并二次确认</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220182036756-1923052014.png" alt="img"></p>
-<p>首页：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220182131064-1732493596.png" alt="img"></p>
-<p>添加数据源，选择Prometheus：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220182246327-820971048.png" alt="img"></p>
-<p>配置Prometheus数据源：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220191338886-1720849223.png" alt="img"></p>
-<p>测试一下并保存：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220191516416-1354105801.png" alt="img"></p>
-<p>配置模板</p>
-<p>可在官网搜索一个模板</p>
-<p><a target="_blank" rel="noopener" href="https://grafana.com/grafana/dashboards?dataSource=prometheus">https://grafana.com/grafana/dashboards?dataSource=prometheus</a></p>
-<p>选择8919这个模板</p>
-<p><a target="_blank" rel="noopener" href="https://grafana.com/grafana/dashboards/8919">https://grafana.com/grafana/dashboards/8919</a></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220192120922-2000407704.png" alt="img"></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220192301419-1127031887.png" alt="img"></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220192440491-1118130965.png" alt="img"></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201220192608650-1894457913.png" alt="img"></p>
-<h1 id="四、安装cadvisor"><a href="#四、安装cadvisor" class="headerlink" title="四、安装cadvisor"></a><strong>四、安装cadvisor</strong></h1><p>docker pull google&#x2F;cadvisor</p>
-<p># 拉取镜像</p>
-<p>docker run -d <br>–name&#x3D;cadvisor2020 <br>–volume&#x3D;&#x2F;:&#x2F;rootfs:ro <br>–volume&#x3D;&#x2F;var&#x2F;run:&#x2F;var&#x2F;run:rw <br>–volume&#x3D;&#x2F;sys:&#x2F;sys:ro <br>–volume&#x3D;&#x2F;var&#x2F;lib&#x2F;docker&#x2F;:&#x2F;var&#x2F;lib&#x2F;docker:ro <br>–volume&#x3D;&#x2F;cgroup:&#x2F;cgroup:ro <br>–publish&#x3D;9595:8080 <br>–detach&#x3D;true <br>–privileged&#x3D;true <br>google&#x2F;cadvisor</p>
-<p># 启动容器</p>
-<p>firewall-cmd –zone&#x3D;public –add-port&#x3D;9595&#x2F;tcp –permanent</p>
-<p>firewall-cmd –reload</p>
-<p># 开放防火墙9595端口</p>
-<p>访问</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.1.113:9595/">http://192.168.1.113:9595/</a></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201221220059646-943627950.png" alt="img"></p>
-<p><a target="_blank" rel="noopener" href="http://192.168.1.113:9595/metrics">http://192.168.1.113:9595/metrics</a></p>
-<p><img src="https://img2020.cnblogs.com/blog/1321829/202012/1321829-20201221220232440-235016602.png" alt="img"></p>
-
+          <p>prometheus pushgateway收集数据： 服务端配置 1 2 docker pull prom/pushgateway docker run -d -p 9091:9091 prom/pushgateway 客户端逻辑： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 3…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Prometheus/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1013,8 +886,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">KMP</span> &#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; next;  <span class="comment">// 失配时，模式串跳转位置</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">build</span><span class="params">(<span class="type">const</span> string &amp;pattern)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> n = pattern.<span class="built_in">length</span>();</span><br><span class="line">        next.<span class="built_in">resize</span>(n + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = next[<span class="number">0</span>] = <span class="number">-1</span>; i &lt; n; next[++i] = ++j) &#123;  <span class="comment">// next(i) := 前s[0...i-1]的失配函数值</span></span><br><span class="line">            <span class="keyword">while</span> (~j &amp;&amp; pattern[i] != pattern[j]) j = next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">find</span><span class="params">(<span class="type">const</span> string &amp;pattern, <span class="type">const</span> string text)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">build</span>(pattern);</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; res;</span><br><span class="line">        <span class="type">int</span> n = pattern.<span class="built_in">length</span>(), m = text.<span class="built_in">length</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; pattern[j] != text[i]) j = next[j];  <span class="comment">// j &gt; 0 是因为，当 j = 0时，我们直接在下面单独处理即可</span></span><br><span class="line">            <span class="keyword">if</span> (pattern[j] == text[i]) ++j;</span><br><span class="line">            <span class="keyword">if</span> (j == n) res.<span class="built_in">push_back</span>(i - n + <span class="number">1</span>), j = next[j];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+          <p>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 struct KMP &amp;#123; vector&lt; int &gt; next; // 失配时，模式串跳转位置 void build ( const string &amp;pattern) &amp;#123; int n = pattern. length (); next. resize (n…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/KMP-string-pattern-algorithm/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1089,83 +969,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>前面讲了Bazel的基本本地使用，但是我们知道，Bazel最重要的是支持缓存和分布式（远程执行），那么这一节主要就是讲如何让bazel使用缓存。</p>
-<p>要能够缓存Bazel每个action的输出，我们就要一个server来实现remote cache，用于存储action的输出。这些输出实际上是一堆文件恶化对应的hash值。总体来说，我们需要满足三个前提：</p>
-<ul>
-<li>设置一个server作为cache backend</li>
-<li>配置Bazel build去使用cache</li>
-<li>Bazel版本要在0.10.0以上</li>
-</ul>
-<p>Cache本身会存储两种数据：</p>
-<ul>
-<li>action cache，或者说实际上是一个acton-&gt;action result的map映射表</li>
-<li>一个可寻址(addressable)的输出文件存储系统</li>
-</ul>
-<p><a href="https://link.zhihu.com/?target=https://docs.bazel.build/versions/master/remote-caching.html">https://docs.bazel.build/versions/master/remote-caching.html</a> 中对Bazel Remote Cache的使用和工作有更详细的介绍，就不重复了。这里直接讲到底怎么设置一个Bazel Remote Cache Server. 在上面这个链接中提到了三种方式：</p>
-<ul>
-<li>NGINX的WebDAV模块</li>
-<li>开源的bazel-remote</li>
-<li>Google Cloud Storage</li>
-</ul>
-<p>这里我们直接选择第二种：开源的bazel-remote，以便可能的定制及更好理解内部实现。</p>
-<p><a href="https://link.zhihu.com/?target=https://github.com/buchgr/bazel-remote/">buchgr&#x2F;bazel-remote</a></p>
-<p>这里我们不用去重新编译运行，直接下载对应的docker镜像并运行即可</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$docker</span> pull buchgr/bazel-remote-cache</span><br></pre></td></tr></table></figure>
-
-<p>bazel-remote支持grpc和http的接口调用，但注意docker内部应用的http接口应该是8080而不是9090（官方文档有误）。</p>
-<p>创建一个目录cache, 然后启动docker容器如下</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -u 0 \</span><br><span class="line">    -v `<span class="built_in">pwd</span>`/bazel_cache:/data \</span><br><span class="line">		-p 7070:8080 \</span><br><span class="line">    -p 9092:9092 \</span><br><span class="line">    buchgr/bazel-remote-cache \</span><br><span class="line">    --max_size=50</span><br><span class="line"><span class="comment"># docker run -u 1000:1000 -v /root/cache:/data -p 8080:8080 -p 9092:9092 buchgr/bazel-remote-cache</span></span><br><span class="line">2021/11/23 04:45:03 bazel-remote built with go1.17.3 from git commit f7f92a5298b0fd19e254b2b25f7f26cd930b2e2d.</span><br><span class="line">2021/11/23 04:45:03 Initial RLIMIT_NOFILE cur: 1048576 max: 1048576</span><br><span class="line">2021/11/23 04:45:03 Setting RLIMIT_NOFILE cur: 1048576 max: 1048576</span><br><span class="line">2021/11/23 04:45:03 <span class="built_in">mkdir</span> /data/cas.v2: permission denied</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker container update --restart=always 容器名字</span><br></pre></td></tr></table></figure>
-
-<p>We recommend deploying bazel-remote-cache with <a target="_blank" rel="noopener" href="https://docs.docker.com/compose/">Docker Compose</a> </p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://stackoverflow.com/questions/64341356/pass-arguments-into-docker-container-from-docker-compose-yml</span></span><br><span class="line"><span class="comment"># cat docker-compose.yaml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">bazel_remote_cache:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">buchgr/bazel-remote-cache:latest</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">bazel</span></span><br><span class="line">    <span class="attr">user:</span> <span class="number">0</span><span class="string">:0</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data1/bazel_cache:/data</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">7070</span><span class="string">:8080</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">9092</span><span class="string">:9092</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">--max_size=100</span></span><br></pre></td></tr></table></figure>
-
-<p>Save as <code>docker-compose.yaml</code>, create <code>config.yaml</code> in the same directory, and run the below commands to get bazel-remote-cache up:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up -d</span><br></pre></td></tr></table></figure>
-
-<p>You can view the logs with:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose logs</span><br></pre></td></tr></table></figure>
-
-<p>Stop bazel-remote-cache with:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose stop &amp;&amp; docker-compose rm -f</span><br></pre></td></tr></table></figure>
-
-
-
-<p>使用具有mkdir权限的docker 用户, user 0 为root用户</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --user 0 -v `<span class="built_in">pwd</span>`/bazel_cache/:/data -p 8080:8080 buchgr/bazel-remote-cache --max_size=20</span><br></pre></td></tr></table></figure>
-
-<p>我们可以看到一堆输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">2020/10/13 16:12:20 bazel-remote built with go1.14.5 from git commit cc9030667416ab63d89b9fbf543f0243292009b4.</span><br><span class="line">2020/10/13 16:12:20 Initial RLIMIT_NOFILE cur: 1048576 max: 1048576</span><br><span class="line">2020/10/13 16:12:20 Setting RLIMIT_NOFILE cur: 1048576 max: 1048576</span><br><span class="line">2020/10/13 16:12:21 Migrating files (if any) to new directory structure: /data/ac</span><br><span class="line">2020/10/13 16:12:21 Migrating files (if any) to new directory structure: /data/cas</span><br><span class="line">2020/10/13 16:12:21 Loading existing files in /data.</span><br><span class="line">2020/10/13 16:12:23 Sorting cache files by atime.</span><br><span class="line">2020/10/13 16:12:23 Building LRU index.</span><br><span class="line">2020/10/13 16:12:23 Finished loading disk cache files.</span><br><span class="line">2020/10/13 16:12:23 Loaded 0 existing disk cache items.</span><br><span class="line">2020/10/13 16:12:23 Starting HTTP server on address :8080</span><br><span class="line">2020/10/13 16:12:23 HTTP AC validation: enabled</span><br><span class="line">2020/10/13 16:12:23 Starting HTTP server for profiling on address :6060</span><br><span class="line">2020/10/13 16:12:23 Starting gRPC server on address :9092</span><br><span class="line">2020/10/13 16:12:23 gRPC AC dependency checks: enabled</span><br><span class="line">2020/10/13 16:12:23 experimental gRPC remote asset API: disabled</span><br></pre></td></tr></table></figure>
-
-<p>然后可以通过其&#x2F;status接口来查看是否正常启动</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$curl http://10.11.11.107:7070/status</span><br><span class="line">&#123;</span><br><span class="line"> &quot;CurrSize&quot;: 0,</span><br><span class="line"> &quot;MaxSize&quot;: 5368709120,</span><br><span class="line"> &quot;NumFiles&quot;: 0,</span><br><span class="line"> &quot;ServerTime&quot;: 1602605641,</span><br><span class="line"> &quot;GitCommit&quot;: &quot;cc9030667416ab63d89b9fbf543f0243292009b4&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>另外我们也可以查看cache目录下是否生成了对应文件：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-b043c63fdb0b7ac6d306165723627729_1440w.jpg" alt="img"></p>
-<p>这时就可以在运行bazel build的时候指定remote cache server的地址：</p>
-<p>使用Bazel Remote Cache<br>在Bazel工程的工程目录下，创建.bazelrc文件，并进行如下配置：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">指定Bazel Remote Cache的Http IP地址和端口,低版本bazel支持</span></span><br><span class="line">build --remote_http_cache=http://172.24.136.52:7070</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">高版本bazel直接使用</span></span><br><span class="line">build --remote_cache=http://172.24.136.52:7070</span><br></pre></td></tr></table></figure>
-
-<p>或者直接build target后加上–remote_cache参数</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$bazel</span> build //src/main:app --remote_cache=http://172.24.136.52:7070</span><br><span class="line">INFO: Invocation ID: a9a389d2-1e9f-4878-b65b-586e7b70fa35</span><br><span class="line">INFO: Analyzed target //src/main:app (0 packages loaded, 0 targets configured).</span><br><span class="line">INFO: Found 1 target...</span><br><span class="line">Target //src/main:app up-to-date:</span><br><span class="line">  bazel-bin/src/main/app_deploy.jar</span><br><span class="line">  bazel-bin/src/main/app_unsigned.apk</span><br><span class="line">  bazel-bin/src/main/app.apk</span><br><span class="line">INFO: Elapsed <span class="keyword">time</span>: 3.271s, Critical Path: 3.02s</span><br><span class="line">INFO: 12 processes: 9 darwin-sandbox, 3 worker.</span><br><span class="line">INFO: Build completed successfully, 13 total actions</span><br></pre></td></tr></table></figure>
-
-<p>在docker一侧，我们可以看到输出</p>
-<p><img src="https://pic1.zhimg.com/80/v2-3b5a76d58304d29b4c96e4efa4b0eca4_1440w.jpg" alt="img"></p>
-<p>可以看到cache主要是通过http put&#x2F;get，并使用hash作为key来进行对应结果的查找。</p>
-<p>我们重复几次bazel build后可以看到耗时很短，只有不到0.3秒:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">INFO: Analyzed target //src/main:app (0 packages loaded, 0 targets configured).</span><br><span class="line">INFO: Found 1 target...</span><br><span class="line">Target //src/main:app up-to-date:</span><br><span class="line">  bazel-bin/src/main/app_deploy.jar</span><br><span class="line">  bazel-bin/src/main/app_unsigned.apk</span><br><span class="line">  bazel-bin/src/main/app.apk</span><br><span class="line">INFO: Elapsed time: 0.286s, Critical Path: 0.03s</span><br><span class="line">INFO: 0 processes.</span><br><span class="line">INFO: Build completed successfully, 1 total action</span><br></pre></td></tr></table></figure>
-
-<p>这显然是cache的作用，我们也可以在BUILD文件中禁止cache。这实际上是对rule的tags设置（我们在以后再讲如何定义rule），我们在这里可以尝试对java_library这个rule添加tag，禁止cache。修改src&#x2F;main&#x2F;java&#x2F;com&#x2F;example&#x2F;bazel&#x2F;util&#x2F;BUILD中的java_library属性如下：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-3c55c63e9bc87a7009314cddb3ba57e5_1440w.jpg" alt="img"></p>
-<p>这样bazel就不会对该BUILD的结果进行缓存，读者可以自行尝试对比，这里就不过多展示实验结果。</p>
-<p>实际上，remote caching只是最基本的一个结果缓存机制，部署和使用都很简单，这里也只是对此进行快捷说明。小团队完全可以用这种方式来部分提升效率。而远程执行(Remote Execution)往往集成了缓存功能，因此在实际大型团队部署中一般不会专门对Remote Cache创建server。我们在下一节来介绍Remote Execution.</p>
-<p>–noremote_accept_cached: disable remote cache accept, but upload.</p>
-<h1 id="Bazel-remote-Execution"><a href="#Bazel-remote-Execution" class="headerlink" title="Bazel remote Execution"></a>Bazel remote Execution</h1><p><a target="_blank" rel="noopener" href="https://bazelbuild.github.io/bazel-buildfarm/docs/quick_start/">https://bazelbuild.github.io/bazel-buildfarm/docs/quick_start/</a></p>
-<p>References:</p>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/265542636">https://zhuanlan.zhihu.com/p/265542636</a></p>
-<p>curl <a target="_blank" rel="noopener" href="http://104.238.213.119:7070/status">http://104.238.213.119:7070/status</a></p>
-
+          <p>前面讲了Bazel的基本本地使用，但是我们知道，Bazel最重要的是支持缓存和分布式（远程执行），那么这一节主要就是讲如何让bazel使用缓存。 要能够缓存Bazel每个action的输出，我们就要一个server来实现remote cache，用于存储action的输出。这些输出实际上是一堆文件恶化对应的hash值。总体来说，我们需要满足三个前提： 设置一个server作为cache backe…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Bazel-Remote-Cache/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1240,29 +1052,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="53-最大子序和"><a href="#53-最大子序和" class="headerlink" title="53. 最大子序和"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">53. 最大子序和</a></h3><p>给定一个整数数组 <code>nums</code> ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-2,1,-3,4,-1,2,1,-5,4]</span><br><span class="line">输出：6</span><br><span class="line">解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [1]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [0]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 4：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-1]</span><br><span class="line">输出：-1</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 5：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [-100000]</span><br><span class="line">输出：-100000</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= nums.length &lt;= 10&lt;sup&gt;5&lt;/sup&gt;</code></li>
-<li><code>-10&lt;sup&gt;4&lt;/sup&gt; &lt;= nums[i] &lt;= 10&lt;sup&gt;4&lt;/sup&gt;</code></li>
-</ul>
-<p>**进阶：**如果你已经实现复杂度为 <code>O(n)</code> 的解法，尝试使用更为精妙的 <strong>分治法</strong> 求解。</p>
-<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4>
+          <p>53. 最大子序和 给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 示例 1： 1 2 3 输入：nums = [-2,1,-3,4,-1,2,1,-5,4] 输出：6 解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。 示例 2： 1 2 输入：nums = [1] 输出：1 示例 3： 1 2 输入：nums = [0] 输出：…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/maximum-subarray/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1337,31 +1135,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="209-长度最小的子数组"><a href="#209-长度最小的子数组" class="headerlink" title="209. 长度最小的子数组"></a><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-size-subarray-sum/">209. 长度最小的子数组</a></h3><p>Difficulty: <strong>中等</strong></p>
-<p>给定一个含有 <code>n</code>个正整数的数组和一个正整数 <code>target</code> <strong>。</strong></p>
-<p>找出该数组中满足其和<code>≥ target</code>的长度最小的 <strong>连续子数组</strong> <code>[nums&lt;sub style=&quot;display: inline;&quot;&gt;l&lt;/sub&gt;, nums&lt;sub style=&quot;display: inline;&quot;&gt;l+1&lt;/sub&gt;, ..., nums&lt;sub style=&quot;display: inline;&quot;&gt;r-1&lt;/sub&gt;, nums&lt;sub style=&quot;display: inline;&quot;&gt;r&lt;/sub&gt;]</code> ，并返回其长度**。**如果不存在符合条件的子数组，返回 <code>0</code> 。</p>
-<p><strong>示例 1：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：target = 7, nums = [2,3,1,2,4,3]</span><br><span class="line">输出：2</span><br><span class="line">解释：子数组 [4,3] 是该条件下的长度最小的子数组。</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 2：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：target = 4, nums = [1,4,4]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
-
-<p><strong>示例 3：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：target = 11, nums = [1,1,1,1,1,1,1,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
-
-<p><strong>提示：</strong></p>
-<ul>
-<li><code>1 &lt;= target &lt;= 10&lt;sup&gt;9&lt;/sup&gt;</code></li>
-<li><code>1 &lt;= nums.length &lt;= 10&lt;sup&gt;5&lt;/sup&gt;</code></li>
-<li><code>1 &lt;= nums[i] &lt;= 10&lt;sup&gt;5&lt;/sup&gt;</code></li>
-</ul>
-<p><strong>进阶：</strong></p>
-<ul>
-<li>如果你已经实现<code>O(n)</code> 时间复杂度的解法, 请尝试设计一个 <code>O(n log(n))</code> 时间复杂度的解法。</li>
-</ul>
-<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>Language: C++</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 滑动窗口算法框架 */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">slidingWindow</span><span class="params">(string s, string t)</span> </span>&#123;</span><br><span class="line">    unordered_map&lt;<span class="type">char</span>, <span class="type">int</span>&gt; need, window;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> c : t) need[c]++;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> valid = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (right &lt; s.<span class="built_in">size</span>()) &#123;</span><br><span class="line">        <span class="comment">// c 是将移入窗口的字符</span></span><br><span class="line">        <span class="type">char</span> c = s[right];</span><br><span class="line">        <span class="comment">// 右移窗口</span></span><br><span class="line">        right++;</span><br><span class="line">        <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        <span class="comment">/*** debug 输出的位置 ***/</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;window: [%d, %d)\n&quot;</span>, left, right);</span><br><span class="line">        <span class="comment">/********************/</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 判断左侧窗口是否要收缩</span></span><br><span class="line">        <span class="keyword">while</span> (window needs shrink) &#123;</span><br><span class="line">            <span class="comment">// d 是将移出窗口的字符</span></span><br><span class="line">            <span class="type">char</span> d = s[left];</span><br><span class="line">            <span class="comment">// 左移窗口</span></span><br><span class="line">            left++;</span><br><span class="line">            <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+          <p>209. 长度最小的子数组 Difficulty: 中等 给定一个含有 n 个正整数的数组和一个正整数 target 。 找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [nums&lt;sub style="display: inline;"&gt;l&lt;/sub&gt;, nums&lt;sub style="display: inline;"&gt;l+1&lt;/sub&gt;, ..., nums&lt;sub sty…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Sliding-Window-Template/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1511,25 +1293,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="1、标准二分查找的适用场景：数组元素有序且不重复"><a href="#1、标准二分查找的适用场景：数组元素有序且不重复" class="headerlink" title="1、标准二分查找的适用场景：数组元素有序且不重复"></a>1、标准二分查找的适用场景：<strong>数组元素有序且不重复</strong></h1><p>我们以 “搜索一个数，如果存在，返回其索引，否则返回 -1” 为例，给出标准二分查找的模板：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二分查找某个数</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">binarySearch</span><span class="params">(vector&lt;<span class="type">int</span>&gt; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int</span> right = nums.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (left &lt;= right) &#123; <span class="comment">// 注意</span></span><br><span class="line">      	<span class="comment">// 防止溢出</span></span><br><span class="line">        <span class="type">int</span> mid = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] == target)</span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line">        <span class="comment">// 收缩右边界</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; target)</span><br><span class="line">            right = mid - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 收缩左边界</span></span><br><span class="line">        <span class="keyword">else</span> <span class="comment">// (nums[mid] &lt; target)</span></span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2、二分查找边界"><a href="#2、二分查找边界" class="headerlink" title="2、二分查找边界"></a>2、二分查找边界</h1><p>附视频链接：<br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1d54y1q7k7">二分查找为什么总是写错？</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二分查找某个数的左边界</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">binarySearch</span><span class="params">(vector&lt;<span class="type">int</span>&gt; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> left = <span class="number">-1</span>, right = nums.<span class="built_in">size</span>();</span><br><span class="line">    <span class="keyword">while</span> (left<span class="number">+1</span> != right) &#123; <span class="comment">// 注意</span></span><br><span class="line">        <span class="type">int</span> mid = left + ((right - left)) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 收缩左边界</span></span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &lt; target) &#123;</span><br><span class="line">            left = mid;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// nums[mid] &gt;= target</span></span><br><span class="line">            <span class="comment">// 收缩右边界</span></span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 打个补丁</span></span><br><span class="line">    <span class="keyword">return</span> nums[left] == target ? left : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="3、二分查找极值点"><a href="#3、二分查找极值点" class="headerlink" title="3、二分查找极值点"></a>3、二分查找极值点</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">binarySearch</span><span class="params">(vector&lt;<span class="type">int</span>&gt; nums)</span></span>&#123;</span><br><span class="line">  <span class="type">int</span> left = <span class="number">0</span>, right = nums.<span class="built_in">size</span>() - <span class="number">1</span>, mid;</span><br><span class="line">  <span class="keyword">while</span>(left &lt;= right) &#123;</span><br><span class="line">    mid = left + ((right - left) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 极值点</span></span><br><span class="line">    <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>] &amp;&amp; nums[mid] &gt; nums[mid - <span class="number">1</span>]) &#123;</span><br><span class="line">      <span class="keyword">return</span> mid;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nums[mid] &gt; nums[mid + <span class="number">1</span>])&#123;</span><br><span class="line">      <span class="comment">// 极值点在 mid 左边</span></span><br><span class="line">      right = mid - <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 极值点在 mid 右边</span></span><br><span class="line">      left = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>References:</p>
-<p>⚡『LeetCode-Offer』二分查找三大模板，照着抄就行！</p>
-
+          <p>1、标准二分查找的适用场景： 数组元素有序且不重复 我们以 “搜索一个数，如果存在，返回其索引，否则返回 -1” 为例，给出标准二分查找的模板： 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 // 二分查找某个数 int binarySearch (vector&lt; int &gt; nums, int target) &amp;#123; int left = 0 ;…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/BinarySearch-Template/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1604,31 +1376,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>简介<br>本文总结了Zookeeper C客户端库在Centos 7上的编译，使用的Zookeeper版本为3.4.13。</p>
-<p>安装工具<br>安装cppunit和ant工具：</p>
-<p>yum install -y cppunit-devel<br>yum install -y ant</p>
-<p>编译<br>下载release版本的源码：</p>
-<p>wget <a target="_blank" rel="noopener" href="https://github.com/apache/zookeeper/archive/release-3.4.13.tar.gz">https://github.com/apache/zookeeper/archive/release-3.4.13.tar.gz</a></p>
-<p>进入代码顶级目录，运行：</p>
-<p>ant clean jar<br>ant compile_jute</p>
-<p>生成配置文件，并编译安装</p>
-<p>autoreconf -if<br>configure<br>make<br>make install</p>
-<p>常见问题<br>libtool版本不匹配<br>[root@centos7-dev c]# make<br>make  all-am<br>make[1]: Entering directory <code>/mnt/github/zookeeper-release-3.4.13/src/c&#39; /bin/sh ./libtool  --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I./include -I./tests -I./generated   -Wall -Werror  -g -O2 -D_GNU_SOURCE -MT zookeeper.lo -MD -MP -MF .deps/zookeeper.Tpo -c -o zookeeper.lo </code>test -f ‘src&#x2F;zookeeper.c’ || echo ‘.&#x2F;‘<code>src/zookeeper.c libtool: Version mismatch error.  This is libtool 2.4.6, but the libtool: definition of this LT_INIT comes from libtool 2.4.2. libtool: You should recreate aclocal.m4 with macros from libtool 2.4.6 libtool: and run autoconf again. make[1]: *** [zookeeper.lo] Error 63 make[1]: Leaving directory </code>&#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;src&#x2F;c’<br>make: *** [all] Error 2</p>
-<p>安装匹配的libtool工具</p>
-<p>conda install -c anaconda libtool&#x3D;2.4.2<br>1<br>ant compile_jute失败<br>[root@centos7-dev zookeeper-release-3.4.13]# ant compile_jute<br>Buildfile: &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build.xml</p>
-<p>init:<br>    [mkdir] Created dir: &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build&#x2F;classes<br>    [mkdir] Created dir: &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build&#x2F;lib<br>    [mkdir] Created dir: &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build&#x2F;package&#x2F;lib<br>    [mkdir] Created dir: &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build&#x2F;test&#x2F;lib</p>
-<p>jute:<br>    [javac] Compiling 39 source files to &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build&#x2F;classes<br>    [javac] warning: [options] bootstrap class path not set in conjunction with -source 1.6<br>    [javac] &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;src&#x2F;java&#x2F;main&#x2F;org&#x2F;apache&#x2F;jute&#x2F;Record.java:21: error: package org.apache.yetus.audience does not exist<br>    [javac] import org.apache.yetus.audience.InterfaceAudience;<br>    [javac]                                 ^<br>    [javac] &#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;src&#x2F;java&#x2F;main&#x2F;org&#x2F;apache&#x2F;jute&#x2F;Record.java:29: error: package InterfaceAudience does not exist<br>    [javac] @InterfaceAudience.Public<br>    [javac]                   ^<br>    [javac] Note: Some input files use unchecked or unsafe operations.<br>    [javac] Note: Recompile with -Xlint:unchecked for details.<br>    [javac] 2 errors<br>    [javac] 1 warning</p>
-<p>BUILD FAILED<br>&#x2F;mnt&#x2F;github&#x2F;zookeeper-release-3.4.13&#x2F;build.xml:316: Compile failed; see the compiler error output for details.</p>
-<p>Total time: 3 seconds</p>
-<p>运行”ant clean compile-test“或“ant clean jar“，具体可参考资料1解决。</p>
-<p>参考资料<br><a target="_blank" rel="noopener" href="https://jira.apache.org/jira/browse/ZOOKEEPER-2954">https://jira.apache.org/jira/browse/ZOOKEEPER-2954</a></p>
-<h2 id="Macos-编译zookeeper"><a href="#Macos-编译zookeeper" class="headerlink" title="Macos 编译zookeeper"></a>Macos 编译zookeeper</h2><p>1、unzip&#x2F;untar the source tarball and cd to the zookeeper-x.x.x&#x2F;zookeeper-client&#x2F;zookeeper-client-c directory</p>
-<p>2、brew install cppunit</p>
-<p>3、change directory to zookeeper-client&#x2F;zookeeper-client-c and do a “autoreconf -if” to bootstrap<br>   autoconf, automake and libtool. Please make sure you have autoconf<br>   version 2.59 or greater installed. </p>
-<p>4、cd zookeeper-release-3.6.3&#x2F;zookeeper-jute&#x2F;; mvn compile</p>
-<p>5、cd zookeeper-client&#x2F;zookeeper-client-c and do a “.&#x2F;configure [OPTIONS]” to generate the makefile.</p>
-<p>6、do a “make” or “make install” to build the libraries and install them.</p>
-
+          <p>简介 本文总结了Zookeeper C客户端库在Centos 7上的编译，使用的Zookeeper版本为3.4.13。 安装工具 安装cppunit和ant工具： yum install -y cppunit-devel yum install -y ant 编译 下载release版本的源码： wget https://github.com/apache/zookeeper/archive/re…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/zookeeper-compile/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1703,91 +1459,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>前言</strong></p>
-<p><strong>在众多背包问题中「01 背包问题」是最为核心的，因此我建议你先精读过 <a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&mid=2247485638&idx=1&sn=d7468955c5b121664031fd5c1b5a6f10&scene=21%23wechat_redirect">背包问题 第一讲</a> 之后再阅读本文。</strong></p>
-<p><strong>其中 01 背包的「一维空间优化」更是要重点掌握。</strong></p>
-<p>另外，我在文章结尾处列举了我所整理的关于背包问题的相关题目。</p>
-<p>背包问题我会按照编排好的顺序进行讲解（每隔几天更新一篇，确保大家消化）。</p>
-<p>你也先可以尝试做做，也欢迎你向我留言补充，你觉得与背包相关的 DP 类型题目 ~</p>
-<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><strong>题目描述</strong></h2><p>有 $N$ 种物品和一个容量为 $C$ 的背包，每种物品都有无限件。</p>
-<p>第 $i$ 件物品的体积是 $v[i]$，价值是$w[i]$ 。</p>
-<p>求解将哪些物品装入背包可使这些物品的费用总和不超过背包容量，且价值总和最大。</p>
-<p>其实就是在 0-1 背包问题的基础上，增加了每件物品可以选择多次的特点（在容量允许的情况下）。</p>
-<p>示例 1：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: N = 2, C = 5, v = [1,2], w = [1,2]</span><br><span class="line">输出: 5</span><br><span class="line">解释: 选一件物品 1，再选两件物品 2，可使价值最大。</span><br></pre></td></tr></table></figure>
-
-<h2 id="常规解法"><a href="#常规解法" class="headerlink" title="常规解法"></a><strong>常规解法</strong></h2><p>我们可以直接将 01 背包的「状态定义」拿过来用：</p>
-<p>$dp[i][j]$ 代表考虑前$i$ <em>件物品，放入一个容量为</em> $j$ <em>的背包可以获得的最大价值。</em></p>
-<p>由于每件物品可以被选择多次，因此对于某个 $dp[i][j]$ 而言，其值应该为以下所有可能方案中的最大值：</p>
-<ul>
-<li>选择 0 件物品 $i$ 的最大价值，即 $dp[i-1][j]$</li>
-<li>选择 1 件物品 $i$​ 的最大价值，即$dp[i-1][j-v[i]]+w[i]$</li>
-<li>选择 2 件物品 $i$​ 的最大价值，即$dp[i-1][j-2<em>v[i]]+2</em>w[i]$  …</li>
-<li>选择 k 件物品 $i$​ 的最大价值，$dp[i-1][j-k<em>v[i]]+k</em>w[i]$</li>
-</ul>
-<p>由此我们可以得出「状态转移方程」为：</p>
-<p>$$<br>d p[i][j]&#x3D;\max (d p[i-1][j], d p[i-1][j-k * v[i]]+k * w[i]), 0&lt;k * v[i] \leqslant j<br>$$<br>代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxValue</span><span class="params">(<span class="type">int</span> N, <span class="type">int</span> C, <span class="type">int</span>[] v, <span class="type">int</span>[] w)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[][] <span class="variable">dp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">int</span>[N][C + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先预处理第一件物品</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= C; j++) &#123;</span><br><span class="line">            <span class="comment">// 显然当只有一件物品的时候，在容量允许的情况下，能选多少件就选多少件</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">maxK</span> <span class="operator">=</span> j / v[<span class="number">0</span>];</span><br><span class="line">            dp[<span class="number">0</span>][j] = maxK * w[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理剩余物品</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= C; j++) &#123;</span><br><span class="line">                <span class="comment">// 不考虑第 i 件物品的情况（选择 0 件物品 i）</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> dp[i - <span class="number">1</span>][j];</span><br><span class="line">                <span class="comment">// 考虑第 i 件物品的情况</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">1</span> ;; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j &lt; v[i] * k) &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    y = Math.max(y, dp[i - <span class="number">1</span>][j - k * v[i]] + k * w[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                dp[i][j] = Math.max(n, y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[N - <span class="number">1</span>][C];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>时间复杂度：共有 $N<em>C$ 个状态需要被转移，但每次转移都需要枚举当前物品的件数，最多枚举 C 次（重量为最小值 1），因此整体复杂度为 $O(N</em>C*C)$</li>
-<li>空间复杂度：$O(N*C)$</li>
-</ul>
-<h2 id="滚动数组"><a href="#滚动数组" class="headerlink" title="滚动数组"></a><strong>滚动数组</strong></h2><p>通过观察我们的「状态转移方程」可以发现，我们在更新某个 $dp[i][x]$的时候只依赖于 $dp[i-1][x]$。</p>
-<p>因此我们可以像 01 背包那样使用「滚动数组」的方式将空间优化到 $O(C)$。</p>
-<p>代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxValue</span><span class="params">(<span class="type">int</span> N, <span class="type">int</span> C, <span class="type">int</span>[] v, <span class="type">int</span>[] w)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[][] <span class="variable">dp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>][C + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先预处理第一件物品</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= C; j++) &#123;</span><br><span class="line">            <span class="comment">// 显然当我们只有一件物品的时候，在容量允许的情况下，能选多少件就选多少件</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">maxK</span> <span class="operator">=</span> j / v[<span class="number">0</span>];</span><br><span class="line">            dp[<span class="number">0</span>][j] = maxK * w[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 处理剩余物品</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= C; j++) &#123;</span><br><span class="line">                <span class="comment">// 不考虑第 i 件物品的情况（选择 0 件物品 i）</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> dp[(i - <span class="number">1</span>)&amp;<span class="number">1</span>][j];</span><br><span class="line">                <span class="comment">// 考虑第 i 件物品的情况</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">1</span> ;; k++) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (j &lt; v[i] * k) &#123;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    y = Math.max(y, dp[(i - <span class="number">1</span>)&amp;<span class="number">1</span>][j - k * v[i]] + k * w[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                dp[i&amp;<span class="number">1</span>][j] = Math.max(n, y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[(N - <span class="number">1</span>)&amp;<span class="number">1</span>][C];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>时间复杂度：共有 $N<em>C$​ 个状态需要被转移，但每次转移都需要枚举当前物品的件数，最多枚举 C 次（重量为最小值 1），因此整体复杂度为 $O(N</em>C*C)$</li>
-<li>空间复杂度：$O(N*C)$</li>
-</ul>
-<h2 id="一维空间优化"><a href="#一维空间优化" class="headerlink" title="一维空间优化"></a><strong>一维空间优化</strong></h2><p>我们知道在 01 背包中，最重要的是「一维空间优化」解法。</p>
-<p><strong>之所以 01 背包能够使用「一维空间优化」解法，是因为当我们开始处理第</strong> <img src="https://www.zhihu.com/equation?tex=i" alt="[公式]"> <strong>件物品的时候，数组中存储的是已经处理完的第</strong> <img src="https://www.zhihu.com/equation?tex=i+-+1" alt="[公式]"> <strong>件物品的状态值。</strong></p>
-<p><strong>然后配合着我们容量维度「从大到小」的遍历顺序，可以确保我们在更新某个状态时，所需要用到的状态值不会被覆盖。</strong></p>
-<p>因此 01 背包问题的状态转移方程为：</p>
-<p>$$<br>d p[j]&#x3D;\max (d p[j], d p[j-v[i]]+w[i])<br>$$<br>同时容量维度的遍历顺序为从大到小。</p>
-<p>PS. 如果你不太理解上面的话，或许是因为你「还没学习」或者「有点忘记」<a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&mid=2247485638&idx=1&sn=d7468955c5b121664031fd5c1b5a6f10&scene=21%23wechat_redirect">01 背包问题</a>，三叶强烈建议你先对 <a href="https://link.zhihu.com/?target=https://mp.weixin.qq.com/s?__biz=MzU4NDE3MTEyMA==&mid=2247485638&idx=1&sn=d7468955c5b121664031fd5c1b5a6f10&scene=21%23wechat_redirect">01 背包问题</a> 进行学习&#x2F;回顾。</p>
-<p>而「完全背包」区别于「01 背包」，在于每件物品可以被选择多次。</p>
-<p>因此你可能会在别的地方看到这样的讲解：</p>
-<p>「01 背包将容量维度「从大到小」遍历代表每件物品只能选择一件，而完全背包将容量维度「从小到大」遍历代表每件物品可以选择多次。」</p>
-<p>这样的解释其实是利用了人的抽象思维，但感觉不一定是对的。</p>
-<p>接下来，我们从「数学」的角度去证明为什么修改 01 背包的遍历顺序可以正确求解完全背包问题。</p>
-<p>我们先来展开完全背包中 $dp[i][j]$的所有可能方案：<br>$$<br>dp[i][j]&#x3D;\max (d p[i-1][j], d p[i-1][j-v[i]]+w[i], d p[i-1][j-2 * v[i]]+2 * w[i], \ldots, d p[i-1][j-k * v[i]]+k * w[i]), 0 \leqslant k * v[i] \leqslant j<br>$$</p>
-<p>$dp[i][j]$所代表的含义：在容量允许的情况下，对于第 $i$ 件物品，我们可以不选，可以选 1 次，可以选 2 次，…，可以选 $k$ 次 …</p>
-<p>然后我们通过代入，看看 $dp[i][j-v[i]]$ 是什么内容：</p>
-<p>$$<br>dp[i][j-v[i]]&#x3D;\max (d p[i-1][j-v[i]], d p[i-1][j-2 * v[i]]+w[i], d p[i-1][j-3 * v[i]]+2 * w[i], \ldots, d p[i-1][j-k * v[i]]+(k-1) * w[i]), 0 \leqslant k * v[i] \leqslant j<br>$$<br>光看公式可能很难看出两者的联系，三叶将相同的部分进行标记：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-99b6b7206bab82b3843fa3562593350f_1440w.jpg" alt="img"></p>
-<p>总结一下。</p>
-<ul>
-<li>0-1 背包问题的状态转换方程是：</li>
-</ul>
-<p>$$<br>d p[i][j]&#x3D;\max (d p[i-1][j], d p[i-1][j-v[i]]+w[i])<br>$$</p>
-<p><strong>由于计算</strong> $dp[i][j]$ <strong>的时候，依赖于</strong> $dp[i][j-v[i]]$​。</p>
-<p><strong>因此我们在改为「一维空间优化」时，需要确保</strong> $dp[j-v[i]]$<strong>存储的是上一行的值，即确保</strong> $dp[j-v[i]]$ <strong>还没有被更新，所以遍历方向是从大到小。</strong></p>
-<ul>
-<li>完全背包问题的状态转移方程是：</li>
-</ul>
-<p>$$<br>d p[i][j]&#x3D;\max (d p[i-1][j], d p[i][j-v[i]]+w[i])<br>$$</p>
-<p>**由于计算$dp[i][j]$  的时候，依赖于$dp[i][j-v[i]]$ **。</p>
-<p><strong>因此我们在改为「一维空间优化」时，需要确保 $dp[j-v[i]]$ 存储的是当前行的值，即确保 $dp[j-v[i]]$ 已经被更新，所以遍历方向是从小到大。</strong></p>
-<p>代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxValue</span><span class="params">(<span class="type">int</span> N, <span class="type">int</span> C, <span class="type">int</span>[] v, <span class="type">int</span>[] w)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] <span class="variable">dp</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">int</span>[C + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt;= C; j++) &#123;</span><br><span class="line">                <span class="comment">// 不考虑第 i 件物品的情况（选择 0 件物品 i）</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> dp[j];</span><br><span class="line">                <span class="comment">// 考虑第 i 件物品的情况</span></span><br><span class="line">                <span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> j - v[i] &gt;= <span class="number">0</span> ? dp[j - v[i]] + w[i] : <span class="number">0</span>;</span><br><span class="line">                dp[j] = Math.max(n, y);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[C];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>时间复杂度：共有$N<em>C$  个状态需要被转移，复杂度为$O(N</em>C)$</li>
-<li>空间复杂度：$O(C)$</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p>今天我们学习了【动态规划&#x2F;背包问题】中的「完全背包」问题。</p>
-<p><strong>形式上，我们只需要将 01 背包问题的「一维空间优化」解法中的「容量维度」遍历方向从「从大到小 改为 从小到大」就可以解决完全背包问题。</strong></p>
-<p><strong>但本质是因为两者进行状态转移时依赖了不同的格子：</strong></p>
-<ul>
-<li>01 背包依赖的是「上一行正上方的格子」和「上一行左边的格子」。</li>
-<li>完全背包依赖的是「上一行正上方的格子」和「本行左边的格子」。</li>
-</ul>
-<p>另外，我们可以发现通过「一维空间优化」方式，可以将求解「完全背包」问题的时间复杂度从$O(N<em>C</em>C)$  降低为$O(N*C)$。</p>
-<p>这就是为什么三叶一直强调 01 背包问题的「一维空间优化」解法是几乎所有背包问题的基础。</p>
-
+          <p>前言 在众多背包问题中「01 背包问题」是最为核心的，因此我建议你先精读过 背包问题 第一讲 之后再阅读本文。 其中 01 背包的「一维空间优化」更是要重点掌握。 另外，我在文章结尾处列举了我所整理的关于背包问题的相关题目。 背包问题我会按照编排好的顺序进行讲解（每隔几天更新一篇，确保大家消化）。 你也先可以尝试做做，也欢迎你向我留言补充，你觉得与背包相关的 DP 类型题目 ~ 题目描述 有 $N…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/unbounded-knapsack-problem/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1862,39 +1542,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <blockquote>
-<p>STL 就是所谓的标准模板库（Standard Template Library），这可能是C++程序员的一大利器。</p>
-</blockquote>
-<p>总的来说，STL包括几个部分：容器，算法（泛型算法），迭代器三个主要部分（当然还包含仿函数，适配器等其他部分），下图说明了三个主要部分之间的关系（<em>网图，侵删</em>）。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/10118224-ee23dafe96babb08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/778/format/webp" alt="img"></p>
-<p>STL三个主要部分的关系示意图</p>
-<p>要是详细的总结，这肯定是一本类似于《C++ Primer》的大书。本篇文章主要是对于STL中的常用容器的底层数据结构进行总结整理。</p>
-<h2 id="I、vector"><a href="#I、vector" class="headerlink" title="I、vector"></a>I、vector</h2><h5 id="vector底层数据结构"><a href="#vector底层数据结构" class="headerlink" title="vector底层数据结构"></a>vector底层数据结构</h5><p>vector是我们用到最多的数据结构，其底层数据结构是<strong>数组</strong>，由于数组的特点，vector也具有以下特性：<br>	1、O(1)时间的快速访问；<br>	2、顺序存储，所以插入到非尾结点位置所需时间复杂度为O(n)，删除也一样；<br>	3、<strong>扩容规则：</strong><br>	当我们新建一个vector的时候，会首先分配给他一片连续的内存空间，如<code>std::vector&lt;int&gt; vec</code>，当通过push_back向其中增加元素时，如果初始分配空间已满，就会引起vector扩容，其扩容规则在gcc下以2倍方式完成：首先重新申请一个2倍大的内存空间；然后将原空间的内容拷贝过来；最后将原空间内容进行释放，将内存交还给操作系统；</p>
-<p>测试代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mycapacity</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;分配总空间大小为：&quot;</span> &lt;&lt; vec.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mysize</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;已用空间大小为：&quot;</span> &lt;&lt; vec.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myprint</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vec.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        cout &lt;&lt; vec[i] &lt;&lt; <span class="string">&quot;,&quot;</span>;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">    vec.<span class="built_in">reserve</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">// vec.resize(3);</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;起始状态：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">mycapacity</span>(vec);</span><br><span class="line">    <span class="built_in">mysize</span>(vec);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;========================&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">        vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;压入第&quot;</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">&quot;个元素之后：&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="built_in">myprint</span>(vec);</span><br><span class="line">        <span class="built_in">mycapacity</span>(vec);</span><br><span class="line">        <span class="built_in">mysize</span>(vec);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;========================&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://blogimgs-1256340525.cos.ap-chengdu.myqcloud.com/images/20210912144226.png"></p>
-<p>测试输出结果</p>
-<p>从输出结果中的两个红色箭头可以看出vector的扩容规则。</p>
-<p>4、<strong>注意事项：</strong><br>根据vector的插入和删除特性，以及扩容规则，我们在使用vector的时候要注意，<strong>在插入位置和删除位置之后的所有迭代器和指针引用都会失效，同理，扩容之后的所有迭代器指针和引用也都会失效。</strong></p>
-<h2 id="II、map-multimap-unordered-map-unordered-multimap"><a href="#II、map-multimap-unordered-map-unordered-multimap" class="headerlink" title="II、map &amp; multimap &amp; unordered_map &amp; unordered_multimap"></a>II、map &amp; multimap &amp; unordered_map &amp; unordered_multimap</h2><h5 id="2-1-map与multimap底层数据结构"><a href="#2-1-map与multimap底层数据结构" class="headerlink" title="2.1 map与multimap底层数据结构"></a>2.1 map与multimap底层数据结构</h5><p>map与multimap是STL中的<strong>关联容器</strong>、提供一对一key-value的数据处理能力； map与multimap的区别在于，multimap允许关键字重复，而map不允许重复。</p>
-<p>这两个关联容器的底层数据结构均为<strong>红黑树</strong>（<strong>平衡二叉搜索树</strong>），关于红黑树的理解可以参考<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md">教你透彻了解红黑树</a>一文。</p>
-<p>根据红黑树的原理，map与multimap可以实现**O(lgn)**的查找，插入和删除。</p>
-<h5 id="2-2-unordered-map-与unordered-multimap底层数据结构"><a href="#2-2-unordered-map-与unordered-multimap底层数据结构" class="headerlink" title="2.2 unordered_map 与unordered_multimap底层数据结构"></a>2.2 unordered_map 与unordered_multimap底层数据结构</h5><p>unordered_map与unordered_multimap 对比2.1中的两种map在于其2.1中的两个容器实现了以key为序排列，也就是说map与multimap为<strong>有序的</strong>。</p>
-<p>而unordered_map、unordered_multimap和map类似，都是存储的key-value的值，可以通过key快速索引到value。不同的是unordered_map不会根据key的大小进行排序，存储时是根据key的hash值判断元素是否相同，即unordered_map内部元素是<code>无序</code>的。unordered_map的key需要定义hash_value函数并且重载operator&#x3D;&#x3D;。<br>unordered_map的底层是一个防冗余的<code>哈希表（采用除留余数法）</code>。哈希表最大的优点，就是把数据的存储和查找消耗的时间大大降低，时间复杂度为<code>O(1)</code>，而代价仅仅是消耗比较多的内存。</p>
-<h2 id="III、set-multiset-unordered-set-unordered-multiset"><a href="#III、set-multiset-unordered-set-unordered-multiset" class="headerlink" title="III、set &amp; multiset &amp; unordered_set &amp; unordered_multiset"></a>III、set &amp; multiset &amp; unordered_set &amp; unordered_multiset</h2><p>以上四种容器也都是<strong>关联容器</strong>，set系与map系的区别在于map中存储的是<key-value>，而<strong>set可以理解为关键字即值，即只保存关键字的容器。</strong></p>
-<h5 id="3-1-set-multiset底层数据结构"><a href="#3-1-set-multiset底层数据结构" class="headerlink" title="3.1 set &amp; multiset底层数据结构"></a>3.1 set &amp; multiset底层数据结构</h5><p>set与multiset有序存储元素，这两种容器的底层实现与map一样都是<strong>红黑树</strong>，所以能实现O(lgn)的查找，插入，删除操作。</p>
-<p>set与multiset的区别在于是否允许重复；</p>
-<h5 id="3-2-unordered-set-unordered-multiset"><a href="#3-2-unordered-set-unordered-multiset" class="headerlink" title="3.2 unordered_set &amp; unordered_multiset"></a>3.2 unordered_set &amp; unordered_multiset</h5><p>与unordered_map &amp; unordered_multimap相同，其底层实现为<strong>hash table</strong>；</p>
-<h2 id="IV、-priority-queue"><a href="#IV、-priority-queue" class="headerlink" title="IV、 priority_queue"></a>IV、 priority_queue</h2><h5 id="4-1-priority-queue"><a href="#4-1-priority-queue" class="headerlink" title="4.1 priority_queue"></a>4.1 priority_queue</h5><p>优先级队列相当于一个<strong>有权值</strong>的单向队列queue，在这个队列中，所有元素是按照优先级排列的。</p>
-<p>priority_queue根据<strong>堆</strong>的处理规则来调整元素之间的位置，关于堆的原理，可以参考<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://blog.csdn.net/changyuanchn/article/details/14564403">堆</a>；</p>
-<p>根据堆的特性，优先级队列实现了取出最大最小元素时间复杂度为O(1),对于插入和删除，其最坏情况为O(lgn)。</p>
-<h2 id="V、-list"><a href="#V、-list" class="headerlink" title="V、 list"></a>V、 list</h2><p>list的底层数据结构为<strong>双向链表</strong>，特点是支持快速的增删。</p>
-<h2 id="Ⅵ、queue"><a href="#Ⅵ、queue" class="headerlink" title="Ⅵ、queue"></a>Ⅵ、queue</h2><p>queue为单向队列，为先入先出原则。</p>
-<h2 id="Ⅶ、deque"><a href="#Ⅶ、deque" class="headerlink" title="Ⅶ、deque"></a>Ⅶ、deque</h2><p>deque为双向队列，其对比queue可以实现在头尾两端高效的插入和删除操作。</p>
-<p>Reference:</p>
-<p>1、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/834cc223bb57">C++ STL容器底层数据结构总结</a></p>
-
+          <p>STL 就是所谓的标准模板库（Standard Template Library），这可能是C++程序员的一大利器。 总的来说，STL包括几个部分：容器，算法（泛型算法），迭代器三个主要部分（当然还包含仿函数，适配器等其他部分），下图说明了三个主要部分之间的关系（ 网图，侵删 ）。 STL三个主要部分的关系示意图 要是详细的总结，这肯定是一本类似于《C++ Primer》的大书。本篇文章主要是对于…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/C-STL-Containers/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1969,364 +1625,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>背包问题是一类经典的动态规划问题，它非常灵活，需要仔细琢磨体会，本文先对背包问题的几种常见类型作一个总结，期望可以用一套框架解决背包问题。</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-EjEWYo-file_1625110628476" alt="动态规划-背包问题"></p>
-<p><strong>不少同学对背包问题还处于朦胧状态，我特意录了一期视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cg411g7Y6">带你学透0-1背包问题！</a></strong>，这里详细介绍了0-1背包的中dp数组的定义，初始化，递推公式，以及遍历顺序。相信结合本篇题解，会对你学习背包有所帮助。</p>
-<p>本篇目录：</p>
-<ul>
-<li>前序</li>
-<li>01 背包<ul>
-<li>二维dp数组 01背包</li>
-<li>一维dp数组 01背包</li>
-</ul>
-</li>
-<li>416.分割等和子集</li>
-<li>其他语言实现版本（java，python）</li>
-<li>背包问题完整攻略</li>
-</ul>
-<p>背包问题的经典资料当然是：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/FwIiPPmR18_AJO5eiidT6w">背包九讲</a>。</p>
-<p>但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，而且都是伪代码理解起来也吃力。</p>
-<p>对于面试的话，其实掌握01背包，和完全背包，就够用了，最多可以再来一个多重背包。</p>
-<p>如果这几种背包，分不清，我这里画了一个图，如下：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-egwGEh-file_1625110628437" alt="416.分割等和子集1"></p>
-<p>至于背包九讲其其他背包，面试几乎不会问，都是竞赛级别的了，leetcode上连多重背包的题目都没有，所以题库也告诉我们，01背包和完全背包就够用了。</p>
-<p>而完全背包又是也是01背包稍作变化而来，即：完全背包的物品数量是无限的。</p>
-<p><strong>所以背包问题的理论基础重中之重是01背包，一定要理解透！</strong></p>
-<p>leetcode上没有纯01背包的问题，都是01背包应用方面的题目，也就是需要转化为01背包问题。</p>
-<p><strong>所以我先通过纯01背包问题，把01背包原理讲清楚，后续再讲解leetcode题目的时候，重点就是讲解如何转化为01背包问题了</strong>。</p>
-<p>之前可能有些录友已经可以熟练写出背包了，但只要把这个文章仔细看完，相信你会意外收获！</p>
-<h2 id="01-背包"><a href="#01-背包" class="headerlink" title="01 背包"></a>01 背包</h2><p>有N件物品和一个最多能被重量为W 的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
-<p>这是标准的背包问题，以至于很多同学看了这个自然就会想到背包，甚至都不知道暴力的解法应该怎么解了。</p>
-<p>这样其实是没有从底向上去思考，而是习惯性想到了背包，那么暴力的解法应该是怎么样的呢？</p>
-<p>每一件物品其实只有两个状态，取或者不取，所以可以使用回溯法搜索出所有的情况，那么时间复杂度就是O(2^n)，这里的n表示物品数量。</p>
-<p><strong>所以暴力的解法是指数级别的时间复杂度。进而才需要动态规划的解法来进行优化！</strong></p>
-<p>在下面的讲解中，我举一个例子：</p>
-<p>背包最大重量为4。</p>
-<p>物品为：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>重量</th>
-<th>价值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>物品0</td>
-<td>1</td>
-<td>15</td>
-</tr>
-<tr>
-<td>物品1</td>
-<td>3</td>
-<td>20</td>
-</tr>
-<tr>
-<td>物品2</td>
-<td>4</td>
-<td>30</td>
-</tr>
-</tbody></table>
-<p>问背包能背的物品最大价值是多少？</p>
-<p>以下讲解和图示中出现的数字都是以这个例子为例。</p>
-<h2 id="二维dp数组01背包"><a href="#二维dp数组01背包" class="headerlink" title="二维dp数组01背包"></a>二维dp数组01背包</h2><p>依然动规五部曲分析一波。</p>
-<ol>
-<li>确定dp数组以及下标的含义</li>
-</ol>
-<p>对于背包问题，有一种写法， 是使用二维数组，即<strong>dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少</strong>。</p>
-<p>只看这个二维数组的定义，大家一定会有点懵，看下面这个图：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-aaxdVc-file_1625110628525" alt="动态规划-背包问题1"></p>
-<p><strong>要时刻记着这个dp数组的含义，下面的一些步骤都围绕这dp数组的含义进行的</strong>，如果哪里看懵了，就来回顾一下i代表什么，j又代表什么。</p>
-<ol>
-<li>确定递推公式</li>
-</ol>
-<p>再回顾一下dp[i][j]的含义：从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少。</p>
-<p>那么可以有两个方向推出来dp[i][j]，</p>
-<ul>
-<li>由dp[i - 1][j]推出，即背包容量为j，里面不放物品i的最大价值，此时dp[i][j]就是dp[i - 1][j]</li>
-<li>由dp[i - 1][j - weight[i]]推出，dp[i - 1][j - weight[i]] 为背包容量为j - weight[i]的时候不放物品i的最大价值，那么dp[i - 1][j - weight[i]] + value[i] （物品i的价值），就是背包放物品i得到的最大价值</li>
-</ul>
-<p>所以递归公式： dp[i][j] &#x3D; max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);</p>
-<ol>
-<li>dp数组如何初始化</li>
-</ol>
-<p><strong>关于初始化，一定要和dp数组的定义吻合，否则到递推公式的时候就会越来越乱</strong>。</p>
-<p>首先从dp[i][j]的定义出发，如果背包容量j为0的话，即dp[i][0]，无论是选取哪些物品，背包价值总和一定为0。如图：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-faWopl-file_1625110628344" alt="动态规划-背包问题2"></p>
-<p>在看其他情况。</p>
-<p>状态转移方程 dp[i][j] &#x3D; max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]); 可以看出i 是由 i-1 推导出来，那么i为0的时候就一定要初始化。</p>
-<p>dp[0][j]，即：i为0，存放编号0的物品的时候，各个容量的背包所能存放的最大价值。</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正序遍历</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = weight[<span class="number">0</span>]; j &lt;= bagWeight; j++) &#123;</span><br><span class="line">    dp[<span class="number">0</span>][j] = value[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>此时dp数组初始化情况如图所示：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-aktLsl-file_1625110628385" alt="动态规划-背包问题7"></p>
-<p>dp[0][j] 和 dp[i][0] 都已经初始化了，那么其他下标应该初始化多少呢？</p>
-<p>dp[i][j]在推导的时候一定是取价值最大的数，如果题目给的价值都是正整数那么非0下标都初始化为0就可以了，因为0就是最小的了，不会影响取最大价值的结果。</p>
-<p>如果题目给的价值有负数，那么非0下标就要初始化为负无穷了。例如：一个物品的价值是-2，但对应的位置依然初始化为0，那么取最大值的时候，就会取0而不是-2了，所以要初始化为负无穷。</p>
-<p>而背包问题的物品价值都是正整数，所以初始化为0，就可以了。</p>
-<p><strong>这样才能让dp数组在递归公式的过程中取最大的价值，而不是被初始值覆盖了</strong>。</p>
-<p>如图：</p>
-<p><img src="https://pic.leetcode-cn.com/1625111618-avtHAp-image.png" alt="image.png"></p>
-<p>最后初始化代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(weight.<span class="built_in">size</span>() + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(bagWeight + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> j = weight[<span class="number">0</span>]; j &lt;= bagWeight; j++) &#123;</span><br><span class="line">    dp[<span class="number">0</span>][j] = value[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>费了这么大的功夫，才把如何初始化讲清楚，相信不少同学平时初始化dp数组是凭感觉来的，但有时候感觉是不靠谱的</strong>。</p>
-<ol>
-<li>确定遍历顺序</li>
-</ol>
-<p>在如下图中，可以看出，有两个遍历的维度：物品与背包重量</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-opVVnz-file_1625110628399" alt="动态规划-背包问题3"></p>
-<p>那么问题来了，<strong>先遍历 物品还是先遍历背包重量呢？</strong></p>
-<p><strong>其实都可以！！ 但是先遍历物品更好理解</strong>。</p>
-<p>那么我先给出先遍历物品，然后遍历背包重量的代码。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// weight数组的大小 就是物品个数</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagWeight; j++) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">        <span class="keyword">if</span> (j &lt; weight[i]) dp[i][j] = dp[i - <span class="number">1</span>][j]; <span class="comment">// 这个是为了展现dp数组里元素的变化</span></span><br><span class="line">        <span class="keyword">else</span> dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - weight[i]] + value[i]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>先遍历背包，再遍历物品，也是可以的！（注意我这里使用的二维dp数组）</strong></p>
-<p>例如这样：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// weight数组的大小 就是物品个数</span></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagWeight; j++) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">        <span class="keyword">if</span> (j &lt; weight[i]) dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">        <span class="keyword">else</span> dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - weight[i]] + value[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为什么也是可以的呢？</p>
-<p><strong>要理解递归的本质和递推的方向</strong>。</p>
-<p>dp[i][j] &#x3D; max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]); 递归公式中可以看出dp[i][j]是靠dp[i-1][j]和dp[i - 1][j - weight[i]]推导出来的。</p>
-<p>dp[i-1][j]和dp[i - 1][j - weight[i]] 都在dp[i][j]的左上角方向（包括正左和正上两个方向），那么先遍历物品，再遍历背包的过程如图所示：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-laRTNC-file_1625110628415" alt="动态规划-背包问题5"></p>
-<p>再来看看先遍历背包，再遍历物品呢，如图：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-fxjdZQ-file_1625110628362" alt="动态规划-背包问题6"></p>
-<p><strong>大家可以看出，虽然两个for循环遍历的次序不同，但是dp[i][j]所需要的数据就是左上角，根本不影响dp[i][j]公式的推导！</strong></p>
-<p>但先遍历物品再遍历背包这个顺序更好理解。</p>
-<p><strong>其实背包问题里，两个for循环的先后循序是非常有讲究的，理解遍历顺序其实比理解推导公式难多了</strong>。</p>
-<ol>
-<li>举例推导dp数组</li>
-</ol>
-<p>来看一下对应的dp数组的数值，如图：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-zbjicK-file_1625110628495" alt="动态规划-背包问题4"></p>
-<p>最终结果就是dp[2][4]。</p>
-<p>建议大家此时自己在纸上推导一遍，看看dp数组里每一个数值是不是这样的。</p>
-<p><strong>做动态规划的题目，最好的过程就是自己在纸上举一个例子把对应的dp数组的数值推导一下，然后在动手写代码！</strong></p>
-<p>很多同学做dp题目，遇到各种问题，然后凭感觉东改改西改改，怎么改都不对，或者稀里糊涂就改过了。</p>
-<p>主要就是自己没有动手推导一下dp数组的演变过程，如果推导明白了，代码写出来就算有问题，只要把dp数组打印出来，对比一下和自己推导的有什么差异，很快就可以发现问题了。</p>
-<h2 id="完整C-测试代码"><a href="#完整C-测试代码" class="headerlink" title="完整C++测试代码"></a>完整C++测试代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_2_wei_bag_problem1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; weight = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; value = &#123;<span class="number">15</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> bagWeight = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;<span class="type">int</span>&gt;&gt; <span class="built_in">dp</span>(weight.<span class="built_in">size</span>() + <span class="number">1</span>, <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;(bagWeight + <span class="number">1</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = weight[<span class="number">0</span>]; j &lt;= bagWeight; j++) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][j] = value[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt;= bagWeight; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &lt; weight[i]) dp[i][j] = dp[i - <span class="number">1</span>][j];</span><br><span class="line">            <span class="keyword">else</span> dp[i][j] = <span class="built_in">max</span>(dp[i - <span class="number">1</span>][j], dp[i - <span class="number">1</span>][j - weight[i]] + value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; dp[weight.<span class="built_in">size</span>() - <span class="number">1</span>][bagWeight] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">test_2_wei_bag_problem1</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="01背包二维dp数组总结"><a href="#01背包二维dp数组总结" class="headerlink" title="01背包二维dp数组总结"></a>01背包二维dp数组总结</h2><p>讲了这么多才刚刚把二维dp的01背包讲完，<strong>这里大家其实可以发现最简单的是推导公式了，推导公式估计看一遍就记下来了，但难就难在如何初始化和遍历顺序上</strong>。</p>
-<p>可能有的同学并没有注意到初始化 和 遍历顺序的重要性，我们后面做力扣上背包面试题目的时候，大家就会感受出来了。</p>
-<p>下一篇 还是理论基础，我们再来讲一维dp数组实现的01背包（滚动数组），分析一下和二维有什么区别，在初始化和遍历顺序上又有什么差异，敬请期待！</p>
-<p>今天我们就来说一说滚动数组，其实在前面的题目中我们已经用到过滚动数组了，就是把二维dp降为一维dp，一些录友当时还表示比较困惑。</p>
-<p>那么我们通过01背包，来彻底讲一讲滚动数组！</p>
-<p>接下来还是用如下这个例子来进行讲解</p>
-<p>背包最大重量为4。</p>
-<p>物品为：</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>重量</th>
-<th>价值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>物品0</td>
-<td>1</td>
-<td>15</td>
-</tr>
-<tr>
-<td>物品1</td>
-<td>3</td>
-<td>20</td>
-</tr>
-<tr>
-<td>物品2</td>
-<td>4</td>
-<td>30</td>
-</tr>
-</tbody></table>
-<p>问背包能背的物品最大价值是多少？</p>
-<h2 id="一维dp数组（滚动数组）"><a href="#一维dp数组（滚动数组）" class="headerlink" title="一维dp数组（滚动数组）"></a>一维dp数组（滚动数组）</h2><p>对于背包问题其实状态都是可以压缩的。</p>
-<p>在使用二维数组的时候，递推公式：dp[i][j] &#x3D; max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);</p>
-<p><strong>其实可以发现如果把dp[i - 1]那一层拷贝到dp[i]上，表达式完全可以是：dp[i][j] &#x3D; max(dp[i][j], dp[i][j - weight[i]] + value[i]);</strong></p>
-<p><strong>与其把dp[i - 1]这一层拷贝到dp[i]上，不如只用一个一维数组了</strong>，只用dp[j]（一维数组，也可以理解是一个滚动数组）。</p>
-<p>这就是滚动数组的由来，需要满足的条件是上一层可以重复利用，直接拷贝到当前层。</p>
-<p>读到这里估计大家都忘了 dp[i][j]里的i和j表达的是什么了，i是物品，j是背包容量。</p>
-<p><strong>dp[i][j] 表示从下标为[0-i]的物品里任意取，放进容量为j的背包，价值总和最大是多少</strong>。</p>
-<p>一定要时刻记住这里i和j的含义，要不然很容易看懵了。</p>
-<p>动规五部曲分析如下：</p>
-<ol>
-<li>确定dp数组的定义</li>
-</ol>
-<p>在一维dp数组中，dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]。</p>
-<ol>
-<li>一维dp数组的递推公式</li>
-</ol>
-<p>dp[j]为 容量为j的背包所背的最大价值，那么如何推导dp[j]呢？</p>
-<p>dp[j]可以通过dp[j - weight[i]]推导出来，dp[j - weight[i]]表示容量为j - weight[i]的背包所背的最大价值。</p>
-<p>dp[j - weight[i]] + value[i] 表示 容量为 j - 物品i重量 的背包 加上 物品i的价值。（也就是容量为j的背包，放入物品i了之后的价值即：dp[j]）</p>
-<p>此时dp[j]有两个选择，一个是取自己dp[j]，一个是取dp[j - weight[i]] + value[i]，指定是取最大的，毕竟是求最大价值，</p>
-<p>所以递归公式为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);</span><br></pre></td></tr></table></figure>
-
-<p>可以看出相对于二维dp数组的写法，就是把dp[i][j]中i的维度去掉了。</p>
-<ol>
-<li>一维dp数组如何初始化</li>
-</ol>
-<p><strong>关于初始化，一定要和dp数组的定义吻合，否则到递推公式的时候就会越来越乱</strong>。</p>
-<p>dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]，那么dp[0]就应该是0，因为背包容量为0所背的物品的最大价值就是0。</p>
-<p>那么dp数组除了下标0的位置，初始为0，其他下标应该初始化多少呢？</p>
-<p>看一下递归公式：dp[j] &#x3D; max(dp[j], dp[j - weight[i]] + value[i]);</p>
-<p>dp数组在推导的时候一定是取价值最大的数，如果题目给的价值都是正整数那么非0下标都初始化为0就可以了，如果题目给的价值有负数，那么非0下标就要初始化为负无穷。</p>
-<p><strong>这样才能让dp数组在递归公式的过程中取的最大的价值，而不是被初始值覆盖了</strong>。</p>
-<p>那么我假设物品价值都是大于0的，所以dp数组初始化的时候，都初始为0就可以了。</p>
-<ol>
-<li>一维dp数组遍历顺序</li>
-</ol>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123; <span class="comment">// 遍历物品</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = bagWeight; j &gt;= weight[i]; j--) &#123; <span class="comment">// 遍历背包容量</span></span><br><span class="line">        dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>这里大家发现和二维dp的写法中，遍历背包的顺序是不一样的！</strong></p>
-<p>二维dp遍历的时候，背包容量是从小到大，而一维dp遍历的时候，背包是从大到小。</p>
-<p>为什么呢？</p>
-<p><strong>倒叙遍历是为了保证物品i只被放入一次！</strong>。但如果一旦正序遍历了，那么物品0就会被重复加入多次！</p>
-<p>举一个例子：物品0的重量weight[0] &#x3D; 1，价值value[0] &#x3D; 15</p>
-<p>如果正序遍历</p>
-<p>dp[1] &#x3D; dp[1 - weight[0]] + value[0] &#x3D; 15</p>
-<p>dp[2] &#x3D; dp[2 - weight[0]] + value[0] &#x3D; 30</p>
-<p>此时dp[2]就已经是30了，意味着物品0，被放入了两次，所以不能正序遍历。</p>
-<p>为什么倒叙遍历，就可以保证物品只放入一次呢？</p>
-<p>倒叙就是先算dp[2]</p>
-<p>dp[2] &#x3D; dp[2 - weight[0]] + value[0] &#x3D; 15 （dp数组已经都初始化为0）</p>
-<p>dp[1] &#x3D; dp[1 - weight[0]] + value[0] &#x3D; 15</p>
-<p>所以从后往前循环，每次取得状态不会和之前取得状态重合，这样每种物品就只取一次了。</p>
-<p><strong>那么问题又来了，为什么二维dp数组历的时候不用倒叙呢？</strong></p>
-<p>因为对于二维dp，dp[i][j]都是通过上一层即dp[i - 1][j]计算而来，本层的dp[i][j]并不会被覆盖！</p>
-<p>（如何这里读不懂，大家就要动手试一试了，空想还是不靠谱的，实践出真知！）</p>
-<p><strong>再来看看两个嵌套for循环的顺序，代码中是先遍历物品嵌套遍历背包容量，那可不可以先遍历背包容量嵌套遍历物品呢？</strong></p>
-<p>不可以！</p>
-<p>因为一维dp的写法，背包容量一定是要倒序遍历（原因上面已经讲了），如果遍历背包容量放在上一层，那么每个dp[j]就只会放入一个物品，即：背包里只放入了一个物品。</p>
-<p>（这里如果读不懂，就在回想一下dp[j]的定义，或者就把两个for循环顺序颠倒一下试试！）</p>
-<p><strong>所以一维dp数组的背包在遍历顺序上和二维其实是有很大差异的！</strong>，这一点大家一定要注意。</p>
-<ol>
-<li>举例推导dp数组</li>
-</ol>
-<p>一维dp，分别用物品0，物品1，物品2 来遍历背包，最终得到结果如下：</p>
-<p><img src="https://pic.leetcode-cn.com/1625110630-iIAHBf-file_1625110628433" alt="动态规划-背包问题9"></p>
-<h2 id="一维dp01背包完整C-测试代码"><a href="#一维dp01背包完整C-测试代码" class="headerlink" title="一维dp01背包完整C++测试代码"></a>一维dp01背包完整C++测试代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">test_1_wei_bag_problem</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; weight = &#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>&#125;;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; value = &#123;<span class="number">15</span>, <span class="number">20</span>, <span class="number">30</span>&#125;;</span><br><span class="line">    <span class="type">int</span> bagWeight = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(bagWeight + <span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; weight.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = bagWeight; j &gt;= weight[i]; j--) &#123;</span><br><span class="line">            dp[j] = <span class="built_in">max</span>(dp[j], dp[j - weight[i]] + value[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; dp[bagWeight] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">test_1_wei_bag_problem</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看出，一维dp 的01背包，要比二维简洁的多！ 初始化 和 遍历顺序相对简单了。</p>
-<p><strong>所以我倾向于使用一维dp数组的写法，比较直观简洁，而且空间复杂度还降了一个数量级！</strong></p>
-<p><strong>在后面背包问题的讲解中，我都直接使用一维dp数组来进行推导</strong>。</p>
-<h2 id="01背包一维dp数组总结"><a href="#01背包一维dp数组总结" class="headerlink" title="01背包一维dp数组总结"></a>01背包一维dp数组总结</h2><p>以上的讲解可以开发一道面试题目（毕竟力扣上没原题）。</p>
-<p>就是本文中的题目，要求先实现一个纯二维的01背包，如果写出来了，然后再问为什么两个for循环的嵌套顺序这么写？反过来写行不行？再讲一讲初始化的逻辑。</p>
-<p>然后要求实现一个一维数组的01背包，最后再问，一维数组的01背包，两个for循环的顺序反过来写行不行？为什么？</p>
-<p>注意以上问题都是在候选人把代码写出来的情况下才问的。</p>
-<p>就是纯01背包的题目，都不用考01背包应用类的题目就可以看出候选人对算法的理解程度了。</p>
-<p><strong>相信大家读完这篇文章，应该对以上问题都有了答案！</strong></p>
-<p>此时01背包理论基础就讲完了，我用了两篇文章把01背包的dp数组定义、递推公式、初始化、遍历顺序从二维数组到一维数组统统深度剖析了一遍，没有放过任何难点。</p>
-<p>大家可以发现其实信息量还是挺大的。</p>
-<p>如果把<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/FwIiPPmR18_AJO5eiidT6w">动态规划：关于01背包问题，你该了解这些！</a>和本篇的内容都理解了，后面我们在做01背包的题目，就会发现非常简单了。</p>
-<p>不用再凭感觉或者记忆去写背包，而是有自己的思考，了解其本质，代码的方方面面都在自己的掌控之中。</p>
-<p>即使代码没有通过，也会有自己的逻辑去debug，这样就思维清晰了。常见背包问题可分为：</p>
-<h2 id="01-背包问题："><a href="#01-背包问题：" class="headerlink" title="01 背包问题："></a>01 背包问题：</h2><p>最基本的背包问题就是 <strong>01 背包问题</strong>：一共有 <strong>N</strong> 件物品，第 <strong>i</strong>（i 从 1 开始）件物品的重量为 <strong>w[i]</strong>，价值为 <strong>v[i]</strong>。在总重量不超过背包承载上限 <strong>W</strong> 的情况下，能够装入背包的最大价值是多少？</p>
-<h2 id="完全背包问题："><a href="#完全背包问题：" class="headerlink" title="完全背包问题："></a>完全背包问题：</h2><p>完全背包与 01 背包不同就是每种物品可以有无限多个：一共有 <strong>N</strong> 种物品，每种物品有无限多个，第 <strong>i</strong>（i 从 1 开始）种物品的重量为 <strong>w[i]</strong>，价值为 <strong>v[i]</strong>。在总重量不超过背包承载上限 <strong>W</strong> 的情况下，能够装入背包的最大价值是多少？<br>可见 01 背包问题与完全背包问题主要区别就是<strong>物品是否可以重复选取</strong>。</p>
-<h3 id="背包问题具备的特征："><a href="#背包问题具备的特征：" class="headerlink" title="背包问题具备的特征："></a>背包问题具备的特征：</h3><p>是否可以根据一个 <strong>target</strong>（<strong>直接给出或间接求出</strong>），<strong>target</strong> 可以是数字也可以是字符串，再给定一个数组 <strong>arrs</strong>，问：能否使用 <strong>arrs</strong> 中的元素做各种排列组合得到 <strong>target</strong>。</p>
-<h3 id="背包问题解法："><a href="#背包问题解法：" class="headerlink" title="背包问题解法："></a>背包问题解法：</h3><h4 id="01-背包问题：-1"><a href="#01-背包问题：-1" class="headerlink" title="01 背包问题："></a>01 背包问题：</h4><p>如果是 <strong>01 背包</strong>，即数组中的元素不可重复使用，<strong>外循环遍历 arrs</strong>，<strong>内循环遍历 target</strong>，且<strong>内循环倒序</strong>:</p>
-<h4 id="完全背包问题：-1"><a href="#完全背包问题：-1" class="headerlink" title="完全背包问题："></a>完全背包问题：</h4><p>（1）如果是<strong>完全背包</strong>，即数组中的元素可重复使用并且不考虑元素之间顺序，<strong>arrs 放在外循环</strong>（保证 arrs 按顺序），<strong>target在内循环</strong>。且<strong>内循环正序</strong>。<br>（2）如果组合问题需考虑元素之间的顺序，需<strong>将 target 放在外循环，将 arrs 放在内循环</strong>，且<strong>内循环正序</strong>。</p>
-<h3 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h3><h4 id="01-背包问题"><a href="#01-背包问题" class="headerlink" title="01 背包问题"></a>01 背包问题</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">416. 分割等和子集</a></p>
-<p>本题要求把数组分成两个等和的子集，相当于找到一个子集，其和为 sum &#x2F; 2，这个 sum &#x2F; 2 就是 target（target 间接给出）。<br>于是转化为<strong>是否可以用 nums 中的数组合和成 target，01 背包问题，外层循环为选择池 num: nums，内层循环为 target</strong>。</p>
-<p>dp[i] 表示是否存在和为 i 的 num 组合。</p>
-<ul>
-<li>外层遍历 nums 每个 num；</li>
-<li>内层遍历 target（由大到小）。</li>
-</ul>
-<p>对于元素之和等于 i - num 的每一种组合，在最后添加 num 之后即可得到一个元素之和等于 i 的组合，因此dp[i] 依赖于 dp[i - num]，并且在计算 dp[i - num] 时，要保证索引较小的元素值不被覆盖，需要后向更新 dp[i]，并且当 i - num &lt; i 时， dp[i] 已经更新过，于是：<br><code>dp[i] = dp[i] || dp[i - num]</code><br>对于特例：如果 sum 为奇数，那一定找不到符合要求的子集，返回 False。<br>对于边界条件，我们定义 dp[0] &#x3D; true 表示当 i - num &#x3D; 0，存在一个 num 和为 i。<br>最后返回 dp[target]。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">canPartition</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> len = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> num: nums) &#123;</span><br><span class="line">            sum += num;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> ((sum &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> target = sum / <span class="number">2</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">dp</span><span class="params">(target + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num: nums)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = target; i &gt;= num; i--)&#123;</span><br><span class="line"></span><br><span class="line">                dp[i] = dp[i] || dp[i - num];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[target];</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析：</p>
-<ul>
-<li>时间复杂度：O(target × n)，其中 n 是数组 nums 的长度。</li>
-<li>空间复杂度：O(target)。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/target-sum/">494. 目标和</a></p>
-<p>我们想要的 S &#x3D; 正数和 - 负数和 &#x3D; x - y<br>而已知 x 与 y 的和是数组总和：x + y &#x3D; sum<br>可以求出 x &#x3D; (S + sum) &#x2F; 2 &#x3D; target<br>也就是我们要从 nums 数组里选出几个数，令其和为 target（target 间接给出）。<br>于是转化为<strong>是否可以用 nums 中的数组合和成 target，01 背包问题，外层循环为选择池 nums，内层循环为 target</strong>。<br>dp[i] 表示和为 i 的 num 组合有 dp[i] 种。</p>
-<ul>
-<li>外层遍历 nums 每个 num；</li>
-<li>内层遍历 target（由大到小）。</li>
-</ul>
-<p>对于元素之和等于 i - num 的每一种排列，在最后添加 num 之后即可得到一个元素之和等于 i 的排列，因此在计算 dp[i] 时，应该计算所有的 dp[i − num] 之和。<br><code>dp[i] = dp[i] + dp[i - num]</code><br>对于边界条件，我们定义 dp[0] &#x3D; 1 表示只有当不选取任何元素时，元素之和才为 0，因此只有 1 种方案。<br>最后返回 dp[target]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findTargetSumWays</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> S)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num : nums) sum += num;</span><br><span class="line">        <span class="keyword">if</span>(S &gt; sum || (S + sum) % <span class="number">2</span> == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> target = (S + sum) / <span class="number">2</span>;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(target + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num : nums)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = target; i &gt;= num; i--)&#123;               </span><br><span class="line">                dp[i] = dp[i] + dp[i - num];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析：</p>
-<ul>
-<li>时间复杂度：O(target × n)，其中 n 是数组 nums 的长度。</li>
-<li>空间复杂度：O(target)。</li>
-</ul>
-<h4 id="完全背包问题"><a href="#完全背包问题" class="headerlink" title="完全背包问题"></a>完全背包问题</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break/">139. 单词拆分</a></p>
-<p>转化为<strong>是否可以用 wordDict 中的词组合成 s，完全背包问题，并且为“考虑排列顺序的完全背包问题”，外层循环为 target ，内层循环为选择池 wordDict。</strong><br>dp[i] 表示以 i 结尾的字符串是否可以被 wordDict 中组合而成。</p>
-<ul>
-<li>外层遍历 s 中每一个与 word 同长度的字串 s.substr(i - sz, sz) ；</li>
-<li>内层遍历 wordDict 每个 word。</li>
-</ul>
-<p>判断 s.substr(i - sz, sz) &#x3D;&#x3D; word：<br>（1）若不相等，说明与该 word 不匹配，继续遍历；<br>（2）若相等，说明从 [i - sz] 到 i 的字符与 word 匹配。<br><code>dp[i] = dp[i] || d[[i - sz]]</code><br>对于边界条件，我们定义 dp[0] &#x3D; true 表示空串且合法。<br>最后返回 dp[s.size()]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">wordBreak</span><span class="params">(string s, vector&lt;string&gt;&amp; wordDict)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">bool</span>&gt; <span class="title">dp</span><span class="params">(s.size() + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= s.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">auto</span>&amp; word: wordDict)&#123;</span><br><span class="line">                <span class="type">int</span> sz = word.<span class="built_in">size</span>();        </span><br><span class="line">                <span class="keyword">if</span> (i - sz &gt;= <span class="number">0</span> &amp;&amp; s.<span class="built_in">substr</span>(i - sz, sz) == word)</span><br><span class="line">                    dp[i] = dp[i] || dp[i - sz];            </span><br><span class="line">            &#125;       </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[s.<span class="built_in">size</span>()];</span><br><span class="line">    &#125;   </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析</p>
-<ul>
-<li>时间复杂度：O(target × n)，其中 n 是数组 nums 的长度。</li>
-<li>空间复杂度：O(target)。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">279. 完全平方数</a><br>我们想要的 S &#x3D; 若干个完全平方数的和<br>完全平方数最小为 1，最大为 sqrt(n)<br>也就是我们要从 nums &#x3D; [1, 2, …, sqrt(n)] 数组里选出几个数，令其平方和为 target &#x3D; n。<br>于是<strong>转化为是否可以用 nums 中的数组合和成 target，完全背包问题，外层循环为选择池 nums，内层循环为 target</strong>。<br>dp[i] 表示和为 i 的 nums 组合中完全平方数最少有 dp[i] 个。</p>
-<ul>
-<li>外层遍历 nums 每个 num；</li>
-<li>内层遍历 n。</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSquares</span><span class="params">(<span class="type">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(n<span class="number">+1</span>, INT_MAX)</span></span>;;</span><br><span class="line"></span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> num = <span class="number">1</span>; num &lt;= <span class="built_in">sqrt</span>(n); num++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(i &gt;= num * num)</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i - num * num] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>对于元素之和等于 i - num * num 的每一种组合，在最后添加 num 之后即可得到一个元素平方和等于 i 的组合，因此在计算 dp[i] 时，应该计算所有的 dp[i − num * num] + 1 中的最小值。<br>dp[i] &#x3D; min(dp[i], dp[i - num * num] + 1)<br>对于边界条件，我们定义 dp[0] &#x3D; 0。<br>最后返回 dp[n]</p>
-<p>复杂度分析</p>
-<ul>
-<li>时间复杂度：O(n x sqrt{n})，在主步骤中，我们有一个嵌套循环，其中外部循环是 n 次迭代，而内部循环最多需要 sqrt{n} 迭代。</li>
-<li>空间复杂度：O(n)，使用了一个一维数组 dp。</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">322. 零钱兑换</a></p>
-<p>转化为<strong>是否可以用 coins 中的数组合和成 amount，完全背包问题，并且为“不考虑排列顺序的完全背包问题”，外层循环为选择池 coins，内层循环为 amount。</strong><br>dp[i] 表示和为 i 的 coin 组合中硬币最少有 dp[i] 个。</p>
-<ul>
-<li>外层遍历 coins 每个 coin；</li>
-<li>内层遍历 amount。</li>
-</ul>
-<p>对于元素之和等于 i - coin 的每一种组合，在最后添加 coin 之后即可得到一个元素之和等于 i 的组合，因此在计算 dp[i] 时，应该计算所有的 dp[i − coin] + 1 中的最小值。<br><code>dp[i] = min(dp[i], dp[i - coin] + 1)</code><br>对于边界条件，我们定义 dp[0] &#x3D; 0。<br>最后返回 dp[amount]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">coinChange</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; coins, <span class="type">int</span> amount)</span> </span>&#123;      </span><br><span class="line">        <span class="function">vector&lt;<span class="type">long</span> <span class="type">long</span>&gt; <span class="title">dp</span><span class="params">(amount<span class="number">+1</span>, INT_MAX)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span>&amp; coin: coins)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= amount; i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(coin &lt;= i)</span><br><span class="line">                    dp[i] = <span class="built_in">min</span>(dp[i], dp[i-coin] + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;                        </span><br><span class="line">        <span class="keyword">return</span> dp[amount] == INT_MAX ? <span class="number">-1</span> : dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析：</p>
-<ul>
-<li>时间复杂度：O(amount x n)，其中 n 为 coins 大小</li>
-<li>空间复杂度：O(amount)</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></p>
-<p>转化为<strong>是否可以用 nums 中的数组合和成 target，完全背包问题，并且为“考虑排列顺序的完全背包问题”，外层循环为 target ，内层循环为选择池 nums</strong>。<br>dp[i] 表示和为 i 的 num 组合有 dp[i] 种。</p>
-<ul>
-<li>外层遍历 target；</li>
-<li>内层遍历 nums 每个 num。</li>
-</ul>
-<p>对于元素之和等于 i - num 的每一种排列，在最后添加 num 之后即可得到一个元素之和等于 i 的排列，因此在计算 dp[i] 时，应该计算所有的 dp[i − num] 之和。<br><code>dp[i] = dp[i] + dp[i - num]</code><br>对于边界条件，我们定义 dp[0] &#x3D; 1 表示只有当不选取任何元素时，元素之和才为 0，因此只有 1 种方案。<br>最后返回 dp[target]</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">combinationSum4</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(target + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= target; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span>&amp; num: nums)&#123;</span><br><span class="line">                <span class="keyword">if</span>(num &lt;= i &amp;&amp; dp[i - num] &lt; INT_MAX - dp[i])</span><br><span class="line">                    dp[i] += dp[i - num];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[target];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析：</p>
-<ul>
-<li>时间复杂度：O(target x n)，其中 n 为 wordDict 大小</li>
-<li>空间复杂度：O(target)</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a><br>转化为<strong>是否可以用 coins 中的数组合和成 amount，完全背包问题，并且为“不考虑排列顺序的完全背包问题”，外层循环为选择池 coins，内层循环为 amount</strong>。<br>dp[i] 表示和为 i 的 coin 组合有 dp[i] 种。</p>
-<ul>
-<li>外层遍历 coins 每个 coin；</li>
-<li>内层遍历 amount。</li>
-</ul>
-<p>对于元素之和等于 i - coin 的每一种组合，在最后添加 coin 之后即可得到一个元素之和等于 i 的组合，因此在计算 dp[i] 时，应该计算所有的 dp[i − coin] 之和。<br><code>dp[i] = dp[i] + dp[i - coin]</code><br>对于边界条件，我们定义 dp[0] &#x3D; 1，表示只有当不选取任何元素时，元素之和才为 0，因此只有 1 种方案。<br>最后返回 dp[amount]。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">change</span><span class="params">(<span class="type">int</span> amount, vector&lt;<span class="type">int</span>&gt;&amp; coins)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">dp</span><span class="params">(amount + <span class="number">1</span>)</span></span>;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span>&amp; coin: coins)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt;= amount; i++)&#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(coin &lt;= i)</span><br><span class="line">                    dp[i] += dp[i - coin];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>复杂度分析：</p>
-<ul>
-<li>时间复杂度：O(amount x n)，其中 n 为 coins 大小</li>
-<li>空间复杂度：O(amount)</li>
-</ul>
-
+          <p>背包问题是一类经典的动态规划问题，它非常灵活，需要仔细琢磨体会，本文先对背包问题的几种常见类型作一个总结，期望可以用一套框架解决背包问题。 不少同学对背包问题还处于朦胧状态，我特意录了一期视频 带你学透0-1背包问题！ ，这里详细介绍了0-1背包的中dp数组的定义，初始化，递推公式，以及遍历顺序。相信结合本篇题解，会对你学习背包有所帮助。 本篇目录： 前序 01 背包 二维dp数组 01背包 一维…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/knapsack-problem/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -2401,16 +1708,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>一些常见的动态内存错误：<br>1.对NULL指针解引用<br>2.对动态开辟空间进行越界访问<br>3.非动态开辟空间使用free进行释放<br>4.在使用free释放一块动态开辟的空间只释放了部分<br>5.一块空间多次释放<br>6.忘记释放—-&gt;内存泄露</p>
-<p>什么是内存泄露？？<br>指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的控制，因而造成了内存的浪费。</p>
-<p>python中就没有此类问题，因为python自带垃圾回收机制。</p>
-<p>C&#x2F;C++中主要有两种内存泄露：</p>
-<p>堆内存泄漏（Heap leak）。对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释放，那么此后这块内存将不会被使用，就会产生Heap Leak.<br>系统资源泄露（Resource Leak）.主要指程序使用系统分配的资源比如 Bitmap,handle ,SOCKET等没有使用相应的函数释放掉，导致系统资源的浪费，严重可导致系统效能降低，系统运行不稳定。</p>
-<p>C&#x2F;C++中如何检测内存泄露？<br>使用一些软件测试工具进行检测<br>最直接的方式还是打开windows下的任务管理器查看“内存使用”和”虚拟内存大小”进行检测。<br>总之，在使用动态内存申请时还是要相当谨慎，使用完记得要及时free。</p>
-<p><a target="_blank" rel="noopener" href="https://danluu.com/malloc-tutorial/">https://danluu.com/malloc-tutorial/</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.cloudflare.com/the-effect-of-switching-to-tcmalloc-on-rocksdb-memory-use/">The effect of switching to TCMalloc on RocksDB memory use</a></p>
-<p><a target="_blank" rel="noopener" href="https://jacktang816.github.io/post/mallocandfree/">malloc和free的实现原理解析</a></p>
-
+          <p>一些常见的动态内存错误： 1.对NULL指针解引用 2.对动态开辟空间进行越界访问 3.非动态开辟空间使用free进行释放 4.在使用free释放一块动态开辟的空间只释放了部分 5.一块空间多次释放 6.忘记释放—-&gt;内存泄露 什么是内存泄露？？ 指由于疏忽或错误造成程序未能释放已经不再使用的内存的情况。内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，失去了对该段内存的…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Malloc-tutorial/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -2485,60 +1791,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>动态规划算法模板：</p>
-<figure class="highlight cpp"><figcaption><span>[bash]</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">result = []</span><br><span class="line"><span class="type">void</span> <span class="built_in">dynamic_programming</span>(路径, 选择列表) &#123;</span><br><span class="line">  <span class="comment">// 1.通用初始化</span></span><br><span class="line">  vector&lt;<span class="type">int</span>&gt; <span class="built_in">dp</span>(容量 + <span class="number">1</span>, base case1);</span><br><span class="line">  <span class="comment">// 2.边界初始化</span></span><br><span class="line">  dp[<span class="number">0</span>][<span class="number">0</span>][...] = base case2;</span><br><span class="line">  <span class="comment">// 3.状态转移</span></span><br><span class="line">  <span class="keyword">for</span> 状态<span class="number">1</span>的个数</span><br><span class="line">    <span class="keyword">for</span> 状态<span class="number">2</span>的个数</span><br><span class="line">      <span class="keyword">for</span> ...</span><br><span class="line">        dp[状态<span class="number">1</span>][状态<span class="number">2</span>][...] = 求最值 <span class="keyword">or</span> 求和(选择<span class="number">1</span>, 选择<span class="number">2</span>，...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>按照如下顺序刷力扣上的题目，相信会帮你在学习回溯算法的路上少走很多弯路。</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fibonacci-number/">509. 斐波那契数</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/n-th-tribonacci-number/">1137. 第 N 个泰波那契数</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">70. 爬楼梯</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">746. 使用最小花费爬楼梯</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber/">198. 打家劫舍</a>：dp[i] &#x3D; max(dp[i-1], dp[i-2] + nums[i])</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/house-robber-ii/">213. 打家劫舍 II</a> int res &#x3D; max(helper(nums, 0, size - 2), helper(nums, 1, size - 1));</p>
-<p><strong><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/delete-and-earn/">740. 删除并获得点数</a></strong></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game/">55. 跳跃游戏</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game-ii/">45. 跳跃游戏 II</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">53. 最大子序和</a>: dp[i]是以nums[i]结尾的最大自序和</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-sum-circular-subarray/">918. 环形子数组的最大和</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-product-subarray/">152. 乘积最大子数组</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-subarray-with-positive-product/">1567. 乘积为正数的最长子数组长度</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-sightseeing-pair/">1014. 最佳观光组合</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a>：vector&lt;vector<int>&gt; dp(n, vector<int>(2, 0)); <code>dp[i][1]</code>表示第i天持有股票</p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/">309. 最佳买卖股票时机含冷冻期</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/">714. 买卖股票的最佳时机含手续费</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-break/">343. 整数拆分</a>：<code>dp[i]</code>拆分数字能获得的最大乘积，<code>dp[i]=max(j*i-j, j*dp[i-j])</code></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof/">剑指 Offer 14- I. 剪绳子</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/partition-equal-subset-sum/">416. 分割等和子集</a>：<code>dp[i][j]</code>表示下标<code>[0, i]</code>区间内是否能选出一些数使其之和恰好为<code>j</code></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/word-break/">139. 单词拆分</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/trapping-rain-water/">42. 接雨水</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/arithmetic-slices/">413. 等差数列划分</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/decode-ways/">91. 解码方法</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/ugly-number-ii/">264. 丑数 II</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a>:<code>dp[i] = dp[]</code></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/pascals-triangle/">118. 杨辉三角</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/pascals-triangle-ii/">119. 杨辉三角 II</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-falling-path-sum/">931. 下降路径最小和</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/triangle/">120. 三角形最小路径和</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/matrix-block-sum/">1314. 矩阵区域和</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/range-sum-query-2d-immutable/">304. 二维区域和检索 - 矩阵不可变</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">62. 不同路径</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">63. 不同路径 II</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-path-sum/">64. 最小路径和</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximal-square/">221. 最大正方形</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-substring/">5. 最长回文子串</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">516. 最长回文子序列</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-increasing-subsequence/">300. 最长递增子序列</a>：<code>dp[i] = max(dp[i], dp[j] + 1);</code></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wiggle-subsequence/">376. 摆动序列</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/is-subsequence/">392. 判断子序列</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/">1143. 最长公共子序列</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance/">72. 编辑距离</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change/">322. 零钱兑换</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/coin-change-2/">518. 零钱兑换 II</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combination-sum-iv/">377. 组合总和 Ⅳ</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-break/">343. 整数拆分</a></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/perfect-squares/">279. 完全平方数</a></p>
-
+          <p>动态规划算法模板： [bash] 1 2 3 4 5 6 7 8 9 10 11 12 result = [] void dynamic_programming (路径, 选择列表) &amp;#123; // 1.通用初始化 vector&lt; int &gt; dp (容量 + 1 , base case1); // 2.边界初始化 dp[ 0 ][ 0 ][...] = base case2; // 3.状态…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/dynamic-programming/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -2613,87 +1874,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>GPU 编译环境配置：</p>
-<p>0、GPU驱动安装：</p>
-<p>首先根据本机的显卡版本，确定nvidia显卡的驱动版本，然后根据驱动版本确定CUDA toolkit的版本。<br>\1. 查看显卡类型</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ lspci | grep -i nvidia</span><br><span class="line">00:07.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1)</span><br></pre></td></tr></table></figure>
-
-<p>显示所有的pci设备信息 lspci</p>
-<h3 id="Linux-驱动安装"><a href="#Linux-驱动安装" class="headerlink" title="Linux 驱动安装"></a>Linux 驱动安装</h3><p>Linux GPU驱动安装采用 Shell 脚本安装方式，适用于任何 Linux 发行版，包括 CentOS，Ubuntu 等。</p>
-<p>NVIDIA Telsa GPU 的 Linux 驱动在安装过程中需要编译 kernel module，系统需提前安装 gcc 和编译 Linux Kernel Module 所依赖的包，例如 <code>kernel-devel-$(uname -r)</code> 等。</p>
-<ol>
-<li><p>执行以下命令，检查当前系统中是否已安装 dkms。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -qa | grep -i dkms</span><br><span class="line">dkms-2.8.4-1.el7.noarch</span><br></pre></td></tr></table></figure>
-
-<p>返回结果如下图，则表示已安装 dkms。</p>
-<p><img src="https://main.qcloudimg.com/raw/ada786e81334e5a88f8c95e54ff42f18.png" alt="img"></p>
-<p>如未安装 dkms，则执行以下命令进行安装。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install -y dkms</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>登录 <a target="_blank" rel="noopener" href="http://www.nvidia.com/Download/Find.aspx">NVIDIA 驱动下载</a> 或访问 <code>http://www.nvidia.com/Download/Find.aspx</code>。</p>
-</li>
-<li><p>tensorflow cuda版本要求<br><a target="_blank" rel="noopener" href="https://www.tensorflow.org/install/source?hl=zh-cn#linux">https://www.tensorflow.org/install/source?hl=zh-cn#linux</a>  <strong>DeepRec要求CUDA版本&#x3D;11.2</strong></p>
-</li>
-<li><p>选择操作系统和安装包，并单击【SEARCH】搜寻驱动，选择要下载的驱动版本。注意要选Linux 64-bit，而不是RHEL8</p>
-</li>
-<li><p>依次执行以下命令，检查当前系统中是否已安装 gcc 和 kernel-devel 包。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -qa | grep kernel-devel</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rpm -qa | grep gcc</span><br></pre></td></tr></table></figure>
-
-<p>返回结果如下，则表示已安装 gcc 和 kernel-devel。<br><img src="https://main.qcloudimg.com/raw/0a9d385944669528d49544eb0bd6b8eb.png" alt="img"><br>如未安装，则请执行以下命令进行安装。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> yum install -y gcc kernel-devel</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行以下命令，运行驱动安装程序，并按提示进行后续操作。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">sudo</span> sh NVIDIA-Linux-x86_64-418.126.02.run</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装完成后，执行以下命令进行验证。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ nvidia-smi</span><br><span class="line">Fri Sep  3 20:00:41 2021</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| NVIDIA-SMI 410.129      Driver Version: 410.129      CUDA Version: 10.0     |</span><br><span class="line">|-------------------------------+----------------------+----------------------+</span><br><span class="line">| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |</span><br><span class="line">| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |</span><br><span class="line">|===============================+======================+======================|</span><br><span class="line">|   0  Tesla T4            On   | 00000000:00:07.0 Off |                    0 |</span><br><span class="line">| N/A   31C    P8     9W /  70W |      0MiB / 15079MiB |      0%      Default |</span><br><span class="line">+-------------------------------+----------------------+----------------------+</span><br><span class="line"></span><br><span class="line">+-----------------------------------------------------------------------------+</span><br><span class="line">| Processes:                                                       GPU Memory |</span><br><span class="line">|  GPU       PID   Type   Process name                             Usage      |</span><br><span class="line">|=============================================================================|</span><br><span class="line">|  No running processes found                                                 |</span><br><span class="line">+-----------------------------------------------------------------------------+</span><br></pre></td></tr></table></figure>
-
-<p>如返回信息类似下图中的 GPU 信息，则说明驱动安装成功。</p>
-<p><img src="https://main.qcloudimg.com/raw/94cbceaa09720cd7edba76961f2763d8.png" alt="img"></p>
-</li>
-</ol>
-<p>Docker安装：<a target="_blank" rel="noopener" href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker">https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker</a></p>
-<p># Step 1：download docker image<br>CPU version: sudo docker pull <a target="_blank" rel="noopener" href="http://registry.cn-shanghai.aliyuncs.com/pai-dlc/tensorflow-developer:1.15deeprec2106-cpu-py36-ubuntu18.04">registry.cn-shanghai.aliyuncs.com&#x2F;pai-dlc&#x2F;tensorflow-developer:1.15deeprec2106-cpu-py36-ubuntu18.04</a></p>
-<p>GPU version: sudo docker pull <a target="_blank" rel="noopener" href="http://registry.cn-shanghai.aliyuncs.com/pai-dlc/tensorflow-developer:1.15deeprec2106-gpu-py36-cu110-ubuntu18.04">registry.cn-shanghai.aliyuncs.com&#x2F;pai-dlc&#x2F;tensorflow-developer:1.15deeprec2106-gpu-py36-cu110-ubuntu18.04</a><br># Step 2：enter docker with GPU<br>sudo docker run -it –name&#x3D;’cpu’ –network&#x3D;host <a target="_blank" rel="noopener" href="http://registry.cn-shanghai.aliyuncs.com/pai-dlc/tensorflow-developer:1.15deeprec2106-cpu-py36-ubuntu18.04">registry.cn-shanghai.aliyuncs.com&#x2F;pai-dlc&#x2F;tensorflow-developer:1.15deeprec2106-cpu-py36-ubuntu18.04</a> &#x2F;bin&#x2F;bash</p>
-<p>sudo docker run –gpus all -it –name&#x3D;’gpu’ –network&#x3D;host <a target="_blank" rel="noopener" href="http://registry.cn-shanghai.aliyuncs.com/pai-dlc/tensorflowdeveloper:1.15deeprec2106-gpu-py36-cu110-ubuntu18.04">registry.cn-shanghai.aliyuncs.com&#x2F;pai-dlc&#x2F;tensorflow-developer:1.15deeprec2106-gpu-py36-cu110-ubuntu18.04</a> &#x2F;bin&#x2F;bash</p>
-<p>sudo docker run –gpus all -it –name&#x3D;’gpu’ –network&#x3D;host <a target="_blank" rel="noopener" href="http://registry.cn-shanghai.aliyuncs.com/pai-dlc/tensorflowdeveloper:1.15deeprec2106-gpu-py36-cu110-ubuntu18.04">registry.cn-shanghai.aliyuncs.com&#x2F;pai-dlc&#x2F;tensorflow-developer:1.15deeprec2106-gpu-py36-cu110-ubuntu18.04</a> bash</p>
-<p># Step 3：compile DeepRec</p>
-<p>CUDA安装：</p>
-<h2 id="下载CUDA文件"><a href="#下载CUDA文件" class="headerlink" title="下载CUDA文件"></a>下载CUDA文件</h2><p>下载最新的CUDA软件安装包， <a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-downloads">CUDA Toolkit 9.2 Download</a>。</p>
-<p>\4. 安装过程的选项选择</p>
-<p>(1). 会先有个阅读声明，一直按D即可，然后accept。<br>(2). 选项install nvidia accelerated Graphics Driver,输入n，因为我们已经安装了nvidia的驱动。<br>(3). 选项install the OpenGL libraries,如果双显卡(集显+独显)选择n，如果只有独显可以选择y，如果双显卡选择y的话，会出现黑屏或者循环登录的问题，如果加了上面的参数就不会出现这个选项了。<br>(4). 后面的可以都选择yes，最后一个选项我们可以选择n,也就是不复制Samples，因为安装目录下有samples。</p>
-<p>安装过程结束后会有以下信息：</p>
-<p>Driver ：Installed<br>Toolkit ：Installed in &#x2F;usr&#x2F;local&#x2F;cuda-9.2<br>Samples ：Installed in &#x2F;home&#x2F;vincent</p>
-<p>代表安装完成，但是不代表成功。这时需要重启。</p>
-<p>\5. 验证cuda是否成功安装</p>
-<p>重启进入界面，打开终端输入：</p>
-<p>export PATH&#x3D;”&#x2F;usr&#x2F;local&#x2F;cuda-9.2&#x2F;bin:$PATH”<br>export LD_LIBRARY_PATH&#x3D;”&#x2F;usr&#x2F;local&#x2F;cuda-9.2&#x2F;lib64:$LD_LIBRARY_PATH” </p>
-<p>这两条命令是将cuda的bin文件和lib导出到系统环境中。<br>如果安装的版本不是一样的，更换路径中的cuda-9.2。</p>
-<p>(1). 终端输入：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ nvcc -V</span><br><span class="line">nvcc: NVIDIA (R) Cuda compiler driver</span><br><span class="line">Copyright (c) 2005-2018 NVIDIA Corporation</span><br><span class="line">Built on Sat_Aug_25_21:08:01_CDT_2018</span><br><span class="line">Cuda compilation tools, release 10.0, V10.0.130</span><br></pre></td></tr></table></figure>
-
-
-
-<p>如果有CUDA的版本信息代表正常。</p>
-<p>(2). 编译samples例子</p>
-<p>#编译并测试设备 deviceQuery：<br>cd &#x2F;usr&#x2F;local&#x2F;cuda-9.2&#x2F;samples&#x2F;1_Utilities&#x2F;deviceQuery<br>sudo make<br>.&#x2F;deviceQuery</p>
-<p>#编译并测试带宽 bandwidthTest：<br>cd ..&#x2F;bandwidthTest<br>sudo make<br>.&#x2F;bandwidthTest</p>
-<p>如果这两个测试的最后结果都是Result &#x3D; PASS，说明CUDA安装成功啦。</p>
-<p>备注：<br>如果安装失败，有可能是缺少依赖，终端执行：</p>
-<p>sudo apt-get install freeglut3-dev <br>build-essential <br>libx11-dev <br>libxmu-dev <br>libxi-dev <br>libgl1-mesa-glx <br>libglu1-mesa <br>libglu1-mesa-dev</p>
-<p>(6). 将cuda的bin和lib写入系统环境</p>
-<p>打开~.bashrc文件在末尾追加两句：</p>
-<p>export CUDA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-9.2<br>export LD_LIBRARY_PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-9.2&#x2F;lib64:$LD_LIBRARY_PATH<br>export PATH&#x3D;&#x2F;usr&#x2F;local&#x2F;cuda-9.2&#x2F;bin:$PATH</p>
-<p>然后退出重新打开终端即可。</p>
-<p>CUDA卸载<br>CUDA默认安装在 &#x2F;usr&#x2F;local&#x2F;cuda-9.2下，用下面的命令卸载：：</p>
-<p>sudo &#x2F;usr&#x2F;local&#x2F;cuda-9.2&#x2F;bin&#x2F;<a target="_blank" rel="noopener" href="http://uninstall_cuda-9.2.pl/">uninstall_cuda-9.2.pl</a><br>NVIDIA驱动卸载：</p>
-<p>sudo &#x2F;usr&#x2F;bin&#x2F;nvidia-uninstall<br>卸载过程一路都是yes。<br>————————————————<br>CUDNN安装:<a target="_blank" rel="noopener" href="https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html">https://docs.nvidia.com/deeplearning/cudnn/install-guide/index.html</a></p>
-<p>tar -zxvf cudnn-10.0-linux-x64-v7.4.2.24.tgz<br>sudo cp cuda&#x2F;include&#x2F;cudnn.h &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;<br>sudo cp cuda&#x2F;lib64&#x2F;libcudnn* &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F;<br>sudo chmod a+r &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;include&#x2F;cudnn.h<br>sudo chmod a+r &#x2F;usr&#x2F;local&#x2F;cuda&#x2F;lib64&#x2F;libcudnn*</p>
-<p>验证CUDNN 7.1 for CUDA 9.0是否安装成功<br>使用如下命令将示例代码复制到当前用户目录，编译并运行其中的一个示例程序mnistCUDNN：</p>
-<p>cp -r &#x2F;usr&#x2F;src&#x2F;cudnn_samples_v7&#x2F; ~<br>cd ~&#x2F;cudnn_samples_v7&#x2F;mnistCUDNN<br>make clean &amp;&amp; make<br>.&#x2F;mnistCUDNN</p>
-
+          <p>GPU 编译环境配置： 0、GPU驱动安装： 首先根据本机的显卡版本，确定nvidia显卡的驱动版本，然后根据驱动版本确定CUDA toolkit的版本。 \1. 查看显卡类型 1 2 $ lspci | grep -i nvidia 00:07.0 3D controller: NVIDIA Corporation TU104GL [Tesla T4] (rev a1) 显示所有的pci设备信息…</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/Tensorflow-compile-from-source/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

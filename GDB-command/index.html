@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="写在前面在我的工作经历中，前几年在Windows上进行开发，使用Visual Studio进行调试，简直是利器，各种断点等用鼠标点点点就能设置；大概从12年开始转Linux开发了，所以调试都是基于GDB的。本来这篇文章也想写写Windows下调试相关，奈何好多年没用了，再加上工作太忙，所以本文就只写了Linux下GDB调试相关，对于Windows开发人员，实在对不住了😃。 这篇文章，涉及的比较全">
+    <meta name="description" content="写在前面 在我的工作经历中，前几年在Windows上进行开发，使用Visual Studio进行调试，简直是利器，各种断点等用鼠标点点点就能设置；大概从12年开始转Linux开发了，所以调试都是基于GDB的。本来这篇文章也想写写Windows下调试相关，奈何好多年没用了，再加上工作太忙，所以本文就只写了Linux下GDB调试相关，对于Windows开发人员，实在对不住了😃。 这篇文章，涉及的比较">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GDB command">
 <meta property="og:url" content="https://fuhailin.github.io/GDB-command/index.html">
 <meta property="og:site_name" content="赵大寳">
-<meta property="og:description" content="写在前面在我的工作经历中，前几年在Windows上进行开发，使用Visual Studio进行调试，简直是利器，各种断点等用鼠标点点点就能设置；大概从12年开始转Linux开发了，所以调试都是基于GDB的。本来这篇文章也想写写Windows下调试相关，奈何好多年没用了，再加上工作太忙，所以本文就只写了Linux下GDB调试相关，对于Windows开发人员，实在对不住了😃。 这篇文章，涉及的比较全">
+<meta property="og:description" content="写在前面 在我的工作经历中，前几年在Windows上进行开发，使用Visual Studio进行调试，简直是利器，各种断点等用鼠标点点点就能设置；大概从12年开始转Linux开发了，所以调试都是基于GDB的。本来这篇文章也想写写Windows下调试相关，奈何好多年没用了，再加上工作太忙，所以本文就只写了Linux下GDB调试相关，对于Windows开发人员，实在对不住了😃。 这篇文章，涉及的比较">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/p3sYCQXkuHghL5sGHeax43qiaqhreiatwb191HvPuosMelLicQHXe6SjRNcyWiciazU6qMcqP03iaFkh6TWKPdicPJ59A/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="og:image" content="https://blogimgs-1256340525.cos.ap-chengdu.myqcloud.com/images/20220601140130.png">

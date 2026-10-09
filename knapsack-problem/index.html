@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="背包问题是一类经典的动态规划问题，它非常灵活，需要仔细琢磨体会，本文先对背包问题的几种常见类型作一个总结，期望可以用一套框架解决背包问题。  不少同学对背包问题还处于朦胧状态，我特意录了一期视频带你学透0-1背包问题！，这里详细介绍了0-1背包的中dp数组的定义，初始化，递推公式，以及遍历顺序。相信结合本篇题解，会对你学习背包有所帮助。 本篇目录：  前序 01 背包 二维dp数组 01背包 一维">
+    <meta name="description" content="背包问题是一类经典的动态规划问题，它非常灵活，需要仔细琢磨体会，本文先对背包问题的几种常见类型作一个总结，期望可以用一套框架解决背包问题。 不少同学对背包问题还处于朦胧状态，我特意录了一期视频 带你学透0-1背包问题！ ，这里详细介绍了0-1背包的中dp数组的定义，初始化，递推公式，以及遍历顺序。相信结合本篇题解，会对你学习背包有所帮助。 本篇目录： 前序 01 背包 二维dp数组 01背包 一维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="knapsack problem">
 <meta property="og:url" content="https://fuhailin.github.io/knapsack-problem/index.html">
 <meta property="og:site_name" content="赵大寳">
-<meta property="og:description" content="背包问题是一类经典的动态规划问题，它非常灵活，需要仔细琢磨体会，本文先对背包问题的几种常见类型作一个总结，期望可以用一套框架解决背包问题。  不少同学对背包问题还处于朦胧状态，我特意录了一期视频带你学透0-1背包问题！，这里详细介绍了0-1背包的中dp数组的定义，初始化，递推公式，以及遍历顺序。相信结合本篇题解，会对你学习背包有所帮助。 本篇目录：  前序 01 背包 二维dp数组 01背包 一维">
+<meta property="og:description" content="背包问题是一类经典的动态规划问题，它非常灵活，需要仔细琢磨体会，本文先对背包问题的几种常见类型作一个总结，期望可以用一套框架解决背包问题。 不少同学对背包问题还处于朦胧状态，我特意录了一期视频 带你学透0-1背包问题！ ，这里详细介绍了0-1背包的中dp数组的定义，初始化，递推公式，以及遍历顺序。相信结合本篇题解，会对你学习背包有所帮助。 本篇目录： 前序 01 背包 二维dp数组 01背包 一维">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic.leetcode-cn.com/1625110630-EjEWYo-file_1625110628476">
 <meta property="og:image" content="https://pic.leetcode-cn.com/1625110630-egwGEh-file_1625110628437">
