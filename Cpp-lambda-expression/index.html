@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="C++中的lambda与函数对象lambda表达式是C++11中引入的一项新技术，利用lambda表达式可以编写内嵌的匿名函数，用以替换独立函数或者函数对象，并且使代码更可读。但是从本质上来讲，lambda表达式只是一种语法糖，因为所有其能完成的工作都可以用其它稍微复杂的代码来实现。但是它简便的语法却给C++带来了深远的影响。 如果从广义上说，lambda表达式产生的是函数对象。函数对象的本质上是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cpp lambda expression">
+<meta property="og:url" content="https://fuhailin.github.io/Cpp-lambda-expression/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="C++中的lambda与函数对象lambda表达式是C++11中引入的一项新技术，利用lambda表达式可以编写内嵌的匿名函数，用以替换独立函数或者函数对象，并且使代码更可读。但是从本质上来讲，lambda表达式只是一种语法糖，因为所有其能完成的工作都可以用其它稍微复杂的代码来实现。但是它简便的语法却给C++带来了深远的影响。 如果从广义上说，lambda表达式产生的是函数对象。函数对象的本质上是">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-05T16:25:24.000Z">
+<meta property="article:modified_time" content="2021-09-12T06:56:14.251Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Cpp-lambda-expression/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Cpp-lambda-expression/","path":"Cpp-lambda-expression/","title":"Cpp lambda expression"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Cpp lambda expression | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E4%B8%AD%E7%9A%84lambda%E4%B8%8E%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">C++中的lambda与函数对象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">lambda表达式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lambda%E6%96%B0%E7%89%B9%E6%80%A7%EF%BC%88C-14%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">lambda新特性（C++14）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lambda%E6%8D%95%E6%8D%89%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">lambda捕捉表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8Blambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">3.2.</span> <span class="nav-text">泛型lambda表达式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.</span> <span class="nav-text">函数对象</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Cpp-lambda-expression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Cpp lambda expression | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Cpp lambda expression
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-06 00:25:24" itemprop="dateCreated datePublished" datetime="2021-08-06T00:25:24+08:00">2021-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-09-12 14:56:14" itemprop="dateModified" datetime="2021-09-12T14:56:14+08:00">2021-09-12</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="C-中的lambda与函数对象"><a href="#C-中的lambda与函数对象" class="headerlink" title="C++中的lambda与函数对象"></a>C++中的lambda与函数对象</h1><p><code>lambda</code>表达式是C++11中引入的一项新技术，利用<code>lambda</code>表达式可以编写内嵌的匿名函数，用以替换独立函数或者函数对象，并且使代码更可读。但是从本质上来讲，lambda表达式只是一种语法糖，因为所有其能完成的工作都可以用其它稍微复杂的代码来实现。但是它简便的语法却给C++带来了深远的影响。</p>
+<p>如果从广义上说，<code>lambda</code>表达式产生的是函数对象。函数对象的本质上是一个类而不是一个函数，在类中，对象重载了函数调用运算符()，从而使对象能够项函数一样被调用，我们称这些对象为函数对象（Function Object）或者仿函数（Functor）。相比lambda表达式，函数对象有自己独特的优势。下面我们开始具体讲解这两项黑科技。</p>
+<h1 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h1><p>先从一个简单的例子开始，我们定义一个输出字符串的<code>lambda</code>表达式，如下所示，表达式一般都是从方括号<code>[]</code>开始，然后结束于花括号<code>{}</code>：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto basic_lambda = []&#123;cout&lt;&lt;&quot;Hello Lambda&quot;&lt;&lt;endl;&#125;; //定义简单的lambda表达式</span><br><span class="line">basic_lambda(); //调用</span><br></pre></td></tr></table></figure>
+
+
+
+<p>下面分别是包含参数和返回类型的<code>lambda</code>表达式：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto add = [] (int a, int b)-&gt;int &#123; return a+b;&#125;; //返回类型需要用`-&gt;`符号指出</span><br><span class="line">auto multiply = [](int a, int b) &#123;return a*b;&#125; //一般可以省略返回类型，通过自动推断就能得到返回类型</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>lambda</code>表达式最前面的方括号提供了“闭包”功能。每当定义一个<code>lambda</code>表达式以后，编译器会自动生成一个 <strong>匿名类</strong> ，并且这个类重载了<code>()</code>运算符，我们将其称之为<code>闭包类型（closure type）</code>。在运行时，这个<code>lambda</code>表达式会返回一个匿名的闭包实例，并且该实例是一个右值。闭包的一个强大之处在于其可以通过传值或引用的方式捕捉其封装作用域内的变量，<code>lambda</code>表达式前面的方括号就是用来定义捕捉模式以及变量的<code>lambda</code>捕捉块，如下所示：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">  int x = 10; // 定义作用域内的x，方便下面的lambda捕捉</span><br><span class="line">  auto add_x = [x](int a)&#123; return a+x;&#125;; // 传值捕捉x</span><br><span class="line">  auto multiply_x = [&amp;x](int a) &#123;return a*x;&#125;; //引用捕捉x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>当<code>lambda</code>捕捉块为空时，表示没有捕捉任何变量。对于传值方式捕捉的变量x，<code>lambda</code>表达式会在生成的匿名类中添加一个非静态的数据成员，由于闭包类重载<code>()</code>运算符是使用了const属性，所以不能在<code>lambda</code>表达式中修改传值方式捕捉的变量，但是如果把<code>lambda</code>标记为<code>mutable</code>，则可以改变(但是这里的改变只会对 lambda 表达式内部的代码有影响, 对外部不起作用)，如下所示：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">int x = 10;</span><br><span class="line"></span><br><span class="line">auto add_x = [x](int a) mutable&#123; x * = 2; return a+x;&#125;;</span><br><span class="line">cout&lt;&lt;add_x(10)&lt;&lt;endk; //输出30</span><br><span class="line">return 0;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而对于引用方式捕捉的变量，无论是否标记为<code>mutable</code>，都可以对变量进行修改，并且修改的值会影响到外部, 至于会不会在匿名类中创建数据成员，需要看不同编译器的具体实现。</p>
+<p><code>lambda</code>表达式只能作为右值，也就是说，它是不能被赋值的</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto a=[]&#123; cout&lt;&lt;&quot;A&quot;&lt;&lt;endl; &#125;;</span><br><span class="line">auto b=[]&#123; cout&lt;&lt;&quot;B&quot;&lt;&lt;endl; &#125;;</span><br><span class="line"></span><br><span class="line">a = b;  // 非法，lambda表达式变量只能做右值</span><br><span class="line">auto c = a; // 合法，生成一个副本</span><br></pre></td></tr></table></figure>
+
+
+
+<p>造成以上原因是因为禁用了赋值运算符：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ClosureType&amp; operator=(const ClosureType&amp;) = delete;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>但是没有禁用复制构造函数，所以仍然可以用是一个<code>lambda</code>表达式去初始化另一个（通过产生副本）。</p>
+<p>关于<code>lambda</code>的捕捉块，主要有以下用法：</p>
+<ul>
+<li>[]：默认不捕捉变量</li>
+<li>[&#x3D;]：默认以值捕捉所有变量（最好不要用）</li>
+<li>[&amp;]：默认以引用捕捉所有变量（最好不要用）</li>
+<li>[x]：仅以值捕捉变量x，其他变量不捕捉</li>
+<li>[&amp;x]：仅以引用捕捉x，其他变量不捕捉</li>
+<li>[&#x3D;, &amp;x]：默认以值捕捉所有变量，但是x是例外，通过引用捕捉</li>
+<li>[&amp;, x]：默认以引用捕捉所有变量，但是x是例外，通过值捕捉</li>
+<li>[this]：通过引用捕捉当前对象（其实是复制指针）</li>
+<li>[* this]：通过传值方式捕捉当前对象</li>
+</ul>
+<p>通过以上的说明，可以看到<code>lambda表达式</code>可以作为返回值，赋值给对应类型的函数指针，但是使用函数指针貌似并不是那么方便，于是STL在头文件<code>&lt;functional&gt;</code>中定义了一个多态的函数对象封装<code>std::function</code>，其功能类似于函数指针。它可以绑定到任何类函数对象，只要参数与返回类型相同。如下面的返回一个bool且接收两个int的函数包装器：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::function&lt;bool(int, int)&gt; wrapper = [](int x, int y) &#123; return x&lt;y; &#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><code>lambda</code>表达式还有一个很重要的应用是其可以作为函数的参数，如下所示：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">int value = 3;</span><br><span class="line">vector&lt;int&gt; v&#123;1,2,3,4,5,6,7&#125;;</span><br><span class="line"></span><br><span class="line">int count == std::count_if(v.begin, v.end(), [value](int x)&#123;return x&gt;value;&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>下面给出<code>lambda</code>表达式的完整语法：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 完整语法</span><br><span class="line">[ capture-list ] ( params ) mutable(optional) constexpr(optional)(c++17) exception attribute -&gt; ret &#123; body &#125;</span><br><span class="line"></span><br><span class="line">// 可选的简化语法</span><br><span class="line">[ capture-list ] ( params ) -&gt; ret &#123; body &#125;     </span><br><span class="line">[ capture-list ] ( params ) &#123; body &#125;    </span><br><span class="line">[ capture-list ] &#123; body &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>capture-list：捕捉列表，这个不用多说，前面已经讲过，记住它不能省略；</li>
+<li>params：参数列表，可以省略（但是后面必须紧跟函数体）；</li>
+<li>mutable：可选，将lambda表达式标记为mutable后，函数体就可以修改传值方式捕获的变量；</li>
+<li>constexpr：可选，C++17，可以指定lambda表达式是一个常量函数；</li>
+<li>exception：可选，指定lambda表达式可以抛出的异常；</li>
+<li>attribute：可选，指定lambda表达式的特性；</li>
+<li>ret：可选，返回值类型；</li>
+<li>body：函数执行体。</li>
+</ul>
+<h1 id="lambda新特性（C-14）"><a href="#lambda新特性（C-14）" class="headerlink" title="lambda新特性（C++14）"></a>lambda新特性（C++14）</h1><p>在<code>C++14</code>中，<code>lambda</code>又得到了增强，一个是泛型<code>lambda</code>表达式，一个是<code>lambda</code>可以捕捉表达式。</p>
+<h2 id="lambda捕捉表达式"><a href="#lambda捕捉表达式" class="headerlink" title="lambda捕捉表达式"></a>lambda捕捉表达式</h2><p>前面讲过，<code>lambda</code>表达式可以按传值或者引用捕捉在其作用域范围内的变量。而有时候，我们希望捕捉不在其作用域范围内的变量，而且最重要的是我们希望捕捉右值。所以<code>C++14</code>中引入了表达式捕捉，其允许用任何类型的表达式初始化捕捉的变量，如下：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 利用表达式捕获，可以更灵活地处理作用域内的变量</span><br><span class="line">int x = 4;</span><br><span class="line">auto y = [&amp;r = x, x = x + 1] &#123; r += 2; return x * x; &#125;();</span><br><span class="line">// 此时 x 更新为6，y 为25</span><br><span class="line"></span><br><span class="line">// 直接用字面值初始化变量</span><br><span class="line">auto z = [str = &quot;string&quot;]&#123; return str; &#125;();</span><br><span class="line">// 此时z是const char* 类型，存储字符串 string</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以看到捕捉表达式扩大了lambda表达式的捕捉能力，有时候你可以用std::move初始化变量。这对不能复制只能移动的对象很重要，比如std::unique_ptr，因为其不支持复制操作，你无法以值方式捕捉到它。但是利用lambda捕捉表达式，可以通过移动来捕捉它：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto myPi = std::make_unique&lt;double&gt;(3.1415);</span><br><span class="line">auto circle_area = [pi = std::move(myPi)](double r) &#123; return *pi * r * r; &#125;;</span><br><span class="line">cout &lt;&lt; circle_area(1.0) &lt;&lt; endl; // 3.1415</span><br></pre></td></tr></table></figure>
+
+<h2 id="泛型lambda表达式"><a href="#泛型lambda表达式" class="headerlink" title="泛型lambda表达式"></a>泛型lambda表达式</h2><p>从C++14开始，lambda表达式支持泛型：其参数可以使用自动推断类型的功能，而不需要显示地声明具体类型。这就如同函数模板一样，参数要使用类型自动推断功能，只需要将其类型指定为auto，类型推断规则与函数模板一样。这里给出一个简单例子：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">auto add = [](auto x, auto y) &#123; return x + y; &#125;;</span><br><span class="line"></span><br><span class="line">int x = add(2, 3);   // 5</span><br><span class="line">double y = add(2.5, 3.5);  // 6.0</span><br></pre></td></tr></table></figure>
+
+<h1 id="函数对象"><a href="#函数对象" class="headerlink" title="函数对象"></a>函数对象</h1><p>函数对象是一个广泛的概念，因为所有具有函数行为的对象都可以称为函数对象。这是一个高级抽象，我们不关心对象到底是什么，只要其具有函数行为即可。函数行为是指可以使用<code>()</code>调用并传递参数，如下所示：</p>
+<p>复制</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function(arg1, arg2, ...); //函数调用</span><br></pre></td></tr></table></figure>
+
+
+
+<p>由此，<code>lambda</code>表达式也是一个函数对象。该函数对象实际上是一个匿名类的实例，且这个类实现了函数调用运算符<code>()</code>。</p>
+<p>泛型提供了高级抽象，不论是<code>lambda</code>表达式、函数对象、还是函数指针，都可以传入到STL算法中（如for_each）。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Custom-Op/" rel="prev" title="Custom Op">
+                  <i class="fa fa-angle-left"></i> Custom Op
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Cpp-eight-part-essay/" rel="next" title="Cpp八股文">
+                  Cpp八股文 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

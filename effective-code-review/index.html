@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="为什么每个团队都需要 Code Review？不少开发团队和创业公司都在纠结是否要执行 code review，既希望改进代码质量，又担心带来的负担会拖慢项目进度。实时上，在软件开发中质量和效率往往并不是二选其一的关系。能产出高质量代码的团队通常效率也非常高。 在我作为工程师的职业经历中，自动化测试和 code review 可说是能同时提高代码质量和开发效率的两个最有效的手段。所谓 code r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="effective-code-review">
+<meta property="og:url" content="https://fuhailin.github.io/effective-code-review/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="为什么每个团队都需要 Code Review？不少开发团队和创业公司都在纠结是否要执行 code review，既希望改进代码质量，又担心带来的负担会拖慢项目进度。实时上，在软件开发中质量和效率往往并不是二选其一的关系。能产出高质量代码的团队通常效率也非常高。 在我作为工程师的职业经历中，自动化测试和 code review 可说是能同时提高代码质量和开发效率的两个最有效的手段。所谓 code r">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://1byte.io/static/e305fe0e3d553fe0192056b56ac74496/0d3a1/code_review_wtfs.jpg">
+<meta property="article:published_time" content="2021-08-18T07:47:11.000Z">
+<meta property="article:modified_time" content="2021-08-18T07:52:25.307Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://1byte.io/static/e305fe0e3d553fe0192056b56ac74496/0d3a1/code_review_wtfs.jpg">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/effective-code-review/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/effective-code-review/","path":"effective-code-review/","title":"effective-code-review"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>effective-code-review | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E4%B8%AA%E5%9B%A2%E9%98%9F%E9%83%BD%E9%9C%80%E8%A6%81-Code-Review%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">为什么每个团队都需要 Code Review？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E8%AE%A9-code-review-%E6%9C%89%E6%95%88%E5%8F%91%E6%8C%A5%E5%AE%83%E7%9A%84%E4%BD%9C%E7%94%A8%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">怎么才能让 code review 有效发挥它的作用。</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/effective-code-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="effective-code-review | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          effective-code-review
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-08-18 15:47:11 / Modified: 15:52:25" itemprop="dateCreated datePublished" datetime="2021-08-18T15:47:11+08:00">2021-08-18</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="为什么每个团队都需要-Code-Review？"><a href="#为什么每个团队都需要-Code-Review？" class="headerlink" title="为什么每个团队都需要 Code Review？"></a>为什么每个团队都需要 Code Review？</h1><p>不少开发团队和创业公司都在纠结是否要执行 code review，既希望改进代码质量，又担心带来的负担会拖慢项目进度。实时上，在软件开发中质量和效率往往并不是二选其一的关系。能产出高质量代码的团队通常效率也非常高。</p>
+<p>在我作为工程师的职业经历中，自动化测试和 code review 可说是能同时提高代码质量和开发效率的两个最有效的手段。所谓 code review，和学术界的 peer review 类似。Peer review 是由同事或同行对一位作者的作品进行查阅并提出建议和问题，只有当所有提出的问题都得到满意的答案后，作品才能发表。对于 code review 来说，作品就是代码，发表就是把代码 commit 到官方代码库。</p>
+<p>在 Code Complete 这本书中讲述了两个很有说服力的案例。在一项对同一个团队开发的很多个程序进行对比的研究中，没有经过 review 的程序平均每 100 行有 4.5 个错误，而经过 review 的程序平均每 100 行只有 0.82 个错误，也就是说 80% 的错误在 review 中被修正了。AT &amp; T 的一个 200 多人的部门在开始执行 code review 后，开发效率提高了 14%，而错误减少了 90% 左右。</p>
+<p>除了减少缺陷，避免在诊断错误上浪费时间，review 的过程还可以通过相互的督促保证代码有好的可读性、文档、风格，并同时检查测试覆盖率等开发过程中的规范，从而提高团队的协作效率。对于所有复杂的事情来说，总是越早发现问题，解决问题的成本越低。</p>
+<p>对于经验不足或者刚开始一份新工作的人来说，通过 code review 可以得到更资深的人帮助，更快熟悉现有的规范和架构，在新的环境和团队中快速提升。</p>
+<p>对于资深的工程师来说，让其他同事 review 代码，有利于在团队中传播经验、知识和好的实践。身边的同事水平提高会让自己的工作也更高效。并且谁都有需要休假的时候，无论是公司还是个人都不希望有太多工作因此而停滞，如果有平时就熟悉自己工作的同事，这个问题就很好解决。</p>
+<p>像很多其他事情一样，code review 最难的就是迈出第一步。一旦开始，花在 review 过程的每一分钟都会很快被成倍地赚回来。如果你不在一个可以一下改变团队流程的位置上，那么至少可以和认同这件事的少数同事先开始实践，当价值开始体现的时候，相信其他人会乐于效仿。</p>
+<h1 id="怎么才能让-code-review-有效发挥它的作用。"><a href="#怎么才能让-code-review-有效发挥它的作用。" class="headerlink" title="怎么才能让 code review 有效发挥它的作用。"></a>怎么才能让 code review 有效发挥它的作用。</h1><p>**使用方便的工具。**要在团队中成功推行 code review，有好的工具是很重要的。谁都不愿意在工作中加入繁琐的过程，所以如果要让人接受一个新的步骤，最好让它有尽可能好的体验。在我用过的开源 code review 工具中，Phabricator 是最完善的。Review Board 应该也是不错的选择，只是我很久没实际用了，不知道最新状态。GitHub 在支持 side-by-side diff 后，它的 pull request 也提供了很好的 code review 体验，唯一不足的是无法从机制上强制所有 commit 都经过 pull request 的过程。</p>
+<p>**把简单的检查自动化。**有很多检查是可以自动化的，比如一些风格规范（缩进、空行、行尾空格、命名等），这类问题应该尽可能写脚本检查。一方面可以让负责 review 的工程师把更多注意力放在更高层面的问题上；另一方面，从接受 review 的人心理上说，由程序提出这些细节问题比让另一个人来挑刺要更容易接受些。当然，这并不是说人工 review 的时候应该忽略细节问题。</p>
+<p>**控制每次 review 的代码量。**每次 review 包含 200 行左右代码是比较理想的，最多不要超过 400 行。因为如果代码太多，review 的人容易因为注意力分散而忽略一些问题，另外也可能让时间拖得过长。因此，开发的时候需要把大的改动分解成多个小的步骤，每完成一个步骤就提交一次 review。</p>
+<p>**使用异步的工作流。**这和上一点是相关的，当你需要把一个改动分为相互依赖的多步时，不应该因为等待 review 而 block 住自己的工作。在当前分支等待 review 时，可以从这个点开一个新的分支继续开发，之后再把 review 完的分支 merge 进来。</p>
+<p>**作者应该提供清晰的 commit note。**Code review 的重要作用之一是同事间的交流，每个 commit 的 commit note 很重要也很影响 review 的效率，应该包含这个改动的目的，以及实现方式的概述。如果使用的 review 系统支持对 review 本身的描述（如 GitHub 的 pull request），那么应该写清楚作者希望 reviewer 重点关注的问题。</p>
+<p>**在合并到主干之前进行 review。**有的人主张小团队应该做事后的 review，因为这样效率更高、更「轻量」。事实上，这样并不会减少工作量，并且如果工作流安排合理，事前 review 并不会导致效率降低。从心理上说，代码并合并到主干之后往往就意味着「完事了」，在时间比较紧张的时候很难坚持 review 所有代码。所以应该把 code review 作为代码合并到主干前必过的一道关口。</p>
+<p>**所有人的代码都要经过 review。**Code review 并不是资深工程师对初级工程师做的事情，而应该全员平等参与，每个人都会有所收获。关于这方面在上一篇「为什么每个团队都需要 Code Review」里也有提及。</p>
+<p>**关注设计方面的问题和客观的规范，避免在主观意见上争执。**Code review 的讨论应该专注于设计层面的问题以及在团队中有明确共识的规范（代码风格，测试覆盖等），而要避免在一些主观意见的分歧上浪费时间。这也意味着应该在一些本身不重要，但很影响一致性的细节上尽早达成有共识的规范，如缩进方式，括号的位置等等，避免在 review 中去争论这些问题。</p>
+<p>**从正面看待在 review 中发现的问题。**当发现一个错误时，并不应该看作是一个人犯了错被另一个人发现了，而是两个人配合改进了代码、避免了错误。</p>
+<p>**Review 所有的代码，包括很简单的改动。**每一个 commit，无论多小都应该经过 review。一方面，很难界定什么算简单的改动，如果一行的 commit 不用 review，那两行是不是差不多同样简单，三行呢？另一方面，我已经不记得自己曾有多少次觉得「这个改动太简单，不用跑测试就可以提交了」，然后很快因为测试通不过而很尴尬地被别人 rollback。所以无论多小的改动都应该有测试、都应该通过 review。</p>
+<p>**循序渐进。**如果现在完全没有做 code review，那么到整个团队都能严格有效地进行 code review 是一个循序渐进的过程。如果你所处的角色无法很快改变团队的工作方式，那么可以从把自己的代码发给别人 review 开始，实际可见的价值是最有说服力的。</p>
+<p><img src="https://1byte.io/static/e305fe0e3d553fe0192056b56ac74496/0d3a1/code_review_wtfs.jpg" alt="code review wtfs">Measurement of Code Quality</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Kubernets/" rel="prev" title="Kubernets">
+                  <i class="fa fa-angle-left"></i> Kubernets
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/minikube-start/" rel="next" title="minikube start">
+                  minikube start <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

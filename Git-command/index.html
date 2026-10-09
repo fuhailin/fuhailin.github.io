@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
-
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
@@ -16,11 +15,12 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="常用Git操作清单">
 <meta property="og:url" content="https://fuhailin.github.io/Git-command/index.html">
@@ -42,18 +42,44 @@
 <link rel="canonical" href="https://fuhailin.github.io/Git-command/">
 
 
-
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Git-command/","path":"Git-command/","title":"常用Git操作清单"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>常用Git操作清单 | 赵大寳</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
-  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false}</script>
-  <script src="/js/third-party/analytics/google-analytics.js"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
 
-  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
   <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
 
 
 
@@ -66,8 +92,8 @@
   <div class="headband"></div>
 
   <main class="main">
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="Toggle navigation bar" role="button">
         <span class="toggle-line"></span>
@@ -80,14 +106,14 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">赵大寳</h1>
+      <p class="site-title">赵大寳</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
     </div>
   </div>
 </div>
@@ -95,29 +121,16 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu">
-        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
-        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
-        <li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li>
-        <li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
-        <li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
   </ul>
 </nav>
 
 
 
 
-</div>
+</header>
         
   
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-
   <aside class="sidebar">
 
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
@@ -138,112 +151,113 @@
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
-          <div class="site-overview">
-            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="赵大寳"
       src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
   <p class="site-author-name" itemprop="name">赵大寳</p>
   <div class="site-description" itemprop="description">赵大寳個人小站</div>
 </div>
-<div class="site-state-wrap site-overview-item animated">
+<div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">89</span>
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/categories/">
+          <a href="/categories/">
         <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">57</span>
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
 </div>
-  <div class="links-of-author site-overview-item animated">
+  <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
       <span class="links-of-author-item">
-        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
       </span>
       <span class="links-of-author-item">
-        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
       </span>
   </div>
 
-
-  <div class="links-of-blogroll site-overview-item animated">
-    <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
-      Links
-    </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
-        </li>
-    </ul>
-  </div>
-
-          </div>
         </div>
       </div>
     </div>
-  </aside>
-  <div class="sidebar-dimmer"></div>
-
-
-    </header>
 
     
-  <div class="back-to-top" role="button" aria-label="Back to top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
 
-  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
+    </div>
 
     <div class="main-inner post posts-expand">
 
@@ -261,11 +275,16 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
       <meta itemprop="name" content="赵大寳">
-      <meta itemprop="description" content="赵大寳個人小站">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="常用Git操作清单 | 赵大寳">
+      <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -282,13 +301,13 @@
 
       <time title="Created: 2019-01-15 19:07:09" itemprop="dateCreated datePublished" datetime="2019-01-15T19:07:09+08:00">2019-01-15</time>
     </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-23 14:42:04" itemprop="dateModified" datetime="2021-07-23T14:42:04+08:00">2021-07-23</time>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
       </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-07-23 14:42:04" itemprop="dateModified" datetime="2021-07-23T14:42:04+08:00">2021-07-23</time>
+    </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -315,13 +334,12 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-        <p> <strong>欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。</strong></p>
+    <div class="post-body" itemprop="articleBody"><p> <strong>欢迎使用Git工具进行项目管理, 下面是我整理的常用 Git 操作清单。</strong></p>
 <span id="more"></span>
 
 <p>几个专用名词的译名如下。</p>
 <blockquote>
-<p>Workspace：工作区<br>Index / Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
+<p>Workspace：工作区<br>Index &#x2F; Stage：暂存区<br>Repository：仓库区（或本地仓库）<br>Remote：远程仓库</p>
 </blockquote>
 <h1 id="一、新建代码库"><a href="#一、新建代码库" class="headerlink" title="一、新建代码库"></a>一、新建代码库</h1><blockquote>
 <p><code>git init</code>: 在当前目录新建一个Git代码库<br><code>git init [project-name]</code>: 新建一个目录，将其初始化为Git代码库<br><code>git clone [url]</code>: 下载一个项目和它的整个代码历史</p>
@@ -334,7 +352,7 @@
 <blockquote>
 <p><code>git config --global core.quotepath false</code>: 由于Git默认引用非ASCII 字符，disable它的引用行为可以用这个命令<br> 设置提交代码时的用户信息<br><code>git config [--global] user.name &quot;Your Name&quot;</code><br><code>git config [--global] user.email you@example.com</code></p>
 </blockquote>
-<h1 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加/删除文件"></a>三、增加/删除文件</h1><p><strong>git add</strong>: 把文件加入暂存区</p>
+<h1 id="三、增加-删除文件"><a href="#三、增加-删除文件" class="headerlink" title="三、增加&#x2F;删除文件"></a>三、增加&#x2F;删除文件</h1><p><strong>git add</strong>: 把文件加入暂存区</p>
 <blockquote>
 <p><code>git add -A</code> : stages All<br><code>git add .</code> : stages new and modified, without deleted<br><code>git add -u</code> ： stages modified and deleted, without new<br>所以<code>git add -A</code> 等于  <code>git add .; git add -u</code><br><code>git add [file1] [file2] ...</code>: 添加指定文件到暂存区staging area<br><code>git add [dir]</code>: 添加指定目录到暂存区，包括子目录<br><code>git add -p</code>: 添加每个变化前，都会要求确认; 对于同一个文件的多处变化，可以实现分次提交</p>
 </blockquote>
@@ -342,7 +360,7 @@
 <blockquote>
 <p><code>git rm [file1] [file2] ...</code>: 删除工作区文件，并且将这次删除放入暂存区<br><code>git rm --cached [file]</code>: 停止追踪指定文件，但该文件会保留在工作区<br><code>git mv [file-original] [file-renamed]</code>: 改名文件，并且将这个改名放入暂存区</p>
 </blockquote>
-<h1 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h1><p> <strong>git commit</strong>: To save t    he changes in the staging area.</p>
+<h1 id="四、代码提交"><a href="#四、代码提交" class="headerlink" title="四、代码提交"></a>四、代码提交</h1><p> <strong>git commit</strong>: To save t	he changes in the staging area.</p>
 <blockquote>
 <p><code>git commit -m &quot;write your log message here.&quot;</code> : to save the changes in the staging area with your log message.<br><code>git commit [file1] [file2] ... -m [message]</code>: 提交暂存区的指定文件到仓库区</p>
 </blockquote>
@@ -376,7 +394,7 @@
 </blockquote>
 <p> <strong>git diff</strong>: 显示暂存区和工作区的差异 Without any filenames will show you all the changes in your repository</p>
 <blockquote>
-<p><code>git diff --cached [file]</code> # 显示暂存区和上一个commit的差异<br><code>git diff HEAD</code> # 显示工作区与当前分支最新commit之间的差异<br><code>git diff [first-branch]...[second-branch]</code> # 显示两次提交之间的差异<br><code>git diff --shortstat &quot;@&#123;0 day ago&#125;&quot;</code> # 显示今天你写了多少行代码<br><code>git diff filename</code> : to compare the file as it currently is to what you last saved<br><code>git diff directory</code>: will show you the changes to the files in some directory.<br><code>git diff -r HEAD path/to/file</code>: To compare a file’s current state to the changes in the staging area.  The<code>-r    </code>flag means “compare to a particular revision”, <code>HEAD</code> is a shortcut meaning “the most recent commit”<br><code>git diff -r HEAD~1</code>: The label <code>HEAD~1</code> then refers to the commit before it, while <code>HEAD~2</code> refers to the commit before that, and so on.</p>
+<p><code>git diff --cached [file]</code> # 显示暂存区和上一个commit的差异<br><code>git diff HEAD</code> # 显示工作区与当前分支最新commit之间的差异<br><code>git diff [first-branch]...[second-branch]</code> # 显示两次提交之间的差异<br><code>git diff --shortstat &quot;@{0 day ago}&quot;</code> # 显示今天你写了多少行代码<br><code>git diff filename</code> : to compare the file as it currently is to what you last saved<br><code>git diff directory</code>: will show you the changes to the files in some directory.<br><code>git diff -r HEAD path/to/file</code>: To compare a file’s current state to the changes in the staging area.  The<code>-r    </code>flag means “compare to a particular revision”, <code>HEAD</code> is a shortcut meaning “the most recent commit”<br><code>git diff -r HEAD~1</code>: The label <code>HEAD~1</code> then refers to the commit before it, while <code>HEAD~2</code> refers to the commit before that, and so on.</p>
 </blockquote>
 <p>  <strong>git show</strong>: To view the details of a specific commit.</p>
 <blockquote>
@@ -390,19 +408,20 @@
 </blockquote>
 <p><strong>git stash</strong>: 暂时将未提交的变化移除,保存当前工作进度，会把暂存区和工作区的改动保存起来</p>
 <blockquote>
-<p><code>git stash save &#39;message...&#39;</code> : 可以添加一些注释<br><code>git stash list</code> : 显示保存进度的列表。也就意味着，git stash命令可以多次执行。<br><code>git stash pop</code>  :恢复最新的进度到工作区。git默认会把工作区和暂存区的改动都恢复到工作区。<br><code>git stash pop --index</code> : 恢复最新的进度到工作区和暂存区。（尝试将原来暂存区的改动还恢复到暂存区）<br><code>git stash pop stash@&#123;1&#125;</code> : 恢复指定的进度到工作区。stash_id是通过git stash list命令得到的<br> 通过 <code>git stash pop</code> 命令恢复进度后，会删除当前进度。<br><code>git stash drop [stash_id]</code> : 删除一个存储的进度。如果不指定stash_id，则默认删除最新的存储进度<br><code>git stash clear</code>: 删除所有存储的进度。<br><code>git stash apply [–index] [stash_id]</code> :  除了不删除恢复的进度之外，其余和git stash pop 命令一样。</p>
+<p><code>git stash save &#39;message...&#39;</code> : 可以添加一些注释<br><code>git stash list</code> : 显示保存进度的列表。也就意味着，git stash命令可以多次执行。<br><code>git stash pop</code>  :恢复最新的进度到工作区。git默认会把工作区和暂存区的改动都恢复到工作区。<br><code>git stash pop --index</code> : 恢复最新的进度到工作区和暂存区。（尝试将原来暂存区的改动还恢复到暂存区）<br><code>git stash pop stash@{1}</code> : 恢复指定的进度到工作区。stash_id是通过git stash list命令得到的<br> 通过 <code>git stash pop</code> 命令恢复进度后，会删除当前进度。<br><code>git stash drop [stash_id]</code> : 删除一个存储的进度。如果不指定stash_id，则默认删除最新的存储进度<br><code>git stash clear</code>: 删除所有存储的进度。<br><code>git stash apply [–index] [stash_id]</code> :  除了不删除恢复的进度之外，其余和git stash pop 命令一样。</p>
 </blockquote>
 <h1 id="十、其他"><a href="#十、其他" class="headerlink" title="十、其他"></a>十、其他</h1><blockquote>
 <p><code>git archive</code> # 生成一个可供发布的压缩包</p>
 </blockquote>
 <h1 id="十一、中国大陆地区下载Github源代码速度慢的解决办法"><a href="#十一、中国大陆地区下载Github源代码速度慢的解决办法" class="headerlink" title="十一、中国大陆地区下载Github源代码速度慢的解决办法"></a>十一、中国大陆地区下载Github源代码速度慢的解决办法</h1><p>这里记录在Windows系统下clone github代码速度太慢的解决办法，亲测有效！</p>
-<p>由于网络环境的限制，clone github代码速度只有4kb/s，实在是太慢了挂了VPN也一样。通过添加DNS可以解除一些网络限制：</p>
+<p>由于网络环境的限制，clone github代码速度只有4kb&#x2F;s，实在是太慢了挂了VPN也一样。通过添加DNS可以解除一些网络限制：</p>
 <ol>
 <li>查询网站的IP地址，进入( <a target="_blank" rel="noopener" href="http://tool.chinaz.com/dns">http://tool.chinaz.com/dns</a> )，输入 github.com，结果如下所示：<img src="http://www.pianshen.com/images/926/09c9ece225c2cde531d00373dfc6a72e.JPEG"> 得到github.com对应两个IP地址，使用<code>ping</code>命令测试两个地址，选择一个TTL值较小的IP地址。</li>
 <li>接着，我们打开电脑的 <code>C:\Windows\System32\drivers\etc</code> 目录，找到hosts文件; Linux系统下在<code>/etc/hosts</code></li>
-<li>在文件末追加<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">151.101.197.194 github.global.ssl.fastly.net</span><br><span class="line">192.30.253.112 github.com</span><br></pre></td></tr></table></figure>
-保存后刷新DNS缓存。重新clone github， 速度得到明显提升，从4kb/s到300kb/s.</li>
+<li>在文件末追加</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">151.101.197.194 github.global.ssl.fastly.net</span><br><span class="line">192.30.253.112 github.com</span><br></pre></td></tr></table></figure>
+<p>保存后刷新DNS缓存。重新clone github， 速度得到明显提升，从4kb&#x2F;s到300kb&#x2F;s.</p>
 <h1 id="十二、Sync-Git-Fork-to-the-Original-Repo"><a href="#十二、Sync-Git-Fork-to-the-Original-Repo" class="headerlink" title="十二、Sync Git Fork to the Original Repo"></a>十二、Sync Git Fork to the Original Repo</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add upstream https://github.com/[Original Owner Username]/[Original Repository].git</span><br><span class="line">$ git fetch upstream</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git merge upstream/master</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://digitaldrummerj.me/git-syncing-fork-with-original-repo/">Sync your Git Fork to the Original Repo</a></p>
 <h1 id="十三、Git-submodules"><a href="#十三、Git-submodules" class="headerlink" title="十三、Git submodules"></a>十三、Git submodules</h1><p>git submodules子模块功能允许你将其他的git 项目包含在你的项目当中，它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。</p>
@@ -416,9 +435,9 @@
 
 <h2 id="如何删除submodules："><a href="#如何删除submodules：" class="headerlink" title="如何删除submodules："></a>如何删除submodules：</h2><ol>
 <li>Delete the relevant line from the .gitmodules file.</li>
-<li>Delete the relevant section from .git/config.</li>
+<li>Delete the relevant section from .git&#x2F;config.</li>
 <li>Run git rm –cached path_to_submodule (no trailing slash).</li>
-<li>Commit and delete the now untracked submodule files.<br><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule">(Stack Overflow reference)</a></li>
+<li>Commit and delete the now untracked submodule files.<br>  <a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/1260748/how-do-i-remove-a-git-submodule">(Stack Overflow reference)</a></li>
 </ol>
 
     </div>
@@ -429,7 +448,7 @@
 
     <footer class="post-footer">
           <div class="reward-container">
-  <div>您的支持将鼓励我继续创作！</div>
+  <div>Buy me a coffee</div>
   <button>
     Donate
   </button>
@@ -456,23 +475,25 @@
   <div class="social-list">
 
       <div class="social-item">
-        <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
-          <span class="icon">
-            <i class="fab fa-weixin"></i>
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
           </span>
 
-          <span class="label">WeChat</span>
-        </a>
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
       </div>
 
       <div class="social-item">
-        <a target="_blank" class="social-link" href="/atom.xml">
-          <span class="icon">
-            <i class="fa fa-rss"></i>
-          </span>
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
 
-          <span class="label">RSS</span>
-        </a>
+            <span class="label">RSS</span>
+          </a>
       </div>
   </div>
 </div>
@@ -486,12 +507,12 @@
           <div class="post-nav">
             <div class="post-nav-item">
                 <a href="/Essential-Apps/" rel="prev" title="Ubuntu、macOS必备软件配置记录帖">
-                  <i class="fa fa-chevron-left"></i> Ubuntu、macOS必备软件配置记录帖
+                  <i class="fa fa-angle-left"></i> Ubuntu、macOS必备软件配置记录帖
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Difference-between-the-dot-and-the-arrow-operator-in-C/" rel="next" title="Difference between the dot(.) and the arrow(->) operator in C++?">
-                  Difference between the dot(.) and the arrow(->) operator in C++? <i class="fa fa-chevron-right"></i>
+                <a href="/Difference-between-the-dot-and-the-arrow-operator-in-C/" rel="next" title="Difference between the dot(.) and the arrow(-&gt;) operator in C++?">
+                  Difference between the dot(.) and the arrow(->) operator in C++? <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -511,15 +532,14 @@
   <footer class="footer">
     <div class="footer-inner">
 
-
-<div class="copyright">
-  &copy; 2018 – 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="snowflake-o"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">赵大寳</span>
-</div>
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
 <div class="busuanzi-count">
     <span class="post-meta-item" id="busuanzi_container_site_uv">
       <span class="post-meta-item-icon">
@@ -545,27 +565,24 @@
   </footer>
 
   
-  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
-  
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
 
-
-
-
-  
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-
-  
-
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
-
-
-<script src="/js/third-party/comments/livere.js"></script>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
 
 </body>
 </html>

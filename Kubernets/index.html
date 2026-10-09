@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="安装 Kubernetes介绍完 Docker，终于可以开始试试 Kubernetes 了。我们另外安装两样东西：Kubernetes 的命令行客户端 kubctl、一个可以在本地跑起来的 Kubernetes 环境 Minikube。 Install Kubernetes Client (kubectl):Install and Set Up kubectl on Linux minikube">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernets">
+<meta property="og:url" content="https://fuhailin.github.io/Kubernets/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="安装 Kubernetes介绍完 Docker，终于可以开始试试 Kubernetes 了。我们另外安装两样东西：Kubernetes 的命令行客户端 kubctl、一个可以在本地跑起来的 Kubernetes 环境 Minikube。 Install Kubernetes Client (kubectl):Install and Set Up kubectl on Linux minikube">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-17T03:20:52.000Z">
+<meta property="article:modified_time" content="2021-08-24T08:14:05.974Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Kubernets">
+<meta property="article:tag" content="Minikube">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Kubernets/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Kubernets/","path":"Kubernets/","title":"Kubernets"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Kubernets | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-Kubernetes"><span class="nav-number">1.</span> <span class="nav-text">安装 Kubernetes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Kubernetes-Client-kubectl"><span class="nav-number">1.1.</span> <span class="nav-text">Install Kubernetes Client (kubectl):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minikube-install"><span class="nav-number">1.2.</span> <span class="nav-text">minikube install:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-new-User"><span class="nav-number">1.3.</span> <span class="nav-text">Add new User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Login-to-the-newly-created-User"><span class="nav-number">1.4.</span> <span class="nav-text">Login to the newly created User</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-User-to-the-Docker-Group"><span class="nav-number">1.5.</span> <span class="nav-text">Add User to the Docker Group</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Install-Minicube"><span class="nav-number">1.5.1.</span> <span class="nav-text">Install Minicube</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Start-minikube-with-Docker-Driver"><span class="nav-number">1.5.2.</span> <span class="nav-text">Start minikube with Docker Driver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Verify-minikube-Installation"><span class="nav-number">1.5.3.</span> <span class="nav-text">Verify minikube Installation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubernetes-%E6%9E%B6%E6%9E%84%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">Kubernetes 架构简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubectl-cheatsheet"><span class="nav-number">3.</span> <span class="nav-text">kubectl cheatsheet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E4%B8%80%E4%B8%AA%E5%8D%95%E5%AE%9E%E4%BE%8B%E6%9C%8D%E5%8A%A1"><span class="nav-number">4.</span> <span class="nav-text">部署一个单实例服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%AA%E5%90%91%E6%89%A9%E5%B1%95%E3%80%81%E6%BB%9A%E5%8A%A8%E6%9B%B4%E6%96%B0%E3%80%81%E7%89%88%E6%9C%AC%E5%9B%9E%E6%BB%9A"><span class="nav-number">5.</span> <span class="nav-text">横向扩展、滚动更新、版本回滚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Kubernets/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Kubernets | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Kubernets
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-17 11:20:52" itemprop="dateCreated datePublished" datetime="2021-08-17T11:20:52+08:00">2021-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-08-24 16:14:05" itemprop="dateModified" datetime="2021-08-24T16:14:05+08:00">2021-08-24</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="安装-Kubernetes"><a href="#安装-Kubernetes" class="headerlink" title="安装 Kubernetes"></a>安装 Kubernetes</h2><p>介绍完 Docker，终于可以开始试试 Kubernetes 了。我们另外安装两样东西：Kubernetes 的命令行客户端 kubctl、一个可以在本地跑起来的 Kubernetes 环境 Minikube。</p>
+<h3 id="Install-Kubernetes-Client-kubectl"><a href="#Install-Kubernetes-Client-kubectl" class="headerlink" title="Install Kubernetes Client (kubectl):"></a>Install Kubernetes Client (kubectl):</h3><p><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/">Install and Set Up kubectl on Linux</a></p>
+<h3 id="minikube-install"><a href="#minikube-install" class="headerlink" title="minikube install:"></a>minikube install:</h3><p><a target="_blank" rel="noopener" href="https://v1-18.docs.kubernetes.io/docs/tasks/tools/install-minikube/">Install Minikube</a>，需要注意的是minikube的启动限制使用root账户，你需要切换到具有docker权限的非root账户启动</p>
+<h3 id="Add-new-User"><a href="#Add-new-User" class="headerlink" title="Add new User"></a>Add new User</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adduser developer</span><br><span class="line"><span class="comment"># password@7</span></span><br><span class="line">usermod -aG <span class="built_in">sudo</span> developer</span><br><span class="line">su - developer</span><br></pre></td></tr></table></figure>
+
+<h3 id="Login-to-the-newly-created-User"><a href="#Login-to-the-newly-created-User" class="headerlink" title="Login to the newly created User"></a>Login to the newly created User</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su - developer</span><br><span class="line"><span class="comment"># password@7</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Add-User-to-the-Docker-Group"><a href="#Add-User-to-the-Docker-Group" class="headerlink" title="Add User to the Docker Group"></a>Add User to the Docker Group</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> groupadd docker</span><br><span class="line"><span class="built_in">sudo</span> usermod -aG docker <span class="variable">$USER</span></span><br><span class="line">- Re-Login or Restart the Server</span><br></pre></td></tr></table></figure>
+
+<h4 id="Install-Minicube"><a href="#Install-Minicube" class="headerlink" title="Install Minicube"></a>Install Minicube</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line"><span class="built_in">chmod</span> +x minikube</span><br><span class="line"><span class="built_in">mv</span> ./minikube /usr/local/bin/minikube</span><br></pre></td></tr></table></figure>
+
+<h4 id="Start-minikube-with-Docker-Driver"><a href="#Start-minikube-with-Docker-Driver" class="headerlink" title="Start minikube with Docker Driver"></a>Start minikube with Docker Driver</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start --driver=docker</span><br></pre></td></tr></table></figure>
+
+<h4 id="Verify-minikube-Installation"><a href="#Verify-minikube-Installation" class="headerlink" title="Verify minikube Installation"></a>Verify minikube Installation</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p>MacOS安装：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ brew install --cask docker </span><br><span class="line">$ open /Applications/Docker.app</span><br><span class="line">$ brew install kubectl</span><br><span class="line">$ brew install minikube</span><br><span class="line">$ minikube start --driver=docker --image-mirror-country cn --registry-mirror=<span class="string">&quot;https://a90tkz28.mirror.aliyuncs.com&quot;</span> --image-repository=<span class="string">&quot;registry.cn-hangzhou.aliyuncs.com/google_containers&quot;</span></span><br></pre></td></tr></table></figure>
+<p>Open the Kubernetes dashboard in a browser:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube dashboard</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Kubernetes-架构简介"><a href="#Kubernetes-架构简介" class="headerlink" title="Kubernetes 架构简介"></a>Kubernetes 架构简介</h2><p>典型的 Kubernetes 集群包含一个 master 和多个 node。</p>
+<p><strong>Master</strong> :控制集群的中心，Master 上运行着很多进程，包括面向用户的 API 服务、负责维护集群状态的 Controller Manager、负责调度任务的 Scheduler 等</p>
+<p>**节点（Node）：**这些设备负责执行由控制平面分配的请求任务。node 是提供 CPU、内存和存储资源的节点。每个 node 上运行着维护 node 状态并和 master 通信的 kubelet，以及实现集群网络服务的 kube-proxy。</p>
+<p>作为一个开发和测试的环境，Minikube 会建立一个有一个 node 的集群，用下面的命令可以看到：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get nodes</span><br><span class="line">NAME       STATUS    AGE       VERSION</span><br><span class="line">minikube   Ready     1h        v1.10.0</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>容器集（Pod）：</strong><br>部署到单个节点上且包含一个或多个容器的容器组。容器集是最小、最简单的 Kubernetes 对象。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods</span><br><span class="line">NAME                              READY   STATUS             RESTARTS   AGE</span><br><span class="line">hello-minikube-6ddfcc9757-cqxc6   0/1     ImagePullBackOff   0          5m38s</span><br><span class="line">$ kubectl delete deployment jenkins2 -n jenkins 		<span class="comment">#删除</span></span><br><span class="line">$ kubectl delete deployment --all										<span class="comment">#删除所有deployment</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>服务（Service）：</strong><br>一种将一组容器集上运行的应用开放为网络服务的方法。它会把工作定义与容器集分离。</p>
+<p>**Deployment **：</p>
+<p>检查 Pod 的健康状况，并在 Pod 中的容器终止的情况下重新启动新的容器。 Deployment 是管理 Pod 创建和扩展的推荐方法。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get deployments</span><br><span class="line">NAME             READY   UP-TO-DATE   AVAILABLE   AGE</span><br><span class="line">hello-minikube   0/1     1            0           43m</span><br></pre></td></tr></table></figure>
+
+<h2 id="kubectl-cheatsheet"><a href="#kubectl-cheatsheet" class="headerlink" title="kubectl cheatsheet"></a>kubectl cheatsheet</h2><ol>
+<li>命令格式<br><code>kubectl get resource_name</code></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>常见resource_name</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>all</td>
+<td></td>
+</tr>
+<tr>
+<td>certificatesigningrequests (缩写 csr)</td>
+<td></td>
+</tr>
+<tr>
+<td>clusterrolebindings</td>
+<td></td>
+</tr>
+<tr>
+<td>clusterrol</td>
+<td></td>
+</tr>
+<tr>
+<td>componentstatuses (缩写 cs)</td>
+<td></td>
+</tr>
+<tr>
+<td>configmaps (缩写 cm)</td>
+<td></td>
+</tr>
+<tr>
+<td>controllerrevisions</td>
+<td></td>
+</tr>
+<tr>
+<td>cronjobs</td>
+<td></td>
+</tr>
+<tr>
+<td>customresourcedefinition (缩写 crd)</td>
+<td></td>
+</tr>
+<tr>
+<td>daemonsets (缩写 ds)</td>
+<td></td>
+</tr>
+<tr>
+<td>deployments (缩写 deploy)</td>
+<td></td>
+</tr>
+<tr>
+<td>endpoints (缩写 ep)</td>
+<td></td>
+</tr>
+<tr>
+<td>events (缩写 ev)</td>
+<td></td>
+</tr>
+<tr>
+<td>horizontalpodautoscalers (缩写 hpa)</td>
+<td></td>
+</tr>
+<tr>
+<td>ingresses (缩写 ing)</td>
+<td></td>
+</tr>
+<tr>
+<td>jobs</td>
+<td></td>
+</tr>
+<tr>
+<td>limitranges (缩写 limits)</td>
+<td></td>
+</tr>
+<tr>
+<td>namespaces (缩写 ns)</td>
+<td></td>
+</tr>
+<tr>
+<td>networkpolicies (缩写 netpol)</td>
+<td></td>
+</tr>
+<tr>
+<td>nodes (缩写 no)</td>
+<td></td>
+</tr>
+<tr>
+<td>persistentvolumeclaims (缩写 pvc)</td>
+<td></td>
+</tr>
+<tr>
+<td>persistentvolumes (缩写 pv)</td>
+<td></td>
+</tr>
+<tr>
+<td>poddisruptionbudgets (缩写 pdb)</td>
+<td></td>
+</tr>
+<tr>
+<td>podpreset</td>
+<td></td>
+</tr>
+<tr>
+<td>pods (缩写 po)</td>
+<td></td>
+</tr>
+<tr>
+<td>podsecuritypolicies (缩写 psp)</td>
+<td></td>
+</tr>
+<tr>
+<td>podtemplates</td>
+<td></td>
+</tr>
+<tr>
+<td>replicasets (缩写 rs)</td>
+<td></td>
+</tr>
+<tr>
+<td>replicationcontrollers (缩写 rc)</td>
+<td></td>
+</tr>
+<tr>
+<td>resourcequotas (缩写 quota)</td>
+<td></td>
+</tr>
+<tr>
+<td>rolebindings</td>
+<td></td>
+</tr>
+<tr>
+<td>roles</td>
+<td></td>
+</tr>
+<tr>
+<td>secrets</td>
+<td></td>
+</tr>
+<tr>
+<td>serviceaccounts (缩写 sa)</td>
+<td></td>
+</tr>
+<tr>
+<td>services (缩写 svc)</td>
+<td></td>
+</tr>
+<tr>
+<td>statefulsets (缩写 sts)</td>
+<td></td>
+</tr>
+<tr>
+<td>storageclasses (缩写 sc)</td>
+<td></td>
+</tr>
+</tbody></table>
+<ol start="2">
+<li><p>其它可选参数<br>用不同的格式查看：<code>-o wide/yaml/json</code><br>看指定标签的pods，支持<code>=</code>, <code>==</code>, and <code>!=</code>操作符 <code>-l key=value</code></p>
+</li>
+<li><p>举几个栗子</p>
+</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看Master状态</span></span><br><span class="line">$ kubectl get componentstatuses</span><br><span class="line"><span class="comment"># 查看所有命名空间</span></span><br><span class="line">$ kubectl get namespace</span><br><span class="line"><span class="comment"># 列出所有的pods</span></span><br><span class="line">$ kubectl get pods</span><br><span class="line"><span class="comment"># 显示更多的pods列表信息(例如 pod的ip和所处的node)</span></span><br><span class="line">$ kubectl get pods -o wide</span><br><span class="line"><span class="comment"># 列出名字为web的rc</span></span><br><span class="line">$ kubectl get replicationcontroller web</span><br><span class="line"><span class="comment"># 获取名字为web-pod-13je7的pod的信息，并以json格式输出</span></span><br><span class="line">$ kubectl get -o json pod web-pod-13je7</span><br><span class="line"><span class="comment"># 根据pod文件查找pod，并以json格式输出</span></span><br><span class="line">$ kubectl get -f pod.yaml -o json</span><br><span class="line"><span class="comment"># 获取pod容器的状态</span></span><br><span class="line">$ kubectl get -o template pod/kube-dns-795f5f6f9c-ldxxs --template &#123;&#123;.status.phase&#125;&#125;</span><br><span class="line"><span class="comment"># 同时获取所有的rc和service</span></span><br><span class="line">$ kubectl get rc,services</span><br><span class="line"><span class="comment"># 获取符合条件的所有rc,svc,pod</span></span><br><span class="line">$ kubectl get rc/web service/frontend pods/web-pod-13je7</span><br><span class="line"><span class="comment"># 获取所有resource</span></span><br><span class="line">$ kubectl get all</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="部署一个单实例服务"><a href="#部署一个单实例服务" class="headerlink" title="部署一个单实例服务"></a>部署一个单实例服务</h2><p>我们先尝试像文章开始介绍 Docker 时一样，部署一个简单的服务。Kubernetes 中部署的最小单位是 pod，而不是 Docker 容器。实时上 Kubernetes 是不依赖于 Docker 的，完全可以使用其他的容器引擎在 Kubernetes 管理的集群中替代 Docker。在与 Docker 结合使用时，一个 pod 中可以包含一个或多个 Docker 容器。但除了有紧密耦合的情况下，通常一个 pod 中只有一个容器，这样方便不同的服务各自独立地扩展。</p>
+<p>Minikube 自带了 Docker 引擎，所以我们需要重新配置客户端，让 docker 命令行与 Minikube 中的 Docker 进程通讯：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">eval</span> $(minikube -p minikube docker-env)</span><br></pre></td></tr></table></figure>
+
+<p>在运行上面的命令后，再运行 <code>docker image ls</code> 时只能看到一些 Minikube 自带的镜像，就看不到我们刚才构建的 docker-demo:0.1 镜像了。所以在继续之前，要重新构建一遍我们的镜像，这里顺便改一下名字，叫它 k8s-demo:0.1。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t k8s-demo:0.1 .</span><br></pre></td></tr></table></figure>
+
+<p>然后创建一个叫 pod.yml 的定义文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-demo</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">k8s-demo</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">k8s-demo:0.1</span></span><br><span class="line">      <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<p>这里定义了一个叫 k8s-demo 的 Pod，使用我们刚才构建的 k8s-demo:0.1 镜像。这个文件也告诉 Kubernetes 容器内的进程会监听 80 端口。然后把它跑起来：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create -f pod.yml</span><br><span class="line">pod <span class="string">&quot;k8s-demo&quot;</span> created</span><br></pre></td></tr></table></figure>
+
+<p>kubectl 把这个文件提交给 Kubernetes API 服务，然后 Kubernetes Master 会按照要求把 Pod 分配到 node 上。用下面的命令可以看到这个新建的 Pod：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods</span><br><span class="line">NAME       READY     STATUS    RESTARTS   AGE</span><br><span class="line">k8s-demo   1/1       Running   0          5s</span><br></pre></td></tr></table></figure>
+
+<p>因为我们的镜像在本地，并且这个服务也很简单，所以运行 <code>kubectl get pods</code> 的时候 STATUS 已经是 running。要是使用远程镜像（比如 Docker Hub 上的镜像），你看到的状态可能不是 Running，就需要再等待一下。</p>
+<p>虽然这个 pod 在运行，但是我们是无法像之前测试 Docker 时一样用浏览器访问它运行的服务的。可以理解为 pod 都运行在一个内网，我们无法从外部直接访问。要把服务暴露出来，我们需要创建一个 Service。Service 的作用有点像建立了一个反向代理和负载均衡器，负责把请求分发给后面的 pod。</p>
+<p>创建一个 Service 的定义文件 svc.yml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-demo-svc</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">NodePort</span></span><br><span class="line">  <span class="attr">ports:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">port:</span> <span class="number">80</span></span><br><span class="line">      <span class="attr">nodePort:</span> <span class="number">30050</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br></pre></td></tr></table></figure>
+
+<p>这个 service 会把容器的 80 端口从 node 的 30050 端口暴露出来。注意文件最后两行的 selector 部分，这里决定了请求会被发送给集群里的哪些 pod。这里的定义是所有包含「app: k8s-demo」这个标签的 pod。然而我们之前部署的 pod 并没有设置标签：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl describe pods | grep Labels</span><br><span class="line">Labels:     &lt;none&gt;</span><br></pre></td></tr></table></figure>
+
+<p>所以要先更新一下 pod.yml，把标签加上（注意在 <code>metadata:</code> 下增加了 <code>labels</code> 部分）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-demo</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">k8s-demo</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">k8s-demo:0.1</span></span><br><span class="line">      <span class="attr">ports:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<p>然后更新 pod 并确认成功新增了标签：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f pod.yml</span><br><span class="line">pod <span class="string">&quot;k8s-demo&quot;</span> configured</span><br><span class="line">$ kubectl describe pods | grep Labels</span><br><span class="line">Labels:     app=k8s-demo</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以创建这个 service 了：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create -f svc.yml</span><br><span class="line">service &quot;k8s-demo-svc&quot; created</span><br></pre></td></tr></table></figure>
+
+<p>用下面的命令可以得到暴露出来的 URL，在浏览器里访问，就能看到我们之前创建的网页了。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ minikube service k8s-demo-svc --url</span><br><span class="line">http://192.168.64.4:30050</span><br></pre></td></tr></table></figure>
+
+<h2 id="横向扩展、滚动更新、版本回滚"><a href="#横向扩展、滚动更新、版本回滚" class="headerlink" title="横向扩展、滚动更新、版本回滚"></a>横向扩展、滚动更新、版本回滚</h2><p>在这一节，我们来实验一下在一个高可用服务的生产环境会常用到的一些操作。在继续之前，先把刚才部署的 pod 删除（但是保留 service，下面还会用到）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl delete pod k8s-demo</span><br><span class="line">pod <span class="string">&quot;k8s-demo&quot;</span> deleted</span><br></pre></td></tr></table></figure>
+
+<p>在正式环境中我们需要让一个服务不受单个节点故障的影响，并且还要根据负载变化动态调整节点数量，所以不可能像上面一样逐个管理 pod。Kubernetes 的用户通常是用 Deployment 来管理服务的。一个 deployment 可以创建指定数量的 pod 部署到各个 node 上，并可完成更新、回滚等操作。</p>
+<p>首先我们创建一个定义文件 deployment.yml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-demo-deployment</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">k8s-demo-pod</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">k8s-demo:0.1</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<p><code>replicas: 10</code> 指定了这个 deployment 要有 10 个 pod，后面的部分和之前的 pod 定义类似。提交这个文件，创建一个 deployment：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl create -f deployment.yml</span><br><span class="line">deployment <span class="string">&quot;k8s-demo-deployment&quot;</span> created</span><br></pre></td></tr></table></figure>
+
+<p>用下面的命令可以看到这个 deployment 的副本集（replica set），有 10 个 pod 在运行。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get rs</span><br><span class="line">NAME                             DESIRED   CURRENT   READY     AGE</span><br><span class="line">k8s-demo-deployment-774878f86f   10        10        10        19s</span><br></pre></td></tr></table></figure>
+
+<p>假设我们对项目做了一些改动，要发布一个新版本。这里作为示例，我们只把 HTML 文件的内容改一下, 然后构建一个新版镜像 k8s-demo:0.2：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">&#x27;&lt;h1&gt;Hello Kubernetes!&lt;/h1&gt;&#x27;</span> &gt; html/index.html</span><br><span class="line">$ docker build -t k8s-demo:0.2 .</span><br></pre></td></tr></table></figure>
+
+<p>然后更新 deployment.yml：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">k8s-demo-deployment</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br><span class="line">  <span class="attr">minReadySeconds:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">strategy:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">RollingUpdate</span></span><br><span class="line">    <span class="attr">rollingUpdate:</span></span><br><span class="line">      <span class="attr">maxUnavailable:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">maxSurge:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">k8s-demo</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">k8s-demo-pod</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">k8s-demo:0.2</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">80</span></span><br></pre></td></tr></table></figure>
+
+<p>这里有两个改动，第一个是更新了镜像版本号 <code>image: k8s-demo:0.2</code>，第二是增加了 <code>minReadySeconds: 10</code> 和 <code>strategy</code> 部分。新增的部分定义了更新策略：<code>minReadySeconds: 10</code> 指在更新了一个 pod 后，需要在它进入正常状态后 10 秒再更新下一个 pod；<code>maxUnavailable: 1</code> 指同时处于不可用状态的 pod 不能超过一个；<code>maxSurge: 1</code> 指多余的 pod 不能超过一个。这样 Kubernetes 就会逐个替换 service 后面的 pod。运行下面的命令开始更新：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f deployment.yml --record=<span class="literal">true</span></span><br><span class="line">deployment <span class="string">&quot;k8s-demo-deployment&quot;</span> configured</span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>--record=true</code> 让 Kubernetes 把这行命令记到发布历史中备查。这时可以马上运行下面的命令查看各个 pod 的状态：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods</span><br><span class="line">NAME                                   READY  STATUS        ...   AGE</span><br><span class="line">k8s-demo-deployment-774878f86f-5wnf4   1/1    Running       ...   7m</span><br><span class="line">k8s-demo-deployment-774878f86f-6kgjp   0/1    Terminating   ...   7m</span><br><span class="line">k8s-demo-deployment-774878f86f-8wpd8   1/1    Running       ...   7m</span><br><span class="line">k8s-demo-deployment-774878f86f-hpmc5   1/1    Running       ...   7m</span><br><span class="line">k8s-demo-deployment-774878f86f-rd5xw   1/1    Running       ...   7m</span><br><span class="line">k8s-demo-deployment-774878f86f-wsztw   1/1    Running       ...   7m</span><br><span class="line">k8s-demo-deployment-86dbd79ff6-7xcxg   1/1    Running       ...   14s</span><br><span class="line">k8s-demo-deployment-86dbd79ff6-bmvd7   1/1    Running       ...   1s</span><br><span class="line">k8s-demo-deployment-86dbd79ff6-hsjx5   1/1    Running       ...   26s</span><br><span class="line">k8s-demo-deployment-86dbd79ff6-mkn27   1/1    Running       ...   14s</span><br><span class="line">k8s-demo-deployment-86dbd79ff6-pkmlt   1/1    Running       ...   1s</span><br><span class="line">k8s-demo-deployment-86dbd79ff6-thh66   1/1    Running       ...   26s</span><br></pre></td></tr></table></figure>
+
+<p>从 AGE 列就能看到有一部分 pod 是刚刚新建的，有的 pod 则还是老的。下面的命令可以显示发布的实时状态：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl rollout status deployment k8s-demo-deployment</span><br><span class="line">Waiting <span class="keyword">for</span> rollout to finish: 1 old replicas are pending termination...</span><br><span class="line">Waiting <span class="keyword">for</span> rollout to finish: 1 old replicas are pending termination...</span><br><span class="line">deployment <span class="string">&quot;k8s-demo-deployment&quot;</span> successfully rolled out</span><br></pre></td></tr></table></figure>
+
+<p>由于我输入得比较晚，发布已经快要结束，所以只有三行输出。下面的命令可以查看发布历史，因为第二次发布使用了 <code>--record=true</code> 所以可以看到用于发布的命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl rollout <span class="built_in">history</span> deployment k8s-demo-deployment</span><br><span class="line">deployments <span class="string">&quot;k8s-demo-deployment&quot;</span></span><br><span class="line">REVISION    CHANGE-CAUSE</span><br><span class="line">1       &lt;none&gt;</span><br><span class="line">2       kubectl apply --filename=deploy.yml --record=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>这时如果刷新浏览器，就可以看到更新的内容「Hello Kubernetes!」。假设新版发布后，我们发现有严重的 bug，需要马上回滚到上个版本，可以用这个很简单的操作：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl rollout undo deployment k8s-demo-deployment --to-revision=1</span><br><span class="line">deployment <span class="string">&quot;k8s-demo-deployment&quot;</span> rolled back</span><br></pre></td></tr></table></figure>
+
+<p>Kubernetes 会按照既定的策略替换各个 pod，与发布新版本类似，只是这次是用老版本替换新版本：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl rollout status deployment k8s-demo-deployment</span><br><span class="line">Waiting <span class="keyword">for</span> rollout to finish: 4 out of 10 new replicas have been updated...</span><br><span class="line">Waiting <span class="keyword">for</span> rollout to finish: 6 out of 10 new replicas have been updated...</span><br><span class="line">Waiting <span class="keyword">for</span> rollout to finish: 8 out of 10 new replicas have been updated...</span><br><span class="line">Waiting <span class="keyword">for</span> rollout to finish: 1 old replicas are pending termination...</span><br><span class="line">deployment <span class="string">&quot;k8s-demo-deployment&quot;</span> successfully rolled out</span><br></pre></td></tr></table></figure>
+
+<p>在回滚结束之后，刷新浏览器就可以确认网页内容又改回了「Hello Docker!」。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>我们从不同层面实践了一遍镜像的构建和容器的部署，并且部署了一个有 10 个容器的 deployment, 实验了滚动更新和回滚的流程。Kubernetes 提供了非常多的功能，本文只是以走马观花的方式做了一个快节奏的 walkthrough，略过了很多细节。虽然你还不能在简历上加上「精通 Kubernetes」，但是应该可以在本地的 Kubernetes 环境测试自己的前后端项目，遇到具体的问题时求助于 Google 和官方文档即可。在此基础上进一步熟悉应该就可以在别人提供的 Kubernetes 生产环境发布自己的服务。</p>
+<p>References:</p>
+<p><a target="_blank" rel="noopener" href="https://1byte.io/developer-guide-to-docker-and-kubernetes/">https://1byte.io/developer-guide-to-docker-and-kubernetes/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.qikqiak.com/k8strain/examples/wordpress/">https://www.qikqiak.com/k8strain/examples/wordpress/</a></p>
+<p><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/tutorials/hello-minikube/">https://kubernetes.io/docs/tutorials/hello-minikube/</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+              <a href="/tags/Kubernets/" rel="tag"><i class="fa fa-tag"></i> Kubernets</a>
+              <a href="/tags/Minikube/" rel="tag"><i class="fa fa-tag"></i> Minikube</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/TFRecord/" rel="prev" title="TFRecord">
+                  <i class="fa fa-angle-left"></i> TFRecord
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/effective-code-review/" rel="next" title="effective-code-review">
+                  effective-code-review <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

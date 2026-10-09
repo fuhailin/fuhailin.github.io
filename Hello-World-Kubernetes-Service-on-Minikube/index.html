@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="This is part 2 of a series on Kubernetes a la minikube. Minikube is (probably) the easiest way of installing a small Kubernetes system including a graphical user interface. In part 1 we have shown how">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hello World Kubernetes Service on Minikube">
+<meta property="og:url" content="https://fuhailin.github.io/Hello-World-Kubernetes-Service-on-Minikube/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="This is part 2 of a series on Kubernetes a la minikube. Minikube is (probably) the easiest way of installing a small Kubernetes system including a graphical user interface. In part 1 we have shown how">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-20-22_59_42-Minikube-Google-Pr%C3%A4sentationen.png">
+<meta property="og:image" content="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-19-18_46_57-Minikube-Google-Pr%C3%A4sentationen.jpg">
+<meta property="og:image" content="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-18-17_40_51-159.69.221.89_32120-1024x151.png">
+<meta property="article:published_time" content="2021-08-20T07:52:55.000Z">
+<meta property="article:modified_time" content="2021-11-24T11:53:13.810Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Kubernets">
+<meta property="article:tag" content="Minikube">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-20-22_59_42-Minikube-Google-Pr%C3%A4sentationen.png">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Hello-World-Kubernetes-Service-on-Minikube/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Hello-World-Kubernetes-Service-on-Minikube/","path":"Hello-World-Kubernetes-Service-on-Minikube/","title":"Hello World Kubernetes Service on Minikube"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Hello World Kubernetes Service on Minikube | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-0-Get-Access-to-a-Minishift-Installation"><span class="nav-number">1.</span> <span class="nav-text">Step 0: Get Access to a Minishift Installation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-1-optional-Explore-the-Status"><span class="nav-number">2.</span> <span class="nav-text">Step 1 (optional): Explore the Status</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-2-Create-an-Application-Deployment-vs-POD"><span class="nav-number">3.</span> <span class="nav-text">Step 2: Create an Application: Deployment vs POD</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-1-Creating-a-POD-directly"><span class="nav-number">3.1.</span> <span class="nav-text">Step 2.1: Creating a POD directly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2-2-Creating-a-POD-via-a-Deployment-recommended"><span class="nav-number">3.2.</span> <span class="nav-text">Step 2.2: Creating a POD via a Deployment (recommended)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-3-optional-Explore-Docker-processes-PODs-and-Services"><span class="nav-number">4.</span> <span class="nav-text">Step 3 (optional): Explore Docker processes, PODs, and Services</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step-4-Expose-the-Service"><span class="nav-number">5.</span> <span class="nav-text">Step 4: Expose the Service</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-4-1-Exposing-the-Service-via-NodePorts"><span class="nav-number">5.1.</span> <span class="nav-text">Step 4.1: Exposing the Service via NodePorts</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">6.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Hello-World-Kubernetes-Service-on-Minikube/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Hello World Kubernetes Service on Minikube | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hello World Kubernetes Service on Minikube
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-20 15:52:55" itemprop="dateCreated datePublished" datetime="2021-08-20T15:52:55+08:00">2021-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-11-24 19:53:13" itemprop="dateModified" datetime="2021-11-24T19:53:13+08:00">2021-11-24</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>This is part 2 of a series on Kubernetes a la <a target="_blank" rel="noopener" href="https://github.com/kubernetes/minikube">minikube</a>. Minikube is (probably) the easiest way of installing a small Kubernetes system including a graphical user interface. <a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/19/single-node-kubernetes-cluster-1-installing-minikube-on-centos/">In part 1</a> we have shown how to install such a system on a fresh CentOS Linux system. In this part, we will create our first Hello World Kubernetes Service accessible from the Internet.</p>
+<p><img src="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-20-22_59_42-Minikube-Google-Pr%C3%A4sentationen.png" alt="Web Browser accessing a Kubernetes Hello World Service"></p>
+<p>For that, we will create a kubernetes deployment, which automatically creates a POD with a single Docker container. Then, we create a Kubernetes Service of type NodePort, which is accessible from the outside world.</p>
+<p>In the appendix, we will show, how to tweak the automatically generated kubernetes dashboard service, so we can reach it from the Internet.</p>
+<p>Within this blog post, we will work on minikube installed on a fresh CentOS cloud system we have installed in <a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/19/single-node-kubernetes-cluster-1-installing-minikube-on-centos/">part 1 of this series</a>.</p>
+<p><img src="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-19-18_46_57-Minikube-Google-Pr%C3%A4sentationen.jpg" alt="minikube @ CentOS - Install Minikube on CentOS"></p>
+<p>Contents [<a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#">hide</a>]</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Step_0_Get_Access_to_a_Minishift_Installation">Step 0: Get Access to a Minishift Installation</a></li>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Step_1_optional_Explore_the_Status">Step 1 (optional): Explore the Status</a></li>
+<li>Step 2: Create an Application: Deployment vs POD<ul>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Step_21_Creating_a_POD_directly">Step 2.1: Creating a POD directly</a></li>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Step_22_Creating_a_POD_via_a_Deployment_recommended">Step 2.2: Creating a POD via a Deployment (recommended)</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Step_3_optional_Explore_Docker_processes_PODs_and_Services">Step 3 (optional): Explore Docker processes, PODs, and Services</a></li>
+<li>Step 4: Expose the Service<ul>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Step_41_Exposing_the_Service_via_NodePorts">Step 4.1: Exposing the Service via NodePorts</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Summary">Summary</a></li>
+<li><a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/26/single-node-kubernetes-cluster-2-deploying-a-hello-world-application/#Appendix_Make_Kubernetes_Dashboard_available_to_the_Internet">Appendix: Make Kubernetes Dashboard available to the Internet</a></li>
+</ul>
+<h1 id="Step-0-Get-Access-to-a-Minishift-Installation"><a href="#Step-0-Get-Access-to-a-Minishift-Installation" class="headerlink" title="Step 0: Get Access to a Minishift Installation"></a>Step 0: Get Access to a Minishift Installation</h1><p>One way of achieving this step is to follow steps 1 to 4 of <a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/19/single-node-kubernetes-cluster-1-installing-minikube-on-centos/">part 1 of this series</a>. However, there are other possibilities to get access to Kubernetes systems as well. For example, you may want to access a Minishift installation as provided by Ben Hall on his Katacoda platform. Check out e.g. the tutorial „<a target="_blank" rel="noopener" href="https://www.katacoda.com/courses/kubernetes/launch-single-node-cluster">Launch A Single Node Cluster</a>„.</p>
+<h1 id="Step-1-optional-Explore-the-Status"><a href="#Step-1-optional-Explore-the-Status" class="headerlink" title="Step 1 (optional): Explore the Status"></a>Step 1 (optional): Explore the Status</h1><p>To get acquainted with your minikube installation, you may repeat step 5 of <a target="_blank" rel="noopener" href="https://vocon-it.com/2018/11/19/single-node-kubernetes-cluster-1-installing-minikube-on-centos/">part 1 of this series</a> and run the commands</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl version</span><br><span class="line">kubectl cluster-info</span><br><span class="line">kubectl get nodes</span><br></pre></td></tr></table></figure>
+
+<h1 id="Step-2-Create-an-Application-Deployment-vs-POD"><a href="#Step-2-Create-an-Application-Deployment-vs-POD" class="headerlink" title="Step 2: Create an Application: Deployment vs POD"></a>Step 2: Create an Application: Deployment vs POD</h1><p>In Kubernetes, there are, among others, two ways of creating application containers:</p>
+<ul>
+<li>creating POD directly</li>
+<li>creating POD via deployments (recommended)</li>
+</ul>
+<h2 id="Step-2-1-Creating-a-POD-directly"><a href="#Step-2-1-Creating-a-POD-directly" class="headerlink" title="Step 2.1: Creating a POD directly"></a>Step 2.1: Creating a POD directly</h2><p>Even though it is not recommended for most cases (see a <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/41325087/in-kubernetes-what-is-the-difference-between-a-pod-and-a-deployment">discussion of this topic on StackOverflow</a>) we can create a POD directly like follows:</p>
+<p>Create a single POD:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pod.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">gitea-pod</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">gitea-container</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">gitea/gitea:latest</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f pod.yaml</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">kubectl</span></span><br></pre></td></tr></table></figure>
+
+<p>This will create a pod as expected:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl get pods</span><br><span class="line">NAME                                    READY   STATUS    RESTARTS   AGE</span><br><span class="line">nginx                                   1/1     Running   1          24m</span><br></pre></td></tr></table></figure>
+
+<p>Note that it is <strong>not</strong> possible to create a POD with a kubectl create pod command (crossed out for not confusing the quick reader). Above, we had to create it by reading in a YAML file instead.</p>
+<p><del>kubectl create pod mypod –image&#x3D;nginx</del></p>
+<p> If the <code>STATUS</code> of your pod is not <code>Running</code>, type following command to show pod status:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl describe pod gitea</span><br></pre></td></tr></table></figure>
+
+
+<p>Note also that the POD is restarted, if a container process is killed:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ps -ef | grep nginx | grep -v grep</span><br><span class="line">root     30466 30450  0 22:13 ?        00:00:00 nginx: master process nginx -g daemon off;</span><br><span class="line">101      31744 30466  0 22:16 ?        00:00:00 nginx: worker process</span><br><span class="line">$ <span class="built_in">kill</span> -9 31744 30466</span><br><span class="line">$ ps -ef | grep nginx</span><br><span class="line">root     31950 31934  0 22:17 ?        00:00:00 nginx: master process nginx -g daemon off;</span><br><span class="line">101      31965 31950  0 22:17 ?        00:00:00 nginx: worker process</span><br></pre></td></tr></table></figure>
+
+<p>In that sense, the POD we have created directly seems to be durable, even though the discussions below may hint into another direction: they say that only a deployment will restart a POD if it fails. Since we only have a single node cluster, we cannot test, whether a POD is created on another node, if a node fails.</p>
+<h2 id="Step-2-2-Creating-a-POD-via-a-Deployment-recommended"><a href="#Step-2-2-Creating-a-POD-via-a-Deployment-recommended" class="headerlink" title="Step 2.2: Creating a POD via a Deployment (recommended)"></a>Step 2.2: Creating a POD via a Deployment (recommended)</h2><p>The recommended way of creating a POD is to create a deployment. Why? What is the difference between creating a deployment and creating a pod? What is a deployment, anyway? For an answer to that, let us consult google:</p>
+<blockquote>
+<p>What is a kubernetes deployment?</p>
+<p>Google: A <strong>Deployment</strong> runs multiple replicas of your application and automatically replaces any instances that fail or become unresponsive. In this way, <strong>Deployments</strong> help ensure that one or more instances of your application are available to serve user requests. <strong>Deployments</strong> are managed by the <strong>Kubernetes Deployment</strong> controller.</p>
+</blockquote>
+<p>Okay, when we create a deployment and tell the deployment to create 5 replicas of a POD, this is different from just creating 5 replicas of a POD, because a deployment will restart PODs that have failed. Let us test this.</p>
+<p>Most tutorials do that with commands as follows:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl run first-deployment --image=katacoda/docker-http-server --port=80</span><br><span class="line"><span class="comment">### output:</span></span><br><span class="line">kubectl run --generator=deployment/apps.v1beta1 is DEPRECATED and will be removed <span class="keyword">in</span> a future version. Use kubectl create instead.</span><br><span class="line">deployment.apps/first-deployment created</span><br></pre></td></tr></table></figure>
+
+<p>However, as there is a hint that this kind of commands is deprecated, let us create the deployment differently:</p>
+<p>If you have done so, and you want to test the recommended way, let us delete the deployment again:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl delete deployment first-deployment</span><br></pre></td></tr></table></figure>
+
+<p>Now we can create the deployment in the recommended way:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> &lt;&lt;<span class="string">EOF | kubectl create -f -</span></span><br><span class="line"><span class="string">apiVersion: apps/v1</span></span><br><span class="line"><span class="string">kind: Deployment</span></span><br><span class="line"><span class="string">metadata:</span></span><br><span class="line"><span class="string">  annotations:</span></span><br><span class="line"><span class="string">    deployment.kubernetes.io/revision: &quot;1&quot;</span></span><br><span class="line"><span class="string">  creationTimestamp: 2018-11-19T21:55:59Z</span></span><br><span class="line"><span class="string">  generation: 1</span></span><br><span class="line"><span class="string">  labels:</span></span><br><span class="line"><span class="string">    run: first-deployment</span></span><br><span class="line"><span class="string">  name: first-deployment</span></span><br><span class="line"><span class="string">  namespace: default</span></span><br><span class="line"><span class="string">  resourceVersion: &quot;300379&quot;</span></span><br><span class="line"><span class="string">  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/first-deployment</span></span><br><span class="line"><span class="string">spec:</span></span><br><span class="line"><span class="string">  progressDeadlineSeconds: 600</span></span><br><span class="line"><span class="string">  replicas: 1</span></span><br><span class="line"><span class="string">  revisionHistoryLimit: 2</span></span><br><span class="line"><span class="string">  selector:</span></span><br><span class="line"><span class="string">    matchLabels:</span></span><br><span class="line"><span class="string">      run: first-deployment</span></span><br><span class="line"><span class="string">  strategy:</span></span><br><span class="line"><span class="string">    rollingUpdate:</span></span><br><span class="line"><span class="string">      maxSurge: 25%</span></span><br><span class="line"><span class="string">      maxUnavailable: 25%</span></span><br><span class="line"><span class="string">    type: RollingUpdate</span></span><br><span class="line"><span class="string">  template:</span></span><br><span class="line"><span class="string">    metadata:</span></span><br><span class="line"><span class="string">      creationTimestamp: null</span></span><br><span class="line"><span class="string">      labels:</span></span><br><span class="line"><span class="string">        run: first-deployment</span></span><br><span class="line"><span class="string">    spec:</span></span><br><span class="line"><span class="string">      containers:</span></span><br><span class="line"><span class="string">      - image: katacoda/docker-http-server</span></span><br><span class="line"><span class="string">        imagePullPolicy: Always</span></span><br><span class="line"><span class="string">        name: first-deployment</span></span><br><span class="line"><span class="string">        ports:</span></span><br><span class="line"><span class="string">        - containerPort: 80</span></span><br><span class="line"><span class="string">          protocol: TCP</span></span><br><span class="line"><span class="string">        resources: &#123;&#125;</span></span><br><span class="line"><span class="string">        terminationMessagePath: /dev/termination-log</span></span><br><span class="line"><span class="string">        terminationMessagePolicy: File</span></span><br><span class="line"><span class="string">      dnsPolicy: ClusterFirst</span></span><br><span class="line"><span class="string">      restartPolicy: Always</span></span><br><span class="line"><span class="string">      schedulerName: default-scheduler</span></span><br><span class="line"><span class="string">      securityContext: &#123;&#125;</span></span><br><span class="line"><span class="string">      terminationGracePeriodSeconds: 30</span></span><br><span class="line"><span class="string">EOF</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># deployment.extensions/first-deployment created</span></span><br></pre></td></tr></table></figure>
+
+<p>To be honest, I have liked the kubectl run command more…</p>
+<p>😉</p>
+<p>The reason for the depreciation is discussed in <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/52890718/kubectl-run-is-deprecated-looking-for-alternative">this StackOverflow Q&amp;A</a>.</p>
+<h1 id="Step-3-optional-Explore-Docker-processes-PODs-and-Services"><a href="#Step-3-optional-Explore-Docker-processes-PODs-and-Services" class="headerlink" title="Step 3 (optional): Explore Docker processes, PODs, and Services"></a>Step 3 (optional): Explore Docker processes, PODs, and Services</h1><p>This is creating two docker containers: a „pause“ container per POD and the service container in the POD:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># docker ps | grep &quot;^CONTAINER\|deployment&quot;</span><br><span class="line">CONTAINER ID        IMAGE                                     COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line">af733dc6244c        katacoda/docker-http-server               &quot;/app&quot;                   18 hours ago        Up 18 hours                             k8s_first-deployment_first-deployment-59f6bb4956-fqrhd_default_b17c0c0c-e9ee-11e8-bccd-9600001441cb_0</span><br><span class="line">bd1e5b869266        k8s.gcr.io/pause-amd64:3.1                &quot;/pause&quot;                 18 hours ago        Up 18 hours                             k8s_POD_first-deployment-59f6bb4956-fqrhd_default_b17c0c0c-e9ee-11e8-bccd-9600001441cb_0</span><br></pre></td></tr></table></figure>
+
+<p>This is quite similar to what is created with the ‚oc new-app‘ command on an OpenShift installation. See e.g. our blog post <a target="_blank" rel="noopener" href="https://vocon-it.com/2016/07/21/getting-started-with-red-hat-openshift-container-platform-a-k-a-openshift-origin-openshift-enterprise/">Getting started with OpenShift</a>. But not quite: here, the service has not yet been created, as can be seen below.</p>
+<p>We can see, that no service is created by deployment:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># kubectl get svc</span><br><span class="line">NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE</span><br><span class="line">kubernetes   ClusterIP   10.96.0.1            443/TCP   4h</span><br></pre></td></tr></table></figure>
+
+<p>However, we will find that a POD is created:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># kubectl get pod</span><br><span class="line">NAME                                READY   STATUS    RESTARTS   AGE</span><br><span class="line">first-deployment-59f6bb4956-fqrhd   1/1     Running   0          17h</span><br></pre></td></tr></table></figure>
+
+<p>To see the services or pods of all namespaces, you also can use the –all-namespaces option:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># kubectl get pod --all-namespaces</span><br><span class="line">NAMESPACE     NAME                                    READY   STATUS    RESTARTS   AGE</span><br><span class="line">default       first-deployment-59f6bb4956-fqrhd       1/1     Running   0          18h</span><br><span class="line">kube-system   coredns-c4cffd6dc-r8vg4                 1/1     Running   0          22h</span><br><span class="line">kube-system   etcd-minikube                           1/1     Running   0          20h</span><br><span class="line">kube-system   kube-addon-manager-minikube             1/1     Running   1          22h</span><br><span class="line">kube-system   kube-apiserver-minikube                 1/1     Running   0          20h</span><br><span class="line">kube-system   kube-controller-manager-minikube        1/1     Running   0          20h</span><br><span class="line">kube-system   kube-dns-86f4d74b45-gghfb               3/3     Running   0          22h</span><br><span class="line">kube-system   kube-proxy-fhls5                        1/1     Running   0          20h</span><br><span class="line">kube-system   kube-scheduler-minikube                 1/1     Running   0          22h</span><br><span class="line">kube-system   kubernetes-dashboard-6f4cfc5d87-tnl6r   1/1     Running   0          22h</span><br><span class="line">kube-system   storage-provisioner                     1/1     Running   0          22h</span><br></pre></td></tr></table></figure>
+
+<p>and</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># kubectl get svc --all-namespaces</span><br><span class="line">NAMESPACE     NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE</span><br><span class="line">default       kubernetes             ClusterIP   10.96.0.1               443/TCP         22h</span><br><span class="line">kube-system   kube-dns               ClusterIP   10.96.0.10              53/UDP,53/TCP   22h</span><br><span class="line">kube-system   kubernetes-dashboard   ClusterIP   10.101.34.253           80/TCP          22h</span><br></pre></td></tr></table></figure>
+
+<p>Here, we can see, that minikube has started a kubernetes dashboard and a DNS server in the kube-system namespace.</p>
+<p>We can get even more details on the POD by using the describe command:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"># kubectl describe pod first-deployment-59f6bb4956-fqrhd</span><br><span class="line">Name:           first-deployment-59f6bb4956-fqrhd</span><br><span class="line">Namespace:      default</span><br><span class="line">Node:           minikube/159.69.221.89</span><br><span class="line">Start Time:     Fri, 16 Nov 2018 23:26:42 +0100</span><br><span class="line">Labels:         pod-template-hash=1592660512</span><br><span class="line">                run=first-deployment</span><br><span class="line">Annotations:    </span><br><span class="line">Status:         Running</span><br><span class="line">IP:             172.17.0.6</span><br><span class="line">Controlled By:  ReplicaSet/first-deployment-59f6bb4956</span><br><span class="line">Containers:</span><br><span class="line">  first-deployment:</span><br><span class="line">    Container ID:   docker://af733dc6244ca05866d664729552a3db4070e8988337687e8a68948b72235a31</span><br><span class="line">    Image:          katacoda/docker-http-server</span><br><span class="line">    Image ID:       docker-pullable://katacoda/docker-http-server@sha256:76dc8a47fd019f80f2a3163aba789faf55b41b2fb06397653610c754cb12d3ee</span><br><span class="line">    Port:           80/TCP</span><br><span class="line">    Host Port:      0/TCP</span><br><span class="line">    State:          Running</span><br><span class="line">      Started:      Fri, 16 Nov 2018 23:26:45 +0100</span><br><span class="line">    Ready:          True</span><br><span class="line">    Restart Count:  0</span><br><span class="line">    Environment:    </span><br><span class="line">    Mounts:</span><br><span class="line">      /var/run/secrets/kubernetes.io/serviceaccount from default-token-lj5jx (ro)</span><br><span class="line">Conditions:</span><br><span class="line">  Type           Status</span><br><span class="line">  Initialized    True</span><br><span class="line">  Ready          True</span><br><span class="line">  PodScheduled   True</span><br><span class="line">Volumes:</span><br><span class="line">  default-token-lj5jx:</span><br><span class="line">    Type:        Secret (a volume populated by a Secret)</span><br><span class="line">    SecretName:  default-token-lj5jx</span><br><span class="line">    Optional:    false</span><br><span class="line">QoS Class:       BestEffort</span><br><span class="line">Node-Selectors:  </span><br><span class="line">Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s</span><br><span class="line">                 node.kubernetes.io/unreachable:NoExecute for 300s</span><br><span class="line">Events:          </span><br></pre></td></tr></table></figure>
+
+<p>Even though the service is not yet exposed, we still can reach it from the Docker host: The Container IP address is 172.17.0.6, as we can read it from the output of the kubectl describe pod command above. The service is running on port 80. So, let us try to access the POD:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># curl 172.17.0.6:80</span><br><span class="line">&lt;h1&gt;This request was processed by host: first-deployment-59f6bb4956-fqrhd&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Note, however, that the POD IP address 172.17.0.6 is a private address that is not accessible from the outside world. In the next step, we will make sure that the service can be reached from the Internet as well.</p>
+<h1 id="Step-4-Expose-the-Service"><a href="#Step-4-Expose-the-Service" class="headerlink" title="Step 4: Expose the Service"></a>Step 4: Expose the Service</h1><p>Now, we want to expose the service to the outside world. Kubernetes knows three ways of doing this:</p>
+<ul>
+<li>exposing via ClusterIP:<br>reachable internally, only</li>
+<li>exposing via NodePorts:<br>reachable internally and externally</li>
+<li>exposing via LoadBalancers:<br>means of configuring cloud load balancers by way of labels See e.g. <a target="_blank" rel="noopener" href="https://kubernetes.io/docs/concepts/services-networking/service/">https://kubernetes.io/docs/concepts/services-networking/service/</a> for details on Kubernetes Load Balancer interaction.</li>
+</ul>
+<p>The ClusterIP way is the default, but it is reachable from within the kubernetes network only. On the other hand, the LoadBalancer option works only in certain cloud environments. Therefore, we choose to expose the service via NodePort. This way, we can make the service reachable from the Internet and still need no external load balancers.</p>
+<p>Let us now demonstrate the NodePorts ways of exposing a service.</p>
+<h2 id="Step-4-1-Exposing-the-Service-via-NodePorts"><a href="#Step-4-1-Exposing-the-Service-via-NodePorts" class="headerlink" title="Step 4.1: Exposing the Service via NodePorts"></a>Step 4.1: Exposing the Service via NodePorts</h2><p>If the Node the service is running on has a publicly available IP address (mapped or not), we can access the service by exposing the deployment to a node port as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl expose deployment first-deployment --port=80 --type=NodePort</span><br></pre></td></tr></table></figure>
+
+<p>Since we have not added an option like <code>--target-port=&lt;static-port&gt;</code>, the port is allocated dynamically. Therefore, we decide to retrieve the port value from via kubectl as follows:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PORT=$(kubectl get svc first-deployment -o go-template=&#x27;&#123;&#123;range.spec.ports&#125;&#125;&#123;&#123;if .nodePort&#125;&#125;&#123;&#123;.nodePort&#125;&#125;&#123;&#123;&quot;\n&quot;&#125;&#125;&#123;&#123;end&#125;&#125;&#123;&#123;end&#125;&#125;&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>We need that information to access the service via curl:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># curl 127.0.0.1:$PORT</span><br><span class="line">&lt;h1&gt;This request was processed by host: first-deployment-59f6bb4956-fqrhd&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Since our Docker host is accessible from the Internet, we also can retrieve the same information from any browser on the Internet:</p>
+<p><img src="https://vocon-it.com/wp-content/uploads/2018/11/2018-11-18-17_40_51-159.69.221.89_32120-1024x151.png" alt="Accessing an exposed service from the Internet"></p>
+<p>Okay, the random port is not nice. On the other hand, we cannot run all containers on the same well-known ports like port 80 (HTTP) or port 443 (HTTPS) by specifying the same target ports on the expose commands. This issue is something that can only be resolved with the help of a reverse proxy or an HTTP load balancer, which is out of scope for this blog post.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>In this blog post, we have learned how to create, run, and access applications in a Kubernetes environment. For that, we have created Kubernetes PODs, Deployments and Services. We have learned that Deployments help with the management of PODs. E.g. they restart PODs if they fail.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+              <a href="/tags/Kubernets/" rel="tag"><i class="fa fa-tag"></i> Kubernets</a>
+              <a href="/tags/Minikube/" rel="tag"><i class="fa fa-tag"></i> Minikube</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/minikube-start/" rel="prev" title="minikube start">
+                  <i class="fa fa-angle-left"></i> minikube start
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Running-WordPress-in-Kubernetes-Cluster/" rel="next" title="Running WordPress in Kubernetes Cluster">
+                  Running WordPress in Kubernetes Cluster <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

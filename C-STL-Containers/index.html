@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="STL 就是所谓的标准模板库（Standard Template Library），这可能是C++程序员的一大利器。  总的来说，STL包括几个部分：容器，算法（泛型算法），迭代器三个主要部分（当然还包含仿函数，适配器等其他部分），下图说明了三个主要部分之间的关系（网图，侵删）。  STL三个主要部分的关系示意图 要是详细的总结，这肯定是一本类似于《C++ Primer》的大书。本篇文章主要是对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ STL Containers">
+<meta property="og:url" content="https://fuhailin.github.io/C-STL-Containers/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="STL 就是所谓的标准模板库（Standard Template Library），这可能是C++程序员的一大利器。  总的来说，STL包括几个部分：容器，算法（泛型算法），迭代器三个主要部分（当然还包含仿函数，适配器等其他部分），下图说明了三个主要部分之间的关系（网图，侵删）。  STL三个主要部分的关系示意图 要是详细的总结，这肯定是一本类似于《C++ Primer》的大书。本篇文章主要是对">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/10118224-ee23dafe96babb08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/778/format/webp">
+<meta property="og:image" content="https://blogimgs-1256340525.cos.ap-chengdu.myqcloud.com/images/20210912144226.png">
+<meta property="article:published_time" content="2021-09-12T06:31:27.000Z">
+<meta property="article:modified_time" content="2021-09-23T08:24:07.389Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/10118224-ee23dafe96babb08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/778/format/webp">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/C-STL-Containers/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/C-STL-Containers/","path":"C-STL-Containers/","title":"C++ STL Containers"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++ STL Containers | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I%E3%80%81vector"><span class="nav-number">1.</span> <span class="nav-text">I、vector</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#vector%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">vector底层数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II%E3%80%81map-multimap-unordered-map-unordered-multimap"><span class="nav-number">2.</span> <span class="nav-text">II、map &amp; multimap &amp; unordered_map &amp; unordered_multimap</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-map%E4%B8%8Emultimap%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 map与multimap底层数据结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-unordered-map-%E4%B8%8Eunordered-multimap%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 unordered_map 与unordered_multimap底层数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#III%E3%80%81set-multiset-unordered-set-unordered-multiset"><span class="nav-number">3.</span> <span class="nav-text">III、set &amp; multiset &amp; unordered_set &amp; unordered_multiset</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-set-multiset%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 set &amp; multiset底层数据结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-unordered-set-unordered-multiset"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 unordered_set &amp; unordered_multiset</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IV%E3%80%81-priority-queue"><span class="nav-number">4.</span> <span class="nav-text">IV、 priority_queue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-priority-queue"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 priority_queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#V%E3%80%81-list"><span class="nav-number">5.</span> <span class="nav-text">V、 list</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%85%A5%E3%80%81queue"><span class="nav-number">6.</span> <span class="nav-text">Ⅵ、queue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%85%A6%E3%80%81deque"><span class="nav-number">7.</span> <span class="nav-text">Ⅶ、deque</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/C-STL-Containers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++ STL Containers | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++ STL Containers
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-12 14:31:27" itemprop="dateCreated datePublished" datetime="2021-09-12T14:31:27+08:00">2021-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-09-23 16:24:07" itemprop="dateModified" datetime="2021-09-23T16:24:07+08:00">2021-09-23</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><blockquote>
+<p>STL 就是所谓的标准模板库（Standard Template Library），这可能是C++程序员的一大利器。</p>
+</blockquote>
+<p>总的来说，STL包括几个部分：容器，算法（泛型算法），迭代器三个主要部分（当然还包含仿函数，适配器等其他部分），下图说明了三个主要部分之间的关系（<em>网图，侵删</em>）。</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/10118224-ee23dafe96babb08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/778/format/webp" alt="img"></p>
+<p>STL三个主要部分的关系示意图</p>
+<p>要是详细的总结，这肯定是一本类似于《C++ Primer》的大书。本篇文章主要是对于STL中的常用容器的底层数据结构进行总结整理。</p>
+<h2 id="I、vector"><a href="#I、vector" class="headerlink" title="I、vector"></a>I、vector</h2><h5 id="vector底层数据结构"><a href="#vector底层数据结构" class="headerlink" title="vector底层数据结构"></a>vector底层数据结构</h5><p>vector是我们用到最多的数据结构，其底层数据结构是<strong>数组</strong>，由于数组的特点，vector也具有以下特性：<br>	1、O(1)时间的快速访问；<br>	2、顺序存储，所以插入到非尾结点位置所需时间复杂度为O(n)，删除也一样；<br>	3、<strong>扩容规则：</strong><br>	当我们新建一个vector的时候，会首先分配给他一片连续的内存空间，如<code>std::vector&lt;int&gt; vec</code>，当通过push_back向其中增加元素时，如果初始分配空间已满，就会引起vector扩容，其扩容规则在gcc下以2倍方式完成：首先重新申请一个2倍大的内存空间；然后将原空间的内容拷贝过来；最后将原空间内容进行释放，将内存交还给操作系统；</p>
+<p>测试代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mycapacity</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;分配总空间大小为：&quot;</span> &lt;&lt; vec.<span class="built_in">capacity</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">mysize</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;已用空间大小为：&quot;</span> &lt;&lt; vec.<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">myprint</span><span class="params">(<span class="type">const</span> vector&lt;<span class="type">int</span>&gt;&amp; vec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; vec.<span class="built_in">size</span>(); ++i)</span><br><span class="line">        cout &lt;&lt; vec[i] &lt;&lt; <span class="string">&quot;,&quot;</span>;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    vector&lt;<span class="type">int</span>&gt; vec;</span><br><span class="line">    vec.<span class="built_in">reserve</span>(<span class="number">3</span>);</span><br><span class="line">    <span class="comment">// vec.resize(3);</span></span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;起始状态：&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">mycapacity</span>(vec);</span><br><span class="line">    <span class="built_in">mysize</span>(vec);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;========================&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">        vec.<span class="built_in">push_back</span>(i);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;压入第&quot;</span> &lt;&lt; i + <span class="number">1</span> &lt;&lt; <span class="string">&quot;个元素之后：&quot;</span> &lt;&lt; endl;</span><br><span class="line">        <span class="built_in">myprint</span>(vec);</span><br><span class="line">        <span class="built_in">mycapacity</span>(vec);</span><br><span class="line">        <span class="built_in">mysize</span>(vec);</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;========================&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://blogimgs-1256340525.cos.ap-chengdu.myqcloud.com/images/20210912144226.png"></p>
+<p>测试输出结果</p>
+<p>从输出结果中的两个红色箭头可以看出vector的扩容规则。</p>
+<p>4、<strong>注意事项：</strong><br>根据vector的插入和删除特性，以及扩容规则，我们在使用vector的时候要注意，<strong>在插入位置和删除位置之后的所有迭代器和指针引用都会失效，同理，扩容之后的所有迭代器指针和引用也都会失效。</strong></p>
+<h2 id="II、map-multimap-unordered-map-unordered-multimap"><a href="#II、map-multimap-unordered-map-unordered-multimap" class="headerlink" title="II、map &amp; multimap &amp; unordered_map &amp; unordered_multimap"></a>II、map &amp; multimap &amp; unordered_map &amp; unordered_multimap</h2><h5 id="2-1-map与multimap底层数据结构"><a href="#2-1-map与multimap底层数据结构" class="headerlink" title="2.1 map与multimap底层数据结构"></a>2.1 map与multimap底层数据结构</h5><p>map与multimap是STL中的<strong>关联容器</strong>、提供一对一key-value的数据处理能力； map与multimap的区别在于，multimap允许关键字重复，而map不允许重复。</p>
+<p>这两个关联容器的底层数据结构均为<strong>红黑树</strong>（<strong>平衡二叉搜索树</strong>），关于红黑树的理解可以参考<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://github.com/julycoding/The-Art-Of-Programming-By-July/blob/master/ebook/zh/03.01.md">教你透彻了解红黑树</a>一文。</p>
+<p>根据红黑树的原理，map与multimap可以实现**O(lgn)**的查找，插入和删除。</p>
+<h5 id="2-2-unordered-map-与unordered-multimap底层数据结构"><a href="#2-2-unordered-map-与unordered-multimap底层数据结构" class="headerlink" title="2.2 unordered_map 与unordered_multimap底层数据结构"></a>2.2 unordered_map 与unordered_multimap底层数据结构</h5><p>unordered_map与unordered_multimap 对比2.1中的两种map在于其2.1中的两个容器实现了以key为序排列，也就是说map与multimap为<strong>有序的</strong>。</p>
+<p>而unordered_map、unordered_multimap和map类似，都是存储的key-value的值，可以通过key快速索引到value。不同的是unordered_map不会根据key的大小进行排序，存储时是根据key的hash值判断元素是否相同，即unordered_map内部元素是<code>无序</code>的。unordered_map的key需要定义hash_value函数并且重载operator&#x3D;&#x3D;。<br>unordered_map的底层是一个防冗余的<code>哈希表（采用除留余数法）</code>。哈希表最大的优点，就是把数据的存储和查找消耗的时间大大降低，时间复杂度为<code>O(1)</code>，而代价仅仅是消耗比较多的内存。</p>
+<h2 id="III、set-multiset-unordered-set-unordered-multiset"><a href="#III、set-multiset-unordered-set-unordered-multiset" class="headerlink" title="III、set &amp; multiset &amp; unordered_set &amp; unordered_multiset"></a>III、set &amp; multiset &amp; unordered_set &amp; unordered_multiset</h2><p>以上四种容器也都是<strong>关联容器</strong>，set系与map系的区别在于map中存储的是<key-value>，而<strong>set可以理解为关键字即值，即只保存关键字的容器。</strong></p>
+<h5 id="3-1-set-multiset底层数据结构"><a href="#3-1-set-multiset底层数据结构" class="headerlink" title="3.1 set &amp; multiset底层数据结构"></a>3.1 set &amp; multiset底层数据结构</h5><p>set与multiset有序存储元素，这两种容器的底层实现与map一样都是<strong>红黑树</strong>，所以能实现O(lgn)的查找，插入，删除操作。</p>
+<p>set与multiset的区别在于是否允许重复；</p>
+<h5 id="3-2-unordered-set-unordered-multiset"><a href="#3-2-unordered-set-unordered-multiset" class="headerlink" title="3.2 unordered_set &amp; unordered_multiset"></a>3.2 unordered_set &amp; unordered_multiset</h5><p>与unordered_map &amp; unordered_multimap相同，其底层实现为<strong>hash table</strong>；</p>
+<h2 id="IV、-priority-queue"><a href="#IV、-priority-queue" class="headerlink" title="IV、 priority_queue"></a>IV、 priority_queue</h2><h5 id="4-1-priority-queue"><a href="#4-1-priority-queue" class="headerlink" title="4.1 priority_queue"></a>4.1 priority_queue</h5><p>优先级队列相当于一个<strong>有权值</strong>的单向队列queue，在这个队列中，所有元素是按照优先级排列的。</p>
+<p>priority_queue根据<strong>堆</strong>的处理规则来调整元素之间的位置，关于堆的原理，可以参考<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://blog.csdn.net/changyuanchn/article/details/14564403">堆</a>；</p>
+<p>根据堆的特性，优先级队列实现了取出最大最小元素时间复杂度为O(1),对于插入和删除，其最坏情况为O(lgn)。</p>
+<h2 id="V、-list"><a href="#V、-list" class="headerlink" title="V、 list"></a>V、 list</h2><p>list的底层数据结构为<strong>双向链表</strong>，特点是支持快速的增删。</p>
+<h2 id="Ⅵ、queue"><a href="#Ⅵ、queue" class="headerlink" title="Ⅵ、queue"></a>Ⅵ、queue</h2><p>queue为单向队列，为先入先出原则。</p>
+<h2 id="Ⅶ、deque"><a href="#Ⅶ、deque" class="headerlink" title="Ⅶ、deque"></a>Ⅶ、deque</h2><p>deque为双向队列，其对比queue可以实现在头尾两端高效的插入和删除操作。</p>
+<p>Reference:</p>
+<p>1、<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/834cc223bb57">C++ STL容器底层数据结构总结</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/knapsack-problem/" rel="prev" title="knapsack problem">
+                  <i class="fa fa-angle-left"></i> knapsack problem
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/unbounded-knapsack-problem/" rel="next" title="完全背包问题">
+                  完全背包问题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

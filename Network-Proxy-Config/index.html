@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="LinuxClash使用LDAP账号登录网站  进入后在订阅链接中选择 Clash  然后点击复制  下载 Clash Core for linux https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases 解压后放到一个目录下，例如放到 &#x2F;opt&#x2F;clash 里，将可执行文件更名为 clash 测试能否启动1234567# .&#x2F;clash -d .INFO[0000">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Network Proxy Config">
+<meta property="og:url" content="https://fuhailin.github.io/Network-Proxy-Config/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="LinuxClash使用LDAP账号登录网站  进入后在订阅链接中选择 Clash  然后点击复制  下载 Clash Core for linux https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases 解压后放到一个目录下，例如放到 &#x2F;opt&#x2F;clash 里，将可执行文件更名为 clash 测试能否启动1234567# .&#x2F;clash -d .INFO[0000">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc82f8958-64fc-4d11-b9e9-bb4fcf88462d%2FUntitled.png?table=block&id=a6d74177-4daa-43ac-b872-0d7fcf9b26af&cache=v2">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F13bc40f0-b30b-48ed-8c2d-6e28c5e82f28%2FUntitled.png?table=block&id=6791dfde-fb4e-489c-9887-a5f652d732f7&cache=v2">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F61e453bb-0d13-45db-a6b2-03e8272e7b21%2FUntitled.png?table=block&id=a2649c8a-6956-4b41-9f68-e669ed56e18e&cache=v2">
+<meta property="og:image" content="https://cdn.233xyx.com/favicon.ico">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7103b064-4eca-486d-92a0-86c2db6b90a8%2FUntitled.png?table=block&id=6aa9364d-cbf9-4504-ae0e-4e89ac4d4126&cache=v2">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F8f386063-01ad-4414-9e4d-50da587363fc%2FUntitled.png?table=block&id=5940ec9c-3d4d-48f0-ac7a-9ca2f66b9a40&cache=v2">
+<meta property="og:image" content="https://yacd.haishan.me/yacd.ico">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F8779641d-5439-4d2d-9940-04e56c1d8b87%2FUntitled.png?table=block&id=05ec7f8d-edab-4256-a2da-5eb5b3c7c919&cache=v2">
+<meta property="og:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F9e41f4a8-c234-45b1-b68d-db6867bf8b31%2FUntitled.png?table=block&id=126d6e6d-5b48-4542-8ac8-3b239cfd61a8&cache=v2">
+<meta property="og:image" content="https://v2xtls.org/wp-content/uploads/2020/11/clash%E9%85%8D%E7%BD%AEv2ray%E4%BF%A1%E6%81%AF-1024x779-1.png">
+<meta property="og:image" content="https://v2xtls.org/wp-content/uploads/2020/11/clash%E5%AF%BC%E5%85%A5%E4%BF%AE%E6%94%B9%E5%A5%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-1024x746-1.png">
+<meta property="og:image" content="https://v2xtls.org/wp-content/uploads/2020/11/clash%E9%80%89%E6%8B%A9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%8A%82%E7%82%B9-1024x753-1.png">
+<meta property="article:published_time" content="2021-08-30T11:32:03.000Z">
+<meta property="article:modified_time" content="2022-11-21T16:42:52.137Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="效率工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc82f8958-64fc-4d11-b9e9-bb4fcf88462d%2FUntitled.png?table=block&id=a6d74177-4daa-43ac-b872-0d7fcf9b26af&cache=v2">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Network-Proxy-Config/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Network-Proxy-Config/","path":"Network-Proxy-Config/","title":"Network Proxy Config"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Network Proxy Config | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux"><span class="nav-number">1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clash"><span class="nav-number">1.1.</span> <span class="nav-text">Clash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%83%BD%E5%90%A6%E5%90%AF%E5%8A%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">测试能否启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Shell%E4%B8%AD%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.1.2.</span> <span class="nav-text">在Shell中设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E6%A1%8C%E9%9D%A2%E7%8E%AF%E5%A2%83%E4%B8%AD%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.1.3.</span> <span class="nav-text">在桌面环境中设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD%E7%AE%A1%E7%90%86"><span class="nav-number">1.1.4.</span> <span class="nav-text">后续管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Clash-%E5%AF%BC%E5%85%A5%E8%87%AA%E5%BB%BAvmess%E8%8A%82%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">Clash 导入自建vmess节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker"><span class="nav-number">3.</span> <span class="nav-text">Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bazel-%E8%AE%BE%E7%BD%AEproxy"><span class="nav-number">3.1.</span> <span class="nav-text">Bazel 设置proxy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-%E8%AE%BE%E7%BD%AEproxy"><span class="nav-number">3.2.</span> <span class="nav-text">Git 设置proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%A7%BB%E9%99%A4%E5%BD%93%E5%89%8D-Git-%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">3.2.1.</span> <span class="nav-text">1 移除当前 Git 全局配置代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%9F%A5%E7%9C%8B%E4%BF%A1%E6%81%AF-Git-%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="nav-number">3.2.2.</span> <span class="nav-text">2 查看信息 Git 配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%87%8D%E6%96%B0%E4%B8%BA-Git-%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">3.2.3.</span> <span class="nav-text">3 重新为 Git 设置代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%86%8D%E6%AC%A1%E6%9F%A5%E7%9C%8B-gitconfig-%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.4.</span> <span class="nav-text">4 再次查看 gitconfig 的配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker%E8%AE%BE%E7%BD%AEproxy"><span class="nav-number">3.3.</span> <span class="nav-text">Docker设置proxy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References:</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Network-Proxy-Config/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Network Proxy Config | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Network Proxy Config
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-30 19:32:03" itemprop="dateCreated datePublished" datetime="2021-08-30T19:32:03+08:00">2021-08-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-11-22 00:42:52" itemprop="dateModified" datetime="2022-11-22T00:42:52+08:00">2022-11-22</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="Clash"><a href="#Clash" class="headerlink" title="Clash"></a>Clash</h2><p>使用LDAP账号登录<a target="_blank" rel="noopener" href="http://airport.appshahe.com/">网站</a></p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc82f8958-64fc-4d11-b9e9-bb4fcf88462d%2FUntitled.png?table=block&id=a6d74177-4daa-43ac-b872-0d7fcf9b26af&cache=v2" alt="img"></p>
+<p>进入后在订阅链接中选择 Clash</p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F13bc40f0-b30b-48ed-8c2d-6e28c5e82f28%2FUntitled.png?table=block&id=6791dfde-fb4e-489c-9887-a5f652d732f7&cache=v2" alt="img"></p>
+<p>然后点击复制</p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F61e453bb-0d13-45db-a6b2-03e8272e7b21%2FUntitled.png?table=block&id=a2649c8a-6956-4b41-9f68-e669ed56e18e&cache=v2" alt="img"></p>
+<p>下载 Clash Core for linux</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">https://github.com/Dreamacro/clash/releases</a></p>
+<p>解压后放到一个目录下，例如放到 <code>/opt/clash</code> 里，将可执行文件更名为 <strong><code>clash</code></strong></p>
+<h3 id="测试能否启动"><a href="#测试能否启动" class="headerlink" title="测试能否启动"></a>测试能否启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># ./clash -d .</span><br><span class="line">INFO[0000] Start initial compatible provider 自动选择</span><br><span class="line">INFO[0000] Start initial compatible provider ******</span><br><span class="line">INFO[0000] HTTP proxy listening at: [::]:7896</span><br><span class="line">INFO[0000] SOCKS proxy listening at: [::]:7897</span><br><span class="line">INFO[0000] Mixed(http+socks) proxy listening at: [::]:7895</span><br><span class="line">INFO[0000] RESTful API listening at: 127.0.0.1:9090</span><br></pre></td></tr></table></figure>
+<p>出现 proxy listenning at 则可以认为启动成功.</p>
+<p>下载GEOIP数据库，将其放到clash可执行文件的同级目录下，命名为 <strong>Country.mmdb</strong></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.233xyx.com/1616551751307_104.mmdb">cdn.233xyx.com<img src="https://cdn.233xyx.com/favicon.ico" alt="cdn.233xyx.com"><a target="_blank" rel="noopener" href="https://cdn.233xyx.com/1616551751307_104.mmdb">https://cdn.233xyx.com/1616551751307_104.mmdb</a></a></p>
+<p>下载刚才从网站中复制的Clash链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://airport.xxx.com/s/xxxx?target=clash -O config.yaml</span><br></pre></td></tr></table></figure>
+
+<p>此时，&#x2F;opt&#x2F;clash 下的目录结构应该为</p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F7103b064-4eca-486d-92a0-86c2db6b90a8%2FUntitled.png?table=block&id=6aa9364d-cbf9-4504-ae0e-4e89ac4d4126&cache=v2" alt="img"></p>
+<p>创建 Clash service</p>
+<p>&#x2F;lib&#x2F;systemd&#x2F;system&#x2F;clash.service</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=clash</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">ExecStart=/opt/clash/clash -d /opt/clash/</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>启动服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start clash.service</span><br><span class="line">systemctl <span class="built_in">enable</span> clash.service</span><br><span class="line">systemctl status clash.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="在Shell中设置"><a href="#在Shell中设置" class="headerlink" title="在Shell中设置"></a>在Shell中设置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># set clash network proxy for all user</span></span><br><span class="line">vim /etc/profile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关理代理</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">proxy_off</span></span>()&#123;</span><br><span class="line">    <span class="built_in">unset</span> http_proxy</span><br><span class="line">    <span class="built_in">unset</span> https_proxy</span><br><span class="line">    <span class="built_in">unset</span> all_proxy</span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;代理已关闭&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 打开代理</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">proxy_on</span></span>() &#123;</span><br><span class="line">    <span class="built_in">export</span> no_proxy=<span class="string">&quot;localhost,127.0.0.1,localaddress,.localdomain.com&quot;</span></span><br><span class="line">    <span class="built_in">export</span> http_proxy=<span class="string">&quot;http://0.0.0.0:7890&quot;</span></span><br><span class="line">    <span class="built_in">export</span> https_proxy=<span class="string">&quot;http://0.0.0.0:7890&quot;</span></span><br><span class="line">    <span class="built_in">export</span> all_proxy=<span class="string">&quot;socks5://0.0.0.0:7890&quot;</span></span><br><span class="line">    <span class="built_in">echo</span> -e <span class="string">&quot;代理已开启&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="在桌面环境中设置"><a href="#在桌面环境中设置" class="headerlink" title="在桌面环境中设置"></a>在桌面环境中设置</h3><p>手动设置系统代理</p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F8f386063-01ad-4414-9e4d-50da587363fc%2FUntitled.png?table=block&id=5940ec9c-3d4d-48f0-ac7a-9ca2f66b9a40&cache=v2" alt="img"></p>
+<h3 id="后续管理"><a href="#后续管理" class="headerlink" title="后续管理"></a>后续管理</h3><p>更新订阅(公司内网环境下)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /opt/clash</span><br><span class="line">wget http://airport.appshahe.com/s/qyedPtbB?target=clash -O config.yaml</span><br><span class="line">sudo service clash restart</span><br></pre></td></tr></table></figure>
+
+<p>节点管理</p>
+<p>打开 Clash 的一个网页管理面板(纯前端面板，部署到本地也是同样的效果)</p>
+<p><a target="_blank" rel="noopener" href="https://yacd.haishan.me/">yacd - Yet Another Clash DashboardYet Another Clash Dashboard<img src="https://yacd.haishan.me/yacd.ico" alt="yacd - Yet Another Clash Dashboard"><a target="_blank" rel="noopener" href="https://yacd.haishan.me/">https://yacd.haishan.me/</a></a></p>
+<p>接口选择为</p>
+<p><a target="_blank" rel="noopener" href="http://127.0.0.1:9090/">http://127.0.0.1:9090</a></p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F8779641d-5439-4d2d-9940-04e56c1d8b87%2FUntitled.png?table=block&id=05ec7f8d-edab-4256-a2da-5eb5b3c7c919&cache=v2" alt="img"></p>
+<p>然后就可以进入管理了</p>
+<p><img src="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F9e41f4a8-c234-45b1-b68d-db6867bf8b31%2FUntitled.png?table=block&id=126d6e6d-5b48-4542-8ac8-3b239cfd61a8&cache=v2" alt="img"></p>
+<h1 id="Clash-导入自建vmess节点"><a href="#Clash-导入自建vmess节点" class="headerlink" title="Clash 导入自建vmess节点"></a>Clash 导入自建vmess节点</h1><p>如果你是自建服务器，点击 <a target="_blank" rel="noopener" href="https://v2xtls.org/clash_template2.yaml">https://v2xtls.org/clash_template2.yaml</a> 下载模板配置文件，用记事本、VS Code、Notepad++等编辑器打开，找到v2ray配置块，把 server、port、uid等信息改成你服务端配置(不知道这些信息填什么请参考参考查看 <a target="_blank" rel="noopener" href="https://v2xtls.org/%E8%8E%B7%E5%8F%96%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BF%A1%E6%81%AF/">获取科学上网服务端信息</a>）：</p>
+<p><a target="_blank" rel="noopener" href="https://v2xtls.org/wp-content/uploads/2020/11/clash%E9%85%8D%E7%BD%AEv2ray%E4%BF%A1%E6%81%AF-1024x779-1.png"><img src="https://v2xtls.org/wp-content/uploads/2020/11/clash%E9%85%8D%E7%BD%AEv2ray%E4%BF%A1%E6%81%AF-1024x779-1.png" alt="clash配置v2ray信息"></a></p>
+<p>clash配置v2ray信息</p>
+<p><strong>如果使用了伪装</strong>，把tls、network等字段的注释取消（把#号和后面的空格删了），并正确配置伪装路径和伪装域名。</p>
+<blockquote>
+<p>注意：</p>
+<p>\1. 如果看不懂配置文件，不要改name的值！</p>
+<p>\2. 如果有多个节点，按照v2ray格式修改ss&#x2F;ss-obfs&#x2F;trojan等节点的信息，看不懂不要改name的值!</p>
+<p>\3. 修改name的值、添加和删除节点请参考：<a target="_blank" rel="noopener" href="https://v2xtls.org/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3clash%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">深入理解Clash配置文件</a></p>
+</blockquote>
+<p>\6. 点击“Profiles”，把修改好的配置文件拖到clash界面中，然后双击选中拖进来的配置文件(深色表示选中)：</p>
+<p><a target="_blank" rel="noopener" href="https://v2xtls.org/wp-content/uploads/2020/11/clash%E5%AF%BC%E5%85%A5%E4%BF%AE%E6%94%B9%E5%A5%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6.png"><img src="https://v2xtls.org/wp-content/uploads/2020/11/clash%E5%AF%BC%E5%85%A5%E4%BF%AE%E6%94%B9%E5%A5%BD%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-1024x746-1.png" alt="clash导入修改好的配置文件"></a></p>
+<p>clash导入修改好的配置文件</p>
+<p>\7. 接着点击“Proxies”，进入最重要的设置：选择代理模式和使用的节点：</p>
+<p><a target="_blank" rel="noopener" href="https://v2xtls.org/wp-content/uploads/2020/11/clash%E9%80%89%E6%8B%A9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%8A%82%E7%82%B9-1024x753-1.png"><img src="https://v2xtls.org/wp-content/uploads/2020/11/clash%E9%80%89%E6%8B%A9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E5%92%8C%E8%8A%82%E7%82%B9-1024x753-1.png" alt="clash选择代理模式和节点"></a></p>
+<p>clash选择代理模式和节点</p>
+<p>最上面的Global、Rule和Direct表示全局代理、基于规则路由和直连，(可以认为)对应其他客户端的全局模式、PAC模式和禁用系统代理。<strong>绝大多数情况建议使用Rule</strong>。</p>
+<p>接着在PROXY里选择使用的节点，默认是自动选择快速节点，也可以指定使用某个节点。</p>
+<p>Final表示如果没有匹配的规则，默认走代理还是直连。个人建议默认直连，网站打不开再选择代理。</p>
+<p>其他看不懂的东西保持默认就好了。</p>
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>We recommend deploying Clash with <a target="_blank" rel="noopener" href="https://docs.docker.com/compose/">Docker Compose</a> if you’re on Linux. On macOS, it’s recommended to use the third-party Clash GUI <a target="_blank" rel="noopener" href="https://install.appcenter.ms/users/clashx/apps/clashx-pro/distribution_groups/public">ClashX Pro</a>. (<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/issues/770#issuecomment-650951876">#770</a>)</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">clash:</span></span><br><span class="line">    <span class="comment"># ghcr.io/dreamacro/clash</span></span><br><span class="line">    <span class="comment"># ghcr.io/dreamacro/clash-premium</span></span><br><span class="line">    <span class="comment"># dreamacro/clash</span></span><br><span class="line">    <span class="comment"># dreamacro/clash-premium</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">dreamacro/clash</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">clash</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./config.yaml:/root/.config/clash/config.yaml</span></span><br><span class="line">      <span class="comment"># - ./ui:/ui # dashboard volume</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;7890:7890&quot;</span></span><br><span class="line">      <span class="comment"># - &quot;7891:7891&quot;</span></span><br><span class="line">      <span class="comment"># - &quot;8080:8080&quot; # external controller (Restful API)</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">unless-stopped</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">&quot;host&quot;</span> <span class="comment"># or &quot;host&quot; on Linux</span></span><br></pre></td></tr></table></figure>
+
+<p>Save as <code>docker-compose.yaml</code>, create <code>config.yaml</code> in the same directory, and run the below commands to get Clash up:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>You can view the logs with:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose logs</span><br></pre></td></tr></table></figure>
+
+<p>Stop Clash with:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose stop &amp;&amp; docker-compose rm -f</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Bazel-设置proxy"><a href="#Bazel-设置proxy" class="headerlink" title="Bazel 设置proxy"></a>Bazel 设置proxy</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HTTP_PROXY=http://127.0.0.1:7890</span><br><span class="line"><span class="built_in">export</span> HTTPS_PROXY=http://127.0.0.1:7890</span><br><span class="line"></span><br><span class="line"><span class="built_in">env</span> | grep http</span><br><span class="line"><span class="built_in">unset</span> HTTP_PROXY HTTPS_PROXY</span><br></pre></td></tr></table></figure>
+
+<h2 id="Git-设置proxy"><a href="#Git-设置proxy" class="headerlink" title="Git 设置proxy"></a>Git 设置proxy</h2><h3 id="1-移除当前-Git-全局配置代理"><a href="#1-移除当前-Git-全局配置代理" class="headerlink" title="1 移除当前 Git 全局配置代理"></a>1 移除当前 Git 全局配置代理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查看信息-Git-配置信息"><a href="#2-查看信息-Git-配置信息" class="headerlink" title="2 查看信息 Git 配置信息"></a>2 查看信息 Git 配置信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-重新为-Git-设置代理"><a href="#3-重新为-Git-设置代理" class="headerlink" title="3 重新为 Git 设置代理"></a>3 重新为 Git 设置代理</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy &#x27;http://127.0.0.1:7895&#x27;</span><br><span class="line">git config --global https.proxy &#x27;http://127.0.0.1:7895&#x27;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">unset</span></span></span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-再次查看-gitconfig-的配置"><a href="#4-再次查看-gitconfig-的配置" class="headerlink" title="4 再次查看 gitconfig 的配置"></a>4 再次查看 gitconfig 的配置</h3><p>使用如下命令再次查看配置文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.gitconfig</span><br></pre></td></tr></table></figure>
+
+<p>会发现多出了这两行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[http]</span><br><span class="line">    proxy = http://127.0.0.1:7895</span><br><span class="line">[https]</span><br><span class="line">    proxy = http://127.0.0.1:7895</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker设置proxy"><a href="#Docker设置proxy" class="headerlink" title="Docker设置proxy"></a>Docker设置proxy</h2><p>方法一、编辑<code>~/.docker/config.json</code>文件，加入proxies配置信息</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line"> <span class="attr">&quot;proxies&quot;</span><span class="punctuation">:</span></span><br><span class="line"> <span class="punctuation">&#123;</span></span><br><span class="line">   <span class="attr">&quot;default&quot;</span><span class="punctuation">:</span></span><br><span class="line">   <span class="punctuation">&#123;</span></span><br><span class="line">     <span class="attr">&quot;httpProxy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://0.0.0.0:7895&quot;</span><span class="punctuation">,</span></span><br><span class="line">     <span class="attr">&quot;httpsProxy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://0.0.0.0:7895&quot;</span><span class="punctuation">,</span></span><br><span class="line">     <span class="attr">&quot;noProxy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;*.test.example.com,.example2.com,127.0.0.0/8&quot;</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>方法二、Set the environment variables manually</p>
+<p>When you build the image, or using the <code>--env</code> flag when you create or run the container, you can set one or more of the following variables to the appropriate value. This method makes the image less portable, so if you have Docker 17.07 or higher, you should <a target="_blank" rel="noopener" href="https://docs.docker.com/network/proxy/#configure-the-docker-client">configure the Docker client</a> instead.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Variable</th>
+<th align="left">Dockerfile example</th>
+<th align="left"><code>docker run</code> example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>HTTP_PROXY</code></td>
+<td align="left"><code>ENV HTTP_PROXY=&quot;http://127.0.0.1:7895&quot;</code></td>
+<td align="left"><code>--env HTTP_PROXY=&quot;http://127.0.0.1:7895&quot;</code></td>
+</tr>
+<tr>
+<td align="left"><code>HTTPS_PROXY</code></td>
+<td align="left"><code>ENV HTTPS_PROXY=&quot;127.0.0.1:7895&quot;</code></td>
+<td align="left"><code>--env HTTPS_PROXY=&quot;https://127.0.0.1:7895&quot;</code></td>
+</tr>
+<tr>
+<td align="left"><code>FTP_PROXY</code></td>
+<td align="left"><code>ENV FTP_PROXY=&quot;ftp://127.0.0.1:7895&quot;</code></td>
+<td align="left"><code>--env FTP_PROXY=&quot;ftp://127.0.0.1:7895&quot;</code></td>
+</tr>
+<tr>
+<td align="left"><code>NO_PROXY</code></td>
+<td align="left"><code>ENV NO_PROXY=&quot;*.test.example.com,.example2.com&quot;</code></td>
+<td align="left"><code>--env NO_PROXY=&quot;*.test.example.com,.example2.com&quot;</code></td>
+</tr>
+</tbody></table>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker build . \</span><br><span class="line">--network=host \</span><br><span class="line">--build-arg http_proxy=http://127.0.0.1:7895 \</span><br><span class="line">--build-arg https_proxy=http://127.0.0.1:7895</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.calabash.top/Calabash/articles/5f9061e8cd3f3a2eb0b774a1">https://blog.calabash.top/Calabash/articles/5f9061e8cd3f3a2eb0b774a1</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 效率工具</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Running-WordPress-in-Kubernetes-Cluster/" rel="prev" title="Running WordPress in Kubernetes Cluster">
+                  <i class="fa fa-angle-left"></i> Running WordPress in Kubernetes Cluster
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Tensorflow-compile-from-source/" rel="next" title="Tensorflow compile from source">
+                  Tensorflow compile from source <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="本文介绍tensorflow Serving的原理和代码实现, 并提供简要的代码阅读指导. # 如何serve一个模型具体的步骤可以参考官方文档. 主要包括两个部分： #  导出模型 启动服务  需要说明的是导出模型部分. 如果要把我们训练的模型拿来提供服务, 除了模型本身外, 还需要一些额外的信息, 比如模型的名称, 输入、输出对应的tensor信息, 方法名, 这些东西可以让TFS进行请求数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensorflow Serving的原理和代码实现">
+<meta property="og:url" content="https://fuhailin.github.io/tensorflow-serving/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="本文介绍tensorflow Serving的原理和代码实现, 并提供简要的代码阅读指导. # 如何serve一个模型具体的步骤可以参考官方文档. 主要包括两个部分： #  导出模型 启动服务  需要说明的是导出模型部分. 如果要把我们训练的模型拿来提供服务, 除了模型本身外, 还需要一些额外的信息, 比如模型的名称, 输入、输出对应的tensor信息, 方法名, 这些东西可以让TFS进行请求数据">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/naurril/draft/raw/master/tf/tfs_arch.png">
+<meta property="article:published_time" content="2022-06-09T13:21:49.000Z">
+<meta property="article:modified_time" content="2022-07-13T07:38:12.644Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/naurril/draft/raw/master/tf/tfs_arch.png">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/tensorflow-serving/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/tensorflow-serving/","path":"tensorflow-serving/","title":"Tensorflow Serving的原理和代码实现"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tensorflow Serving的原理和代码实现 | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95serve%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">如何serve一个模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TFS%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">2.</span> <span class="nav-text">TFS的功能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TFS%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">TFS的架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Servable"><span class="nav-number">3.1.</span> <span class="nav-text">Servable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ServerCore"><span class="nav-number">3.2.</span> <span class="nav-text">ServerCore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AspiredVersionManager"><span class="nav-number">3.3.</span> <span class="nav-text">AspiredVersionManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BasicManager"><span class="nav-number">3.4.</span> <span class="nav-text">BasicManager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LoaderHarness"><span class="nav-number">3.5.</span> <span class="nav-text">LoaderHarness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Loader"><span class="nav-number">3.6.</span> <span class="nav-text">Loader</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Adapter"><span class="nav-number">3.7.</span> <span class="nav-text">Adapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SourceRouter"><span class="nav-number">3.8.</span> <span class="nav-text">SourceRouter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Source"><span class="nav-number">3.9.</span> <span class="nav-text">Source</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Target"><span class="nav-number">3.10.</span> <span class="nav-text">Target</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">启动过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%BB%B4%E6%8A%A4"><span class="nav-number">5.</span> <span class="nav-text">模型维护</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E6%89%AB%E6%8F%8F"><span class="nav-number">5.1.</span> <span class="nav-text">文件系统扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD-%E5%8D%B8%E8%BD%BD"><span class="nav-number">5.2.</span> <span class="nav-text">模型加载&#x2F;卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%AE%A1%E7%90%86"><span class="nav-number">5.3.</span> <span class="nav-text">模型管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%A8%A1%E5%9E%8B%E5%8A%A0%E8%BD%BD"><span class="nav-number">5.4.</span> <span class="nav-text">快速模型加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Aspired-version-policy"><span class="nav-number">5.5.</span> <span class="nav-text">Aspired version policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servable-Version-Policy"><span class="nav-number">5.6.</span> <span class="nav-text">Servable Version Policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE%E5%8A%A8%E6%80%81%E6%9B%B4%E6%96%B0"><span class="nav-number">5.7.</span> <span class="nav-text">模型配置动态更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="nav-number">5.8.</span> <span class="nav-text">资源管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Batching"><span class="nav-number">6.</span> <span class="nav-text">Batching</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Model-Warmup"><span class="nav-number">7.</span> <span class="nav-text">Model Warmup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">8.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B3%E5%8F%B0%E9%85%8D%E7%BD%AE"><span class="nav-number">8.1.</span> <span class="nav-text">平台配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">8.2.</span> <span class="nav-text">模型配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8ETensorflow%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">9.</span> <span class="nav-text">与Tensorflow的关系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">10.</span> <span class="nav-text">性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">10.1.</span> <span class="nav-text">References:</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/tensorflow-serving/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Tensorflow Serving的原理和代码实现 | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tensorflow Serving的原理和代码实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-06-09 21:21:49" itemprop="dateCreated datePublished" datetime="2022-06-09T21:21:49+08:00">2022-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-07-13 15:38:12" itemprop="dateModified" datetime="2022-07-13T15:38:12+08:00">2022-07-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文介绍tensorflow Serving的原理和代码实现, 并提供简要的代码阅读指导. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par1">#</a></p>
+<h1 id="如何serve一个模型"><a href="#如何serve一个模型" class="headerlink" title="如何serve一个模型"></a>如何serve一个模型</h1><p>具体的步骤可以参考<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/g3doc/serving_basic.md">官方文档</a>. 主要包括两个部分： <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par2">#</a></p>
+<ol>
+<li>导出模型</li>
+<li>启动服务</li>
+</ol>
+<p>需要说明的是导出模型部分. 如果要把我们训练的模型拿来提供服务, 除了模型本身外, 还需要一些额外的信息, 比如模型的名称, 输入、输出对应的tensor信息, 方法名, 这些东西可以让TFS进行请求数据的格式检查以及目标模型查找. 这就是模型导出的作用. 直接拿一个checkpoint文件之类的是不能用的. TF使用<a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/saved_model/README.md">SavedModel</a>格式导出模型, 并提供了相关的工具(tf.saved_model.builder.SavedModelBuilder). <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par3">#</a></p>
+<h1 id="TFS的功能"><a href="#TFS的功能" class="headerlink" title="TFS的功能"></a>TFS的功能</h1><ul>
+<li>支持多种模型服务策略,比如用最新版本&#x2F;所有版本&#x2F;指定版本, 以及动态策略更新、模型的增删等</li>
+<li>自动加载&#x2F;卸载模型</li>
+<li>Batching</li>
+<li>多种平台支持(非TF平台)</li>
+</ul>
+<h1 id="TFS的架构"><a href="#TFS的架构" class="headerlink" title="TFS的架构"></a>TFS的架构</h1><p><img src="https://github.com/naurril/draft/raw/master/tf/tfs_arch.png" alt="架构图"></p>
+<p>本节简要介绍各模块的主要功能, 后续章节介绍他们相互之间是如何协作的. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par5">#</a></p>
+<h2 id="Servable"><a href="#Servable" class="headerlink" title="Servable"></a>Servable</h2><p>Servable是对模型的抽象, 但是任何能够提供算法或者数据查询服务的实体都可以是Servable, 不一定是机器学习模型. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par6">#</a></p>
+<p>在我们常用的场景下, Servable就是模型. 所以本文有时会混用模型和Servable. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par7">#</a></p>
+<h2 id="ServerCore"><a href="#ServerCore" class="headerlink" title="ServerCore"></a>ServerCore</h2><p>整个服务系统的创建维护, 建立http rest server、grpc server和模型管理部分(AspiredVersionManager)之间的关系等. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par8">#</a></p>
+<h2 id="AspiredVersionManager"><a href="#AspiredVersionManager" class="headerlink" title="AspiredVersionManager"></a>AspiredVersionManager</h2><p>模型管理的上层控制部分. 负责执行Source发出的模型管理指令. 一部分功能通过回调的方式由Source调用, 一部分由独立线程执行. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par9">#</a></p>
+<h2 id="BasicManager"><a href="#BasicManager" class="headerlink" title="BasicManager"></a>BasicManager</h2><p>负责Servable的管理, 包括加载、卸载、状态查询、资源跟踪等, 对外提供如下接口操作Servable <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par10">#</a></p>
+<ul>
+<li>ManageServable</li>
+<li>LoadServable</li>
+<li>UnloadServable</li>
+<li>StopManagerServable</li>
+</ul>
+<p>另外提供接口查询servableHandle(GetUntypedServableHandle), 也就是加载好的模型,供http rest或者grpc server调用进行推理. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par11">#</a></p>
+<p>所有受管理的servable都放在ManagedMap里面, 已经正常加载的servable同时也放在ServingMap里进行管理, 提供查询接口. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par12">#</a></p>
+<h2 id="LoaderHarness"><a href="#LoaderHarness" class="headerlink" title="LoaderHarness"></a>LoaderHarness</h2><p>LoaderHarness对Loader提供状态跟踪, ServingMap和ManagedMap里面保存的都是LoaderHarness对象,只有通过LoaderHarness才能访问Loader的接口. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par13">#</a></p>
+<h2 id="Loader"><a href="#Loader" class="headerlink" title="Loader"></a>Loader</h2><p>Loader对Servable的生命周期进行控制, 包括load&#x2F;unload接口,资源预估接口等. 加载之后的Servable也存在Loader里面. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par14">#</a></p>
+<h2 id="Adapter"><a href="#Adapter" class="headerlink" title="Adapter"></a>Adapter</h2><p>Adapter是为了将Source(比如文件系统)转换成Loader而引入的抽象, 这样server core的实现和具体的平台解耦. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par15">#</a></p>
+<h2 id="SourceRouter"><a href="#SourceRouter" class="headerlink" title="SourceRouter"></a>SourceRouter</h2><p>Adapter是平台相关的, 每个平台一个Adapter, 但是Source是和Servable相关的, 这样在Adapter和Source之间存在一对多的关系, Router负责维护这些对应关系. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par16">#</a></p>
+<h2 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h2><p>Source是对Servable的来源(Source)的抽象, 比如模型文件是某个模型的Source. Source监控外部的资源（如文件系统）, 发现新的模型版本, 并通知Target. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par17">#</a></p>
+<h2 id="Target"><a href="#Target" class="headerlink" title="Target"></a>Target</h2><p>Target是和Source对应的抽象概念, AspiredVersionManager、Router都是Target. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par18">#</a></p>
+<h1 id="启动过程"><a href="#启动过程" class="headerlink" title="启动过程"></a>启动过程</h1><p>TFS启动的全部参数可以参考<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/model_servers/main.cc">main.c</a>. 主要的参数包括服务端口（gprc和http rest端口）和模型配置. 其中模型配置可以直接指定（名称（model_name）、路径（model_base_path）等）, 也可以使用文件指定（model_config_file,格式参考<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/config/model_server_config.proto">model_server_config.proto</a>）. 如果只启动单个模型的服务可以使用参数指定, 如果是多个模型必须使用文件. 其他的参数可以使用默认值. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par19">#</a></p>
+<p>启动过程主要是创建ServerCore对象, 并启动grpc server和http server. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par20">#</a></p>
+<p>ServerCore对象可以认为是系统中枢, 模型的维护, 服务请求的处理都是由他完成. ServerCore通过BasicManager管理所有的model(多版本号), 并查处模型已经提供预测、分类、回归请求. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par21">#</a></p>
+<p>ServerCore启动的时候创建AspiredVersionManager, AspiredVersionManager会启动定时任务(线程), 用于处理AspiredVersionRequest消息, 其实就是模型的加载、卸载. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par22">#</a></p>
+<p>启动的时候ServerCore还会根据模型配置创建文件系统扫描任务, 定时扫描模型文件目录并进行相应的处理 <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par23">#</a></p>
+<p>http rest服务启动后, 会监听http post请求, 将请求（json）转换成protobuf格式的消息, 通过serverCore查找对应的模型版本, 获取对应的已加载的模型, 进行运算并返回结果. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par24">#</a></p>
+<p>rgpc服务与 http rest服务类似. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par25">#</a></p>
+<h1 id="模型维护"><a href="#模型维护" class="headerlink" title="模型维护"></a>模型维护</h1><h2 id="文件系统扫描"><a href="#文件系统扫描" class="headerlink" title="文件系统扫描"></a>文件系统扫描</h2><p>Source是TFS定义的对未加载模型对象的抽象, 目前实现了两种Source, 一种是StaticStoragePathSource,一种是FileSystemStoragePathSource. 前者是简单的静态的模型文件存储系统, 仅仅在启动时触发模型的加载, 没有其他动作. 后者是动态的Source, 能监测存储系统的变化并发出通知. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par26">#</a></p>
+<p>TFS实现Source时将模块职责划分的很清晰, Source的职责就是监测变化, 如何处理则由Source的用户决定, 所以Source有一个接口SetAspiredVersionsCallback, 可以设置回调函数用于通知AspiredVersion的变化. Source在变化的时候就会调用设置的回调函数. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par27">#</a></p>
+<p>作为Source的对等对象, 系统也定义了Target, 有接口GetAspiredVersionsCallback, 用于获取处理AspiredVersions的回调接口, 然后我们就可以将Target和Source连起来了. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par28">#</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">template &lt;typename T&gt;</span><br><span class="line">void ConnectSourceToTarget(Source&lt;T&gt;* source, Target&lt;T&gt;* target) &#123;</span><br><span class="line">  source-&gt;SetAspiredVersionsCallback(target-&gt;GetAspiredVersionsCallback());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Source和ServerCore的关系是这样的 <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par29">#</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Source --&gt; Router --&gt; Adapter --&gt; AspiredVersionManager</span><br></pre></td></tr></table></figure>
+
+<p>上述连接关系里面, Router和Adapter既是Source又是Target, AspiredVersionManager是Target. 但是Router没有实现Source接口, 而是要求在创建Router对象时直接将Adapter作为参数, 这样实现主要目的是创建一对多的关系. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par30">#</a></p>
+<p>系统根据所支持平台的个数（tensorflow算是一种平台）创建Adapter, 一种平台对应一个Adapter, 负责创建模型加载器Loader. 对于tensorflow平台, 对应的adapter是<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/servables/tensorflow/saved_model_bundle_source_adapter.h">SavedModelBundleSourceAdapter</a>. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par31">#</a></p>
+<p>Router负责根据模型名称查找对应的平台(<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/config/model_server_config.proto">model_config</a>里面有指定平台名称), 从而定位到对应的Adapter. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par32">#</a></p>
+<p>这些连接关系是在系统启动, 或者更新model-config的时候建立的. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par33">#</a></p>
+<p>默认配置下, FileSystemStoragePathSource为Source的实例, SavedModelBundleSourceAdapter为Adapter的实例, DynamicSourceRouter为Router的实例. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par34">#</a></p>
+<ol>
+<li>FileSystemStoragePathSource有自己单独的工作线程, 周期查询文件系统, 发现每个模型的版本, 根据指定的servable_version_policy(<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/config/model_server_config.proto">model_config</a>), 创建ServableData(模型名, 版本号, 路径), 传给Router</li>
+<li>Router根据路由找到对应的adapter, 传给Adataper</li>
+<li>Adapter将ServableData(模型名, 版本号, 路径)转换成ServableData(模型名, 版本, Loader), 传给AspiredVersionManager</li>
+<li>AspiredVersionManager将这些信息存到pending_aspired_versions_requests_, 等待另外一个工作线程(AspiredVersionsManager_ManageState_Thread)处理</li>
+</ol>
+<p>上述消息传递的方式是依次调用下游的SetAspiredVersions函数. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par35">#</a></p>
+<h2 id="模型加载-卸载"><a href="#模型加载-卸载" class="headerlink" title="模型加载&#x2F;卸载"></a>模型加载&#x2F;卸载</h2><p>上节提到的工作线程ManageState_Thread是在AspiredVersionsManager创建的时候启动的定时线程, 负责处理pending_aspired_versions_requests_里面的ServableData. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par36">#</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">manage_state_thread_.reset(new PeriodicFunction(</span><br><span class="line">        [this]() &#123;</span><br><span class="line">          this-&gt;FlushServables();</span><br><span class="line">          this-&gt;HandlePendingAspiredVersionsRequests();</span><br><span class="line">          this-&gt;InvokePolicyAndExecuteAction();</span><br><span class="line">        &#125;,</span><br><span class="line">        manage_state_interval_micros));</span><br></pre></td></tr></table></figure>
+
+<p>该线程的工作分3部分, 如上述代码所示 <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par37">#</a></p>
+<ol>
+<li>FlushServables主要目的是将异常状态的模型清理掉, 或者停止加载. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par38">#</a></li>
+<li>HandlePendingAspiredVersionsRequests取出每个模型的信息分别处理, 如果发现当前要加载的模型版本已经存在, 需要等待之前的模型完成服务并退出, 这叫re-aspired version. 如果不是这种情况, 计算需要加载的模型和需要卸载的模型, 将新加载的模型管理起来（加到管理列表）,将需要卸载的模型打上标记并停止其加载. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par39">#</a></li>
+<li>InvokePolicyAndExecuteAction每次只会执行一个模型的一个动作（load&#x2F;unload). 具体方法是每个模型根据aspired_version_policy（AvailabilityPreservingPolicy&#x2F;ResourcePreservingPolicy）选择一个动作, 然后所有模型的选择动作放在一起排序, unload优先load, 决定处理哪一个模型. 执行动作的时候, 会调用Loader的相应函数, 并设置相关的状态(参考模型状态管理). <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par40">#</a></li>
+</ol>
+<p>可以看出ManageState_Thread并不是一股脑的进行模型的加载、卸载等操作, 而是兼顾了资源占用、服务可用性、系统负荷的, 考虑周到. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par41">#</a></p>
+<h2 id="模型管理"><a href="#模型管理" class="headerlink" title="模型管理"></a>模型管理</h2><p>AspiredVersionManager的成员BasicManager负责模型管理, 把一个模型版本加入到BasicManager里面就叫管理一个模型(manager a model). BasicManager通过LoaderHarness间接管理模型, LoaderHarness管理一个模型的生命周期, 持有模型的Loader对象, 在合适的时候调用Loader的Load&#x2F;Unload完成状态迁移. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par42">#</a></p>
+<p>LoaderHarness有自己的<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/core/loader_harness.h">状态</a>记录, 每次执行动作时都会进行状态迁移. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par43">#</a></p>
+<p>进行模型状态管理的同时, BasicManager还会将模型的<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/core/servable_state.h">服务状态</a>发布到EventBus(servable_event_bus_), 便于其他模块对这些状态变化进行订阅. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par44">#</a></p>
+<h2 id="快速模型加载"><a href="#快速模型加载" class="headerlink" title="快速模型加载"></a>快速模型加载</h2><p>首次启动的时候, 采用快速加载模式, 实现方法是临时增加模型加载线程（4倍可用cpu个数）. 完成加载后恢复线程数. <a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/model_servers/server_core.h">代码</a> <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par45">#</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// The number of load threads used to load the initial set of models at</span><br><span class="line">// server startup. This is set high to load up the initial set of models</span><br><span class="line">// fast, after this the server uses num_load_threads.</span><br><span class="line">int32 num_initial_load_threads = 4.0 * port::NumSchedulableCPUs();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Aspired-version-policy"><a href="#Aspired-version-policy" class="headerlink" title="Aspired version policy"></a>Aspired version policy</h2><p>AspiredVersionPolicy是用来决定一个模型的多个版本谁先处理, <a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/core/availability_preserving_policy.h">AvailabilityPreservingPolicy</a>的目标是保证服务可用, 会临时牺牲一些资源, 而 <a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/core/resource_preserving_policy.h">ResourcePreservingPolicy</a>是优先保证占用更少的资源, 可能会牺牲服务可用性. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par46">#</a></p>
+<p>代码里面的注释提供了很好的解释, 可参考. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par47">#</a></p>
+<h2 id="Servable-Version-Policy"><a href="#Servable-Version-Policy" class="headerlink" title="Servable Version Policy"></a>Servable Version Policy</h2><p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/sources/storage_path/file_system_storage_path_source.proto">ServableVersionPolicy</a> 定义了模型的多个版本如何进行选择. 注意和Aspired Version Policy的关系, 一个是如何选择版本, 一个是选择了版本后, 如何选择执行先后顺序. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par48">#</a></p>
+<p>目前提供3种方式： <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par49">#</a></p>
+<ul>
+<li>all 所有的版本</li>
+<li>latest 最新的N个版本</li>
+<li>specific 一个或一些指定的版本号</li>
+</ul>
+<h2 id="模型配置动态更新"><a href="#模型配置动态更新" class="headerlink" title="模型配置动态更新"></a>模型配置动态更新</h2><p>tfs的main默认并没有提供模型配置文件的动态更新, 但是调用<code>ServerCore::ReloadConfig(const ModelServerConfig&amp; new_config)</code>就可以完成更新. 可以自己包装该接口在合适的时间进行调用. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par50">#</a></p>
+<p>动态更新可以增加、删除模型, 修改版本策略（比如从最新版本到指定某版本）等. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par51">#</a></p>
+<p>动态更新的实现也不复杂, 更新Router的路由策略, 更新Source就可以了. 代码实现可以参考<code>ServerCore::AddModelsViaModelConfigList</code> <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par52">#</a></p>
+<p>TFS目前还不支持动态增加平台. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par53">#</a></p>
+<h2 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h2><p>TFS目前仅支持内存资源的管理，类ResourceTracker用来跟踪当前Servable消耗的总资源，当有新的Servable需要加载的时候，会计算剩下的资源是否够用, 并预留资源(<code>BasicManager::ReserveResources</code>). <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par54">#</a></p>
+<p><code>ServerCore.Options.total_model_memory_limit_bytes</code>控制总资源，默认设置无上限. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par55">#</a></p>
+<p>SavedModelBundleFactory提供了对TF模型资源的评估方法，简单的将模型文件大小乘1.2倍(<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/servables/tensorflow/bundle_factory_util.cc">代码</a>, <code>EstimateResourceFromPath</code>). <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par56">#</a></p>
+<h1 id="Batching"><a href="#Batching" class="headerlink" title="Batching"></a>Batching</h1><p>Batching是提高服务性能的一个有效办法, 最简单的batching就是把多个单独请求打包到一起, 由TF Session一次运算得出结果. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par57">#</a></p>
+<p>Batching的参数参考 <a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/servables/tensorflow/session_bundle_config.proto">session_bundle_config</a> <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par58">#</a></p>
+<p>Batching的实现就是在普通的Tensorflow Session之外包装一个BatchingSession，负责缓存、调度. 参考代码<code>SavedModelBundleFactory::Create</code>. Batching分两个部分实现，BatchScheduler和BatchingSession. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par59">#</a></p>
+<p>BatchingSession对外提供Run和ListDevices接口. 有Run请求的时候, 将请求打包成一个BatchTask，交给BatchScheduler去处理，并等待处理结束，取出结果返回. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par60">#</a></p>
+<p>BatchScheduler是一个底层的调度器，拥有自己的线程池, 负责将多个BatchTask合并处理. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par61">#</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/batching/batching_session.h">代码</a> <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par62">#</a></p>
+<h1 id="Model-Warmup"><a href="#Model-Warmup" class="headerlink" title="Model Warmup"></a>Model Warmup</h1><p>模型加载后，如果需要Warmup，从模型文件目录中取出预先存好的请求数据，调用模型进行推理，如此可以将模型”热身”，避免首次处理服务请求时时延过大。 <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par63">#</a></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="平台配置"><a href="#平台配置" class="headerlink" title="平台配置"></a>平台配置</h2><p>参考<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/config/platform_config.proto">platform_config.proto</a>, <a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/servables/tensorflow/session_bundle_config.proto">session_bundle_config</a>, 主要包括如下配置: <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par64">#</a></p>
+<ul>
+<li><p>平台名, 如tensorflow</p>
+</li>
+<li><p>平台配置</p>
+<ul>
+<li><p>sessoin target <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par65">#</a></p>
+<p>如果需要使用分布式TF服务器, 可以在这里指定. 默认情况下使用本地Session(DirectSession) <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par66">#</a></p>
+</li>
+<li><p>Session 参数 <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par67">#</a></p>
+</li>
+</ul>
+</li>
+<li><p>Batching参数</p>
+</li>
+</ul>
+<h2 id="模型配置"><a href="#模型配置" class="headerlink" title="模型配置"></a>模型配置</h2><p>参考<a target="_blank" rel="noopener" href="https://github.com/tensorflow/serving/blob/master/tensorflow_serving/config/model_server_config.proto">model_server_config.proto</a> 主要包括: <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par68">#</a></p>
+<ul>
+<li>模型名</li>
+<li>模型根路径</li>
+<li>平台名</li>
+<li>版本策略</li>
+</ul>
+<h1 id="与Tensorflow的关系"><a href="#与Tensorflow的关系" class="headerlink" title="与Tensorflow的关系"></a>与Tensorflow的关系</h1><p>TFS对TF是源代码级别的依赖, 两者的版本号保持一致, TFS在加载模型、执行推理的过程中, 都是调用TF的库. TFS使用的很多基本构件, 比如多线程库&#x2F;BatchScheduler, 都是直接使用TF的代码. <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par69">#</a></p>
+<h1 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h1><p>TFS在如下方面做出了性能提升的设计： <a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2018/08/22/inside_tfs.html#par70">#</a></p>
+<ul>
+<li>Batching</li>
+<li>Fast Model Loading</li>
+<li>Model Warmup</li>
+<li>Availability&#x2F;Resource Proserving Policy</li>
+</ul>
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://naurril.github.io/howtos/2017/04/25/how-to-debug-tensorflow.html">How to debug tensorflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tensorflow.org/tfx/guide/serving">https://www.tensorflow.org/tfx/guide/serving</a></li>
+<li></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ bazel build tensorflow/tools/api/tests:api_compatibility_test</span><br><span class="line">$ ./bazel-bin/tensorflow/tools/api/tests/api_compatibility_test --update_goldens True</span><br><span class="line">bazel test //tensorflow/tools/api/tests:api_compatibility_test</span><br><span class="line"></span><br><span class="line">bazel build tensorflow/tools/api/tests:api_compatibility_test</span><br><span class="line">bazel-bin/tensorflow/tools/api/tests/api_compatibility_test \</span><br><span class="line">          --update_goldens True</span><br><span class="line">          </span><br><span class="line">          </span><br><span class="line">添加Op，生成api_def文件：./tensorflow/core/api_def/update_api_def.sh</span><br><span class="line">api test: bazel test //tensorflow/tools/api/tests:api_compatibility_test</span><br><span class="line">bazel-bin/tensorflow/tools/api/tests/api_compatibility_test  --update_goldens True</span><br><span class="line"></span><br><span class="line">bazel test //tensorflow/tools/api/tests:api_compatibility_test</span><br><span class="line">童璇</span><br><span class="line"></span><br><span class="line">添加新op需要生成api_def</span><br><span class="line">童璇</span><br><span class="line"></span><br><span class="line">你需要本地跑通：你要跑//tensorflow/tools/api/tests:api_compatibility_test 和//tensorflow/core/api_def:api_test</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/bloom-filter/" rel="prev" title="bloom-filter">
+                  <i class="fa fa-angle-left"></i> bloom-filter
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/Eigen-cheatsheet/" rel="next" title="Eigen cheatsheet">
+                  Eigen cheatsheet <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/32x32-logo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/16x16-logo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"fuhailin.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.29.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"a11y-dark","dark":"a11y-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="排序学习（Learning to Rank，LTR），也称机器排序学习（Machine-learned Ranking，MLR) ，就是使用机器学习的技术解决排序问题。自从机器学习的思想逐步渗透到信息检索等领域之后，如何利用机器学习来提升信息检索的性能水平变成了近些年来非常热门的研究话题，因此产生了各类基于机器学习的排序算法，也带来了搜索引擎技术的成熟和发展，如今，Learning to Rank">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统中的排序学习三种设计思路">
+<meta property="og:url" content="https://fuhailin.github.io/Learning-to-Rank/index.html">
+<meta property="og:site_name" content="赵大寳">
+<meta property="og:description" content="排序学习（Learning to Rank，LTR），也称机器排序学习（Machine-learned Ranking，MLR) ，就是使用机器学习的技术解决排序问题。自从机器学习的思想逐步渗透到信息检索等领域之后，如何利用机器学习来提升信息检索的性能水平变成了近些年来非常热门的研究话题，因此产生了各类基于机器学习的排序算法，也带来了搜索引擎技术的成熟和发展，如今，Learning to Rank">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBM9GiauCuicJm8IiasZyJd75842N6Bdf8pDur1ryNBZPgeIR7w7Gegiby2NQ/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMaEJ1MO5D9miaqRbbnuuybbAH8RoiblfjpfcHLCkAVI3YEwllqNiaxjYMg/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMf5pUzbd0Sn0VyN1ucBXAoPqibnQibT66veC7iadCv0skfjFYibDclxMcxg/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMOqmKYMzL6AdEQV1a1BmbkVsZInDbWPtllMrxibicoicKw6DxTN0CVdX3A/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMkiaz6mRawVQVbf7pLYT5aeLNXicTwJ8zxu4DnxiaLYrc28TexSLeZ7ILg/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMDwWuStRoLSPV6scJEONZ4O2sJIaz71ibWteEGsM9PUSglwM2mFGZ6kQ/640?wx_fmt=other">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMvBA9NFsF2RTXpovxohCHuKQAT95D36h7ZRAggDnTIGhvxJF1HVzeCA/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMLlHtficESDHaOeHsLJPMzYe8pW99YetAWM5BeANOicRI4Y5Ccymyc2og/640?wx_fmt=other">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMVibH7btTnJCnJQP27hhg2Mp75jL2hE0ziaQukZlPNtiaF2gma9BHhkGLw/640?wx_fmt=other">
+<meta property="article:published_time" content="2020-02-16T07:24:51.000Z">
+<meta property="article:modified_time" content="2020-02-16T07:29:41.649Z">
+<meta property="article:author" content="赵大寳">
+<meta property="article:tag" content="算法工程师">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBM9GiauCuicJm8IiasZyJd75842N6Bdf8pDur1ryNBZPgeIR7w7Gegiby2NQ/640?wx_fmt=png">
+
+
+<link rel="canonical" href="https://fuhailin.github.io/Learning-to-Rank/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://fuhailin.github.io/Learning-to-Rank/","path":"Learning-to-Rank/","title":"推荐系统中的排序学习三种设计思路"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>推荐系统中的排序学习三种设计思路 | 赵大寳</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129037882-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-129037882-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js" defer></script>
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?d0967e9b160f4f6248804003642ee818"></script>
+
+
+
+
+
+
+
+  
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","display_overflow":"scroll","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@4.1.3/tex-mml-chtml.js","integrity":"sha256-ihPtDDm7pTmSF9ViEsItlvsrBTsNkz0MOXMchzOwCQw="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">赵大寳</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">鶸鸡程序员，新世纪农民工</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>Commonweal 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E6%8E%92%E5%BA%8F%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">1.为什么需要排序学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%8E%92%E5%BA%8F%E5%AD%A6%E4%B9%A0%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">2.排序学习架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="nav-number">2.1.</span> <span class="nav-text">2.1.特征提取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="nav-number">2.2.</span> <span class="nav-text">2.2.训练数据的获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%92%E5%BA%8F%E5%AD%A6%E4%B9%A0%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">3.排序学习设计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%8D%95%E7%82%B9%E6%B3%95%EF%BC%88Pointwise%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">3.1.单点法（Pointwise）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E9%85%8D%E5%AF%B9%E6%B3%95%EF%BC%88Pairwise%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">3.2.配对法（Pairwise）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%88%97%E8%A1%A8%E6%B3%95%EF%BC%88Listwise%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">3.3.列表法（Listwise）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">4.</span> <span class="nav-text">4.应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">6.</span> <span class="nav-text">5.参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="赵大寳"
+      src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+  <p class="site-author-name" itemprop="name">赵大寳</p>
+  <div class="site-description" itemprop="description">赵大寳個人小站</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">145</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">71</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/fuhailin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;fuhailin" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hailinfufu@outlook.com" title="E-Mail → mailto:hailinfufu@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab/" title="Linkedin → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;%E6%B5%B7%E6%9E%97-%E4%BB%98-855633ab&#x2F;" rel="noopener me" target="_blank"><i class="linkedin fa-fw"></i>Linkedin</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/u010412858" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;u010412858" rel="noopener me" target="_blank"><i class="csdn fa-fw"></i>CSDN</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://tcxx.info/" title="https:&#x2F;&#x2F;tcxx.info&#x2F;" rel="noopener" target="_blank">甜欣屋</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://licstar.net/" title="http:&#x2F;&#x2F;licstar.net&#x2F;" rel="noopener" target="_blank">Siwei Lai的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://wepon.me/" title="http:&#x2F;&#x2F;wepon.me&#x2F;" rel="noopener" target="_blank">wepon的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jd92.wang/" title="http:&#x2F;&#x2F;jd92.wang&#x2F;" rel="noopener" target="_blank">迁移学习王晋东</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://www.yinwang.org/" title="http:&#x2F;&#x2F;www.yinwang.org&#x2F;" rel="noopener" target="_blank">王垠的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://blog.sina.com.cn/weiyanzheng" title="http:&#x2F;&#x2F;blog.sina.com.cn&#x2F;weiyanzheng" rel="noopener" target="_blank">魏延政的博客</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://iphysresearch.github.io/" title="https:&#x2F;&#x2F;iphysresearch.github.io&#x2F;" rel="noopener" target="_blank">IPhysResearch</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://paperswithcode.com/task/recommendation-systems" title="https:&#x2F;&#x2F;paperswithcode.com&#x2F;task&#x2F;recommendation-systems" rel="noopener" target="_blank">Papers with Code</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jcf94.com/" title="http:&#x2F;&#x2F;jcf94.com&#x2F;" rel="noopener" target="_blank">Chenfan Blog</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://coolshell.cn/" title="https:&#x2F;&#x2F;coolshell.cn&#x2F;" rel="noopener" target="_blank">左耳朵耗子</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://1byte.io/about/" title="https:&#x2F;&#x2F;1byte.io&#x2F;about&#x2F;" rel="noopener" target="_blank">LeanCloud江宏</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://gaocegege.com/Blog/about/" title="http:&#x2F;&#x2F;gaocegege.com&#x2F;Blog&#x2F;about&#x2F;" rel="noopener" target="_blank">高策</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.yanbinghu.com/about/" title="https:&#x2F;&#x2F;www.yanbinghu.com&#x2F;about&#x2F;" rel="noopener" target="_blank">编程珠玑</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://d0evi1.com/" title="http:&#x2F;&#x2F;d0evi1.com&#x2F;" rel="noopener" target="_blank">d0evi1</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.aristeia.com/" title="https:&#x2F;&#x2F;www.aristeia.com&#x2F;" rel="noopener" target="_blank">Scott Meyers</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://thodrek.github.io/about/" title="https:&#x2F;&#x2F;thodrek.github.io&#x2F;about&#x2F;" rel="noopener" target="_blank">Theodoros (Theo) Rekatsinas@ETH</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fuhailin.github.io/Learning-to-Rank/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/uploads-avatar.jpg">
+      <meta itemprop="name" content="赵大寳">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="赵大寳">
+      <meta itemprop="description" content="赵大寳個人小站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="推荐系统中的排序学习三种设计思路 | 赵大寳">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          推荐系统中的排序学习三种设计思路
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2020-02-16 15:24:51 / Modified: 15:29:41" itemprop="dateCreated datePublished" datetime="2020-02-16T15:24:51+08:00">2020-02-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><strong>排序学习（Learning to Rank，LTR）</strong>，也称<strong>机器排序学习（Machine-learned Ranking，MLR)</strong> ，就是使用机器学习的技术解决排序问题。自从机器学习的思想逐步渗透到信息检索等领域之后，如何利用机器学习来提升信息检索的性能水平变成了近些年来非常热门的研究话题，因此产生了各类基于机器学习的排序算法，也带来了搜索引擎技术的成熟和发展，如今，Learning to Rank 已经成为搜索、推荐和广告领域非常重要的技术手段。本文我们主要介绍排序学习的三种主要设计思路<strong>Point-wise、Pair-wise、List-wise</strong>和应用场景。</p>
+<span id="more"></span>
+
+<h2 id="1-为什么需要排序学习"><a href="#1-为什么需要排序学习" class="headerlink" title="1.为什么需要排序学习"></a>1.为什么需要排序学习</h2><p>传统的排序方法可粗略分为基于相似度和基于重要性进行排序两大类，早期基于相关度的模型，通常利用 query 和 doc 之间的词共现特性（如布尔模型）、VSM（如 TF-IDF、LSI）、概率排序思想（如 BM25、LMIR）等方式。基于重要性的模型，利用的是 doc 本身的重要性，如 PageRank、TrustRank 等。</p>
+<p>传统的检索模型所考虑的因素并不多，主要是利用词频、逆文档频率和文档长度、文档重要度这几个因子来人工拟合排序公式，且其中大多数模型都包含参数，也就需要通过不断的实验确定最佳的参数组合，以此来形成相关性打分。这种方式非常简单高效，但是也同时存在很多问题4：</p>
+<ol>
+<li>很难融合多种信息</li>
+<li>手动调参工作量太大，如果模型参数很多，手动调参的可用性非常低</li>
+<li>可能会过拟合</li>
+</ol>
+<p>LTR 则是基于特征，通过机器学习算法训练来学习到最佳的拟合公式，相比传统的排序方法，优势有很多:</p>
+<ol>
+<li>可以根据反馈自动学习并调整参数</li>
+<li>可以融合多方面的排序影响因素</li>
+<li>避免过拟合（通过正则项）</li>
+<li>实现个性化需求（推荐）</li>
+<li>多种召回策略的融合排序推荐（推荐）</li>
+<li>多目标学习（推荐）</li>
+</ol>
+<p>$ 排序学习在推荐领域的重要作用</p>
+<p><strong>推荐的整个流程可以分为召回、排序、重排序这三个阶段</strong>，通俗来说，召回就是找到用户可能喜欢的几百条资讯，排序就是对这几百条资讯利用机器学习的方法预估用户对每条资讯的偏好程度，一般以点击率衡量，也就是点击率预估问题。不难看出，排序学习在推荐领域主要用于排序阶段，最常用的是 Pointwise 排序方法；重排序更多是考虑业务逻辑的规则过滤，如在推荐结果的多样性、时效性、新颖性等方面进行控制。</p>
+<p>在没有 Learning to Rank 之前，基于内容的推荐算法和基于邻域的协同过滤虽然也能预测用户的偏好，可以帮助用户召回大量的物品，但是我们必须知道，<strong>推荐系统中更重要的目标是排序，因为真正最后推荐给用户的只有少数物品，我们更关心这些召回物品中哪些才是用户心中更加喜欢的，也就是排序更靠前，这便是 Top-N 推荐</strong>。例如使用用户最近点击的资讯信息召回这些 item 的相关结果与用户偏好类别的热门结果组合后进行返回。但是这对于资讯类推荐需要考虑以下问题：**资讯类信息流属于用户消费型场景，item 时效性要求高，item based-cf 容易召回较旧的内容，而且容易导致推荐结果收敛。**因此可以将 item 的相关结果保证时效性的基础上，融合类别、标签热门结果，对各个策略的召回结果按照线上总体反馈进行排序，就可以作为用户的推荐结果。但是这一融合过程比较复杂，一种简单的方式就是看哪种召回策略总体收益越高就扩大这个策略的曝光占比，对于个体而言却显得不是特别个性化，而且在规则调参上也比较困难，<strong>而 Leaning to Rank 则可以根据用户的反馈对多路召回的 item 进行排序推荐。</strong></p>
+<h2 id="2-排序学习架构"><a href="#2-排序学习架构" class="headerlink" title="2.排序学习架构"></a>2.排序学习架构</h2><p>排序学习是一个典型的有监督机器学习过程，我们分别来看一下排序学习在搜索以及推荐领域中的结构和作用。</p>
+<p>在信息检索中，对每一个给定的查询－文档对，抽取特征，通过日志挖掘或者人工标注的方法获得真实数据标注。然后通过排序模型，使得输入能够和实际的数据相似。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBM9GiauCuicJm8IiasZyJd75842N6Bdf8pDur1ryNBZPgeIR7w7Gegiby2NQ/640?wx_fmt=png" alt="img"></p>
+<p>排序学习在现代推荐架构中处于非常关键的环节，它可以完成不同召回策略的统一排序，也可将离线、近线、在线的推荐结果根据根据用户所处的场景进行整合和实时调整，完成打分重排并推荐给用户。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMaEJ1MO5D9miaqRbbnuuybbAH8RoiblfjpfcHLCkAVI3YEwllqNiaxjYMg/640?wx_fmt=png" alt="美团推荐架构"></p>
+<p>无论是搜索还是推荐，排序学习模型的特征提取以及训练数据的获取是非常重要的两个过程，与常见的机器学习任务相比，也有很多特殊的地方，下面我们简单介绍这两个过程中可能需要考虑的问题。</p>
+<h3 id="2-1-特征提取"><a href="#2-1-特征提取" class="headerlink" title="2.1.特征提取"></a>2.1.特征提取</h3><p>在排序学习模型中，文档都是转化成特征向量来表征的，这便涉及一系列文本特征提取的工作，我们这里简单介绍一些可能用到的特征提取方法以及常用的特征类型。</p>
+<p>文档的特征通常可以从传统排序模型获得一些相关特征或者相关度打分值，所以可分为两种类型：</p>
+<p>一是文档本身的特征，比如 Pagerank 值、内容丰富度、spam 值、number of slash、url length、inlink number、outlink number、siterank，用户停留时间、CTR、二跳率等。</p>
+<p>二是 Query-Doc 的特征：文档对应查询的相关度、每个域的 tf-idf 值，bool model，vsm，bm25，language model 相关度等。</p>
+<p>也可以对文档分域，如对于一个网页文本，特征所在的文档区域可以包括 body 域，anchor 域，title 域，url 域，whole document 域等。</p>
+<p>通过各个域和各种特征，我们可以组合出很多特征，当然有些特征是正相关有些是负相关，这需要我们通过学习过程去选取优化。</p>
+<h3 id="2-2-训练数据的获取"><a href="#2-2-训练数据的获取" class="headerlink" title="2.2.训练数据的获取"></a>2.2.训练数据的获取</h3><p>特征可以通过各种方式进行提取，但是 Label 的获取就不是那么容易了。目前主要的方式是人工获取或者日志提取，需注意的是，标注的类型与算法选择以及损失函数都有很大关系。</p>
+<p><strong>人工标注</strong></p>
+<p>人工标注比较灵活，但是若需要大量的训练数据，人工标注就不太现实了，人工标注主要有以下几种标注类型：</p>
+<ol>
+<li><p><strong>单点标注</strong></p>
+<p>单点标注只关注单点，不考虑相互联系，单点标注又分三种不同的标注方式：</p>
+<p>优缺点</p>
+<p>优点：标注的量少，为 O(n)</p>
+<p>缺点：难标，不好统一</p>
+</li>
+<li><ul>
+<li><p>对于每个查询文档直接打上绝对标签，即相关度得分</p>
+</li>
+<li><p>二元标注</p>
+<p>相关和不相关</p>
+</li>
+<li><p>五级标注</p>
+<p>按照相关度划分五级（同 NDCG 指标）：即 “最相关”、“相关”、“中性”、“不相关”、最不相关”，通常在模型训练时会用数字来表示，如 1~5</p>
+</li>
+</ul>
+</li>
+<li><p><strong>两两标注</strong></p>
+<p>优缺点</p>
+<p>优点：标注起来比较方便</p>
+<p>缺点：标注量大，应该有$O\left(n^{2}\right)$</p>
+</li>
+<li><ul>
+<li>对于一个查询 Query，标注文档 d1 比文档 d2 是否更加相关，即 (𝑞,𝑑1)≻(𝑞,𝑑2)?</li>
+</ul>
+</li>
+<li><p><strong>列表标注</strong></p>
+<p>优缺点</p>
+<p>优点：相对于上面两种，标的效果会很好</p>
+<p>缺点：这个工作量非常大（整体的文档数量太大）</p>
+</li>
+<li><ul>
+<li>对于一个查询 Query，将人工理想的排序全部标好</li>
+</ul>
+</li>
+</ol>
+<p><strong>日志抽取</strong></p>
+<p>当搜索引擎搭建起来之后，就可以通过用户点击记录来获取训练数据。对应查询返回的搜索结果，用户会点击其中的某些网页，假设用户优先点击的是和查询更相关的网页。尽管很多时候这种假设并不成立，但实际经验表明这种获取训练数据是可行的。</p>
+<p>比如，结果 ABC 分别位于 123 位，B 比 A 位置低，但却得到了更多的点击，那么 B 的相关性可能好于 A。</p>
+<p><strong>这种点击数据隐含了 Query 到文档的相关性好坏。所以一般会使用点击倒置的高低位结果作为训练数据</strong>。</p>
+<p>但是日志抽取也存在问题：</p>
+<ul>
+<li>用户总是习惯于从上到下浏览搜索结果</li>
+<li>用户点击有比较大的噪声</li>
+<li>一般头查询（head query）才存在用户点击</li>
+</ul>
+<h2 id="3-排序学习设计方法"><a href="#3-排序学习设计方法" class="headerlink" title="3.排序学习设计方法"></a>3.排序学习设计方法</h2><p>排序学习的模型通常分为<strong>单点法（Pointwise Approach）</strong>、<strong>配对法（Pairwise Approach）<strong>和</strong>列表法（Listwise</strong> **Approach）**三大类，三种方法并不是特定的算法，而是排序学习模型的设计思路，主要区别体现在损失函数（Loss Function）、以及相应的标签标注方式和优化方法的不同。</p>
+<p>三种方法从 ML 角度的总览：</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMf5pUzbd0Sn0VyN1ucBXAoPqibnQibT66veC7iadCv0skfjFYibDclxMcxg/640?wx_fmt=png" alt="img"></p>
+<h3 id="3-1-单点法（Pointwise）"><a href="#3-1-单点法（Pointwise）" class="headerlink" title="3.1.单点法（Pointwise）"></a>3.1.单点法（Pointwise）</h3><p>单点法排序学习模型的每一个训练样本都仅仅是某一个查询关键字和某一个文档的配对。它们之间是否相关，与其他文档和其他查询关键字都没有关系。很明显，单点法排序学习是对现实的一个极大简化，但是对于训练排序算法来说是一个不错的起点。</p>
+<p>单点法将文档转换为特征向量后，机器学习系统根据从训练数据中学习到的分类或者回归函数对文档打分，打分结果即是搜索结果。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMOqmKYMzL6AdEQV1a1BmbkVsZInDbWPtllMrxibicoicKw6DxTN0CVdX3A/640?wx_fmt=png" alt="img">单点排序学习可以按照标注和损失函数设计的不同，将排序问题转化成回归、分类、和有序分类问题（有些文献也称有序回归）问题，可参考下图:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMkiaz6mRawVQVbf7pLYT5aeLNXicTwJ8zxu4DnxiaLYrc28TexSLeZ7ILg/640?wx_fmt=png" alt="img"></p>
+<p>分别看一下损失函数的设计思想:</p>
+<ul>
+<li><p>分类（Classification）：输出空间包含的是无序类别，对每个查询-文档对的样本判断是否相关，可以是二分类的，如相关认为是正例，不相关认为是负例；也可以是类似 NDCG 那样的五级标注的多分类问题。</p>
+<p>分类模型通常会输出一个概率值，可根据概率值的排序作为排序最终结果。</p>
+</li>
+<li><p>回归（Regression）：输出空间包含的是真实值相关度得分，可通过回归来直接拟合相关度打分。</p>
+</li>
+<li><p>有序分类（Ordinal Classification）：有序分类也称有序回归（Ordinal Regression），输出空间一般包含的是有序类别，通常的做法是找到一个打分函数，然后用一系列阈值对得分进行分割，得到有序类别。如采用 PRanking、基于 margin 的方法。</p>
+</li>
+</ul>
+<p>$ 推荐领域的 Pointwise 排序学习</p>
+<p><strong>回到我们的推荐系统领域，最常用就是二元分类的 Pointwise，比如常见的点击率（CTR）预估问题，之所以用得多，是因为二元分类的 Pointwise 模型的复杂度通常比 Pairwise 和 Listwise 要低，而且可以借助用户的点击反馈自然地完成正负样例的标注，而其他 Pairwise 和 Listwise 的模型标注就没那么容易了。成功地将排序问题转化成分类问题，也就意味着我们机器学习中那些常用的分类方法都可以直接用来解决排序问题，如 LR、GBDT、SVM 等，甚至包括结合深度学习的很多推荐排序模型，都属于这种 Pointwise 的思想范畴。</strong></p>
+<p><strong>Pointwise 方法存在的问题：</strong></p>
+<p>Pointwise 方法通过优化损失函数求解最优的参数，可以看到 Pointwise 方法非常简单，工程上也易实现，但是 Pointwise 也存在很多问题：</p>
+<ul>
+<li>Pointwise 只考虑单个文档同 query 的相关性，没有考虑文档间的关系，然而排序追求的是排序结果，并不要求精确打分，只要有相对打分即可；</li>
+<li>通过分类只是把不同的文档做了一个简单的区分，同一个类别里的文档则无法深入区别，虽然我们可以根据预测的概率来区别，但实际上，这个概率只是准确度概率，并不是真正的排序靠前的预测概率；</li>
+<li>Pointwise 方法并没有考虑同一个 query 对应的文档间的内部依赖性。一方面，导致输入空间内的样本不是 IID 的，违反了 ML 的基本假设，另一方面，没有充分利用这种样本间的结构性。其次，当不同 query 对应不同数量的文档时，整体 loss 将容易被对应文档数量大的 query 组所支配，应该每组 query 都是等价的才合理。</li>
+<li>很多时候，排序结果的 Top N 条的顺序重要性远比剩下全部顺序重要性要高，因为损失函数没有相对排序位置信息，这样会使损失函数可能无意的过多强调那些不重要的 docs，即那些排序在后面对用户体验影响小的 doc，所以对于位置靠前但是排序错误的文档应该加大惩罚。</li>
+</ul>
+<p><strong>代表算法：</strong></p>
+<p>基于神经网络的排序算法 RankProp、基于感知机的在线排序算法 Prank(Perception Rank)&#x2F;OAP-BPM 和基于 SVM 的排序算法。</p>
+<p><strong>推荐中使用较多的 Pointwise 方法是 LR、GBDT、SVM、FM 以及结合 DNN 的各种排序算法。</strong></p>
+<h3 id="3-2-配对法（Pairwise）"><a href="#3-2-配对法（Pairwise）" class="headerlink" title="3.2.配对法（Pairwise）"></a>3.2.配对法（Pairwise）</h3><p>配对法的基本思路是对样本进行两两比较，构建偏序文档对，从比较中学习排序，因为对于一个查询关键字来说，最重要的其实不是针对某一个文档的相关性是否估计得准确，而是要能够正确估计一组文档之间的 “相对关系”。</p>
+<p>因此，Pairwise 的训练集样本从每一个 “关键字文档对” 变成了 “关键字文档文档配对”。也就是说，每一个数据样本其实是一个比较关系，当前一个文档比后一个文档相关排序更靠前的话，就是正例，否则便是负例，如下图。试想，有三个文档：A、B 和 C。完美的排序是 “B&gt;C&gt;A”。我们希望通过学习两两关系 “B&gt;C”、“B&gt;A” 和 “C&gt;A” 来重构 “B&gt;C&gt;A”。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMDwWuStRoLSPV6scJEONZ4O2sJIaz71ibWteEGsM9PUSglwM2mFGZ6kQ/640?wx_fmt=other" alt="img"></p>
+<p>这里面有几个非常关键的假设。</p>
+<p>**第一，我们可以针对某一个关键字得到一个完美的排序关系。**在实际操作中，这个关系可以通过五级相关标签来获得，也可以通过其他信息获得，比如点击率等信息。然而，这个完美的排序关系并不是永远都存在的。试想在电子商务网站中，对于查询关键字 “哈利波特”，有的用户希望购买书籍，有的用户则希望购买含有哈利波特图案的 T 恤，显然，这里面就不存在一个完美排序。</p>
+<p>**第二，我们寄希望能够学习文档之间的两两配对关系从而 “重构” 这个完美排序。**然而，这也不是一个有 “保证” 的思路。用刚才的例子，希望学习两两关系 “B&gt;C”、“B&gt;A” 和 “C&gt;A” 来重构完美排序 “B&gt;C&gt;A”。然而，实际中，这三个两两关系之间是独立的。特别是在预测的时候，即使模型能够正确判断 “B&gt;C” 和 “C&gt;A”，也不代表模型就一定能得到 “B&gt;A”。注意，这里的关键是 “一定”，也就是模型有可能得到也有可能得不到。两两配对关系不能 “一定” 得到完美排序，这个结论其实就揭示了这种方法的不一致性。也就是说，我们并不能真正保证可以得到最优的排序。</p>
+<p>**第三，我们能够构建样本来描述这样的两两相对的比较关系。**一个相对比较简单的情况，认为文档之间的两两关系来自于文档特征（Feature）之间的差异。也就是说，可以利用样本之间特征的差值当做新的特征，从而学习到差值到相关性差异这样的一组对应关系。</p>
+<p>Pairwise 最终的算分，分类和回归都可以实现，不过最常用的还是二元分类，如下图:</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMvBA9NFsF2RTXpovxohCHuKQAT95D36h7ZRAggDnTIGhvxJF1HVzeCA/640?wx_fmt=png" alt="img"></p>
+<p><strong>人工标注标签怎么转换到 pairwise 类方法的输出空间：</strong></p>
+<p>如果标注直接是相关度 $𝑠𝑗$，则 doc pair $\left(x_{u}, x_{v}\right)$ 的真实标签定义为  如$y_{u, v}&#x3D;2 * I_{s_{u}&gt;s_{v}}-1$如果标注是 pairwise preference $s_{u, v}$，则 doc pair $\left(x_{u}, x_{v}\right)$ 的真实标签定义为  $y_{u, v}&#x3D;s_{u, v}$如果标注是整体排序 π，则 doc pair $\left(x_{u}, x_{v}\right)$ 的真实标签定义为 $y_{u, v}&#x3D;2 * I_{\pi_{u}, \pi_{v}}-1$</p>
+<p><strong>Pairwise 方法存在的问题：</strong></p>
+<p><strong>Pairwise 方法存在的问题：</strong></p>
+<p>Pairwise 方法通过考虑两两文档之间的相关对顺序来进行排序，相比 Pointwise 方法有明显改善。但 Pairwise 方法仍有如下问题：</p>
+<ul>
+<li>使用的是两文档之间相关度的损失函数，而它和真正衡量排序效果的指标之间存在很大不同，甚至可能是负相关的，如可能出现 Pairwise Loss 越来越低，但 NDCG 分数也越来越低的现象。</li>
+<li>只考虑了两个文档的先后顺序，且没有考虑文档在搜索列表中出现的位置，导致最终排序效果并不理想。</li>
+<li>不同的查询，其相关文档数量差异很大，转换为文档对之后，有的查询可能有几百对文档，有的可能只有几十个，这样不加均一化地在一起学习，模型会优先考虑文档对数量多的查询，减少这些查询的 loss，最终对机器学习的效果评价造成困难。</li>
+<li>Pairwise 方法的训练样例是偏序文档对，它将对文档的排序转化为对不同文档与查询相关性大小关系的预测；因此，如果因某个文档相关性被预测错误，或文档对的两个文档相关性均被预测错误，则会影响与之关联的其它文档，进而引起连锁反应并影响最终排序结果。</li>
+</ul>
+<p><strong>代表算法：</strong></p>
+<p>基于 SVM 的 Ranking SVM 算法、基于神经网络的 RankNet 算法和基于 Boosting 的 RankBoost 算法。</p>
+<p><strong>推荐中使用较多的 Pairwise 方法是贝叶斯个性化排序（Bayesian personalized ranking，BPR）。</strong></p>
+<p><strong>$Pointwise 与 Pairwise 的结合方案</strong></p>
+<p>Pairwise 方法的训练样例是偏序文档对，它将对文档的排序转化为对不同文档与查询相关性大小关系的预测；因此，如果因某个文档相关性被预测错误，或文档对的两个文档相关性均被预测错误，则会影响与之关联的其它文档，进而引起连锁反应并影响最终排序结果。而 Pointwise 方法的训练样例是单个文档，它解决的问题恰恰是对单个文档的相关性预测。基于此，本文在 Pairwise 方法的基础上，增加 Pointwise 损失函数，通过融入对单个文档相关性大小的考虑，减小因错误预测单个文档相关性大小而导致连锁反应所造成的损失，来优化 Pairwise 方法去排序模型，提升其排序性能。</p>
+<p>1）推荐领域中，凡是基于协同过滤对单个物品进行偏好打分预测的模型，其实都可以看成是 Pointwise 排序方法。对于 Pairwise 方法，协同过滤可以发展为用户对一对物品偏好。一个通常的做法是将 Pointwise 的输出作为 Pairwise 的输入特征，然后两两作差，在用 Pointwise 方法保证单个物品预测精度的基础上，用 Pairwise 对做进一步排序优化。这种方法的一个典型案例是 BPR，它是推荐领域中使用较多的 Pairwise 方法，具体内容我们将在下一小节单独介绍。</p>
+<p>2）将 Pointwise 的损失函数融合进 Pairwise 的损失函数7</p>
+<p>考查现存 Pointwise 方法，大多将排序问题转化为分类或回归问题，所用到的损失函数分别为分类或回归问题的损失函数。本文采用回归损失函数，它也是人工神经网络中常用的用于衡量训练样例的预测值与真实值之间误差的函数。记为训练集合中文档的相关性大小标注值，为排序模型对文档的相关性预测值，则其 Pointwise 损失函数形式如下：</p>
+<p>$$<br>L_{i}&#x3D;\frac{1}{2} L\left(y_{i}-f\left(x_{i}\right)\right)^{2}<br>$$<br>考虑到 Pairwise 方法不会将所有文档的相关性预测错误，且单个文档在不同偏序文档对中存在重复，因而将 Pairwise 损失函数与 Pointwise 损失函数线性插值，得到改进的损失函数，形式如下：</p>
+<p>$$<br>L&#x3D;\sum_{\left(x_{i}, x_{j}\right) \in R^{d}}\left(c_{1} \cdot L_{i j}+c_{2} \cdot \sum_{k \in(i, j)} L_{k}\right)<br>$$<br>其中，$c_{1}$ 与 $c_{2}$ 是不同损失函数的权重，试验中通过验证集来确定其大小。</p>
+<h3 id="3-3-列表法（Listwise）"><a href="#3-3-列表法（Listwise）" class="headerlink" title="3.3.列表法（Listwise）"></a>3.3.列表法（Listwise）</h3><p>相对于尝试学习每一个样本是否相关或者两个文档的相对比较关系，列表法排序学习的基本思路是尝试直接优化像 NDCG（Normalized Discounted Cumulative Gain）这样的指标，从而能够学习到最佳排序结果。</p>
+<p>关于 NDCG 以及其他相关排序指标，可参考我之前写的文章《工业界推荐系统的评测标准》。</p>
+<p>列表法的相关研究有很大一部分来自于微软研究院，这其中著名的作者就有微软亚洲院的徐君、李航、刘铁岩等人，以及来自微软西雅图的研究院的著名排序算法 LambdaMART 以及 Bing 搜索引擎的主导人克里斯托弗·博格斯（Christopher J.C. Burges）。</p>
+<p>列表法排序学习有两种基本思路。第一种称为 Measure-specific，就是直接针对 NDCG 这样的指标进行优化。目的简单明了，用什么做衡量标准，就优化什么目标。第二种称为 Non-measure specific，则是根据一个已经知道的最优排序，尝试重建这个顺序，然后来衡量这中间的差异。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMLlHtficESDHaOeHsLJPMzYe8pW99YetAWM5BeANOicRI4Y5Ccymyc2og/640?wx_fmt=other" alt="img"></p>
+<p><strong>1）Measure-specific，直接针对 NDCG 类的排序指标进行优化</strong></p>
+<p>先来看看直接优化排序指标的难点和核心在什么地方。</p>
+<p>难点在于，希望能够优化 NDCG 指标这样的 “理想” 很美好，但是现实却很残酷。NDCG、MAP 以及 AUC 这类排序标准，都是在数学的形式上的 “非连续”（Non-Continuous）和 “非可微分”（Non-Differentiable）。而绝大多数的优化算法都是基于 “连续”（Continuous）和 “可微分”（Differentiable）函数的。因此，直接优化难度比较大。</p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz/e5hNJDSDIwBUDicRRX2wgqk5ia0JBmPqBMVibH7btTnJCnJQP27hhg2Mp75jL2hE0ziaQukZlPNtiaF2gma9BHhkGLw/640?wx_fmt=other" alt="img"></p>
+<p>针对这种情况，主要有这么几种解决方法。</p>
+<p>第一种方法是，既然直接优化有难度，那就找一个近似 NDCG 的另外一种指标。而这种替代的指标是 “连续” 和 “可微分” 的 。只要我们建立这个替代指标和 NDCG 之间的近似关系，那么就能够通过优化这个替代指标达到逼近优化 NDCG 的目的。这类的代表性算法的有 SoftRank 和 AppRank。</p>
+<p>第二种方法是，尝试从数学的形式上写出一个 NDCG 等指标的 “边界”（Bound），然后优化这个边界。比如，如果推导出一个上界，那就可以通过最小化这个上界来优化 NDCG。这类的代表性算法有 SVM-MAP 和 SVM-NDCG。</p>
+<p>第三种方法则是，希望从优化算法上下手，看是否能够设计出复杂的优化算法来达到优化 NDCG 等指标的目的。对于这类算法来说，算法要求的目标函数可以是 “非连续” 和 “非可微分” 的。这类的代表性算法有 AdaRank 和 RankGP。</p>
+<p><strong>2）Non-measure specific，尝试重建最优顺序，衡量其中差异</strong></p>
+<p>这种思路的主要假设是，已经知道了针对某个搜索关键字的完美排序，那么怎么通过学习算法来逼近这个完美排序。我们希望缩小预测排序和完美排序之间的差距。值得注意的是，在这种思路的讨论中，优化 NDCG 等排序的指标并不是主要目的。这里面的代表有 ListNet 和 ListMLE。</p>
+<p><strong>3）列表法和配对法的中间解法</strong></p>
+<p>第三种思路某种程度上说是第一种思路的一个分支，因为很特别，这里单独列出来。其特点是在纯列表法和配对法之间寻求一种中间解法。具体来说，这类思路的核心思想，是从 NDCG 等指标中受到启发，设计出一种替代的目标函数。这一步和刚才介绍的第一种思路中的第一个方向有异曲同工之妙，都是希望能够找到替代品。</p>
+<p>找到替代品以后，接下来就是把直接优化列表的想法退化成优化某种配对。这第二步就更进一步简化了问题。这个方向的代表方法就是微软发明的 LambdaRank 以及后来的 LambdaMART。微软发明的这个系列算法成了微软的搜索引擎 Bing 的核心算法之一，而且 LambdaMART 也是推荐领域中可能用到一类排序算法。</p>
+<p><strong>Listwise 方法存在的问题：</strong></p>
+<p>列表法相较单点法和配对法针对排序问题的模型设计更加自然，解决了排序应该基于 query 和 position 问题。</p>
+<p>但列表法也存在一些问题：一些算法需要基于排列来计算 loss，从而使得训练复杂度较高，如 ListNet 和 BoltzRank。此外，位置信息并没有在 loss 中得到充分利用，可以考虑在 ListNet 和 ListMLE 的 loss 中引入位置折扣因子。</p>
+<p><strong>代表算法：</strong></p>
+<p>基于 Measure-specific 的 SoftRank、SVM-MAP、SoftRank、LambdaRank、LambdaMART，基于 Non-measure specific 的 ListNet、ListMLE、BoltzRank。</p>
+<p><strong>推荐中使用较多的 Listwise 方法是 LambdaMART。</strong></p>
+<h2 id="4-应用场景"><a href="#4-应用场景" class="headerlink" title="4.应用场景"></a>4.应用场景</h2><p>在推荐领域，排序学习可能会用在以下场景：</p>
+<ol>
+<li><p><strong>用于多路召回策略的融合排序</strong></p>
+<p>一个推荐系统的召回阶段可能会用到多种不同召回策略，比如基于内容的召回、基于热门物品的召回、基于协同过滤的召回、基于类别和标签的召回等等，不同的召回策略召回的物品无法确切地分辨哪个策略召回更重要，所以需要一个排序学习模型，根据用户的行为反馈来对多路召回的物品进行排序推荐，这也是排序模块的一大重要作用。</p>
+</li>
+<li><p><strong>一个排序模型完成召回排序</strong></p>
+<p>某些简单的推荐场景下，召回排序过程区分的不够开，目标比较单一，比如相关推荐，对相关性要求比较高，此时可以用 LTR，一个排序模型就可以完成召回排序任务。</p>
+</li>
+<li><p><strong>解决多目标排序问题</strong></p>
+<p>通常一个推荐系统的目标是提高点击率（CTR）或转化率（CVR），但是这些并不能完全反映用户对推荐物品的满意度，以此为目标的推荐系统也无法保证用户存留。为了提高用户对推荐物品满意度，可能还需要依赖更多的指标，比如加购、收藏、分享等等。由此便产生了多种目标，如何优化最终推荐列表的顺序来使得众多指标在不同的场景下近可能达到最优或者满意，这就是推荐系统中的多目标排序问题，而排序学习是解决多目标排序问题的一种重要方法。</p>
+<p>关于多目标学习，限于篇幅我打算单独写文章详细阐述，这里仅谈一下常见的多目标学习方法。</p>
+<p>1）每个目标训练一个模型，每个模型算出一个分数（预估概率），然后根据业务设计一个经验公式计算出综合分数，再按照综合分数进行排序推荐。这个经验公式通常会包含代表各个目标重要性的超参数（比如最简单的线性回归中的权重），但这些超参数基本是靠人工根据经验来确定的，因为很难标注 Label，不太容易用模型学习。</p>
+<p>2）使用排序学习方法融合多目标，一种常见的方法是对多目标产生的物品构建 Pair，比如用户对物品 产生的购买，对物品 产生了了点击，假定我们觉得购买的目标比点击的目标更重要，就可以让 𝑖&gt;𝑢𝑗。有了顺序对后，我们便可以训练排序学习模型，这样一个模型就可以融合多个目标，而不用训练多个模型。</p>
+<p>3）采⽤用多任务学习（multi-task learning），共享参数，学习出多个分数，最后结合起来。典型的算法有谷歌的 MMOE（Multi-gate Mixture-of-Experts）以及阿里的 ESMM（Entire Space Multi-Task Model）。</p>
+</li>
+</ol>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><hr>
+<p>1 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/nnslnt">[延伸]Tie-Yan Liu. Learning to Rank for Information Retrieval. Springer↩</a></p>
+<p>2 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/rszqpc">[延伸]Hang Li. Learning to rank for information retrieval and natural language processing↩</a></p>
+<p>3 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/rui0pc">[延伸]Li Hang. A Short Introduction to Learning to Rank↩</a></p>
+<p>4 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/69up9k">Learning to rank 学习基础</a></p>
+<p>5 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/5ncae0">达观数据. 资讯信息流 LTR 实践. 机器之心 ↩</a></p>
+<p>6 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/79khq5">美团技术团队. 深度学习在美团推荐平台排序中的运用↩</a></p>
+<p>7 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/wunexd">吴佳金等. 改进 Pairwise 损失函数的排序学习方法. 知网↩</a></p>
+<p>8 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/hhnixk">Steffen Rendle et. Bayesian Personalized Ranking from Implicit Feedback. arxiv↩</a></p>
+<p>9 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/i8bvzd">刘建平. 贝叶斯个性化排序 (BPR) 算法小结. cnblogs↩</a></p>
+<p>10 <a target="_blank" rel="noopener" href="https://lumingdong.cn/go/4zadd4">笨兔勿应. Learning to Rank 算法介绍. cnblogs↩</a></p>
+<p>11 <a target="_blank" rel="noopener" href="https://lumingdong.cn/learning-to-rank-in-recommendation-system.html">卢东宁.推荐系统中的排序学习↩</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>Buy me a coffee</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/wechatpay.jpg" alt="赵大寳 WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/alipay.jpg" alt="赵大寳 Alipay">
+        <span>Alipay</span>
+      </div>
+      <div>
+        <img src="https://gitee.com/fuhailin/Object-Storage-Service/raw/master/bitcoinpay.jpg" alt="赵大寳 Bitcoin">
+        <span>Bitcoin</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="/images/wechat_channel.jpg">
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/Linear-Regression/" rel="prev" title="Linear Regression">
+                  <i class="fa fa-angle-left"></i> Linear Regression
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/activation-functions/" rel="next" title="激活函数">
+                  激活函数 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="lv-container" data-id="city" data-uid="MTAyMC80MjE1MS8xODY5OA=="></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2018 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="snowflake-o"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">赵大寳</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/fuhailin" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<script src="/js/third-party/comments/livere.js" defer></script>
+
+</body>
+</html>
